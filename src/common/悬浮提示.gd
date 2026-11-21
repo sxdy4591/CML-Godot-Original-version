@@ -23,7 +23,14 @@ const 命名色映射 := {
 	"yellow": "#8A6D00",    # 深黄(橄榄)
 	"orange": "#B4661E",    # 深橙
 	"cyan": "#2A8C96",      # 深青
+	"aqua": "#1F7F8C",      # 深青(与 cyan 同系)
+	"teal": "#1F6F6B",      # 深蓝绿
 	"blue": "#3B62C4",      # 中蓝(纯 #0000CC 在深色 tooltip 上看不见)
+	"darkblue": "#1A3A8F",  # 更深蓝
+	"purple": "#6A2C91",    # 深紫
+	"fuchsia": "#A6198C",   # 深紫红
+	"maroon": "#7B1F1F",    # 深褐红
+	"olive": "#6B6B1F",     # 深橄榄
 	"white": "#FFFFFF",
 	"black": "#111111",
 	"gray": "#777777",
@@ -44,7 +51,14 @@ const 命名色映射_亮 := {
 	"yellow": "#FFD166",    # 亮黄
 	"orange": "#FFA94D",    # 亮橙
 	"cyan": "#66D9E8",      # 亮青
+	"aqua": "#7FE3F0",      # 亮青(与 cyan 同系)
+	"teal": "#5FD3CF",      # 亮蓝绿
 	"blue": "#7FA6FF",      # 亮蓝
+	"darkblue": "#8FA8FF",  # 黑底上深蓝不可见, 给亮蓝
+	"purple": "#C89BFF",    # 亮紫
+	"fuchsia": "#FF8FD8",   # 亮紫红
+	"maroon": "#E88C8C",    # 亮褐红
+	"olive": "#C9C96B",     # 亮橄榄
 	"white": "#FFFFFF",
 	"black": "#E6E6E6",     # 黑底上"黑"没有意义, 给浅灰
 	"gray": "#B0B0B0",
@@ -52,9 +66,20 @@ const 命名色映射_亮 := {
 }
 
 static func _apply_color_map(text: String, table: Dictionary) -> String:
-	var out := text.replace("</color>", "[/color]")
+	var out := text
+	# 原版自己会产出空色值标签: QueryDecisions 里
+	#   string.Format("{0} <color={1}>{2}</color>", 文案, "", "")
+	# 填出来就是 <color=></color>(内容也是空). Unity 不认这种标签, 这里整对删掉只留内容,
+	# 否则界面上会原样露出 "<COLOR=>[/COLOR]".
+	var empty_re := RegEx.new()
+	empty_re.compile("(?is)<color=\\s*>(.*?)</color>")
+	out = empty_re.sub(out, "$1", true)
+	# 闭合标签大小写敏感会漏掉 </COLOR> 这类写法, 统一用不区分大小写的正则
+	var close_re := RegEx.new()
+	close_re.compile("(?i)</color>")
+	out = close_re.sub(out, "[/color]", true)
 	var re := RegEx.new()
-	re.compile("<color=([^>]+)>")
+	re.compile("(?i)<color=([^>]+)>")
 	var matches := re.search_all(out)
 	# 从后往前替换: 前面的替换不会让后面的偏移失效
 	for i in range(matches.size() - 1, -1, -1):
