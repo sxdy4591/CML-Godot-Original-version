@@ -124,16 +124,22 @@ public sealed class EconomyPane : IPanel
     static void EnsureHost()
     {
         if (_plankaCheck != null) return;
-        _plankaCheck = Stub.Take<Show_diplomacy_data_script>("planka_dolg(clone)", Lifecycle.Lazy);
-        _plankaCheck.Set("text", new TextMesh());
+        // 原版 Awake 里 text/okno 都用 GetComponent 取, 场景对象必须挂这两个组件,
+        // 否则 Awake 内 Repaint 对 null text 写入会直接 NRE(整个经济面板快照失败, 界面停在 .tscn 占位值).
+        _plankaCheck = Stub.Take<Show_diplomacy_data_script>("planka_dolg(clone)", Lifecycle.Scene);
+        _plankaCheck.Set("text", _plankaCheck.Also<TextMesh>());
+        _plankaCheck.Also<OkoshkoScript>();
+        _plankaCheck.Activate();
     }
 
     static string ReadDisplay(string key, int num, string method, bool plankaGosdolg)
     {
         if (!DisplaysCache.TryGetValue(key, out var stub))
         {
-            stub = Stub.Take<Show_diplomacy_data_script>("Show_" + key, Lifecycle.Lazy);
-            stub.Set("text", new TextMesh());
+            // 同上: 先挂 TextMesh/OkoshkoScript 再起 Awake, 让原版 Repaint* 有 text 可写
+            stub = Stub.Take<Show_diplomacy_data_script>("Show_" + key, Lifecycle.Scene);
+            stub.Set("text", stub.Also<TextMesh>());
+            stub.Also<OkoshkoScript>();
             stub.Set("num", num);
             stub.Set("planka_gosdolg", plankaGosdolg);
             stub.Set("gosdolg", method == "Repaint_dolg");
@@ -141,6 +147,7 @@ public sealed class EconomyPane : IPanel
             stub.Set("planka", method == "MakePlankaReady");
             stub.Set("reserve", method == "ReserveRepaint");
             stub.Set("olyga", method == "Repaint_olyga");
+            stub.Activate();
             DisplaysCache[key] = stub;
         }
         stub.Invoke(method);
