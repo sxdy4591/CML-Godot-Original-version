@@ -22,7 +22,7 @@ func _检查更新() -> void:
 	在线.检查更新()
 
 
-func _更新结果(有新版本: bool, 远端: String, 下载页: String, 说明: String) -> void:
+func _更新结果(有新版本: bool, 远端: String, 下载页: String, _说明: String) -> void:
 	if 有新版本:
 		var 链接: String = 下载页 if not 下载页.is_empty() else str(在线.站点)
 		版本信息.text = _版本文案("[url=%s][color=#C0392B]发现新版本 %s · 点击前往下载[/color][/url]" % [链接, 远端])
