@@ -14,6 +14,8 @@ public partial class UiBridge : Node
     const string MapHighlightSignal = "map_highlight";
     const string SceneRequestedSignal = "scene_requested";
     const string ToastSignal = "toast";
+    // 任何面板动作都可能改数值; 常驻顶栏靠这个信号即时刷新, 不必等自己的轮询窗口
+    const string DataChangedSignal = "data_changed";
 
     // 信号必须在任何场景脚本 _ready 连接之前注册, 放 _EnterTree 比 _Ready 更早.
     public override void _EnterTree()
@@ -22,6 +24,7 @@ public partial class UiBridge : Node
         AddUserSignal(MapHighlightSignal, new Godot.Collections.Array { "indices" });
         AddUserSignal(SceneRequestedSignal, new Godot.Collections.Array { "path" });
         AddUserSignal(ToastSignal, new Godot.Collections.Array { "text" });
+        AddUserSignal(DataChangedSignal, new Godot.Collections.Array());
     }
 
     public override void _Ready()
@@ -77,6 +80,7 @@ public partial class UiBridge : Node
     {
         PanelRouter.TryGet(panel, out var handler);
         handler.Act(action, UiVariant.FromArray(args));
+        EmitSignal(DataChangedSignal);
     }
 
     // 场景切换由桥层直接执行: 原版 LoadScene 的唯一出口.
@@ -85,6 +89,8 @@ public partial class UiBridge : Node
     void OnScene(string path)
     {
         GD.Print($"[OnScene] 切场景: {path}");
+        // 时间只在主界面(外交/地图)推进; 经济/政治/事件等界面与原来的场景卸载语义一致
+        GameHost.SetMainScene(path == "res://scenes/外交/外交.tscn");
         EmitSignal(SceneRequestedSignal, path);
         GetTree().CallDeferred("change_scene_to_file", path);
     }

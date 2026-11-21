@@ -35,9 +35,10 @@ public static class TimeHostFactory
         Create("SteamManager", typeof(SteamManager));
         new GameObject("Global(Clone)");
 
-        // 时钟本体交给泵: Awake/Start/Update 按原版顺序每帧驱动(时间推进/月度结算).
+        // 时钟不再进泵: 原版 TimeScript 是 Diplomacy 场景对象, 切到经济/政治等界面时随场景卸载,
+        // 时间与事件倒计时都会停. 这里由 GameHost.Tick 只在外交/地图界面调用它的 Update.
         // 对象名必须与原版场景一致(Text_time): in1992_script.Awake 靠 Find("Text_time") 取它.
-        var timeStub = Stub.Take<TimeScript>("Text_time", Lifecycle.Pump);
+        var timeStub = Stub.Take<TimeScript>("Text_time", Lifecycle.Scene);
         timeStub.Go.AddComponent<TextMesh>();
         var achievements = Stub.Attach<AchievementsAlias>(timeStub.Go);
         var time = timeStub.Typed<TimeScript>();
@@ -46,6 +47,8 @@ public static class TimeHostFactory
         EnsureAchievementSlots(achievements);
 
         map.events = new GameObject[] { time.events[0] };
+        // 字段(events/re_war/alarmIcons/goto_economy…)齐了再跑 Awake→Start
+        timeStub.Activate();
         return time;
     }
 
@@ -65,9 +68,12 @@ public static class TimeHostFactory
         LinkSpeedButtons(time);
 
         time.thisText = new TextMesh { name = "thisText" };
-        var economy = Stub.Take<EvetnnashScript>("goto_economy", Lifecycle.Lazy).Typed<EvetnnashScript>();
-        economy.new_scene = "Economy";
-        time.goto_economy = economy;
+        // Scene: TimeScript 是直接调 goto_economy.OnMouseDown()(不经过 Stub), Lazy 永远不会被触发,
+        // Awake 里 map1 = Find("MapChanges") 就留在 null, 预算为负时 map1.EventRead() 抛 NRE, 不会跳经济面板.
+        var economyStub = Stub.Take<EvetnnashScript>("goto_economy", Lifecycle.Scene);
+        economyStub.Set("new_scene", "Economy");
+        economyStub.Activate();
+        time.goto_economy = economyStub.Typed<EvetnnashScript>();
 
         time.ending = new GameObject("ending");
         time.dlc_button = new GameObject("dlc_button");
@@ -96,6 +102,8 @@ public static class TimeHostFactory
         {
             var stub = Stub.Take<at_war_script>("re_war" + i, Lifecycle.None);
             stub.Also<SpriteRenderer>();
+            // 原版场景里 11 个战争图标各序列化一个 this_num(0..10), Repaint 靠它决定显示哪场战争
+            stub.Set("this_num", i);
             time.re_war[i] = stub.Typed<at_war_script>();
         }
 
@@ -111,8 +119,9 @@ public static class TimeHostFactory
             time.events[i] = stub.Go;
         }
 
-        time.Autosavej = Stub.Take<Savescript>("Autosave", Lifecycle.Lazy).Typed<Savescript>();
-        time.Autoloadej = Stub.Take<LoadInScript>("Autoload", Lifecycle.Lazy).Typed<LoadInScript>();
+        // 同上: 自动存档/读档也是 TimeScript 直接调 OnMouseDown, 必须先把 Awake 跑掉
+        time.Autosavej = Stub.Take<Savescript>("Autosave", Lifecycle.Scene).Activate().Typed<Savescript>();
+        time.Autoloadej = Stub.Take<LoadInScript>("Autoload", Lifecycle.Scene).Activate().Typed<LoadInScript>();
     }
 
     // 原版 achievements 的 ach_this 由 Ach.prefab 序列化为 1000 长; 代码初值只有 100.

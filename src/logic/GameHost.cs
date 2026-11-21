@@ -109,15 +109,26 @@ public static class GameHost
         foreach (var icon in Clock.alarmIcons) icon.SetActive(false);
     }
 
+    // 原版 TimeScript 是 Diplomacy 场景对象: 切到经济/政治/事件等独立场景时它随场景卸载,
+    // 时间与事件倒计时全部停住. 移植后时钟常驻, 由桥层按当前场景开关这里.
+    static bool _mainScene;
+    public static void SetMainScene(bool active) => _mainScene = active;
+
+    static readonly System.Reflection.MethodInfo ClockUpdateMethod =
+        typeof(TimeScript).GetMethod("Update",
+            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+
     // ================= 每帧推进 =================
-    // 原版靠 Unity 场景里的 MonoBehaviour.Update 各自推进; 移植后统一由逻辑层一个入口推进,
-    // 桥层只负责每帧调一次 + 把"高亮集合变了"这类状态翻译成信号. 视图刷新频率不再影响逻辑.
+    // 桥层只负责每帧叫一次 + 把"高亮集合变了"翻译成信号; 是否推进由当前场景决定.
     public static void Tick(double delta)
     {
+        if (!_mainScene) return;
         MaybeAutoSave();
         TickWarDedup();
         Automation.Tick();
         Panes.MapPane.Tick();
+        // 原版 Update: 时间推进 + 每日事件需求挂载 + 事件图标超时(会自动切事件场景)
+        ClockUpdateMethod.Invoke(Clock, null);
         TickEventMarker(delta);
     }
 

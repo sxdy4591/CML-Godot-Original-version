@@ -20,6 +20,8 @@ const 节点 := {
 
 func _ready() -> void:
 	UiBridge.connect("panel_snapshot", _收到快照)
+	# 面板动作(调预算/贷款/决议…)会立刻改数值: 收到 data_changed 就即时刷新, 不再等 0.5s 轮询窗口
+	UiBridge.connect("data_changed", func() -> void: UiBridge.request(面板))
 	var timer := Timer.new()
 	timer.wait_time = 0.5
 	timer.timeout.connect(func() -> void: UiBridge.request(面板))

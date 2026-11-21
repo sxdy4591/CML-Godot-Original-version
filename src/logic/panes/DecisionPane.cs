@@ -50,10 +50,7 @@ public sealed class DecisionPane : IPanel
         {
             case "执行":
                 // 原版 OnMouseDown 自己守"背景 == ready", 执行完还会重建决议池
-                typeof(DecisionButtonScript)
-                    .GetMethod("OnMouseDown",
-                        System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
-                    .Invoke(Ensure(index, GameHost.State.decisions[index]), null);
+                Ensure(index, GameHost.State.decisions[index]).OnMouseDown();
                 break;
             case "切换自动":
                 Automation.ToggleDecision();
