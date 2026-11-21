@@ -54,6 +54,8 @@ func _选择(index: int) -> void:
 	# 原版点选项即定案(Results_text 只结算一次): 已选后不再重复执行,
 	# 否则每按一次都会再跑一遍 ResultsOfEvents, 事件效果累加、选项条件被改写成不可用.
 	if _已选 >= 0:
+		选项按钮[index].set_pressed_no_signal(false)
+		选项按钮[_已选].set_pressed_no_signal(true)
 		return
 	print("[事件] 选择=", index)
 	_已选 = index
@@ -61,6 +63,9 @@ func _选择(index: int) -> void:
 		选项按钮[i].set_pressed_no_signal(i == index)
 	UiBridge.act(面板, "选择", [index])
 	UiBridge.request(面板)
+	# 原版点完选项直接进结果页(Results), 不再需要玩家再翻一页
+	_页 = 页.结果
+	_刷新页()
 
 
 func _左翻页() -> void:
@@ -119,9 +124,12 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 			选项按钮[i].visible = 可点
 			选项按钮[i].disabled = not 可点
 		else:
-			# 已选: 冻结选项显示(不再按原版重算可用性), 避免"点过几遍后选项变灰消失"
+			# 已选: 冻结选项显示. 不能设 disabled(TextureButton 的勾选图会退回普通态),
+			# 用 IGNORE 让它不再接收点击, 同时保持选中态与纹理.
 			选项按钮[i].visible = true
-			选项按钮[i].disabled = true
+			选项按钮[i].disabled = false
+			选项按钮[i].mouse_filter = Control.MOUSE_FILTER_IGNORE
+			选项按钮[i].set_pressed_no_signal(i == _已选)
 	_刷新页()
 
 
