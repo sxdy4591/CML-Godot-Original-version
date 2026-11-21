@@ -17,6 +17,9 @@ public partial class UiBridge : Node
     // 任何面板动作都可能改数值; 常驻顶栏靠这个信号即时刷新, 不必等自己的轮询窗口
     const string DataChangedSignal = "data_changed";
 
+    // 原版 TimeScript 只存在于外交场景(含地图模式); 其它界面里时间与事件倒计时都停
+    const string DiplomacyScene = "res://scenes/外交/外交.tscn";
+
     // 信号必须在任何场景脚本 _ready 连接之前注册, 放 _EnterTree 比 _Ready 更早.
     public override void _EnterTree()
     {
@@ -49,6 +52,9 @@ public partial class UiBridge : Node
     public override void _Process(double delta)
     {
         if (!GameHost.Booted) return;
+        // 场景切换有两条路(原版 LoadScene 与 全局管理.request_scene_change), 所以每帧按当前场景判定,
+        // 不依赖 OnScene: 只有外交场景(含地图模式)推进时间.
+        GameHost.SetMainScene(GetTree().CurrentScene?.SceneFilePath == DiplomacyScene);
         // 自动存档/战争去重/自动化/地图扫描/事件倒计时全在逻辑层按时序推进;
         // 桥层只剩两件事: 每帧叫一次, 把"高亮集合变了"翻成信号.
         GameHost.Tick(delta);
@@ -89,8 +95,6 @@ public partial class UiBridge : Node
     void OnScene(string path)
     {
         GD.Print($"[OnScene] 切场景: {path}");
-        // 时间只在主界面(外交/地图)推进; 经济/政治/事件等界面与原来的场景卸载语义一致
-        GameHost.SetMainScene(path == "res://scenes/外交/外交.tscn");
         EmitSignal(SceneRequestedSignal, path);
         GetTree().CallDeferred("change_scene_to_file", path);
     }
