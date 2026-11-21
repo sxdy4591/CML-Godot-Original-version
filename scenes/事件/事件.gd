@@ -63,9 +63,6 @@ func _选择(index: int) -> void:
 		选项按钮[i].set_pressed_no_signal(i == index)
 	UiBridge.act(面板, "选择", [index])
 	UiBridge.request(面板)
-	# 原版点完选项直接进结果页(Results), 不再需要玩家再翻一页
-	_页 = 页.结果
-	_刷新页()
 
 
 func _左翻页() -> void:
