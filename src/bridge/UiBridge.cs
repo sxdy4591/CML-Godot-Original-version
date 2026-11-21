@@ -2,6 +2,7 @@
 // GDScript 侧统一用 snake_case: request / act / panel_snapshot / map_highlight / scene_requested / toast.
 using CML.Logic;
 using CML.Logic.Panes;
+using CML.Logic.Port;
 using Godot;
 
 namespace CML.Bridge;
@@ -16,6 +17,9 @@ public partial class UiBridge : Node
     const string ToastSignal = "toast";
     // 任何面板动作都可能改数值; 常驻顶栏靠这个信号即时刷新, 不必等自己的轮询窗口
     const string DataChangedSignal = "data_changed";
+    // 成就解锁提示 / 事件内指定音乐(音频总管监听)
+    const string AchievementSignal = "achievement_unlocked";
+    const string EventMusicSignal = "event_music";
 
     // 原版 TimeScript 只存在于外交场景(含地图模式); 其它界面里时间与事件倒计时都停
     const string DiplomacyScene = "res://scenes/外交/外交.tscn";
@@ -28,6 +32,8 @@ public partial class UiBridge : Node
         AddUserSignal(SceneRequestedSignal, new Godot.Collections.Array { "path" });
         AddUserSignal(ToastSignal, new Godot.Collections.Array { "text" });
         AddUserSignal(DataChangedSignal, new Godot.Collections.Array());
+        AddUserSignal(AchievementSignal, new Godot.Collections.Array { "number" });
+        AddUserSignal(EventMusicSignal, new Godot.Collections.Array { "name" });
     }
 
     public override void _Ready()
@@ -36,8 +42,12 @@ public partial class UiBridge : Node
         UiEvents.SceneRequested += OnScene;
         UiEvents.ToastRequested += OnToast;
         UiEvents.UnhandledSceneRequested += OnUnhandledScene;
+        UiEvents.EventMusicRequested += OnEventMusic;
         // 原版 SceneManager.LoadScene 的出口: compat 只发原始场景名, 由桥层转成场景请求
         UnityEngine.SceneManagement.SceneRouter.Requested += UiEvents.RequestScene;
+        // 设置页的难度([ui] difficulty)必须在 Boot 之前落到原版的 our_diff_in,
+        // GameState.diff 才会在 Global.Init 里读对, 开局数据/难度系数才按模式区分.
+        GameHost.SetDifficulty(ReadDifficulty());
         GameHost.Boot();        GD.Print($"[UiBridge] 内核启动完成, 已注册面板: {string.Join(",", PanelRouter.Names)}");
     }
 
@@ -46,6 +56,7 @@ public partial class UiBridge : Node
         UiEvents.SceneRequested -= OnScene;
         UiEvents.ToastRequested -= OnToast;
         UiEvents.UnhandledSceneRequested -= OnUnhandledScene;
+        UiEvents.EventMusicRequested -= OnEventMusic;
         Instance = null;
     }
 
@@ -58,7 +69,18 @@ public partial class UiBridge : Node
         // 自动存档/战争去重/自动化/地图扫描/事件倒计时全在逻辑层按时序推进;
         // 桥层只剩两件事: 每帧叫一次, 把"高亮集合变了"翻成信号.
         GameHost.Tick(delta);
+        // 原版 Set(n) 与自建 Unlock 都只是写 ach_this, 这里做差分把"新解锁"翻成信号
+        foreach (var number in AchievementCenter.DrainNewUnlocks()) EmitSignal(AchievementSignal, number);
         if (MapPane.ConsumeDirty()) EmitSignal(MapHighlightSignal, UiVariant.ToArray(MapPane.HighlightList()));
+    }
+
+    // 桥层自己读 playerprefs 的 [ui] difficulty: UISettings 的 _cfg 要等它自己的 _Ready 才建,
+    // 这里在 Boot 之前调用会拿到 null.
+    static int ReadDifficulty()
+    {
+        var cfg = new Godot.ConfigFile();
+        cfg.Load("user://playerprefs.ini");
+        return (int)cfg.GetValue("ui", "difficulty", 2);
     }
 
     // GDScript 入口
@@ -77,9 +99,20 @@ public partial class UiBridge : Node
     // 自动存档开关(0关/1每月/2半年)与保存槽位(1..5): 设置页落盘在 playerprefs,
     // 原版真值在 GlobalScript.autosavej / savePlace, 进游玩场景时推回.
     public void set_save_options(int autosave, int saveplace)
+        => GameHost.SetSaveOptions(autosave, saveplace);
+
+    // 成就提示弹窗只需标题/描述: 桥层做一次查表转发, 不让视图去拉整页快照.
+    public Godot.Collections.Array achievement_text(int number)
     {
-        GameHost.Global.autosavej = autosave;
-        GameHost.Global.savePlace = saveplace;
+        var result = new Godot.Collections.Array();
+        for (var i = 0; i < AchievementCatalog.Count; i++)
+        {
+            if (AchievementCatalog.Numbers[i] != number) continue;
+            result.Add(AchievementCatalog.Titles[i]);
+            result.Add(AchievementCatalog.Descs[i].Replace("|", "\n"));
+            return result;
+        }
+        return result;
     }
 
     public void act(string panel, string action, Godot.Collections.Array args)
@@ -99,5 +132,6 @@ public partial class UiBridge : Node
         GetTree().CallDeferred("change_scene_to_file", path);
     }
     void OnToast(string text) => EmitSignal(ToastSignal, text);
+    void OnEventMusic(string name) => EmitSignal(EventMusicSignal, name);
     void OnUnhandledScene(string name) => GD.PushError($"原版场景未映射: {name}");
 }

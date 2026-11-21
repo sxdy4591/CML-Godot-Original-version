@@ -85,9 +85,26 @@ public sealed class Stub
         return this;
     }
 
+    // 原版 MonoBehaviour 把 Awake/Start/Update 声明成 public virtual 空实现, 事件/时钟类则用
+    // private 同签名方法隐藏它们。带 Public 的 GetMethod 要么命中基类空实现、要么抛歧义
+    // (UnityRuntime.FindLifecycleMethod 就是为这个 catch 的), 结果都是原版逻辑根本不执行。
+    // 逐层 DeclaredOnly 取最派生的那个, 才是 Unity 按名派发给具体类型的原意。
+    public static MethodInfo FindLifecycle(Type type, string name)
+    {
+        for (var t = type; t != null; t = t.BaseType)
+        {
+            if (t == typeof(MonoBehaviour) || t == typeof(Behaviour)
+                || t == typeof(Component) || t == typeof(UnityEngine.Object)) return null;
+            var info = t.GetMethod(name, BindingFlags.Instance
+                | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+            if (info != null) return info;
+        }
+        return null;
+    }
+
     void InvokeLifecycle(string method)
     {
-        var info = Component.GetType().GetMethod(method, Flags);
+        var info = FindLifecycle(Component.GetType(), method);
         if (info != null) info.Invoke(Component, null);
     }
 

@@ -30,7 +30,7 @@ func _ready() -> void:
 func setup(info: Dictionary) -> void:
 	_info = info
 	_index = int(info["index"])
-	# 勾 = 已完成 / 研究中 / 已投入; 叉 = 尚未开始(能否点看按钮与悬停提示)
+	# 勾 = 已完成 / 研究中 / 已投入 / 现在可开始; 叉 = 还不能研究(原因看悬停提示)
 	可科研状态.texture = 可科研是 if str(info["galka"]) == "yes" else 可科研否
 	可科研状态.tooltip_text = str(info["tip"])
 	进度.max_value = int(info["progress_max"])

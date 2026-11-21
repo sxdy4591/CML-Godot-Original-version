@@ -151,6 +151,8 @@ public sealed class EconomyPane : IPanel
             DisplaysCache[key] = stub;
         }
         stub.Invoke(method);
-        return ((TextMesh)stub.Get("text")).text;
+        // 原版 Show_diplomacy_data_script.Repaint_dolg 的中文分支把换行写成了字面 \n
+        // (债务限额那一行), 界面会直接显示反斜杠+n; 这里只修正这处字面转义.
+        return ((TextMesh)stub.Get("text")).text.Replace("\\n", "\n");
     }
 }

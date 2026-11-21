@@ -28,9 +28,14 @@ var 当前专辑目录: String = ""
 var 当前曲目路径列表: Array[String] = []
 var 当前曲目名列表: Array[String] = []
 var 当前专辑索引: int = -1
+# 事件内指定音乐(如毛主席逝世): 临时占用背景音乐播放器, 播完恢复原专辑曲目
+var 事件音乐中: bool = false
+var _事件音乐之前: Dictionary = {}
 var 当前曲目: int = -1
 var 循环: bool = false
 var 随机: bool = true
+# 全部专辑随机: 随机时跨专辑选曲(所有专辑的所有曲目)
+var 全专辑随机: bool = false
 
 ## 持久化(与 C# 桥共用 user://playerprefs.ini, 独立分区, 不碰原代码)
 var _cfg: ConfigFile
@@ -50,6 +55,7 @@ func _ready() -> void:
 	_音乐音量 = clampi(int(_cfg.get_value("audio", "music_volume", 旧音量)), 0, 音量范围)
 	_音效音量 = clampi(int(_cfg.get_value("audio", "sfx_volume", 旧音量)), 0, 音量范围)
 	循环 = _cfg.get_value("audio", "loop", false) == true
+	全专辑随机 = _cfg.get_value("audio", "all_shuffle", false) == true
 	随机 = _cfg.get_value("audio", "shuffle", true) == true
 
 	_确保总线()
@@ -66,6 +72,7 @@ func _ready() -> void:
 	按钮按下.stream = preload("res://assets/audio/sfx/click_default.wav")
 	add_child(按钮按下)
 
+	UiBridge.connect("event_music", 播放事件音乐)
 	_应用音量()
 	_扫描专辑()
 	if not 专辑目录列表.is_empty():
@@ -145,6 +152,7 @@ func _扫描专辑() -> void:
 			专辑目录列表.append(d)
 			专辑名列表.append(名)
 	print("[AudioSys] 加载 %d 张专辑, 来源: %s" % [专辑目录列表.size(), str(根们)])
+	_构建全部曲目()
 	print("[AudioSys] 专辑列表: %s" % str(专辑名列表))
 
 
@@ -371,11 +379,43 @@ func _加载音频(path: String) -> AudioStream:
 		return AudioStreamWAV.load_from_file(path) if not path.begins_with("res://") else load(path)
 	return null
 
+## 指定事件音乐: assets/audio/eventmusic/<名>.mp3
+## 与专辑系统兼容: 只临时占用同一个播放器, 播完恢复事件前的专辑/曲目与播放状态.
+func 播放事件音乐(名: String) -> void:
+	var 路径 := "res://assets/audio/eventmusic/%s.mp3" % 名
+	if not ResourceLoader.exists(路径):
+		push_warning("[AudioSys] 事件音乐不存在: %s" % 路径)
+		return
+	var 流 := _加载音频(路径)
+	if 流 == null:
+		return
+	_事件音乐之前 = {
+		"专辑": 当前专辑索引,
+		"曲目": 当前曲目,
+		"播放中": 背景音乐播放器.playing,
+	}
+	事件音乐中 = true
+	背景音乐播放器.stop()
+	背景音乐播放器.stream = 流
+	背景音乐播放器.play()
+	曲目变更.emit("事件音乐：%s" % 名)
+
 func _on_歌曲播完() -> void:
+	if 事件音乐中:
+		事件音乐中 = false
+		var 之前: Dictionary = _事件音乐之前
+		_事件音乐之前 = {}
+		if bool(之前.get("播放中", false)) and int(之前.get("专辑", -1)) >= 0:
+			选择专辑(int(之前["专辑"]))
+			播放曲目(int(之前["曲目"]))
+		return
 	if 当前曲目 < 0:
 		return
 	if 循环:
 		背景音乐播放器.play()
+		return
+	if 随机 and 全专辑随机:
+		_随机全专辑曲目()
 		return
 	var 下一首: int = _随机曲目索引(当前曲目) if 随机 else _顺序下一首()
 	if 下一首 >= 0:
@@ -397,6 +437,28 @@ func _顺序下一首() -> int:
 	if 总数 == 0:
 		return -1
 	return (当前曲目 + 1) % 总数
+
+## 所有专辑的所有曲目: [[专辑索引, 曲目索引], ...]
+var _全部曲目: Array = []
+
+func _构建全部曲目() -> void:
+	_全部曲目.clear()
+	for 专辑 in 专辑目录列表.size():
+		var 曲目: Array = _扫描目录曲目(专辑目录列表[专辑])["paths"]
+		for 编号 in 曲目.size():
+			_全部曲目.append([专辑, 编号])
+
+func _随机全专辑曲目() -> void:
+	if _全部曲目.is_empty():
+		return
+	var 选中: Array = _全部曲目[randi() % _全部曲目.size()]
+	if int(选中[0]) != 当前专辑索引:
+		选择专辑(int(选中[0]))
+	播放曲目(int(选中[1]))
+
+func 设置全专辑随机(开启: bool) -> void:
+	全专辑随机 = 开启
+	_保存播放选项()
 
 func 当前歌名() -> String:
 	if 当前曲目 < 0 or 当前曲目 >= 当前曲目名列表.size():
@@ -423,6 +485,7 @@ func _保存播放选项() -> void:
 	_cfg.load("user://playerprefs.ini")
 	_cfg.set_value("audio", "loop", 循环)
 	_cfg.set_value("audio", "shuffle", 随机)
+	_cfg.set_value("audio", "all_shuffle", 全专辑随机)
 	_cfg.save("user://playerprefs.ini")
 
 func 当前专辑索引_() -> int:

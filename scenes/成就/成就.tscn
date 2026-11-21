@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://c6vpmp3dg26ba"]
+
+[ext_resource type="Script" uid="uid://cq7fib3exf75j" path="res://scenes/成就/成就.gd" id="1_ach"]
+[ext_resource type="Texture2D" uid="uid://c8ocnkd0biioa" path="res://assets/ui/成就/ui_window_bg.png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://8lwcvuye2ypa" path="res://assets/ui/成就/ui_close.png" id="3_close"]
+
+[node name="成就" type="Control" unique_id=1620353157]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ach")
+
+[node name="背景" type="TextureRect" parent="." unique_id=426488561]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 60.0
+offset_right = 1680.0
+offset_bottom = 1020.0
+mouse_filter = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+
+[node name="标题" type="Label" parent="." unique_id=875855243]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 92.0
+offset_right = 800.0
+offset_bottom = 152.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "成就"
+
+[node name="进度" type="Label" parent="." unique_id=1487607343]
+layout_mode = 0
+offset_left = 1200.0
+offset_top = 104.0
+offset_right = 1620.0
+offset_bottom = 144.0
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 2
+
+[node name="滚动" type="ScrollContainer" parent="." unique_id=583822013]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 164.0
+offset_right = 1620.0
+offset_bottom = 960.0
+horizontal_scroll_mode = 0
+
+[node name="列表" type="VBoxContainer" parent="滚动" unique_id=1429003803]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="返回主菜单" type="TextureButton" parent="." unique_id=353745668]
+layout_mode = 0
+offset_left = 1612.0
+offset_top = 80.0
+offset_right = 1672.0
+offset_bottom = 140.0
+texture_normal = ExtResource("3_close")
+ignore_texture_size = true
+stretch_mode = 5

@@ -83,7 +83,7 @@ public static class DiploHost
         {
             var buttonGo = new GameObject("Button" + tag + " (" + i + ")");
             buttonGo.AddComponent<SpriteRenderer>();
-            Stub.Attach<achievements>(buttonGo);
+            AchievementCenter.Register(Stub.Attach<achievements>(buttonGo));
             var buttonStub = Stub.On<DiploButtonScript>(buttonGo, Lifecycle.Scene);
             AddText(buttonGo, "Text");
             map.buttons[i] = buttonGo;
@@ -97,7 +97,7 @@ public static class DiploHost
 
         var countryGo = new GameObject("CountryProbe" + tag);
         countryGo.AddComponent<SpriteRenderer>();
-        Stub.Attach<achievements>(countryGo);
+        AchievementCenter.Register(Stub.Attach<achievements>(countryGo));
         set.Probe = Stub.On<CountryScript>(countryGo, Lifecycle.None).Typed<CountryScript>();
 
         return set;

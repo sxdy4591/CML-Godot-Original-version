@@ -18,8 +18,12 @@ func 检查更新() -> void:
 func 拉取内容() -> void:
 	请求文本(站点 + "content.json", _解析内容)
 
-## 下载图片; 成功才回调, 失败由 请求字节 显式报错(UI 保持本地图).
-func 下载图片(url: String, 回调: Callable) -> void:
+## 图片结果(拉模式): url -> Texture2D. 调用方每帧自取并 erase.
+## 不接外部 Callable —— 调用方场景(成就/关于)随时可能被释放.
+var 图片结果: Dictionary = {}
+
+func 请求图片(url: String) -> void:
+	# 商店图只是装饰: 离线/连不上 Steam CDN 时静默跳过, 不为每个 URL 刷一条 error
 	请求字节(url, func(数据: PackedByteArray) -> void:
 		var 图 := Image.new()
 		var 后缀 := url.get_extension().to_lower()
@@ -27,13 +31,15 @@ func 下载图片(url: String, 回调: Callable) -> void:
 		if 错误 != OK:
 			push_error("[在线更新] %s 不是可解码的图片: %s" % [url, error_string(错误)])
 			return
-		回调.call(ImageTexture.create_from_image(图)))
+		图片结果[url] = ImageTexture.create_from_image(图), false)
 
 func 请求文本(url: String, 回调: Callable) -> void:
 	请求字节(url, func(数据: PackedByteArray) -> void:
+		if not 回调.is_valid():
+			return
 		回调.call(数据.get_string_from_utf8()))
 
-func 请求字节(url: String, 回调: Callable) -> void:
+func 请求字节(url: String, 回调: Callable, 报错 := true) -> void:
 	var 请求 := HTTPRequest.new()
 	请求.timeout = 10.0
 	add_child(请求)
@@ -41,13 +47,18 @@ func 请求字节(url: String, 回调: Callable) -> void:
 		func(结果: int, 码: int, _头: PackedStringArray, 体: PackedByteArray) -> void:
 			请求.queue_free()
 			if 结果 != HTTPRequest.RESULT_SUCCESS or 码 != 200:
-				push_error("[在线更新] %s 失败: result=%d code=%d" % [url, 结果, 码])
+				if 报错:
+					push_error("[在线更新] %s 失败: result=%d code=%d" % [url, 结果, 码])
+				return
+			# 调用方节点可能已在请求期间被释放(例如成就界面随主菜单切场景), 此时丢弃结果
+			if not 回调.is_valid():
 				return
 			回调.call(体))
 	var 错误 := 请求.request(url)
 	if 错误 != OK:
 		请求.queue_free()
-		push_error("[在线更新] %s 无法发起: %s" % [url, error_string(错误)])
+		if 报错:
+			push_error("[在线更新] %s 无法发起: %s" % [url, error_string(错误)])
 
 func _解析版本清单(文本: String) -> void:
 	var 清单: Variant = JSON.parse_string(文本)

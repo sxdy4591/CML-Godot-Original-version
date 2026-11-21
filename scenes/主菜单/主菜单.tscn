@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="2_i5hij"]
 [ext_resource type="Texture2D" uid="uid://dyguj0ay7w44n" path="res://assets/ui/主菜单/主菜单按钮.png" id="2_ngrxy"]
 [ext_resource type="Texture2D" uid="uid://vcsjiyi2j6yf" path="res://assets/ui/主菜单/menyu_fon.png" id="2_psws0"]
+[ext_resource type="PackedScene" path="res://scenes/成就/成就.tscn" id="3_ach"]
 
 [node name="Control" type="Control" unique_id=1650672303]
 layout_mode = 3
@@ -133,9 +134,8 @@ anchors_preset = -1
 anchor_left = 0.86927086
 anchor_top = 0.08981481
 anchor_right = 0.9916667
-anchor_bottom = 0.32037037
+anchor_bottom = 0.32037038
 tooltip_text = "内容对齐 1.132"
-mouse_filter = 0
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 horizontal_alignment = 2
@@ -158,8 +158,30 @@ flat = true
 icon_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="成就" type="Button" parent="." unique_id=792183636]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42916667
+anchor_top = 0.64444447
+anchor_right = 0.5776042
+anchor_bottom = 0.7259259
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.4467768, 0.446777, 0.44677794, 1)
+theme_override_fonts/font = ExtResource("2_i5hij")
+theme_override_font_sizes/font_size = 62
+text = "成就"
+icon = ExtResource("2_ngrxy")
+flat = true
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="成就界面" parent="." instance=ExtResource("3_ach")]
+visible = false
+
 [connection signal="pressed" from="开始" to="." method="_on_开始游戏_pressed"]
 [connection signal="pressed" from="关于" to="." method="_on_关于_pressed"]
 [connection signal="pressed" from="退出" to="." method="_on_退出_pressed"]
 [connection signal="pressed" from="加载" to="." method="_on_加载_pressed"]
 [connection signal="pressed" from="设置" to="." method="_on_设置_pressed"]
+[connection signal="pressed" from="成就" to="." method="_on_成就_pressed"]

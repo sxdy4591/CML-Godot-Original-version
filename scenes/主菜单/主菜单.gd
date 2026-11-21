@@ -5,7 +5,9 @@ extends Control
 
 const 版本工具 := preload("res://src/common/版本.gd")
 
+
 @onready var 版本信息: RichTextLabel = $版本信息
+@onready var 成就界面: Control = $成就界面
 @onready var 检测更新: Button = $检测更新
 @onready var 在线: Node = get_node("/root/在线更新")
 
@@ -54,6 +56,10 @@ func _on_加载_pressed() -> void:
 
 func _on_关于_pressed() -> void:
 	全局管理.show_about.emit()
+
+
+func _on_成就_pressed() -> void:
+	成就界面.visible = true
 
 
 func _on_退出_pressed() -> void:

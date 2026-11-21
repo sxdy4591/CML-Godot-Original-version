@@ -67,11 +67,26 @@ static func _apply_color_map(text: String, table: Dictionary) -> String:
 	return out
 
 static func unity_to_bbcode(text: String) -> String:
-	return _apply_color_map(text, 命名色映射)
+	return _unity_tags_to_bbcode(_apply_color_map(text, 命名色映射))
 
 ## 深色底版本: 亮色系(供 tooltip 等近黑背景使用)
 static func unity_to_bbcode_亮(text: String) -> String:
-	return _apply_color_map(text, 命名色映射_亮)
+	return _unity_tags_to_bbcode(_apply_color_map(text, 命名色映射_亮))
+
+
+## Unity 富文本的 <size=N>/<b>/<i>/<u> 转 BBCode; <color> 已由 _apply_color_map 处理.
+## 原版事件正文有 "<size=40>…</size>"(如尼加拉瓜事件), 不转就会原样显示标签.
+static var _size_re: RegEx
+static func _unity_tags_to_bbcode(text: String) -> String:
+	if _size_re == null:
+		_size_re = RegEx.new()
+		_size_re.compile("(?i)<size=([0-9]+)>")
+	var t := _size_re.sub(text, "[font_size=$1]", true)
+	t = t.replace("</size>", "[/font_size]").replace("</SIZE>", "[/font_size]")
+	t = t.replace("<b>", "[b]").replace("</b>", "[/b]").replace("<B>", "[b]").replace("</B>", "[/b]")
+	t = t.replace("<i>", "[i]").replace("</i>", "[/i]").replace("<I>", "[i]").replace("</I>", "[/i]")
+	t = t.replace("<u>", "[u]").replace("</u>", "[/u]").replace("<U>", "[u]").replace("</U>", "[/u]")
+	return t
 
 
 ## 命名色查询(供必须手写 BBCode 的地方复用同一套深色值)

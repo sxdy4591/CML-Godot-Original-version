@@ -118,6 +118,14 @@ public static class GameHost
         typeof(TimeScript).GetMethod("Update",
             System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
 
+    // 原版 DiffScript 把难度写进 PlayerPrefs("our_diff_in"), GlobalScript.Init 再读回 gameState.diff;
+    // GameStartScript 按 diff 设置开局数据(牛棚小酌 0: 预算 +500 = 53.0).
+    public static void SetDifficulty(int difficulty)
+    {
+        UnityEngine.PlayerPrefs.SetInt("our_diff_in", difficulty);
+        UnityEngine.PlayerPrefs.Save();
+    }
+
     // ================= 每帧推进 =================
     // 桥层只负责每帧叫一次 + 把"高亮集合变了"翻译成信号; 是否推进由当前场景决定.
     public static void Tick(double delta)
@@ -214,12 +222,24 @@ public static class GameHost
     // (每月 1 日 / 每 6 个月 1 日) 写独立的 0 号自动槽, 界面与手动档同格式.
     static int _autoSaveDay = -1;
 
+    // 玩家自动存档模式(0关/1每月/2半年): 与保存槽位一起从设置页推来.
+    // 原版 GlobalScript.autosavej 保持 0 —— 原版自动存档用 BinaryFormatter, .NET 10 已移除;
+    // 移植版自动存档全部走 SaveService(见 MaybeAutoSave).
+    static int _autoSaveMode = 1;
+
+    public static void SetSaveOptions(int mode, int place)
+    {
+        _autoSaveMode = mode;
+        Global.savePlace = place;
+        Global.autosavej = 0;
+    }
+
     public static void MaybeAutoSave()
     {
         var s = Global.gameState;
-        if (Global.speed <= 0 || Global.autosavej <= 0) return;
+        if (Global.speed <= 0 || _autoSaveMode <= 0) return;
         if (s.data[19] != 1) return;
-        if (Global.autosavej == 2 && s.data[20] % 6 != 0) return;
+        if (_autoSaveMode == 2 && s.data[20] % 6 != 0) return;
         var key = s.data[21] * 10000 + s.data[20] * 100 + s.data[19];
         if (key == _autoSaveDay) return;
         _autoSaveDay = key;

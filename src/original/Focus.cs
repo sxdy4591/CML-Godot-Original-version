@@ -113,7 +113,9 @@ public class Focus : RequestingMinor<Focus>, IRequesting<Focus>
 	{
 		Func<bool> prev = condition;
 		Func<bool> expr = expression;
-		condition = () => expr() || prev();
+		// [移植修复] 1.132 数据里部分焦点没有前置条件(condition/expression 为 null),
+		// 原版直接调用会 NRE 并把 TimeScript.Update 从 Repaint 起打断.
+		condition = () => (expr == null || expr()) || (prev == null || prev());
 		expression = () => true;
 	}
 
@@ -134,7 +136,8 @@ public class Focus : RequestingMinor<Focus>, IRequesting<Focus>
 		else
 		{
 			Func<bool> prev = expression;
-			expression = () => condition() && prev();
+			// [移植修复] 同上: AND 条件的前置表达式可能为 null
+			expression = () => condition() && (prev == null || prev());
 			condition_and = true;
 		}
 		return this;

@@ -29,6 +29,7 @@ UISettings="*res://src/autoload/UISettings.gd"
 "全局管理"="*res://src/autoload/全局管理.tscn"
 "调试控制台"="*res://scenes/调试/调试控制台.tscn"
 "在线更新"="*res://src/autoload/在线更新.gd"
+"成就弹窗"="*res://scenes/成就/成就弹窗.tscn"
 
 [display]
 

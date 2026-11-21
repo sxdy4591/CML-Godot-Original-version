@@ -31,7 +31,8 @@ public static class TimeHostFactory
         Create("Button (0)", typeof(SpeedScript), typeof(SpriteRenderer));
         Create("Button (2)", typeof(EvetnnashScript), typeof(SpriteRenderer));
         Create("Button (4)", typeof(EvetnnashScript), typeof(SpriteRenderer));
-        Create("Ach(Clone)", typeof(AchievementsAlias));
+        var achGo = Create("Ach(Clone)", typeof(AchievementsAlias));
+        AchievementCenter.Register(achGo.GetComponent<AchievementsAlias>());
         Create("SteamManager", typeof(SteamManager));
         new GameObject("Global(Clone)");
 
@@ -125,13 +126,8 @@ public static class TimeHostFactory
     }
 
     // 原版 achievements 的 ach_this 由 Ach.prefab 序列化为 1000 长; 代码初值只有 100.
-    static void EnsureAchievementSlots(AchievementsAlias achievements)
-    {
-        var field = typeof(AchievementsAlias).GetField("ach_this",
-            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-            ?? throw new MissingFieldException(nameof(AchievementsAlias), "ach_this");
-        field.SetValue(achievements, new bool[1000]);
-    }
+    // 扩到 1000 并登记: 界面按"任一实例解锁"聚合读取.
+    static void EnsureAchievementSlots(AchievementsAlias achievements) => AchievementCenter.Register(achievements);
 
     private static GameObject MakeSpeedButton(string name, int number)
     {

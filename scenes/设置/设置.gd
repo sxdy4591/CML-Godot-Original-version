@@ -198,6 +198,9 @@ func _bind_music() -> void:
 	var shuffle_btn := find_child("随机播放", true, false) as BaseButton
 	loop_btn.pressed.connect(_on_loop_pressed)
 	shuffle_btn.pressed.connect(_on_shuffle_pressed)
+	var 全专辑随机 := find_child("全专辑随机", true, false) as CheckButton
+	全专辑随机.button_pressed = audio.全专辑随机
+	全专辑随机.toggled.connect(func(on: bool) -> void: audio.设置全专辑随机(on))
 	# 曲目槽: 只绑定一次, 点击时按"当前专辑的第 i 首"解析(切专辑后会重排)
 	for i in 曲目槽上限:
 		var slot := find_child("左%d" % (i + 1), true, false) if i < 20 else find_child("右%d" % (i - 19), true, false)

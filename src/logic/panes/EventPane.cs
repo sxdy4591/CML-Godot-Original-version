@@ -83,6 +83,30 @@ public sealed class EventPane : IPanel
         var resultArgs = new object[] { name, text, index };
         _script.GetType().GetMethod("ResultsOfEvents").Invoke(_script, resultArgs);
         _result = (string)resultArgs[1];
+        // 原版中文结果页 Results_text.Azkaba: 事件类 ResultsOfEvents 之后一定跟一步 Pereraschyot,
+        // 它把 party_change 落到 party_ideology/party_number 并重算执政派系 data[56].
+        ResultsStub().Invoke("Pereraschyot");
+        // 毛主席逝世(事件 3): 解锁自建成就 1976 并播放事件音乐, 与 dh-4591 扩展包的约定一致
+        if (state.number_event == 3)
+        {
+            AchievementCenter.Unlock(CustomMaoDeath);
+            UiEvents.RequestEventMusic("mao_dead");
+        }
+    }
+
+    // 自建成就编号: 避开 Steam ACH_1..211, 沿用 dh-4591 扩展包的 1976
+    const int CustomMaoDeath = 1976;
+
+    static Stub _results;
+
+    static Stub ResultsStub()
+    {
+        if (_results != null) return _results;
+        _results = Stub.Take<Results_text>("ResultsText", Lifecycle.None);
+        _results.Set("global1", GameHost.Global);
+        _results.Set("achieves", GameObject.Find("Ach(Clone)"));
+        _results.Set("party_change", new float[5]);
+        return _results;
     }
 
     // 原版结果页是 Results_text: 点击 → LoadScene(load_scene_after_click), 默认 Diplomacy;
@@ -91,10 +115,11 @@ public sealed class EventPane : IPanel
     // 并用 SuppressLoadScene 捕获它请求的场景, 没请求就按原版默认回外交.
     void Close()
     {
-        var update = _script.GetType().GetMethod("Update",
-            System.Reflection.BindingFlags.Instance
-            | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
-        if (update == null || update.DeclaringType == typeof(UnityEngine.MonoBehaviour))
+        // 事件类的收尾 Update 是 private(隐藏 MonoBehaviour 的 public virtual 空实现), 必须按
+        // 具体类型逐层找; 用带 Public 的 GetMethod 会命中基类空实现或抛歧义, 结局/链式事件
+        // 就会静默回外交(四人帮"不要干预"正是这条路).
+        var update = Stub.FindLifecycle(_script.GetType(), "Update");
+        if (update == null)
         {
             UiEvents.RequestScene("Diplomacy");
             return;
@@ -120,7 +145,10 @@ public sealed class EventPane : IPanel
         //   TextOfEvents/VariantsOfEvents → a.* 空引用 → 事件页整页空白;
         //   ResultsOfEvents → 文案与扣款全跳过(选完不扣钱).
         // Scene = 依赖场景兄弟对象的驱动: 字段就位后立刻 Activate, 不靠"记得调 Awake".
-        _script = Stub.Take(type, "Event" + number, Lifecycle.Scene).Activate().Typed<Component>();
+        var stub = Stub.Take(type, "Event" + number, Lifecycle.Scene);
+        // 原版事件类的 Set(n) 走 gameObject.GetComponent<achievements>(), 事件对象必须挂组件
+        AchievementCenter.Register(stub.Also<achievements>());
+        _script = stub.Activate().Typed<Component>();
         _number = number;
         _result = "";
     }

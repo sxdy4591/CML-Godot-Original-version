@@ -77,6 +77,8 @@ public static class PoliticsHost
             stub.Set("manager", _manager);
             stub.Set("bear1", _bear1 = EnsureBear("Bearu(0)", true));
             stub.Set("bear2", _bear2 = EnsureBear("Bearu(1)", false));
+            // 原版 Button_Pol_Script 政治动作里用 achieves.GetComponent<achievements>().Set(n)
+            stub.Set("achieves", GameObject.Find("Ach(Clone)"));
             Buttons[i] = stub;
         }
         _manager.buttons = new Button_Pol_Script[14];

@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://bas8wuhc4bl50"]
+
+[ext_resource type="Script" uid="uid://bi1v4so0jlimh" path="res://scenes/成就/成就解锁弹窗.gd" id="1_toast"]
+[ext_resource type="Texture2D" uid="uid://cjynhv2abnhvu" path="res://assets/ui/成就/ui_icon_frame.png" id="2_frame"]
+
+[node name="成就解锁弹窗" type="Control" unique_id=917554865]
+custom_minimum_size = Vector2(430, 104)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_toast")
+
+[node name="底板" type="TextureRect" parent="." unique_id=1259589346]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_frame")
+expand_mode = 1
+
+[node name="布局" type="HBoxContainer" parent="." unique_id=1541302680]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 12.0
+offset_right = -14.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+
+[node name="图标" type="TextureRect" parent="布局" unique_id=442102181]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="文本" type="VBoxContainer" parent="布局" unique_id=1058501298]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="标题" type="Label" parent="布局/文本" unique_id=830858129]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "成就解锁"
+
+[node name="描述" type="Label" parent="布局/文本" unique_id=372246364]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.15, 0.15, 1)
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 3

@@ -70,7 +70,7 @@ public sealed class PoliticsPane : IPanel
             ["face_type"] = (int)p.face_type,
             ["face_parts"] = ToInts(p.face_parts),
             ["jacket"] = (int)p.jacket,
-            ["status_flag"] = p.is_sagovor ? "阴谋" : p.is_sledstvie ? "审查" : "",
+            ["status_flag"] = IsConspirator(state, p) ? "阴谋" : p.is_sledstvie ? "审查" : "",
         };
         if (index < 0)
         {
@@ -97,6 +97,20 @@ public sealed class PoliticsPane : IPanel
 
     static string PoliticianName(GameState state, int index)
         => state.names1[state.politics[index].name_1] + " " + state.names2[state.politics[index].name_2];
+
+    // 卡片"阴谋"角标: 原版引擎自己认定的密谋者, 判据逐条对齐
+    //   TimeScript.PlotPlayer / PlotPlayerCause / Event4.ResultsOfEvents 三处同一条件.
+    // 不能直接用 Politic.is_sagovor —— 那是"被阴谋威胁", 由 PlotPolitics 在领袖逝世后
+    // (data[38] >= 100) 大面积置位(实测几乎人人成立), 原版界面从不把它铺成角标.
+    // data[38] 开局为 5(毛泽东在世), 只有事件 3(逝世)才置 100; 那之前引擎不存在密谋者.
+    static bool IsConspirator(GameState state, Politic p)
+    {
+        if (state.data[38] < 100) return false;
+        var t2 = p.traits[2];
+        var plotting = (p.loyality < 300 && t2 == 16) || p.you_fall
+            || (p.loyality < 150 && t2 != 9) || (p.loyality < 50 && t2 == 9);
+        return plotting && t2 != 17 && t2 != 19 && !p.is_sledstvie;
+    }
 
     // 原版 BeurocratsScript.Repaint: 150 显示实权领袖, 200 显示 "-"
     static string LeaderName(GameState state)

@@ -1,25 +1,25 @@
 [gd_scene format=3 uid="uid://b6l0sieu63sgv"]
 
-[ext_resource type="Texture2D" path="res://assets/ui/设置/设置背景图.png" id="1_cq6xe"]
+[ext_resource type="Texture2D" uid="uid://cdqc4umpsri2p" path="res://assets/ui/设置/设置背景图.png" id="1_cq6xe"]
 [ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="1_ioabl"]
-[ext_resource type="Texture2D" path="res://assets/ui/common/向上箭头.png" id="2_0f5pc"]
-[ext_resource type="Script" path="res://scenes/设置/设置.gd" id="2_d8khx"]
-[ext_resource type="Texture2D" path="res://assets/ui/common/向上箭头选中.png" id="3_ioabl"]
-[ext_resource type="Texture2D" path="res://assets/ui/设置/音频信息.png" id="4_d8khx"]
-[ext_resource type="Texture2D" path="res://assets/ui/设置/减小1音量.png" id="5_v75l0"]
-[ext_resource type="Texture2D" path="res://assets/ui/设置/减小10音量.png" id="6_4lujy"]
-[ext_resource type="Texture2D" path="res://assets/ui/设置/增大1音量.png" id="7_cm5al"]
-[ext_resource type="Script" path="res://scenes/设置/音频信息.gd" id="7_v75l0"]
-[ext_resource type="Texture2D" path="res://assets/ui/设置/增大10音量.png" id="8_owh4n"]
-[ext_resource type="Texture2D" path="res://assets/ui/外交/国家互动按钮背景.png" id="8_r4j0p"]
-[ext_resource type="Texture2D" path="res://assets/ui/设置/循环播放.png" id="12_cm5al"]
-[ext_resource type="Texture2D" path="res://assets/ui/设置/随机播放.png" id="13_owh4n"]
-[ext_resource type="Texture2D" path="res://assets/ui/设置/歌名背景.png" id="14_owh4n"]
-[ext_resource type="PackedScene" path="res://scenes/设置/单曲.tscn" id="15_5n7di"]
+[ext_resource type="Texture2D" uid="uid://bp2sso7vcuf6b" path="res://assets/ui/common/向上箭头.png" id="2_0f5pc"]
+[ext_resource type="Script" uid="uid://dmsdm8jpfpvoy" path="res://scenes/设置/设置.gd" id="2_d8khx"]
+[ext_resource type="Texture2D" uid="uid://dbfj0t8v6siy6" path="res://assets/ui/common/向上箭头选中.png" id="3_ioabl"]
+[ext_resource type="Texture2D" uid="uid://bwrexr8mymfgo" path="res://assets/ui/设置/音频信息.png" id="4_d8khx"]
+[ext_resource type="Texture2D" uid="uid://d1ui5wppdbnm0" path="res://assets/ui/设置/减小1音量.png" id="5_v75l0"]
+[ext_resource type="Texture2D" uid="uid://bys2g61xtj64l" path="res://assets/ui/设置/减小10音量.png" id="6_4lujy"]
+[ext_resource type="Texture2D" uid="uid://diad3ku7hnnqv" path="res://assets/ui/设置/增大1音量.png" id="7_cm5al"]
+[ext_resource type="Script" uid="uid://pojavqu1j1wh" path="res://scenes/设置/音频信息.gd" id="7_v75l0"]
+[ext_resource type="Texture2D" uid="uid://cpv7avso1hi25" path="res://assets/ui/设置/增大10音量.png" id="8_owh4n"]
+[ext_resource type="Texture2D" uid="uid://d13jw6ini7wcs" path="res://assets/ui/外交/国家互动按钮背景.png" id="8_r4j0p"]
+[ext_resource type="Texture2D" uid="uid://ol58rw6py6py" path="res://assets/ui/设置/循环播放.png" id="12_cm5al"]
+[ext_resource type="Texture2D" uid="uid://bhi1j66widxj7" path="res://assets/ui/设置/随机播放.png" id="13_owh4n"]
+[ext_resource type="Texture2D" uid="uid://pnmb1211it77" path="res://assets/ui/设置/歌名背景.png" id="14_owh4n"]
+[ext_resource type="PackedScene" uid="uid://dvrbfsm4ixjq6" path="res://scenes/设置/单曲.tscn" id="15_5n7di"]
 [ext_resource type="PackedScene" path="res://scenes/设置/专辑.tscn" id="17_ujnel"]
-[ext_resource type="Texture2D" path="res://assets/ui/设置/右翻页.png" id="18_upx2b"]
-[ext_resource type="Texture2D" path="res://assets/ui/加载/加载文本栏.png" id="19_rowbar"]
-[ext_resource type="PackedScene" path="res://scenes/设置/自定义页.tscn" id="20_custom"]
+[ext_resource type="Texture2D" uid="uid://bw8sx1li4iyhe" path="res://assets/ui/设置/右翻页.png" id="18_upx2b"]
+[ext_resource type="Texture2D" uid="uid://bf36qtmdti3rd" path="res://assets/ui/加载/加载文本栏.png" id="19_rowbar"]
+[ext_resource type="PackedScene" uid="uid://capooj5b7vt3v" path="res://scenes/设置/自定义页.tscn" id="20_custom"]
 
 [sub_resource type="Theme" id="Theme_34yt3"]
 default_font = ExtResource("1_ioabl")
@@ -749,7 +749,7 @@ offset_bottom = 165.0
 value = 5.0
 
 [node name="音效面板" type="Panel" parent="音频信息背景图" unique_id=330000030]
-offset_left = 0.0
+layout_mode = 0
 offset_top = 168.0
 offset_right = 618.0
 offset_bottom = 212.0
@@ -772,7 +772,6 @@ offset_left = 138.0
 offset_top = 12.0
 offset_right = 500.0
 offset_bottom = 36.0
-max_value = 100.0
 value = 5.0
 
 [node name="音效数值" type="Label" parent="音频信息背景图/音效面板" unique_id=330000033]
@@ -804,6 +803,16 @@ offset_right = 1975.9999
 offset_bottom = 784.0
 scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("13_owh4n")
+
+[node name="全专辑随机" type="CheckButton" parent="." unique_id=2081000001]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 72.0
+offset_right = 1244.0
+offset_bottom = 134.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "全部专辑音乐随机播放"
 
 [node name="左歌名背景" type="TextureRect" parent="." unique_id=1099629759]
 layout_mode = 0

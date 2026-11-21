@@ -9,6 +9,8 @@ public static class UiEvents
     public static event Action<string> SceneRequested;
     public static event Action<string> ToastRequested;
     public static event Action<string> UnhandledSceneRequested;
+    // 指定事件触发时要播的事件音乐(assets/audio/eventmusic/<name>.mp3)
+    public static event Action<string> EventMusicRequested;
 
     public static void RequestScene(string unitySceneName)
     {
@@ -20,4 +22,6 @@ public static class UiEvents
     public static void RequestScenePath(string godotPath) => SceneRequested?.Invoke(godotPath);
 
     public static void Toast(string text) => ToastRequested?.Invoke(text);
+
+    public static void RequestEventMusic(string name) => EventMusicRequested?.Invoke(name);
 }

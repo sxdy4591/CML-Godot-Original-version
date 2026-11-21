@@ -50,10 +50,10 @@ public sealed class SciencePane : IPanel
                 ["progress_max"] = need,
                 ["progress_value"] = done ? need : spent,
                 ["status"] = done ? "已完成" : inProgress ? "研究中" : ScienceData.Year[i].ToString(),
-                // 勾 = 已完成 / 研究中 / 已投入(这一项已经动过); 叉 = 还没开始.
-                // 原版 galka 是"依赖是否满足", 没研究的也会打勾, 玩家会误读成已完成;
-                // 能不能点仍由 available 决定, 原因写在 tip 里.
-                ["galka"] = done || inProgress || spent > 0 ? "yes" : "no",
+                // 勾 = 已完成 / 研究中 / 已投入 / 现在就能开始研究(依赖已满足); 叉 = 还不能研究.
+                // 原版 galka 就是"依赖是否满足", 没研究但可开的也会打勾;
+                // 能不能点仍由 available 决定, 不满足的原因写在 tip 里.
+                ["galka"] = done || inProgress || spent > 0 || available ? "yes" : "no",
                 ["tip"] = StatusTip(i, done, inProgress, available),
                 ["name"] = ((TextMesh)entry.Get("T1")).text,
                 ["cost"] = ((TextMesh)entry.Get("T2")).text,

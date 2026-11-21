@@ -26,7 +26,9 @@ public sealed class TopStatePane : IPanel
             .Put("freedom", Item(d[4], old[4]))
             .Put("living", Item(d[5], old[5]))
             .Put("prestige", Item(d[6], old[6]))
-            .Put("influence", Item(d[7], old[7]))
+            // 原版 Show_diplomacy_data_script.Repaint 的 num == 7 分支读 influencePRC(真值);
+            // data[7] 只是 KumihaRepaint 每天写的缓存, 直接读它会让影响力看起来"卡住不动".
+            .Put("influence", Item(state.influencePRC, old[7]))
             .Put("budget", Item(d[8], old[8]))
             .Put("agents", Item(d[9], old[9]))
             .Put("american", Item(state.empires[0].relations, old[AmericaDeltaSlot]))
