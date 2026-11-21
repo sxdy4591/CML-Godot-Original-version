@@ -1,0 +1,38 @@
+root = true
+
+[*]
+charset = utf-8
+
+# ============================================================
+# src/original/ = 原版 Unity 反编译代码的"逐字节镜像"。两条硬约束:
+#   1. 全工程反射按类名/字段名查找(EventBridge 按 "EventN" 找类型、替身工厂按字段名赋值),
+#      改名/删字段会直接炸;
+#   2. tools/port_119_sync.ps1 靠"src/original 与上游 Assembly-CSharp 逐字节一致"
+#      来检测作者更新 —— 一旦本地改动, 下次同步会把改动当噪音、或反过来覆盖掉修复。
+# 故下列警告只能在 src/original 范围内静音(反编译产物固有), 严禁靠改源码消除。
+# 作用域限定在 src/original, src/bridge 与 src/compat 的同类检查保持生效。
+# ============================================================
+[src/original/**.cs]
+# CS8981: 类名仅含小写 ascii(原版类名, 如 achievements/doneventscript/warinwars, 反射与存档按名引用)
+dotnet_diagnostic.CS8981.severity = none
+# CS0169/CS0649/CS0414: 未使用或未赋值字段(原版为 Unity 序列化字段, 由场景/替身工厂注入)
+dotnet_diagnostic.CS0169.severity = none
+dotnet_diagnostic.CS0649.severity = none
+dotnet_diagnostic.CS0414.severity = none
+# CS0626: extern 无 DllImport —— 反编译残留(KGEvent/QueryDecisions.Turkeyispositive,
+#         全工程无调用点; 若将来被调用会抛异常, 届时需在 Bridge 侧另行处理)
+dotnet_diagnostic.CS0626.severity = none
+
+# ============================================================
+# CS0436: src/compat 有意提供 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+# 同名替身, 让镜像里的 Savescript/LoadInScript 在不改 src/original 的前提下落到
+# GameSaveBinary(.NET 9+ 已移除 BinaryFormatter)。C# 对同名类型优先当前程序集,
+# 因此这两个文件里的 `new BinaryFormatter()` 实际调用的是兼容层 —— 这正是我们要的,
+# 警告只是编译器在提醒"同名冲突"。只对这两个使用点静音, 其它文件保持生效。
+# 见 src/compat/BinaryFormatterCompat.cs 头部说明。
+# ============================================================
+[src/original/Savescript.cs]
+dotnet_diagnostic.CS0436.severity = none
+
+[src/original/LoadInScript.cs]
+dotnet_diagnostic.CS0436.severity = none

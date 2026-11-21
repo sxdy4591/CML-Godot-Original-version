@@ -1,0 +1,296 @@
+[gd_scene format=3 uid="uid://vq6jexkk5tru"]
+
+[ext_resource type="Script" uid="uid://cmtp7ki6twdpc" path="res://scenes/外交/外交.gd" id="1_oqvqm"]
+[ext_resource type="Texture2D" uid="uid://6fk4283uiqgi" path="res://assets/ui/外交/时间背景.png" id="2_datwn"]
+[ext_resource type="Texture2D" uid="uid://cg0njk0q5pkok" path="res://assets/ui/外交/决议.png" id="2_ut6ls"]
+[ext_resource type="PackedScene" uid="uid://dab4f1a2d3e45" path="res://scenes/通用/导航栏.tscn" id="3_6kvcv"]
+[ext_resource type="Texture2D" uid="uid://bkgq2ecoirsqn" path="res://assets/ui/外交/时间暂停.png" id="3_oqvqm"]
+[ext_resource type="Texture2D" uid="uid://bdt321npojxp8" path="res://assets/ui/外交/时间启动.png" id="4_6kvcv"]
+[ext_resource type="Texture2D" uid="uid://dil4r7ro3leow" path="res://assets/ui/外交/地图模式背景.png" id="5_ut6ls"]
+[ext_resource type="Texture2D" uid="uid://cr8bgoj5a28bo" path="res://assets/ui/外交/地图类型按钮.png" id="6_i6ad1"]
+[ext_resource type="PackedScene" uid="uid://b8tq2f4m0w7x1" path="res://scenes/地图/地图.tscn" id="7_map"]
+[ext_resource type="PackedScene" uid="uid://b4w1g2tqn4wli" path="res://scenes/外交/国家面板.tscn" id="9_panel"]
+[ext_resource type="PackedScene" uid="uid://d1dlqipkfuomx" path="res://scenes/外交/国家列表.tscn" id="11_flags"]
+[ext_resource type="PackedScene" uid="uid://da15250ca4be3" path="res://scenes/外交/预警图标.tscn" id="12_alert"]
+[ext_resource type="PackedScene" uid="uid://r6qwt218ctg5" path="res://scenes/通用/1986抉择.tscn" id="14_reborn"]
+[ext_resource type="Script" uid="uid://dui7yvr672tv6" path="res://scenes/外交/地图摄像机.gd" id="15_kwgjq"]
+[ext_resource type="PackedScene" uid="uid://ce3cbk18lse3v" path="res://scenes/通用/TopState.tscn" id="90_bar"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xi88r"]
+
+[node name="外交" type="Control" unique_id=345181900]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_oqvqm")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=479173847]
+z_index = -874
+layout_mode = 0
+offset_left = -4344.0
+offset_top = -2720.0
+offset_right = 7000.0
+offset_bottom = 5280.0
+mouse_filter = 2
+color = Color(0.3783699, 0.75245696, 0.99999887, 1)
+
+[node name="世界地图" parent="." unique_id=1978463844 instance=ExtResource("7_map")]
+position = Vector2(864, 560)
+
+[node name="地图摄像机" type="Camera2D" parent="." unique_id=496792325]
+position = Vector2(960, 496)
+ignore_rotation = false
+process_callback = 0
+limit_left = -663
+limit_top = -481
+limit_right = 2834
+limit_bottom = 1719
+limit_smoothed = true
+script = ExtResource("15_kwgjq")
+
+[node name="国家面板" parent="." unique_id=962363444 instance=ExtResource("9_panel")]
+visible = false
+
+[node name="状态栏" parent="." unique_id=1150695568 instance=ExtResource("90_bar")]
+
+[node name="导航栏" parent="." unique_id=1007205109 instance=ExtResource("3_6kvcv")]
+
+[node name="时间" type="CanvasLayer" parent="." unique_id=1444375107]
+
+[node name="时间背景" type="TextureRect" parent="时间" unique_id=914245470]
+offset_top = 200.0
+offset_right = 304.0
+offset_bottom = 305.0
+texture = ExtResource("2_datwn")
+metadata/_edit_use_anchors_ = true
+
+[node name="时间启停" type="TextureButton" parent="时间" unique_id=969930320]
+offset_left = 7.0
+offset_top = 206.0
+offset_right = 60.0
+offset_bottom = 259.0
+scale = Vector2(1.8, 1.8)
+toggle_mode = true
+texture_normal = ExtResource("3_oqvqm")
+texture_pressed = ExtResource("4_6kvcv")
+metadata/_edit_use_anchors_ = true
+
+[node name="时间" type="Label" parent="时间" unique_id=1042423362]
+offset_left = 116.0
+offset_top = 254.0
+offset_right = 292.0
+offset_bottom = 289.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "1976年2月4日"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="速度1" type="ColorRect" parent="时间" unique_id=845672936]
+offset_left = 150.0
+offset_top = 229.0
+offset_right = 172.0
+offset_bottom = 247.0
+color = Color(0.9, 0.85, 0.2, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="速度2" type="ColorRect" parent="时间" unique_id=1637434656]
+offset_left = 178.0
+offset_top = 229.0
+offset_right = 200.0
+offset_bottom = 247.0
+color = Color(0.9, 0.85, 0.2, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="速度3" type="ColorRect" parent="时间" unique_id=108087715]
+offset_left = 206.0
+offset_top = 229.0
+offset_right = 228.0
+offset_bottom = 247.0
+color = Color(0.9, 0.85, 0.2, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="速度4" type="ColorRect" parent="时间" unique_id=242523547]
+offset_left = 234.0
+offset_top = 229.0
+offset_right = 256.0
+offset_bottom = 247.0
+color = Color(0.9, 0.85, 0.2, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="速度按钮1" type="Button" parent="时间" unique_id=1241970728]
+offset_left = 146.0
+offset_top = 225.0
+offset_right = 176.0
+offset_bottom = 251.0
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xi88r")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="速度按钮2" type="Button" parent="时间" unique_id=427837805]
+offset_left = 174.0
+offset_top = 225.0
+offset_right = 204.0
+offset_bottom = 251.0
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xi88r")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="速度按钮3" type="Button" parent="时间" unique_id=1795314491]
+offset_left = 202.0
+offset_top = 225.0
+offset_right = 232.0
+offset_bottom = 251.0
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xi88r")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="速度按钮4" type="Button" parent="时间" unique_id=1704165767]
+offset_left = 230.0
+offset_top = 225.0
+offset_right = 260.0
+offset_bottom = 251.0
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xi88r")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="预警图标" parent="." unique_id=205346205 instance=ExtResource("12_alert")]
+
+[node name="国家列表层" parent="." unique_id=617726405 instance=ExtResource("11_flags")]
+layer = 1
+
+[node name="地图模式" type="CanvasLayer" parent="." unique_id=326525378]
+
+[node name="地图模式背景" type="TextureRect" parent="地图模式" unique_id=272135019]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -278.0
+offset_top = -516.0
+offset_right = 1.0
+offset_bottom = -6.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("5_ut6ls")
+expand_mode = 1
+
+[node name="政府类型地图模式" type="Button" parent="地图模式" unique_id=224615503]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -488.0
+offset_right = -19.0
+offset_bottom = -397.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0.43137255)
+theme_override_font_sizes/font_size = 40
+text = "政府"
+icon = ExtResource("6_i6ad1")
+flat = true
+icon_alignment = 1
+
+[node name="影响地图模式" type="Button" parent="地图模式" unique_id=975074289]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -392.0
+offset_right = -19.0
+offset_bottom = -301.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0.43137255)
+theme_override_font_sizes/font_size = 40
+text = "影响"
+icon = ExtResource("6_i6ad1")
+flat = true
+icon_alignment = 1
+
+[node name="军事阵营地图模式" type="Button" parent="地图模式" unique_id=1455255936]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -296.0
+offset_right = -19.0
+offset_bottom = -205.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0.43137255)
+theme_override_font_sizes/font_size = 45
+text = "军事"
+icon = ExtResource("6_i6ad1")
+flat = true
+icon_alignment = 1
+
+[node name="经济阵营地图模式" type="Button" parent="地图模式" unique_id=1936876825]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -200.0
+offset_right = -19.0
+offset_bottom = -109.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0.43137255)
+theme_override_font_sizes/font_size = 40
+text = "经济"
+icon = ExtResource("6_i6ad1")
+flat = true
+icon_alignment = 1
+
+[node name="决议" type="TextureButton" parent="地图模式" unique_id=1309358908]
+offset_left = 1817.0002
+offset_top = 473.9999
+offset_right = 1948.7795
+offset_bottom = 597.0769
+scale = Vector2(0.78, 0.78)
+texture_normal = ExtResource("2_ut6ls")
+stretch_mode = 0
+metadata/screen_id = "decision"
+metadata/scene_uid = "uid://b3dscn2yak71"
+metadata/is_extra = true
+
+[node name="顶层按钮" type="CanvasLayer" parent="." unique_id=8416709]
+
+[node name="ESC" type="Button" parent="顶层按钮" unique_id=1986941735]
+offset_left = 1800.0
+offset_top = 16.0
+offset_right = 1896.0
+offset_bottom = 72.0
+focus_mode = 0
+text = "ESC"
+
+[node name="1986抉择" parent="." unique_id=938821122 instance=ExtResource("14_reborn")]
+visible = false
+
+[connection signal="country_selected" from="国家列表层" to="." method="_on_map_country_selected"]

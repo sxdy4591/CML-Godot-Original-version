@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://da15250ca4be3"]
+
+[ext_resource type="Texture2D" uid="uid://1b3wkffxgt4m" path="res://assets/ui/外交/科研未研究提示.png" id="22_kexue"]
+[ext_resource type="Texture2D" uid="uid://leccf6nhblwo" path="res://assets/ui/外交/阴谋临近提示.png" id="23_yinmou"]
+[ext_resource type="Texture2D" uid="uid://btmllpvwine4r" path="res://assets/ui/外交/ymmym.png" id="45_70jce"]
+[ext_resource type="Script" uid="uid://dnyfb7626ejm6" path="res://scenes/外交/预警图标.gd" id="49_alert"]
+[ext_resource type="Texture2D" uid="uid://tv54t112lvax" path="res://assets/ui/外交/事件提示.png" id="50_event"]
+[ext_resource type="Texture2D" uid="uid://btc66jigv57nm" path="res://assets/ui/外交/事件提示覆盖.png" id="51_event_hi"]
+
+[node name="预警图标" type="CanvasLayer" unique_id=205346205]
+script = ExtResource("49_alert")
+
+[node name="科研未研究提示" type="TextureRect" parent="." unique_id=7722002]
+offset_left = 531.0
+offset_top = 181.0
+offset_right = 617.0
+offset_bottom = 261.0
+texture = ExtResource("22_kexue")
+
+[node name="阴谋临近提示" type="TextureRect" parent="." unique_id=7722003]
+offset_left = 648.0
+offset_top = 181.0
+offset_right = 734.0
+offset_bottom = 261.0
+texture = ExtResource("23_yinmou")
+
+[node name="政治局缺人提示" type="TextureRect" parent="." unique_id=475102624]
+offset_left = 768.0
+offset_top = 180.0
+offset_right = 854.0
+offset_bottom = 260.0
+texture = ExtResource("45_70jce")
+
+[node name="事件提示" type="TextureButton" parent="." unique_id=2005080801]
+visible = false
+offset_left = 401.0
+offset_top = 180.0
+offset_right = 483.0
+offset_bottom = 261.0
+texture_normal = ExtResource("50_event")
+texture_pressed = ExtResource("51_event_hi")
+texture_hover = ExtResource("51_event_hi")
+ignore_texture_size = true

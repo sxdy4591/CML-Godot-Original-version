@@ -1,0 +1,1098 @@
+[gd_scene format=3 uid="uid://capooj5b7vt3v"]
+
+[ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="1_font"]
+[ext_resource type="Texture2D" uid="uid://d13jw6ini7wcs" path="res://assets/ui/外交/国家互动按钮背景.png" id="2_bgbtn"]
+
+[sub_resource type="Theme" id="Theme_custom"]
+default_font = ExtResource("1_font")
+
+[node name="自定义页" type="Control" unique_id=1041175065]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_custom")
+
+[node name="滚动" type="ScrollContainer" parent="." unique_id=145361946]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 588.0
+offset_top = 218.0
+offset_right = 228.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="列表" type="VBoxContainer" parent="滚动" unique_id=102529926]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="DebugConsoleRow" type="HBoxContainer" parent="滚动/列表" unique_id=1528133175]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/DebugConsoleRow" unique_id=54775261]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "调试控制台（所有模式可开/关）"
+
+[node name="DebugConsoleToggle" type="CheckButton" parent="滚动/列表/DebugConsoleRow" unique_id=74491639]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="DebugConsoleOpen" type="Button" parent="滚动/列表/DebugConsoleRow" unique_id=74491640]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "打开控制台"
+
+[node name="ParagraphSpacingRow" type="HBoxContainer" parent="滚动/列表" unique_id=639554344]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/ParagraphSpacingRow" unique_id=1034761164]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "事件段落间距"
+
+[node name="ParagraphSpacingToggle" type="CheckButton" parent="滚动/列表/ParagraphSpacingRow" unique_id=1364222705]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="ParagraphIndentRow" type="HBoxContainer" parent="滚动/列表" unique_id=1657919291]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/ParagraphIndentRow" unique_id=1472796674]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "事件段首空两格"
+
+[node name="ParagraphIndentToggle" type="CheckButton" parent="滚动/列表/ParagraphIndentRow" unique_id=1669777488]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="InteractiveHighlightRow" type="HBoxContainer" parent="滚动/列表" unique_id=330000021]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/InteractiveHighlightRow" unique_id=330000022]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "可互动国家淡金高亮"
+
+[node name="InteractiveHighlightToggle" type="CheckButton" parent="滚动/列表/InteractiveHighlightRow" unique_id=330000023]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT7Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003000]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT7Row" unique_id=330003001]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·恢复被破坏的沟通机构"
+
+[node name="AutoT7Toggle" type="CheckButton" parent="滚动/列表/AutoT7Row" unique_id=330003002]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT8Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003010]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT8Row" unique_id=330003011]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·支持伊朗革命派系"
+
+[node name="AutoT8Toggle" type="CheckButton" parent="滚动/列表/AutoT8Row" unique_id=330003012]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT20Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003020]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT20Row" unique_id=330003021]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·增援越南前线"
+
+[node name="AutoT20Toggle" type="CheckButton" parent="滚动/列表/AutoT20Row" unique_id=330003022]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT21Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003030]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT21Row" unique_id=330003031]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·支持阿富汗势力"
+
+[node name="AutoT21Toggle" type="CheckButton" parent="滚动/列表/AutoT21Row" unique_id=330003032]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT28Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003040]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT28Row" unique_id=330003041]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·支持印度东部游击"
+
+[node name="AutoT28Toggle" type="CheckButton" parent="滚动/列表/AutoT28Row" unique_id=330003042]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT34Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003050]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT34Row" unique_id=330003051]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·邀请外国投资者"
+
+[node name="AutoT34Toggle" type="CheckButton" parent="滚动/列表/AutoT34Row" unique_id=330003052]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT56Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003060]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT56Row" unique_id=330003061]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·支持毛派/伊拉克反对派"
+
+[node name="AutoT56Toggle" type="CheckButton" parent="滚动/列表/AutoT56Row" unique_id=330003062]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT71Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003070]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT71Row" unique_id=330003071]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·增援印度前线"
+
+[node name="AutoT71Toggle" type="CheckButton" parent="滚动/列表/AutoT71Row" unique_id=330003072]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT1009Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003080]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT1009Row" unique_id=330003081]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·支持法共正统派"
+
+[node name="AutoT1009Toggle" type="CheckButton" parent="滚动/列表/AutoT1009Row" unique_id=330003082]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT1024Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003090]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT1024Row" unique_id=330003091]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·督促社会改革"
+
+[node name="AutoT1024Toggle" type="CheckButton" parent="滚动/列表/AutoT1024Row" unique_id=330003092]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT1043Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003100]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT1043Row" unique_id=330003101]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·支持拉美非洲左翼游击"
+
+[node name="AutoT1043Toggle" type="CheckButton" parent="滚动/列表/AutoT1043Row" unique_id=330003102]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT1044Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003110]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT1044Row" unique_id=330003111]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·支持拉美非洲右翼武装"
+
+[node name="AutoT1044Toggle" type="CheckButton" parent="滚动/列表/AutoT1044Row" unique_id=330003112]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT1057Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003120]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT1057Row" unique_id=330003121]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·干预乌干达内战"
+
+[node name="AutoT1057Toggle" type="CheckButton" parent="滚动/列表/AutoT1057Row" unique_id=330003122]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT1061Row" type="HBoxContainer" parent="滚动/列表" unique_id=330003130]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT1061Row" unique_id=330003131]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·援助缅甸共产主义游击队"
+
+[node name="AutoT1061Toggle" type="CheckButton" parent="滚动/列表/AutoT1061Row" unique_id=330003132]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoDecisionRow" type="HBoxContainer" parent="滚动/列表" unique_id=330003140]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoDecisionRow" unique_id=330003141]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·周期型决议（每6个月）"
+
+[node name="AutoDecisionToggle" type="CheckButton" parent="滚动/列表/AutoDecisionRow" unique_id=330003142]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="EventAlignRow" type="HBoxContainer" parent="滚动/列表" unique_id=534985786]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/EventAlignRow" unique_id=376088391]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "事件文案对齐"
+
+[node name="EventAlignPrev" type="Button" parent="滚动/列表/EventAlignRow" unique_id=1426357298]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "◀"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="EventAlignValue" type="Label" parent="滚动/列表/EventAlignRow" unique_id=1114370287]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "左对齐"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EventAlignNext" type="Button" parent="滚动/列表/EventAlignRow" unique_id=1367239635]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "▶"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="MapPaletteRow" type="HBoxContainer" parent="滚动/列表" unique_id=128042359]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/MapPaletteRow" unique_id=637927857]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "地图配色"
+
+[node name="MapPalettePrev" type="Button" parent="滚动/列表/MapPaletteRow" unique_id=47146701]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "◀"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="MapPaletteValue" type="Label" parent="滚动/列表/MapPaletteRow" unique_id=1567369437]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "原版"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapPaletteNext" type="Button" parent="滚动/列表/MapPaletteRow" unique_id=585876724]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "▶"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="EventTitleRow" type="HBoxContainer" parent="滚动/列表" unique_id=310000001]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/EventTitleRow" unique_id=310000002]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "事件标题字号"
+
+[node name="EventTitlePrev" type="Button" parent="滚动/列表/EventTitleRow" unique_id=310000003]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "◀"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="EventTitleValue" type="Label" parent="滚动/列表/EventTitleRow" unique_id=310000004]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "39"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EventTitleNext" type="Button" parent="滚动/列表/EventTitleRow" unique_id=310000005]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "▶"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="EventDescRow" type="HBoxContainer" parent="滚动/列表" unique_id=1007013607]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/EventDescRow" unique_id=1733787124]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "事件正文字号"
+
+[node name="EventDescPrev" type="Button" parent="滚动/列表/EventDescRow" unique_id=967846836]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "◀"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="EventDescValue" type="Label" parent="滚动/列表/EventDescRow" unique_id=1734088316]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "29"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EventDescNext" type="Button" parent="滚动/列表/EventDescRow" unique_id=1954298715]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "▶"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="EventOptionRow" type="HBoxContainer" parent="滚动/列表" unique_id=1370775519]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/EventOptionRow" unique_id=1468726565]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "事件选项字号"
+
+[node name="EventOptionPrev" type="Button" parent="滚动/列表/EventOptionRow" unique_id=2111272704]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "◀"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="EventOptionValue" type="Label" parent="滚动/列表/EventOptionRow" unique_id=1301097576]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "28"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EventOptionNext" type="Button" parent="滚动/列表/EventOptionRow" unique_id=1754494746]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "▶"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="EventResultRow" type="HBoxContainer" parent="滚动/列表" unique_id=1373981930]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/EventResultRow" unique_id=1826799786]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "事件结果字号"
+
+[node name="EventResultPrev" type="Button" parent="滚动/列表/EventResultRow" unique_id=1646740039]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "◀"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="EventResultValue" type="Label" parent="滚动/列表/EventResultRow" unique_id=1800338174]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "29"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EventResultNext" type="Button" parent="滚动/列表/EventResultRow" unique_id=1323994792]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "▶"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="UiScaleRow" type="HBoxContainer" parent="滚动/列表" unique_id=1787865256]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/UiScaleRow" unique_id=220007671]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "全局UI字体倍率 %"
+
+[node name="UiScalePrev" type="Button" parent="滚动/列表/UiScaleRow" unique_id=1587007033]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "◀"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="UiScaleValue" type="Label" parent="滚动/列表/UiScaleRow" unique_id=1585647038]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UiScaleNext" type="Button" parent="滚动/列表/UiScaleRow" unique_id=1534196945]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "▶"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="WarIconRow" type="HBoxContainer" parent="滚动/列表" unique_id=330000001]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/WarIconRow" unique_id=330000002]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "战争图标大小"
+
+[node name="WarIconPrev" type="Button" parent="滚动/列表/WarIconRow" unique_id=330000003]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "◀"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="WarIconValue" type="Label" parent="滚动/列表/WarIconRow" unique_id=330000004]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WarIconNext" type="Button" parent="滚动/列表/WarIconRow" unique_id=330000005]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "▶"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="MusicVolumeRow" type="HBoxContainer" parent="滚动/列表" unique_id=330000006]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/MusicVolumeRow" unique_id=330000007]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "音乐音量"
+
+[node name="MusicVolumePrev" type="Button" parent="滚动/列表/MusicVolumeRow" unique_id=330000008]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "◀"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="MusicVolumeValue" type="Label" parent="滚动/列表/MusicVolumeRow" unique_id=330000009]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicVolumeNext" type="Button" parent="滚动/列表/MusicVolumeRow" unique_id=330000010]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "▶"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="SfxVolumeRow" type="HBoxContainer" parent="滚动/列表" unique_id=330000011]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/SfxVolumeRow" unique_id=330000012]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "音效音量"
+
+[node name="SfxVolumePrev" type="Button" parent="滚动/列表/SfxVolumeRow" unique_id=330000013]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "◀"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="SfxVolumeValue" type="Label" parent="滚动/列表/SfxVolumeRow" unique_id=330000014]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SfxVolumeNext" type="Button" parent="滚动/列表/SfxVolumeRow" unique_id=330000015]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "▶"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="作弊快捷键" type="Label" parent="滚动/列表" unique_id=826598783]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "作弊快捷键（仅沙盒难度生效）"
+
+[node name="CheatPartyRow" type="HBoxContainer" parent="滚动/列表" unique_id=1382730110]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatPartyRow" unique_id=341328580]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "党支持 +10"
+
+[node name="CheatPartyValue" type="Label" parent="滚动/列表/CheatPartyRow" unique_id=747757836]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatPartyRebind" type="Button" parent="滚动/列表/CheatPartyRow" unique_id=1179497722]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CheatPeopleRow" type="HBoxContainer" parent="滚动/列表" unique_id=1757829944]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatPeopleRow" unique_id=580962803]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "民众支持 +10"
+
+[node name="CheatPeopleValue" type="Label" parent="滚动/列表/CheatPeopleRow" unique_id=134416370]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatPeopleRebind" type="Button" parent="滚动/列表/CheatPeopleRow" unique_id=995829300]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CheatThoughtRow" type="HBoxContainer" parent="滚动/列表" unique_id=1631340625]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatThoughtRow" unique_id=1157947838]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "思想自由 +10"
+
+[node name="CheatThoughtValue" type="Label" parent="滚动/列表/CheatThoughtRow" unique_id=1811494059]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatThoughtRebind" type="Button" parent="滚动/列表/CheatThoughtRow" unique_id=870558620]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CheatLivingRow" type="HBoxContainer" parent="滚动/列表" unique_id=445470902]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatLivingRow" unique_id=99933231]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "生活水平 +10"
+
+[node name="CheatLivingValue" type="Label" parent="滚动/列表/CheatLivingRow" unique_id=904815287]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatLivingRebind" type="Button" parent="滚动/列表/CheatLivingRow" unique_id=1441785844]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CheatDiploRow" type="HBoxContainer" parent="滚动/列表" unique_id=720060669]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatDiploRow" unique_id=1333545355]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "国际声望 +10"
+
+[node name="CheatDiploValue" type="Label" parent="滚动/列表/CheatDiploRow" unique_id=445653663]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatDiploRebind" type="Button" parent="滚动/列表/CheatDiploRow" unique_id=544026126]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CheatInfluenceRow" type="HBoxContainer" parent="滚动/列表" unique_id=2129017042]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatInfluenceRow" unique_id=1036166591]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "国际影响力 +10"
+
+[node name="CheatInfluenceValue" type="Label" parent="滚动/列表/CheatInfluenceRow" unique_id=880134850]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatInfluenceRebind" type="Button" parent="滚动/列表/CheatInfluenceRow" unique_id=598792603]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CheatBudgetRow" type="HBoxContainer" parent="滚动/列表" unique_id=1613911325]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatBudgetRow" unique_id=234636590]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "预算 +10"
+
+[node name="CheatBudgetValue" type="Label" parent="滚动/列表/CheatBudgetRow" unique_id=1328594639]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatBudgetRebind" type="Button" parent="滚动/列表/CheatBudgetRow" unique_id=842243511]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CheatAgentsRow" type="HBoxContainer" parent="滚动/列表" unique_id=1609961645]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatAgentsRow" unique_id=80361261]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "特工 +10"
+
+[node name="CheatAgentsValue" type="Label" parent="滚动/列表/CheatAgentsRow" unique_id=393177829]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatAgentsRebind" type="Button" parent="滚动/列表/CheatAgentsRow" unique_id=739811434]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CheatArmyRow" type="HBoxContainer" parent="滚动/列表" unique_id=1416544918]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatArmyRow" unique_id=532658809]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "军力 +10"
+
+[node name="CheatArmyValue" type="Label" parent="滚动/列表/CheatArmyRow" unique_id=2052974462]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatArmyRebind" type="Button" parent="滚动/列表/CheatArmyRow" unique_id=654757809]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CheatRelationsRow" type="HBoxContainer" parent="滚动/列表" unique_id=3066180]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatRelationsRow" unique_id=971704008]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "美苏关系 +10"
+
+[node name="CheatRelationsValue" type="Label" parent="滚动/列表/CheatRelationsRow" unique_id=586342133]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatRelationsRebind" type="Button" parent="滚动/列表/CheatRelationsRow" unique_id=441770954]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CheatUssrRow" type="HBoxContainer" parent="滚动/列表" unique_id=1820666524]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatUssrRow" unique_id=1622766354]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "中苏关系切换"
+
+[node name="CheatUssrValue" type="Label" parent="滚动/列表/CheatUssrRow" unique_id=1985942709]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatUssrRebind" type="Button" parent="滚动/列表/CheatUssrRow" unique_id=304166696]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CheatDiploDownRow" type="HBoxContainer" parent="滚动/列表" unique_id=113579034]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatDiploDownRow" unique_id=831572251]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "外交声望 -10"
+
+[node name="CheatDiploDownValue" type="Label" parent="滚动/列表/CheatDiploDownRow" unique_id=1033629605]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatDiploDownRebind" type="Button" parent="滚动/列表/CheatDiploDownRow" unique_id=1746491416]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CheatMilRow" type="HBoxContainer" parent="滚动/列表" unique_id=501989608]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/CheatMilRow" unique_id=1663573094]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "军事介入点 +10"
+
+[node name="CheatMilValue" type="Label" parent="滚动/列表/CheatMilRow" unique_id=1951806117]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "—"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheatMilRebind" type="Button" parent="滚动/列表/CheatMilRow" unique_id=2015302066]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="底部占位" type="Control" parent="滚动/列表" unique_id=1432313243]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2

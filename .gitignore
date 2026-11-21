@@ -1,0 +1,44 @@
+# Godot 4 生成物
+.godot/
+
+# 安卓导出构建暂存（含源码副本，约 2GB）
+/android/
+
+# 素材 >800MB，由外部素材包提供，不入库
+/assets/
+dsh/
+# .NET 构建产物
+/obj/
+/bin/
+*.user
+
+# 本机编辑器设置
+.vscode/
+.idea/
+*.suo
+
+# 本机 Godot 路径（门禁脚本读它，但不该入库）
+tools/godot.path
+tools/mirror_baseline.json.bak
+
+# 测试与矩阵的运行输出
+/tests/输出/
+/tests/路线矩阵/输出/
+
+# Python 工具缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# 操作系统垃圾
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# 运行日志与临时文件
+*.log
+*.tmp
+~$*
+
+# 原版存档路径残留(旧 Savescript 用相对路径写 NewData/N.save)
+/NewData/

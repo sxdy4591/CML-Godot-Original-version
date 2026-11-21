@@ -1,0 +1,341 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/战争/战争条目.gd" id="1_entry"]
+[ext_resource type="Texture2D" path="res://assets/ui/战争/条目背景.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/ui/战争/条目战争名称背景.png" id="3_namebg"]
+[ext_resource type="Texture2D" path="res://assets/ui/战争/参战势力背景.png" id="4_sidebg"]
+[ext_resource type="Texture2D" path="res://assets/ui/战争/左方参战势力图标.png" id="5_left"]
+[ext_resource type="Texture2D" path="res://assets/ui/战争/右方参战势力图标.png" id="6_right"]
+[ext_resource type="Texture2D" path="res://assets/ui/战争/圆圈.png" id="7_circle"]
+[ext_resource type="Texture2D" path="res://assets/ui/战争/按钮背景.png" id="8_btn"]
+[ext_resource type="FontFile" path="res://assets/ui/theme/font.ttf" id="9_font"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_btn"]
+texture = ExtResource("8_btn")
+
+[node name="战争条目" type="Control"]
+custom_minimum_size = Vector2(1186, 107)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1186.0
+offset_bottom = 107.0
+size_flags_horizontal = 4
+script = ExtResource("1_entry")
+
+[node name="背景" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1186.0
+offset_bottom = 107.0
+mouse_filter = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="战争名称背景" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 8.0
+offset_right = 995.0
+offset_bottom = 51.0
+mouse_filter = 2
+texture = ExtResource("3_namebg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="战争名称" type="Label" parent="."]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 8.0
+offset_right = 992.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="左方势力背景" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 61.0
+offset_right = 600.0
+offset_bottom = 94.0
+mouse_filter = 2
+texture = ExtResource("4_sidebg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="左方势力" type="Label" parent="."]
+layout_mode = 0
+offset_left = 413.0
+offset_top = 64.0
+offset_right = 597.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="左方主图标" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 303.0
+offset_top = 56.0
+offset_right = 349.0
+offset_bottom = 99.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="左方圆圈" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 51.0
+offset_right = 292.0
+offset_bottom = 101.0
+mouse_filter = 2
+texture = ExtResource("7_circle")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="左方数值背景" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 354.0
+offset_top = 51.0
+offset_right = 404.0
+offset_bottom = 101.0
+mouse_filter = 2
+texture = ExtResource("7_circle")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="左方数值" type="Label" parent="."]
+layout_mode = 0
+offset_left = 364.0
+offset_top = 62.0
+offset_right = 394.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="右方势力背景" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 606.0
+offset_top = 61.0
+offset_right = 796.0
+offset_bottom = 94.0
+mouse_filter = 2
+texture = ExtResource("4_sidebg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="右方势力" type="Label" parent="."]
+layout_mode = 0
+offset_left = 609.0
+offset_top = 64.0
+offset_right = 793.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="右方主图标" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 56.0
+offset_right = 906.0
+offset_bottom = 99.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="右方圆圈" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 914.0
+offset_top = 51.0
+offset_right = 964.0
+offset_bottom = 101.0
+mouse_filter = 2
+texture = ExtResource("7_circle")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="右方数值背景" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 802.0
+offset_top = 51.0
+offset_right = 852.0
+offset_bottom = 101.0
+mouse_filter = 2
+texture = ExtResource("7_circle")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="右方数值" type="Label" parent="."]
+layout_mode = 0
+offset_left = 812.0
+offset_top = 62.0
+offset_right = 842.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="人力增援左方参战势力" type="Button" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 11.0
+offset_right = 120.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxTexture_btn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_btn")
+theme_override_styles/focus = SubResource("StyleBoxTexture_btn")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_btn")
+text = "人力增援"
+
+[node name="特战支援左方参战势力" type="Button" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 51.0
+offset_right = 120.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxTexture_btn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_btn")
+theme_override_styles/focus = SubResource("StyleBoxTexture_btn")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_btn")
+text = "特战支援"
+
+[node name="军武援助左方参战势力" type="Button" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 11.0
+offset_right = 208.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxTexture_btn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_btn")
+theme_override_styles/focus = SubResource("StyleBoxTexture_btn")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_btn")
+text = "军武援助"
+
+[node name="外交声援左方参战势力" type="Button" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 51.0
+offset_right = 208.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxTexture_btn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_btn")
+theme_override_styles/focus = SubResource("StyleBoxTexture_btn")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_btn")
+text = "外交声援"
+
+[node name="特战支援右方参战势力" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 51.0
+offset_right = 1080.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxTexture_btn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_btn")
+theme_override_styles/focus = SubResource("StyleBoxTexture_btn")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_btn")
+text = "特战支援"
+
+[node name="人力增援右方参战势力" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 11.0
+offset_right = 1080.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxTexture_btn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_btn")
+theme_override_styles/focus = SubResource("StyleBoxTexture_btn")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_btn")
+text = "人力增援"
+
+[node name="军武援助右方参战势力" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 51.0
+offset_right = 1168.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxTexture_btn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_btn")
+theme_override_styles/focus = SubResource("StyleBoxTexture_btn")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_btn")
+text = "军武援助"
+
+[node name="外交声援右方参战势力" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 11.0
+offset_right = 1168.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_font")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxTexture_btn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_btn")
+theme_override_styles/focus = SubResource("StyleBoxTexture_btn")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_btn")
+text = "外交声援"

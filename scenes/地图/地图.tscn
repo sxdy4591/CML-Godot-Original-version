@@ -1,0 +1,3531 @@
+[gd_scene format=3 uid="uid://b8tq2f4m0w7x1"]
+
+[ext_resource type="Script" uid="uid://dnmpqftr2ce1" path="res://scenes/地图/地图.gd" id="1_map"]
+[ext_resource type="Texture2D" uid="uid://dvlc0xy4jc7tm" path="res://assets/map/country/c000.png" id="2_c000"]
+[ext_resource type="Texture2D" uid="uid://cnohwpn8uqp0f" path="res://assets/map/country/c001.png" id="3_c001"]
+[ext_resource type="Texture2D" uid="uid://mpyimx0whql" path="res://assets/map/country/c002.png" id="4_c002"]
+[ext_resource type="Texture2D" uid="uid://b2plijngdhd8d" path="res://assets/map/country/c003.png" id="5_c003"]
+[ext_resource type="Texture2D" uid="uid://bodb14uypws1b" path="res://assets/map/country/c004.png" id="6_c004"]
+[ext_resource type="Texture2D" uid="uid://dwn3c6r8cec4i" path="res://assets/map/country/c005.png" id="7_c005"]
+[ext_resource type="Texture2D" uid="uid://pctd0u62u0q8" path="res://assets/map/country/c006.png" id="8_c006"]
+[ext_resource type="Texture2D" uid="uid://b5gqun8yly2gf" path="res://assets/map/country/c007.png" id="9_c007"]
+[ext_resource type="Texture2D" uid="uid://fs1tgbvrqh80" path="res://assets/map/country/c008.png" id="10_c008"]
+[ext_resource type="Texture2D" uid="uid://bocpejdvrrqe0" path="res://assets/map/country/c009.png" id="11_c009"]
+[ext_resource type="Texture2D" uid="uid://bxcrhhp7qi0hm" path="res://assets/map/country/c010.png" id="12_c010"]
+[ext_resource type="Texture2D" uid="uid://bhbaug60rn0jc" path="res://assets/map/country/c011.png" id="13_c011"]
+[ext_resource type="Texture2D" uid="uid://drnhxuwno6sor" path="res://assets/map/country/c012.png" id="14_c012"]
+[ext_resource type="Texture2D" uid="uid://tle8dogiwhch" path="res://assets/map/country/c013.png" id="15_c013"]
+[ext_resource type="Texture2D" uid="uid://bjjklfm78iroo" path="res://assets/map/country/c014.png" id="16_c014"]
+[ext_resource type="Texture2D" uid="uid://dtiv21irj8tn7" path="res://assets/map/country/c015.png" id="17_c015"]
+[ext_resource type="Texture2D" uid="uid://cysytoqmc6keo" path="res://assets/map/country/c016.png" id="18_c016"]
+[ext_resource type="Texture2D" uid="uid://ctoh85ng1lw5t" path="res://assets/map/country/c017.png" id="19_c017"]
+[ext_resource type="Texture2D" uid="uid://clibr8wrob85s" path="res://assets/map/country/c018.png" id="20_c018"]
+[ext_resource type="Texture2D" uid="uid://c1ssh6s3f8sfh" path="res://assets/map/country/c019.png" id="21_c019"]
+[ext_resource type="Texture2D" uid="uid://wdu0ls1qktro" path="res://assets/map/country/c020.png" id="22_c020"]
+[ext_resource type="Texture2D" uid="uid://bsbnvbt1lhl5g" path="res://assets/map/country/c021.png" id="23_c021"]
+[ext_resource type="Texture2D" uid="uid://b37mdw83fg0nc" path="res://assets/map/country/c022.png" id="24_c022"]
+[ext_resource type="Texture2D" uid="uid://co6klddmrgcbi" path="res://assets/map/country/c023.png" id="25_c023"]
+[ext_resource type="Texture2D" uid="uid://bs0tubeol0o4q" path="res://assets/map/country/c024.png" id="26_c024"]
+[ext_resource type="Texture2D" uid="uid://ccepgv5gojglw" path="res://assets/map/country/c025.png" id="27_c025"]
+[ext_resource type="Texture2D" uid="uid://bh1lago201hy1" path="res://assets/map/country/c026.png" id="28_c026"]
+[ext_resource type="Texture2D" uid="uid://bcieuitmpr7n2" path="res://assets/map/country/c027.png" id="29_c027"]
+[ext_resource type="Texture2D" uid="uid://hmgklv32venl" path="res://assets/map/country/c028.png" id="30_c028"]
+[ext_resource type="Texture2D" uid="uid://bpl3p2qkc065i" path="res://assets/map/country/c029.png" id="31_c029"]
+[ext_resource type="Texture2D" uid="uid://toum8wfqpuda" path="res://assets/map/country/c030.png" id="32_c030"]
+[ext_resource type="Texture2D" uid="uid://viqkqeluiec3" path="res://assets/map/country/c031.png" id="33_c031"]
+[ext_resource type="Texture2D" uid="uid://bt3wfag1iwdv6" path="res://assets/map/country/c032.png" id="34_c032"]
+[ext_resource type="Texture2D" uid="uid://cxsajpetsdov5" path="res://assets/map/country/c033.png" id="35_c033"]
+[ext_resource type="Texture2D" uid="uid://blbsji2igp5ef" path="res://assets/map/country/c034.png" id="36_c034"]
+[ext_resource type="Texture2D" uid="uid://c7y0x8wx5xga4" path="res://assets/map/country/c035.png" id="37_c035"]
+[ext_resource type="Texture2D" uid="uid://b0u3u3csmkc63" path="res://assets/map/country/c036.png" id="38_c036"]
+[ext_resource type="Texture2D" uid="uid://ckjjnqcshi0m8" path="res://assets/map/country/c037.png" id="39_c037"]
+[ext_resource type="Texture2D" uid="uid://dj7w4mcfybdjj" path="res://assets/map/country/c038.png" id="40_c038"]
+[ext_resource type="Texture2D" uid="uid://nsn53f601nvq" path="res://assets/map/country/c039.png" id="41_c039"]
+[ext_resource type="Texture2D" uid="uid://cfmlo070ud0je" path="res://assets/map/country/c040.png" id="42_c040"]
+[ext_resource type="Texture2D" uid="uid://bhurjf0oq88uh" path="res://assets/map/country/c041.png" id="43_c041"]
+[ext_resource type="Texture2D" uid="uid://dedwwtwv62wjj" path="res://assets/map/country/c042.png" id="44_c042"]
+[ext_resource type="Texture2D" uid="uid://dwoirbg6padxm" path="res://assets/map/country/c043.png" id="45_c043"]
+[ext_resource type="Texture2D" uid="uid://dbmbowaww0hb3" path="res://assets/map/country/c044.png" id="46_c044"]
+[ext_resource type="Texture2D" uid="uid://c3ga0s5slvbqq" path="res://assets/map/country/c045.png" id="47_c045"]
+[ext_resource type="Texture2D" uid="uid://bn8q8b0idskbb" path="res://assets/map/country/c046.png" id="48_c046"]
+[ext_resource type="Texture2D" uid="uid://ccdfj71ktlosx" path="res://assets/map/country/c047.png" id="49_c047"]
+[ext_resource type="Texture2D" uid="uid://b4ikus1agwtgu" path="res://assets/map/country/c048.png" id="50_c048"]
+[ext_resource type="Texture2D" uid="uid://cxdf12iih4pqk" path="res://assets/map/country/c049.png" id="51_c049"]
+[ext_resource type="Texture2D" uid="uid://dch18rilfe7hx" path="res://assets/map/country/c050.png" id="52_c050"]
+[ext_resource type="Texture2D" uid="uid://djafm7u8qjvc7" path="res://assets/map/country/c051.png" id="53_c051"]
+[ext_resource type="Texture2D" uid="uid://djbchv03pe76y" path="res://assets/map/country/c052.png" id="54_c052"]
+[ext_resource type="Texture2D" uid="uid://cpd576k0ymieu" path="res://assets/map/country/c053.png" id="55_c053"]
+[ext_resource type="Texture2D" uid="uid://becvc5yy6ojbu" path="res://assets/map/country/c054.png" id="56_c054"]
+[ext_resource type="Texture2D" uid="uid://8qh8l0vr8rdj" path="res://assets/map/country/c055.png" id="57_c055"]
+[ext_resource type="Texture2D" uid="uid://ba26g14sge001" path="res://assets/map/country/c056.png" id="58_c056"]
+[ext_resource type="Texture2D" uid="uid://drmleeeyr048v" path="res://assets/map/country/c057.png" id="59_c057"]
+[ext_resource type="Texture2D" uid="uid://bnikeqqwesuic" path="res://assets/map/country/c058.png" id="60_c058"]
+[ext_resource type="Texture2D" uid="uid://bwig1hjtv4ido" path="res://assets/map/country/c059.png" id="61_c059"]
+[ext_resource type="Texture2D" uid="uid://dkg1fr8omjavt" path="res://assets/map/country/c060.png" id="62_c060"]
+[ext_resource type="Texture2D" uid="uid://6rk3pt3urc6u" path="res://assets/map/country/c061.png" id="63_c061"]
+[ext_resource type="Texture2D" uid="uid://ddv4t1ovl2qqo" path="res://assets/map/country/c062.png" id="64_c062"]
+[ext_resource type="Texture2D" uid="uid://buruk2amcuavc" path="res://assets/map/country/c063.png" id="65_c063"]
+[ext_resource type="Texture2D" uid="uid://dc3viqtg3hnx6" path="res://assets/map/country/c064.png" id="66_c064"]
+[ext_resource type="Texture2D" uid="uid://b2hinkt73k6y2" path="res://assets/map/country/c065.png" id="67_c065"]
+[ext_resource type="Texture2D" uid="uid://flt1wxncrjsc" path="res://assets/map/country/c066.png" id="68_c066"]
+[ext_resource type="Texture2D" uid="uid://dtlwt6kovwy7f" path="res://assets/map/country/c067.png" id="69_c067"]
+[ext_resource type="Texture2D" uid="uid://c5jciygt7hc6t" path="res://assets/map/country/c068.png" id="70_c068"]
+[ext_resource type="Texture2D" uid="uid://d3qpgqtusuo3n" path="res://assets/map/country/c069.png" id="71_c069"]
+[ext_resource type="Texture2D" uid="uid://qr33jkbbd5uk" path="res://assets/map/country/c070.png" id="72_c070"]
+[ext_resource type="Texture2D" uid="uid://cbcnbk5e1gjx4" path="res://assets/map/country/c071.png" id="73_c071"]
+[ext_resource type="Texture2D" uid="uid://sp2gde3vrrlm" path="res://assets/map/country/c072.png" id="74_c072"]
+[ext_resource type="Texture2D" uid="uid://cc2wortrkcq1w" path="res://assets/map/country/c073.png" id="75_c073"]
+[ext_resource type="Texture2D" uid="uid://dxgquuefat3tf" path="res://assets/map/country/c074.png" id="76_c074"]
+[ext_resource type="Texture2D" uid="uid://bjxjkqpqw61fp" path="res://assets/map/country/c075.png" id="77_c075"]
+[ext_resource type="Texture2D" uid="uid://s5f6xqh7ylol" path="res://assets/map/country/c076.png" id="78_c076"]
+[ext_resource type="Texture2D" uid="uid://cose2lte0s48p" path="res://assets/map/country/c077.png" id="79_c077"]
+[ext_resource type="Texture2D" uid="uid://cxa0as0dqy1ug" path="res://assets/map/country/c078.png" id="80_c078"]
+[ext_resource type="Texture2D" uid="uid://dqmy8xuct8tkq" path="res://assets/map/country/c079.png" id="81_c079"]
+[ext_resource type="Texture2D" uid="uid://ecmkn86m6n6k" path="res://assets/map/country/c080.png" id="82_c080"]
+[ext_resource type="Texture2D" uid="uid://bvusiol3rku64" path="res://assets/map/country/c081.png" id="83_c081"]
+[ext_resource type="Texture2D" uid="uid://xqfvwkso4bip" path="res://assets/map/country/c082.png" id="84_c082"]
+[ext_resource type="Texture2D" uid="uid://cy2cer5xwh2hb" path="res://assets/map/country/c083.png" id="85_c083"]
+[ext_resource type="Texture2D" uid="uid://bvfho6etcg77n" path="res://assets/map/country/c084.png" id="86_c084"]
+[ext_resource type="Texture2D" uid="uid://hka7vys1a6pf" path="res://assets/map/country/c085.png" id="87_c085"]
+[ext_resource type="Texture2D" uid="uid://c4byanhe157ln" path="res://assets/map/country/c086.png" id="88_c086"]
+[ext_resource type="Texture2D" uid="uid://bmawfc8p4jpjt" path="res://assets/map/country/c087.png" id="89_c087"]
+[ext_resource type="Texture2D" uid="uid://dekdmj3onntd0" path="res://assets/map/country/c088.png" id="90_c088"]
+[ext_resource type="Texture2D" uid="uid://ccknfyvf44ewb" path="res://assets/map/country/c089.png" id="91_c089"]
+[ext_resource type="Texture2D" uid="uid://brljp6m7bfdgn" path="res://assets/map/country/c090.png" id="92_c090"]
+[ext_resource type="Texture2D" uid="uid://s575sfcluoyc" path="res://assets/map/country/c091.png" id="93_c091"]
+[ext_resource type="Texture2D" uid="uid://cmlxu8s220lqp" path="res://assets/map/country/c092.png" id="94_c092"]
+[ext_resource type="Texture2D" uid="uid://labhgb11t2ob" path="res://assets/map/country/c093.png" id="95_c093"]
+[ext_resource type="Texture2D" uid="uid://l2ap02j5ollv" path="res://assets/map/country/c094.png" id="96_c094"]
+[ext_resource type="Texture2D" uid="uid://clm6a7foejdpb" path="res://assets/map/country/c095.png" id="97_c095"]
+[ext_resource type="Texture2D" uid="uid://qw8qq1xugaqu" path="res://assets/map/country/c096.png" id="98_c096"]
+[ext_resource type="Texture2D" uid="uid://1puradhp6qgh" path="res://assets/map/country/c097.png" id="99_c097"]
+[ext_resource type="Texture2D" uid="uid://x3fey0p4b7sb" path="res://assets/map/country/c098.png" id="100_c098"]
+[ext_resource type="Texture2D" uid="uid://dn47u7yraiel7" path="res://assets/map/country/c099.png" id="101_c099"]
+[ext_resource type="Texture2D" uid="uid://cp4tsr71b8tyd" path="res://assets/map/country/c100.png" id="102_c100"]
+[ext_resource type="Texture2D" uid="uid://bm7xjoachtofb" path="res://assets/map/country/c101.png" id="103_c101"]
+[ext_resource type="Texture2D" uid="uid://ds7als07fd4kb" path="res://assets/map/country/c102.png" id="104_c102"]
+[ext_resource type="Texture2D" uid="uid://nv1ho04jnki0" path="res://assets/map/country/c103.png" id="105_c103"]
+[ext_resource type="Texture2D" uid="uid://ckhdmd66qtn06" path="res://assets/map/country/c104.png" id="106_c104"]
+[ext_resource type="Texture2D" uid="uid://bi5t18l0s8boj" path="res://assets/map/country/c105.png" id="107_c105"]
+[ext_resource type="Texture2D" uid="uid://b15o2u70nhxar" path="res://assets/map/country/c106.png" id="108_c106"]
+[ext_resource type="Texture2D" uid="uid://cns2dmowstud6" path="res://assets/map/country/c107.png" id="109_c107"]
+[ext_resource type="Texture2D" uid="uid://bl336cc0s26q6" path="res://assets/map/country/c108.png" id="110_c108"]
+[ext_resource type="Texture2D" uid="uid://c4txfl2ba1y4a" path="res://assets/map/country/c109.png" id="111_c109"]
+[ext_resource type="Texture2D" uid="uid://dw0fmtm3gqedb" path="res://assets/map/country/c110.png" id="112_c110"]
+[ext_resource type="Texture2D" uid="uid://dq3u7o7jvuhgv" path="res://assets/map/country/c111.png" id="113_c111"]
+[ext_resource type="Texture2D" uid="uid://ucffnr2y2uu1" path="res://assets/map/country/c112.png" id="114_c112"]
+[ext_resource type="Texture2D" uid="uid://bsrlf85l0n21p" path="res://assets/map/country/c113.png" id="115_c113"]
+[ext_resource type="Texture2D" uid="uid://c5orwye1sbybc" path="res://assets/map/country/c114.png" id="116_c114"]
+[ext_resource type="Texture2D" uid="uid://btofesiailnq1" path="res://assets/map/country/c115.png" id="117_c115"]
+[ext_resource type="Texture2D" uid="uid://r7hlvlgw3w3q" path="res://assets/map/country/c116.png" id="118_c116"]
+[ext_resource type="Texture2D" uid="uid://bnnmvmjtvhvmt" path="res://assets/map/country/c117.png" id="119_c117"]
+[ext_resource type="Texture2D" uid="uid://d4m8p7f51l3b3" path="res://assets/map/country/c118.png" id="120_c118"]
+[ext_resource type="Texture2D" uid="uid://djij5wfv0p77i" path="res://assets/map/country/c119.png" id="121_c119"]
+[ext_resource type="Texture2D" uid="uid://dnu6uj8xlaylx" path="res://assets/map/country/c120.png" id="122_c120"]
+[ext_resource type="Texture2D" uid="uid://chd3d8mvqt6vy" path="res://assets/map/country/c121.png" id="123_c121"]
+[ext_resource type="Texture2D" uid="uid://c40vtx4xarw83" path="res://assets/map/country/c122.png" id="124_c122"]
+[ext_resource type="Texture2D" uid="uid://dbw5hxouvjssy" path="res://assets/map/country/c123.png" id="125_c123"]
+[ext_resource type="Texture2D" uid="uid://dxe4je38htl67" path="res://assets/map/country/c124.png" id="126_c124"]
+[ext_resource type="Texture2D" uid="uid://cyhqjhwgt50m4" path="res://assets/map/country/c125.png" id="127_c125"]
+[ext_resource type="Texture2D" uid="uid://df8kwxrh6t0lj" path="res://assets/map/country/c126.png" id="128_c126"]
+[ext_resource type="Texture2D" uid="uid://0yj7l6l1ieqh" path="res://assets/map/country/c127.png" id="129_c127"]
+[ext_resource type="Texture2D" uid="uid://dipphh5e3asvg" path="res://assets/map/country/c128.png" id="130_c128"]
+[ext_resource type="Texture2D" uid="uid://brpenm3c3kon2" path="res://assets/map/country/c129.png" id="131_c129"]
+[ext_resource type="Texture2D" uid="uid://c6can1dp85t3d" path="res://assets/map/country/c130.png" id="132_c130"]
+[ext_resource type="Texture2D" uid="uid://drhj8w1v515yc" path="res://assets/map/country/c131.png" id="133_c131"]
+[ext_resource type="Texture2D" uid="uid://ddgsdm1lsjp66" path="res://assets/map/country/c132.png" id="134_c132"]
+[ext_resource type="Texture2D" uid="uid://c713qebwa37fr" path="res://assets/map/country/c133.png" id="135_c133"]
+[ext_resource type="Texture2D" uid="uid://y6x5ffg62q8g" path="res://assets/map/country/c134.png" id="136_c134"]
+[ext_resource type="Texture2D" uid="uid://fa0bhmmqcgj" path="res://assets/map/country/c135.png" id="137_c135"]
+[ext_resource type="Texture2D" uid="uid://eumcd4yivv6n" path="res://assets/map/country/c136.png" id="138_c136"]
+[ext_resource type="Texture2D" uid="uid://brn18euh716ck" path="res://assets/map/country/c137.png" id="139_c137"]
+[ext_resource type="Texture2D" uid="uid://dsm6y14bhuin6" path="res://assets/map/country/c138.png" id="140_c138"]
+[ext_resource type="Texture2D" uid="uid://migd7rvuq287" path="res://assets/map/country/c139.png" id="141_c139"]
+[ext_resource type="Texture2D" uid="uid://q6n0m3fc4b1g" path="res://assets/map/country/c140.png" id="142_c140"]
+[ext_resource type="Texture2D" uid="uid://8md0r1wo7xbr" path="res://assets/map/country/c141.png" id="143_c141"]
+[ext_resource type="Texture2D" uid="uid://b0thqdwne81w2" path="res://assets/map/country/c142.png" id="144_c142"]
+[ext_resource type="Texture2D" uid="uid://dbggkq7twykd7" path="res://assets/map/country/c143.png" id="145_c143"]
+[ext_resource type="Texture2D" uid="uid://ca14l6gst7u8a" path="res://assets/map/country/c144.png" id="146_c144"]
+[ext_resource type="Texture2D" uid="uid://b4sxndxkxj1bn" path="res://assets/map/country/c145.png" id="147_c145"]
+[ext_resource type="Texture2D" uid="uid://bo2s68ggsnpd8" path="res://assets/map/country/c146.png" id="148_c146"]
+[ext_resource type="Texture2D" uid="uid://278q6l5a7luj" path="res://assets/map/country/war_icon.png" id="185_war_icon"]
+[ext_resource type="Texture2D" uid="uid://bujvqn6rfnt4v" path="res://assets/map/country/p_014_5.png" id="186_p_014_5"]
+[ext_resource type="Texture2D" uid="uid://q1c6gv0n3q6i" path="res://assets/map/country/p_001_4.png" id="187_p_001_4"]
+[ext_resource type="Texture2D" uid="uid://c14fatij144ta" path="res://assets/map/country/p_008_0.png" id="188_p_008_0"]
+[ext_resource type="Texture2D" uid="uid://cyimjh34w0pgl" path="res://assets/map/country/p_001_6.png" id="189_p_001_6"]
+[ext_resource type="Texture2D" uid="uid://dwd0n8xcurgwn" path="res://assets/map/country/p_014_3.png" id="190_p_014_3"]
+[ext_resource type="Texture2D" uid="uid://bqyxmkbb4ml4f" path="res://assets/map/country/p_084_1.png" id="191_p_084_1"]
+[ext_resource type="Texture2D" uid="uid://d4adn11ac8ai5" path="res://assets/map/country/p_007_2.png" id="192_p_007_2"]
+[ext_resource type="Texture2D" uid="uid://clxa461t275vr" path="res://assets/map/country/p_001_0.png" id="193_p_001_0"]
+[ext_resource type="Texture2D" uid="uid://c540glb6vh0m7" path="res://assets/map/country/p_054_0.png" id="194_p_054_0"]
+[ext_resource type="Texture2D" uid="uid://cmffy1gprn1cd" path="res://assets/map/country/p_099_0.png" id="195_p_099_0"]
+[ext_resource type="Texture2D" uid="uid://vfvuysgxjaf6" path="res://assets/map/country/p_013_0.png" id="196_p_013_0"]
+[ext_resource type="Texture2D" uid="uid://bm5octwic2tyq" path="res://assets/map/country/p_030_1.png" id="197_p_030_1"]
+[ext_resource type="Texture2D" uid="uid://c3wsqrakedcsa" path="res://assets/map/country/p_017_0.png" id="198_p_017_0"]
+[ext_resource type="Texture2D" uid="uid://30k0hktnlt24" path="res://assets/map/country/p_035_0.png" id="199_p_035_0"]
+[ext_resource type="Texture2D" uid="uid://cmru06moqud05" path="res://assets/map/country/p_014_2.png" id="200_p_014_2"]
+[ext_resource type="Texture2D" uid="uid://cycvwv76qelu" path="res://assets/map/country/p_045_0.png" id="201_p_045_0"]
+[ext_resource type="Texture2D" uid="uid://b8vjekcvpwcn" path="res://assets/map/country/p_014_0.png" id="202_p_014_0"]
+[ext_resource type="Texture2D" uid="uid://bqndq0vowiny1" path="res://assets/map/country/p_100_0.png" id="203_p_100_0"]
+[ext_resource type="Texture2D" uid="uid://chxk2m56k76k2" path="res://assets/map/country/p_025_0.png" id="204_p_025_0"]
+[ext_resource type="Texture2D" uid="uid://k14yam28xsoi" path="res://assets/map/country/p_021_0.png" id="205_p_021_0"]
+[ext_resource type="Texture2D" uid="uid://cy6kcpll3mysk" path="res://assets/map/country/p_084_3.png" id="206_p_084_3"]
+[ext_resource type="Texture2D" uid="uid://dmolahwdb6hvy" path="res://assets/map/country/p_086_0.png" id="207_p_086_0"]
+[ext_resource type="Texture2D" uid="uid://dem8720cry5pp" path="res://assets/map/country/p_046_0.png" id="208_p_046_0"]
+[ext_resource type="Texture2D" uid="uid://3c41h4d5rgh3" path="res://assets/map/country/p_030_0.png" id="209_p_030_0"]
+[ext_resource type="Texture2D" uid="uid://c5dhmlgrow43t" path="res://assets/map/country/p_001_9.png" id="210_p_001_9"]
+[ext_resource type="Texture2D" uid="uid://bbuldcjsg4asw" path="res://assets/map/country/p_001_10.png" id="211_p_001_10"]
+[ext_resource type="Texture2D" uid="uid://qu1ca08p7oss" path="res://assets/map/country/p_001_3.png" id="212_p_001_3"]
+[ext_resource type="Texture2D" uid="uid://dbtome7x44o8p" path="res://assets/map/country/p_003_0.png" id="213_p_003_0"]
+[ext_resource type="Texture2D" uid="uid://ly6ayntl7fp3" path="res://assets/map/country/p_042_0.png" id="214_p_042_0"]
+[ext_resource type="Texture2D" uid="uid://buyx8evikxrkq" path="res://assets/map/country/p_001_8.png" id="215_p_001_8"]
+[ext_resource type="Texture2D" uid="uid://dmakaavd6uy7n" path="res://assets/map/country/p_014_4.png" id="216_p_014_4"]
+[ext_resource type="Texture2D" uid="uid://ds1qo77rfvqmy" path="res://assets/map/country/p_084_4.png" id="217_p_084_4"]
+[ext_resource type="Texture2D" uid="uid://do8mxk1sw0gdu" path="res://assets/map/country/p_020_0.png" id="218_p_020_0"]
+[ext_resource type="Texture2D" uid="uid://dii2wtt10a7b0" path="res://assets/map/country/p_020_1.png" id="219_p_020_1"]
+[ext_resource type="Texture2D" uid="uid://bexup5kmg1b6y" path="res://assets/map/country/p_001_7.png" id="220_p_001_7"]
+[ext_resource type="Texture2D" uid="uid://dmlcqrxqrcue0" path="res://assets/map/country/p_001_2.png" id="221_p_001_2"]
+[ext_resource type="Texture2D" uid="uid://dxbeiwe5io681" path="res://assets/map/country/p_007_1.png" id="222_p_007_1"]
+[ext_resource type="Texture2D" uid="uid://bjwdbxykfx0uq" path="res://assets/map/country/p_001_5.png" id="223_p_001_5"]
+[ext_resource type="Texture2D" uid="uid://bmvmv0nh16if0" path="res://assets/map/country/p_010_0.png" id="224_p_010_0"]
+[ext_resource type="Texture2D" uid="uid://duxlsedjggepd" path="res://assets/map/country/p_024_0.png" id="225_p_024_0"]
+[ext_resource type="Texture2D" uid="uid://lcpeoeg3xm5l" path="res://assets/map/country/p_086_1.png" id="226_p_086_1"]
+[ext_resource type="Texture2D" uid="uid://c6nb61bqsp2ue" path="res://assets/map/country/p_007_0.png" id="227_p_007_0"]
+[ext_resource type="Texture2D" uid="uid://cc56wa5id814" path="res://assets/map/country/p_016_0.png" id="228_p_016_0"]
+[ext_resource type="Texture2D" uid="uid://bp8o23y0sgbyj" path="res://assets/map/country/p_094_0.png" id="229_p_094_0"]
+[ext_resource type="Texture2D" uid="uid://dx68w2omf1y36" path="res://assets/map/country/p_014_1.png" id="230_p_014_1"]
+[ext_resource type="Texture2D" uid="uid://bgtx47t0joess" path="res://assets/map/country/p_001_1.png" id="231_p_001_1"]
+[ext_resource type="Texture2D" uid="uid://exvwjkmm60ek" path="res://assets/map/country/p_084_0.png" id="232_p_084_0"]
+[ext_resource type="Texture2D" uid="uid://dvyo2x8ks6hw0" path="res://assets/map/country/p_059_0.png" id="233_p_059_0"]
+[ext_resource type="Texture2D" uid="uid://bnflsto4gi861" path="res://assets/map/country/p_011_0.png" id="234_p_011_0"]
+[ext_resource type="Texture2D" uid="uid://hepcmjy3etmj" path="res://assets/map/country/p_001_11.png" id="235_p_001_11"]
+[ext_resource type="Texture2D" uid="uid://dq2kxklc11gc0" path="res://assets/map/country/p_030_2.png" id="236_p_030_2"]
+[ext_resource type="Texture2D" uid="uid://bb8irim4aw65l" path="res://assets/map/country/p_027_0.png" id="237_p_027_0"]
+[ext_resource type="Texture2D" uid="uid://c2ilkbmr8hh7f" path="res://assets/map/country/p_049_0.png" id="238_p_049_0"]
+[ext_resource type="Texture2D" uid="uid://cp1q8coas6ulm" path="res://assets/map/country/p_050_0.png" id="239_p_050_0"]
+[ext_resource type="Texture2D" uid="uid://dybpdj0rhjg74" path="res://assets/map/country/p_127_0.png" id="240_p_127_0"]
+[ext_resource type="Texture2D" uid="uid://dtih2glkdpvw6" path="res://assets/map/country/p_134_0.png" id="241_p_134_0"]
+[ext_resource type="Texture2D" uid="uid://s447bf6pks2t" path="res://assets/map/country/p_140_0.png" id="242_p_140_0"]
+[ext_resource type="Texture2D" uid="uid://bx4h142tc66dr" path="res://assets/map/country/p_140_1.png" id="243_p_140_1"]
+[ext_resource type="Texture2D" uid="uid://c8c5xr3e7louj" path="res://assets/map/country/p_084_5.png" id="244_p_084_5"]
+[ext_resource type="Texture2D" uid="uid://dhtiwmqf6kkla" path="res://assets/map/country/p_053_0.png" id="245_p_053_0"]
+[ext_resource type="Texture2D" uid="uid://pc3spr6l2sca" path="res://assets/map/country/p_053_1.png" id="246_p_053_1"]
+[ext_resource type="Texture2D" uid="uid://bygjoevgp7aqa" path="res://assets/map/country/p_053_2.png" id="247_p_053_2"]
+[ext_resource type="Texture2D" uid="uid://ti83n3aqpbgq" path="res://assets/map/country/p_041_0.png" id="248_p_041_0"]
+[ext_resource type="Texture2D" uid="uid://bkoi8wbxfbn3q" path="res://assets/map/country/p_041_1.png" id="249_p_041_1"]
+[ext_resource type="Texture2D" uid="uid://bh7lt2ewwxktb" path="res://assets/map/country/p_138_0.png" id="250_p_138_0"]
+[ext_resource type="Texture2D" uid="uid://l3fl1n4wrmwq" path="res://assets/map/country/p_042_2.png" id="251_p_042_2"]
+[ext_resource type="Texture2D" uid="uid://ct8m0d5auj3uk" path="res://assets/map/country/p_042_1.png" id="252_p_042_1"]
+[ext_resource type="Texture2D" uid="uid://cuap3jdlhon4l" path="res://assets/map/country/p_119_0.png" id="253_p_119_0"]
+[ext_resource type="Texture2D" uid="uid://38xpuaylo5e0" path="res://assets/map/country/p_119_1.png" id="254_p_119_1"]
+[ext_resource type="Texture2D" uid="uid://lxssansvqudo" path="res://assets/map/country/p_113_0.png" id="255_p_113_0"]
+[ext_resource type="Texture2D" uid="uid://c1e4rq8jbcs3p" path="res://assets/map/country/p_122_0.png" id="256_p_122_0"]
+[ext_resource type="Texture2D" uid="uid://diqjs5hwykp14" path="res://assets/map/country/p_131_0.png" id="257_p_131_0"]
+[ext_resource type="Texture2D" uid="uid://cvtl7socjrxki" path="res://assets/map/country/p_131_1.png" id="258_p_131_1"]
+[ext_resource type="Texture2D" uid="uid://byc1vxue8ygyl" path="res://assets/map/country/p_131_2.png" id="259_p_131_2"]
+[ext_resource type="Texture2D" uid="uid://c2dos6pxhmlhm" path="res://assets/map/country/p_131_3.png" id="260_p_131_3"]
+[ext_resource type="Texture2D" uid="uid://blbgjlhnt0agy" path="res://assets/map/country/p_131_4.png" id="261_p_131_4"]
+[ext_resource type="Texture2D" uid="uid://mmh1jjnqe0op" path="res://assets/map/country/p_153_0.png" id="262_p_153_0"]
+[ext_resource type="Texture2D" uid="uid://c0gdyr3v2iawq" path="res://assets/map/country/p_157_0.png" id="263_p_157_0"]
+[ext_resource type="Texture2D" uid="uid://c4vkqya4dga5h" path="res://assets/map/country/p_157_1.png" id="264_p_157_1"]
+[ext_resource type="Texture2D" uid="uid://bgy0s0jijv5qk" path="res://assets/map/country/p_157_2.png" id="265_p_157_2"]
+[ext_resource type="Texture2D" uid="uid://fipocejgl1py" path="res://assets/map/country/p_163_0.png" id="266_p_163_0"]
+[ext_resource type="Texture2D" uid="uid://dfj2cgh1vym0h" path="res://assets/map/country/p_117_0.png" id="267_p_117_0"]
+[ext_resource type="Texture2D" uid="uid://dyppqwaebdmv1" path="res://assets/map/country/p_117_1.png" id="268_p_117_1"]
+[ext_resource type="Texture2D" uid="uid://cwfr00tutjmw1" path="res://assets/map/country/p_066_0.png" id="269_p_066_0"]
+[ext_resource type="Texture2D" uid="uid://c61ve0yfxapi5" path="res://assets/map/country/p_126_0.png" id="270_p_126_0"]
+[ext_resource type="Texture2D" uid="uid://dtctcr75ts772" path="res://assets/map/country/p_013_1.png" id="271_p_013_1"]
+[ext_resource type="Texture2D" uid="uid://h2tsg53ypjaq" path="res://assets/map/country/p_149_0.png" id="272_p_149_0"]
+[ext_resource type="Texture2D" uid="uid://blgkyihcf300m" path="res://assets/map/country/p_149_1.png" id="273_p_149_1"]
+[ext_resource type="Texture2D" uid="uid://bvxxi63dl7k6j" path="res://assets/map/country/p_149_2.png" id="274_p_149_2"]
+[ext_resource type="Texture2D" uid="uid://dfw5cfotoolku" path="res://assets/map/country/p_147_0.png" id="275_p_147_0"]
+[ext_resource type="Texture2D" uid="uid://dnfr041ul4o1q" path="res://assets/map/country/p_123_0.png" id="276_p_123_0"]
+[ext_resource type="Texture2D" uid="uid://6cxuv2m25eim" path="res://assets/map/country/p_112_1.png" id="277_p_112_1"]
+[ext_resource type="Texture2D" uid="uid://cvnosry0sar4p" path="res://assets/map/country/p_162_0.png" id="278_p_162_0"]
+[ext_resource type="Texture2D" uid="uid://bj3ewpx33ld1t" path="res://assets/map/country/p_107_0.png" id="279_p_107_0"]
+[ext_resource type="Texture2D" uid="uid://dlcy8fmfnevyy" path="res://assets/map/country/p_060_0.png" id="280_p_060_0"]
+[ext_resource type="Texture2D" uid="uid://6l6apjooaqnn" path="res://assets/map/country/p_164_0.png" id="281_p_164_0"]
+[ext_resource type="Texture2D" uid="uid://x6tom4k08wlp" path="res://assets/map/country/p_165_0.png" id="282_p_165_0"]
+[ext_resource type="Texture2D" uid="uid://njxl5mttnbni" path="res://assets/map/country/p_057_0.png" id="283_p_057_0"]
+[ext_resource type="Texture2D" uid="uid://ceadmrss5j6ey" path="res://assets/map/country/p_118_0.png" id="284_p_118_0"]
+[ext_resource type="Texture2D" uid="uid://lkdi3s5iohog" path="res://assets/map/country/p_033_0.png" id="285_p_033_0"]
+[ext_resource type="Texture2D" uid="uid://8oyjaktaghj2" path="res://assets/map/country/p_141_0.png" id="286_p_141_0"]
+[ext_resource type="Texture2D" uid="uid://bdhcbdf0h534d" path="res://assets/map/country/p_058_0.png" id="287_p_058_0"]
+
+[node name="地图" type="Node2D" unique_id=641015197]
+script = ExtResource("1_map")
+
+[node name="国家层" type="Node2D" parent="." unique_id=118301329]
+
+[node name="part_162.0" type="Sprite2D" parent="国家层" unique_id=944191220]
+visible = false
+z_index = 10
+position = Vector2(-711.2046, 72.3976)
+scale = Vector2(0.65629435, 0.6528)
+texture = ExtResource("278_p_162_0")
+metadata/kind = "part"
+metadata/file = "p_162_0.png"
+metadata/tex = "非洲"
+metadata/country = 162
+metadata/part = 0
+metadata/orig = "162.0"
+
+[node name="苏联" type="Sprite2D" parent="国家层" unique_id=2113780771]
+z_index = -6
+position = Vector2(-163.8, -299.16)
+scale = Vector2(0.12794928, 0.12794948)
+texture = ExtResource("2_c000")
+metadata/kind = "country"
+metadata/file = "c000.png"
+metadata/tex = "СССР серый"
+metadata/idx = 7
+
+[node name="芬兰" type="Sprite2D" parent="国家层" unique_id=1162053866]
+z_index = -6
+position = Vector2(-626.22, -326.64)
+scale = Vector2(0.12794964, 0.12795213)
+texture = ExtResource("3_c001")
+metadata/kind = "country"
+metadata/file = "c001.png"
+metadata/tex = "финляндия серый"
+metadata/idx = 26
+
+[node name="罗马尼亚" type="Sprite2D" parent="国家层" unique_id=1159354824]
+z_index = -6
+position = Vector2(-630.06, -119.7)
+scale = Vector2(0.12795871, 0.12795454)
+texture = ExtResource("4_c002")
+metadata/kind = "country"
+metadata/file = "c002.png"
+metadata/tex = "Румыния серый"
+metadata/idx = 5
+
+[node name="波兰" type="Sprite2D" parent="国家层" unique_id=1742514278]
+z_index = -6
+position = Vector2(-663.9, -173.34)
+scale = Vector2(0.12795652, 0.12795871)
+texture = ExtResource("5_c003")
+metadata/kind = "country"
+metadata/file = "c003.png"
+metadata/tex = "Польша серый"
+metadata/idx = 2
+
+[node name="匈牙利" type="Sprite2D" parent="国家层" unique_id=679503168]
+z_index = -6
+position = Vector2(-661.38, -129.9)
+scale = Vector2(0.12794872, 0.12795918)
+texture = ExtResource("6_c004")
+metadata/kind = "country"
+metadata/file = "c004.png"
+metadata/tex = "венгрия серый"
+metadata/idx = 4
+
+[node name="捷克斯洛伐克" type="Sprite2D" parent="国家层" unique_id=103060804]
+z_index = -6
+position = Vector2(-674.16, -149.22)
+scale = Vector2(0.12795833, 0.1279661)
+texture = ExtResource("7_c005")
+metadata/kind = "country"
+metadata/file = "c005.png"
+metadata/tex = "Чехословакия серый"
+metadata/idx = 3
+
+[node name="英国" type="Sprite2D" parent="国家层" unique_id=1447258757]
+z_index = -6
+position = Vector2(-672.24, -225.72)
+scale = Vector2(0.1279483, 0.12794787)
+texture = ExtResource("8_c006")
+metadata/kind = "country"
+metadata/file = "c006.png"
+metadata/tex = "NATO_sery"
+metadata/idx = 92
+
+[node name="保加利亚" type="Sprite2D" parent="国家层" unique_id=1254757690]
+z_index = -6
+position = Vector2(-626.88, -93.48)
+scale = Vector2(0.12795138, 0.12792553)
+texture = ExtResource("9_c007")
+metadata/kind = "country"
+metadata/file = "c007.png"
+metadata/tex = "Болгария серый"
+metadata/idx = 6
+
+[node name="瑞典" type="Sprite2D" parent="国家层" unique_id=285834327]
+z_index = -6
+position = Vector2(-672.9, -293.4)
+scale = Vector2(0.12795, 0.1279519)
+texture = ExtResource("10_c008")
+metadata/kind = "country"
+metadata/file = "c008.png"
+metadata/tex = "Швеция серый"
+metadata/idx = 28
+
+[node name="民主德国" type="Sprite2D" parent="国家层" unique_id=1690337947]
+z_index = -6
+position = Vector2(-702.9, -177.54)
+scale = Vector2(0.1279661, 0.12794118)
+texture = ExtResource("11_c009")
+metadata/kind = "country"
+metadata/file = "c009.png"
+metadata/tex = "ГДР серый"
+metadata/idx = 16
+
+[node name="联邦德国" type="Sprite2D" parent="国家层" unique_id=864405894]
+z_index = -6
+position = Vector2(-717.6, -165.66)
+scale = Vector2(0.12796196, 0.12794013)
+texture = ExtResource("12_c010")
+metadata/kind = "country"
+metadata/file = "c010.png"
+metadata/tex = "ФРГсерый"
+metadata/idx = 17
+
+[node name="南斯拉夫" type="Sprite2D" parent="国家层" unique_id=1368963359]
+z_index = -6
+position = Vector2(-669.06, -103.08)
+scale = Vector2(0.12795044, 0.12793814)
+texture = ExtResource("13_c011")
+metadata/kind = "country"
+metadata/file = "c011.png"
+metadata/tex = "Югославия серый"
+metadata/idx = 15
+
+[node name="阿尔巴尼亚" type="Sprite2D" parent="国家层" unique_id=1481293839]
+z_index = -6
+position = Vector2(-657.78, -80.1)
+scale = Vector2(0.12795454, 0.12795918)
+texture = ExtResource("14_c012")
+metadata/kind = "country"
+metadata/file = "c012.png"
+metadata/tex = "Албания серый"
+metadata/idx = 20
+
+[node name="法国" type="Sprite2D" parent="国家层" unique_id=49087566]
+z_index = -6
+position = Vector2(-761.34, -123.54)
+scale = Vector2(0.12795454, 0.12794752)
+texture = ExtResource("15_c013")
+metadata/kind = "country"
+metadata/file = "c013.png"
+metadata/tex = "Франция серый"
+metadata/idx = 21
+
+[node name="爱尔兰" type="Sprite2D" parent="国家层" unique_id=143858474]
+z_index = -6
+position = Vector2(-823.62, -186.78)
+scale = Vector2(0.12793268, 0.12796053)
+texture = ExtResource("16_c014")
+metadata/kind = "country"
+metadata/file = "c014.png"
+metadata/tex = "Ирландия серый"
+metadata/idx = 29
+
+[node name="利比亚" type="Sprite2D" parent="国家层" unique_id=408937837]
+z_index = -6
+position = Vector2(-674.76, 22.08)
+scale = Vector2(0.127942, 0.1279454)
+texture = ExtResource("17_c015")
+metadata/kind = "country"
+metadata/file = "c015.png"
+metadata/tex = "Ливия серый"
+metadata/idx = 13
+
+[node name="埃及" type="Sprite2D" parent="国家层" unique_id=1719982153]
+z_index = -6
+position = Vector2(-599.4, 20.16)
+scale = Vector2(0.12794922, 0.12795275)
+texture = ExtResource("18_c016")
+metadata/kind = "country"
+metadata/file = "c016.png"
+metadata/tex = "египет серый"
+metadata/idx = 30
+
+[node name="阿富汗" type="Sprite2D" parent="国家层" unique_id=1645687699]
+z_index = -6
+position = Vector2(-381, -28.98)
+scale = Vector2(0.12795454, 0.12795635)
+texture = ExtResource("19_c017")
+metadata/kind = "country"
+metadata/file = "c017.png"
+metadata/tex = "Авганистан серый"
+metadata/idx = 12
+
+[node name="蒙古" type="Sprite2D" parent="国家层" unique_id=548338028]
+z_index = -6
+position = Vector2(-170.82, -129.3)
+scale = Vector2(0.12794837, 0.12794945)
+texture = ExtResource("20_c018")
+metadata/kind = "country"
+metadata/file = "c018.png"
+metadata/tex = "Монголия серый"
+metadata/idx = 9
+
+[node name="中国" type="Sprite2D" parent="国家层" unique_id=783259766]
+z_index = -6
+position = Vector2(-168.96, -56.46)
+scale = Vector2(0.34885743, 0.34886244)
+texture = ExtResource("21_c019")
+metadata/kind = "country"
+metadata/file = "c019.png"
+metadata/tex = "Китай серый"
+metadata/idx = 1
+
+[node name="台湾" type="Sprite2D" parent="国家层" unique_id=572812720]
+z_index = -6
+position = Vector2(-70.56, 40.62)
+scale = Vector2(0.12793478, 0.12796512)
+texture = ExtResource("22_c020")
+metadata/kind = "country"
+metadata/file = "c020.png"
+metadata/tex = "Тайвань серый"
+metadata/idx = 38
+
+[node name="伊朗" type="Sprite2D" parent="国家层" unique_id=352530378]
+z_index = -6
+position = Vector2(-462.72, -19.44)
+scale = Vector2(0.12795249, 0.12794776)
+texture = ExtResource("23_c021")
+metadata/kind = "country"
+metadata/file = "c021.png"
+metadata/tex = "Иран серый"
+metadata/idx = 8
+
+[node name="巴基斯坦" type="Sprite2D" parent="国家层" unique_id=1662868305]
+z_index = -6
+position = Vector2(-370.74, -5.34)
+scale = Vector2(0.12794644, 0.12795198)
+texture = ExtResource("24_c022")
+metadata/kind = "country"
+metadata/file = "c022.png"
+metadata/tex = "Пакистан серый"
+metadata/idx = 31
+
+[node name="尼泊尔" type="Sprite2D" parent="国家层" unique_id=1163470873]
+z_index = -6
+position = Vector2(-285.18, 9.96)
+scale = Vector2(0.12795213, 0.12796296)
+texture = ExtResource("25_c023")
+metadata/kind = "country"
+metadata/file = "c023.png"
+metadata/tex = "Непал серый"
+metadata/idx = 43
+
+[node name="不丹" type="Sprite2D" parent="国家层" unique_id=850153061]
+z_index = -6
+position = Vector2(-248.76, 15.72)
+scale = Vector2(0.1279375, 0.12793478)
+texture = ExtResource("26_c024")
+metadata/kind = "country"
+metadata/file = "c024.png"
+metadata/tex = "Бутан серый"
+metadata/idx = 97
+
+[node name="印度" type="Sprite2D" parent="国家层" unique_id=241548817]
+z_index = -6
+position = Vector2(-293.46, 52.14)
+scale = Vector2(0.1279491, 0.12794818)
+texture = ExtResource("27_c025")
+metadata/kind = "country"
+metadata/file = "c025.png"
+metadata/tex = "Индия серый"
+metadata/idx = 19
+
+[node name="孟加拉" type="Sprite2D" parent="国家层" unique_id=744087709]
+z_index = -6
+position = Vector2(-249.42, 39.96)
+scale = Vector2(0.12796296, 0.12794521)
+texture = ExtResource("28_c026")
+metadata/kind = "country"
+metadata/file = "c026.png"
+metadata/tex = "Бангладеш серый"
+metadata/idx = 32
+
+[node name="缅甸" type="Sprite2D" parent="国家层" unique_id=359772449]
+z_index = -6
+position = Vector2(-211.81, 66.18)
+scale = Vector2(0.1304717, 0.12795354)
+texture = ExtResource("29_c027")
+metadata/kind = "country"
+metadata/file = "c027.png"
+metadata/tex = "Birma_sery"
+metadata/idx = 33
+
+[node name="朝鲜" type="Sprite2D" parent="国家层" unique_id=1979569589]
+z_index = -6
+position = Vector2(-32.88, -74.67)
+scale = Vector2(0.1279392, 0.12795731)
+texture = ExtResource("30_c028")
+metadata/kind = "country"
+metadata/file = "c028.png"
+metadata/tex = "Северная корея серый"
+metadata/idx = 10
+
+[node name="韩国" type="Sprite2D" parent="国家层" unique_id=1855369735]
+z_index = -6
+position = Vector2(-30.96, -41.76)
+scale = Vector2(0.12792683, 0.12795454)
+texture = ExtResource("31_c029")
+metadata/kind = "country"
+metadata/file = "c029.png"
+metadata/tex = "Южная корея  серый"
+metadata/idx = 46
+
+[node name="日本" type="Sprite2D" parent="国家层" unique_id=781079168]
+z_index = -6
+position = Vector2(9.24, -39.24)
+scale = Vector2(0.12794466, 0.1279515)
+texture = ExtResource("32_c030")
+metadata/kind = "country"
+metadata/file = "c030.png"
+metadata/tex = "япония серый"
+metadata/idx = 44
+
+[node name="越南" type="Sprite2D" parent="国家层" unique_id=1320176418]
+z_index = -6
+position = Vector2(-159.36, 87.9)
+scale = Vector2(0.17691056, 0.17693359)
+texture = ExtResource("33_c031")
+metadata/kind = "country"
+metadata/file = "c031.png"
+metadata/tex = "Вьетнам серый"
+metadata/idx = 11
+
+[node name="老挝" type="Sprite2D" parent="国家层" unique_id=643123328]
+z_index = -6
+position = Vector2(-170.22, 74.46)
+scale = Vector2(0.12795454, 0.12795238)
+texture = ExtResource("34_c032")
+metadata/kind = "country"
+metadata/file = "c032.png"
+metadata/tex = "Лаос серый"
+metadata/idx = 22
+
+[node name="柬埔寨" type="Sprite2D" parent="国家层" unique_id=1749943271]
+z_index = -6
+position = Vector2(-163.8, 109.62)
+scale = Vector2(0.12794355, 0.12795454)
+texture = ExtResource("35_c033")
+metadata/kind = "country"
+metadata/file = "c033.png"
+metadata/tex = "Камбоджа серый"
+metadata/idx = 23
+
+[node name="泰国" type="Sprite2D" parent="国家层" unique_id=245732872]
+z_index = -6
+position = Vector2(-184.26, 105.12)
+scale = Vector2(0.12794738, 0.12794286)
+texture = ExtResource("36_c034")
+metadata/kind = "country"
+metadata/file = "c034.png"
+metadata/tex = "тайланд серый"
+metadata/idx = 34
+
+[node name="叙利亚" type="Sprite2D" parent="国家层" unique_id=1194752189]
+z_index = -6
+position = Vector2(-547.68, -34.08)
+scale = Vector2(0.12794872, 0.12796429)
+texture = ExtResource("37_c035")
+metadata/kind = "country"
+metadata/file = "c035.png"
+metadata/tex = "Сирия серый"
+metadata/idx = 35
+
+[node name="伊拉克" type="Sprite2D" parent="国家层" unique_id=1415134043]
+z_index = -6
+position = Vector2(-521.52, -22.62)
+scale = Vector2(0.12794644, 0.12794492)
+texture = ExtResource("38_c036")
+metadata/kind = "country"
+metadata/file = "c036.png"
+metadata/tex = "Ирак серый"
+metadata/idx = 14
+
+[node name="黎巴嫩" type="Sprite2D" parent="国家层" unique_id=85294662]
+z_index = -6
+position = Vector2(-566.22, -27.06)
+scale = Vector2(0.12791666, 0.12793478)
+texture = ExtResource("39_c037")
+metadata/kind = "country"
+metadata/file = "c037.png"
+metadata/tex = "Ливан серый"
+metadata/idx = 93
+
+[node name="以色列" type="Sprite2D" parent="国家层" unique_id=1486425522]
+z_index = -6
+position = Vector2(-571.32, -10.5)
+scale = Vector2(0.12795454, 0.1279717)
+texture = ExtResource("40_c038")
+metadata/kind = "country"
+metadata/file = "c038.png"
+metadata/tex = "Израиль серый"
+metadata/idx = 37
+
+[node name="莫桑比克" type="Sprite2D" parent="国家层" unique_id=901333570]
+z_index = -6
+position = Vector2(-568.74, 293.62)
+scale = Vector2(0.16326436, 0.16326466)
+texture = ExtResource("41_c039")
+metadata/kind = "country"
+metadata/file = "c039.png"
+metadata/tex = "莫桑比克"
+metadata/idx = 126
+
+[node name="科威特" type="Sprite2D" parent="国家层" unique_id=246026468]
+z_index = -6
+position = Vector2(-498.48, 4.2)
+scale = Vector2(0.12793478, 0.1279762)
+texture = ExtResource("42_c040")
+metadata/kind = "country"
+metadata/file = "c040.png"
+metadata/tex = "Кувейт серый"
+metadata/idx = 36
+
+[node name="安哥拉" type="Sprite2D" parent="国家层" unique_id=65763164]
+z_index = -6
+position = Vector2(-672.46, 247.83)
+scale = Vector2(0.16325153, 0.16326278)
+texture = ExtResource("43_c041")
+metadata/kind = "country"
+metadata/file = "c041.png"
+metadata/tex = "安哥拉"
+metadata/idx = 123
+
+[node name="赞比亚" type="Sprite2D" parent="国家层" unique_id=1610996301]
+z_index = -6
+position = Vector2(-612.55, 260.44)
+scale = Vector2(0.15905903, 0.16326924)
+texture = ExtResource("44_c042")
+metadata/kind = "country"
+metadata/file = "c042.png"
+metadata/tex = "赞比亚"
+metadata/idx = 124
+
+[node name="赤道几内亚" type="Sprite2D" parent="国家层" unique_id=269010588]
+z_index = -6
+position = Vector2(-714.85, 174.77)
+scale = Vector2(0.16326924, 0.16326316)
+texture = ExtResource("45_c043")
+metadata/kind = "country"
+metadata/file = "c043.png"
+metadata/tex = "赤道几内亚"
+metadata/idx = 115
+
+[node name="坦桑尼亚" type="Sprite2D" parent="国家层" unique_id=1381660057]
+z_index = -6
+position = Vector2(-571.56, 220.27)
+scale = Vector2(0.16325545, 0.16325498)
+texture = ExtResource("46_c044")
+metadata/kind = "country"
+metadata/file = "c044.png"
+metadata/tex = "坦桑尼亚"
+metadata/idx = 122
+
+[node name="瑞士" type="Sprite2D" parent="国家层" unique_id=849397844]
+z_index = -6
+position = Vector2(-727.14, -126.72)
+scale = Vector2(0.1279717, 0.12794118)
+texture = ExtResource("47_c045")
+metadata/kind = "country"
+metadata/file = "c045.png"
+metadata/tex = "Швейцария серый"
+metadata/idx = 39
+
+[node name="奥地利" type="Sprite2D" parent="国家层" unique_id=1545025433]
+z_index = -6
+position = Vector2(-697.8, -133.92)
+scale = Vector2(0.12794945, 0.12793478)
+texture = ExtResource("48_c046")
+metadata/kind = "country"
+metadata/file = "c046.png"
+metadata/tex = "Австрия серый"
+metadata/idx = 27
+
+[node name="卢森堡" type="Sprite2D" parent="国家层" unique_id=1386824399]
+z_index = -8
+position = Vector2(-739.56, -152.52)
+scale = Vector2(0.128, 0.12803571)
+texture = ExtResource("49_c047")
+metadata/kind = "country"
+metadata/file = "c047.png"
+metadata/tex = "Люксембург серый"
+metadata/idx = 0
+
+[node name="南也门" type="Sprite2D" parent="国家层" unique_id=320894334]
+z_index = -8
+position = Vector2(-490.2, 90.42)
+scale = Vector2(0.12795275, 0.12795731)
+texture = ExtResource("50_c048")
+metadata/kind = "country"
+metadata/file = "c048.png"
+metadata/tex = "Народная республика йемен серый"
+metadata/idx = 24
+
+[node name="北也门" type="Sprite2D" parent="国家层" unique_id=1896353068]
+z_index = -8
+position = Vector2(-516.36, 93)
+scale = Vector2(0.12795454, 0.12794644)
+texture = ExtResource("51_c049")
+metadata/kind = "country"
+metadata/file = "c049.png"
+metadata/tex = "Йемен серый"
+metadata/idx = 25
+
+[node name="罗马尼亚#2" type="Sprite2D" parent="国家层" unique_id=502726848]
+z_index = -6
+position = Vector2(-610.02, -128.1)
+scale = Vector2(0.1279762, 0.12793268)
+texture = ExtResource("52_c050")
+metadata/kind = "country"
+metadata/file = "c050.png"
+metadata/tex = "Moldavorumynia_sery"
+metadata/idx = 5
+
+[node name="保加利亚#2" type="Sprite2D" parent="国家层" unique_id=2143662309]
+z_index = -6
+position = Vector2(-648.42, -84.42)
+scale = Vector2(0.12798387, 0.128)
+texture = ExtResource("53_c051")
+metadata/kind = "country"
+metadata/file = "c051.png"
+metadata/tex = "Bolgarkedonia"
+metadata/idx = 6
+
+[node name="阿尔及利亚" type="Sprite2D" parent="国家层" unique_id=1314258373]
+z_index = -6
+position = Vector2(-765.48, 9.42)
+scale = Vector2(0.12794492, 0.12794492)
+texture = ExtResource("54_c052")
+metadata/kind = "country"
+metadata/file = "c052.png"
+metadata/tex = "Alzhir_sery"
+metadata/idx = 40
+
+[node name="埃塞俄比亚" type="Sprite2D" parent="国家层" unique_id=1448892451]
+z_index = -6
+position = Vector2(-540.06, 118.92)
+scale = Vector2(0.12795058, 0.12795322)
+texture = ExtResource("55_c053")
+metadata/kind = "country"
+metadata/file = "c053.png"
+metadata/tex = "Efiopia_sery"
+metadata/idx = 41
+
+[node name="索马里" type="Sprite2D" parent="国家层" unique_id=81231393]
+z_index = -6
+position = Vector2(-530.34, 133.02)
+scale = Vector2(0.1632659, 0.16325611)
+texture = ExtResource("56_c054")
+metadata/kind = "country"
+metadata/file = "c054.png"
+metadata/tex = "索马里"
+metadata/idx = 42
+
+[node name="希腊" type="Sprite2D" parent="国家层" unique_id=492250481]
+z_index = -6
+position = Vector2(-635.58, -60.06)
+scale = Vector2(0.12795454, 0.12795)
+texture = ExtResource("57_c055")
+metadata/kind = "country"
+metadata/file = "c055.png"
+metadata/tex = "Греция серый"
+metadata/idx = 45
+
+[node name="斯里兰卡" type="Sprite2D" parent="国家层" unique_id=1300439390]
+z_index = -14
+position = Vector2(-305.22, 138.3)
+scale = Vector2(0.1279, 0.12793478)
+texture = ExtResource("58_c056")
+metadata/kind = "country"
+metadata/file = "c056.png"
+metadata/tex = "Шри-Ланка серый"
+metadata/idx = 96
+
+[node name="菲律宾" type="Sprite2D" parent="国家层" unique_id=1839973139]
+z_index = -6
+position = Vector2(-66.42, 102.3)
+scale = Vector2(0.12795044, 0.12794378)
+texture = ExtResource("59_c057")
+metadata/kind = "country"
+metadata/file = "c057.png"
+metadata/tex = "Филиппины серый"
+metadata/idx = 47
+
+[node name="分裂的塞浦路斯" type="Sprite2D" parent="国家层" unique_id=1031147907]
+z_index = -6
+position = Vector2(-580.56, -37.56)
+scale = Vector2(0.12794644, 0.12796874)
+texture = ExtResource("60_c058")
+metadata/kind = "country"
+metadata/file = "c058.png"
+metadata/tex = "Kipr_sery_voen_karta"
+metadata/idx = 94
+
+[node name="苏丹" type="Sprite2D" parent="国家层" unique_id=421249633]
+z_index = -6
+position = Vector2(-599.44, 102.9)
+scale = Vector2(0.12773684, 0.12794565)
+texture = ExtResource("61_c059")
+metadata/kind = "country"
+metadata/file = "c059.png"
+metadata/tex = "9"
+metadata/idx = 53
+
+[node name="摩洛哥" type="Sprite2D" parent="国家层" unique_id=89213854]
+z_index = -6
+position = Vector2(-816.12, -13.74)
+scale = Vector2(0.12794118, 0.12795454)
+texture = ExtResource("62_c060")
+metadata/kind = "country"
+metadata/file = "c060.png"
+metadata/tex = "2"
+metadata/idx = 54
+
+[node name="突尼斯" type="Sprite2D" parent="国家层" unique_id=325697670]
+z_index = -6
+position = Vector2(-719.58, -27.84)
+scale = Vector2(0.12796874, 0.12793814)
+texture = ExtResource("63_c061")
+metadata/kind = "country"
+metadata/file = "c061.png"
+metadata/tex = "3"
+metadata/idx = 55
+
+[node name="尼日尔" type="Sprite2D" parent="国家层" unique_id=899009555]
+z_index = -6
+position = Vector2(-728.22, 77.22)
+scale = Vector2(0.12794444, 0.12794644)
+texture = ExtResource("64_c062")
+metadata/kind = "country"
+metadata/file = "c062.png"
+metadata/tex = "7"
+metadata/idx = 56
+
+[node name="乍得" type="Sprite2D" parent="国家层" unique_id=1387592351]
+z_index = -6
+position = Vector2(-666.6, 90.06)
+scale = Vector2(0.12795833, 0.12794974)
+texture = ExtResource("65_c063")
+metadata/kind = "country"
+metadata/file = "c063.png"
+metadata/tex = "8"
+metadata/idx = 57
+
+[node name="马里" type="Sprite2D" parent="国家层" unique_id=1591355120]
+z_index = -6
+position = Vector2(-798.12, 77.1)
+scale = Vector2(0.12795213, 0.12795198)
+texture = ExtResource("66_c064")
+metadata/kind = "country"
+metadata/file = "c064.png"
+metadata/tex = "6"
+metadata/idx = 58
+
+[node name="毛里塔尼亚" type="Sprite2D" parent="国家层" unique_id=90240573]
+z_index = -6
+position = Vector2(-840.43, 50.07)
+scale = Vector2(0.16333754, 0.16327)
+texture = ExtResource("67_c065")
+metadata/kind = "country"
+metadata/file = "c065.png"
+metadata/tex = "毛里塔尼亚"
+metadata/idx = 59
+
+[node name="尼日利亚" type="Sprite2D" parent="国家层" unique_id=1368404542]
+z_index = -6
+position = Vector2(-724.8, 128.58)
+scale = Vector2(0.12794118, 0.12795044)
+texture = ExtResource("68_c066")
+metadata/kind = "country"
+metadata/file = "c066.png"
+metadata/tex = "22"
+metadata/idx = 60
+
+[node name="上沃尔特" type="Sprite2D" parent="国家层" unique_id=2066616091]
+z_index = -6
+position = Vector2(-784.08, 110.16)
+scale = Vector2(0.12794444, 0.12795454)
+texture = ExtResource("69_c067")
+metadata/kind = "country"
+metadata/file = "c067.png"
+metadata/tex = "18"
+metadata/idx = 61
+
+[node name="贝宁" type="Sprite2D" parent="国家层" unique_id=289725412]
+z_index = -6
+position = Vector2(-761.82, 127.32)
+scale = Vector2(0.12791666, 0.12795775)
+texture = ExtResource("70_c068")
+metadata/kind = "country"
+metadata/file = "c068.png"
+metadata/tex = "20"
+metadata/idx = 62
+
+[node name="科特迪瓦" type="Sprite2D" parent="国家层" unique_id=1415669964]
+z_index = -6
+position = Vector2(-807.12, 137.94)
+scale = Vector2(0.12793478, 0.12796667)
+texture = ExtResource("71_c069")
+metadata/kind = "country"
+metadata/file = "c069.png"
+metadata/tex = "16"
+metadata/idx = 64
+
+[node name="加纳" type="Sprite2D" parent="国家层" unique_id=1144793901]
+z_index = -6
+position = Vector2(-781.5, 135.66)
+scale = Vector2(0.12795, 0.1279392)
+texture = ExtResource("72_c070")
+metadata/kind = "country"
+metadata/file = "c070.png"
+metadata/tex = "17"
+metadata/idx = 63
+
+[node name="喀麦隆" type="Sprite2D" parent="国家层" unique_id=112052919]
+z_index = -6
+position = Vector2(-700.38, 141.74)
+scale = Vector2(0.16326134, 0.16326296)
+texture = ExtResource("73_c071")
+metadata/kind = "country"
+metadata/file = "c071.png"
+metadata/tex = "喀麦隆"
+metadata/idx = 66
+
+[node name="利比里亚" type="Sprite2D" parent="国家层" unique_id=1507504199]
+z_index = -6
+position = Vector2(-829.74, 144.36)
+scale = Vector2(0.12793478, 0.12796874)
+texture = ExtResource("74_c072")
+metadata/kind = "country"
+metadata/file = "c072.png"
+metadata/tex = "15"
+metadata/idx = 67
+
+[node name="几内亚" type="Sprite2D" parent="国家层" unique_id=1888937907]
+z_index = -6
+position = Vector2(-850.49, 114.3)
+scale = Vector2(0.16325359, 0.16312835)
+texture = ExtResource("75_c073")
+metadata/kind = "country"
+metadata/file = "c073.png"
+metadata/tex = "几内亚"
+metadata/idx = 68
+
+[node name="中非共和国" type="Sprite2D" parent="国家层" unique_id=596757307]
+z_index = -6
+position = Vector2(-654.12, 142.5)
+scale = Vector2(0.12797946, 0.12796915)
+texture = ExtResource("76_c074")
+metadata/kind = "country"
+metadata/file = "c074.png"
+metadata/tex = "24"
+metadata/idx = 65
+
+[node name="西撒哈拉" type="Sprite2D" parent="国家层" unique_id=1176332351]
+z_index = -6
+position = Vector2(-851.45, 32.92)
+scale = Vector2(0.15258242, 0.15491304)
+texture = ExtResource("77_c075")
+metadata/kind = "country"
+metadata/file = "c075.png"
+metadata/tex = "4"
+metadata/idx = 18
+
+[node name="几内亚比绍" type="Sprite2D" parent="国家层" unique_id=1887306740]
+z_index = -6
+position = Vector2(-850.49, 114.41)
+scale = Vector2(0.16325359, 0.16625668)
+texture = ExtResource("78_c076")
+metadata/kind = "country"
+metadata/file = "c076.png"
+metadata/tex = "几内亚比绍"
+metadata/idx = 114
+
+[node name="冈比亚" type="Sprite2D" parent="国家层" unique_id=1923320608]
+z_index = -6
+position = Vector2(-850.15, 114.24)
+scale = Vector2(0.16325359, 0.16393048)
+texture = ExtResource("79_c077")
+metadata/kind = "country"
+metadata/file = "c077.png"
+metadata/tex = "冈比亚"
+metadata/idx = 113
+
+[node name="刚果（布）" type="Sprite2D" parent="国家层" unique_id=1754594002]
+z_index = -6
+position = Vector2(-687.66, 186.12)
+scale = Vector2(0.16325372, 0.16326582)
+texture = ExtResource("80_c078")
+metadata/kind = "country"
+metadata/file = "c078.png"
+metadata/tex = "刚果布"
+metadata/idx = 52
+
+[node name="刚果（金）" type="Sprite2D" parent="国家层" unique_id=2000537975]
+z_index = -6
+position = Vector2(-601.68, 181.14)
+scale = Vector2(0.16326179, 0.16326368)
+texture = ExtResource("81_c079")
+metadata/kind = "country"
+metadata/file = "c079.png"
+metadata/tex = "刚果金"
+metadata/idx = 117
+
+[node name="乌干达" type="Sprite2D" parent="国家层" unique_id=2111256575]
+z_index = -6
+position = Vector2(-584.64, 174.96)
+scale = Vector2(0.16324323, 0.16326445)
+texture = ExtResource("82_c080")
+metadata/kind = "country"
+metadata/file = "c080.png"
+metadata/tex = "乌干达"
+metadata/idx = 118
+
+[node name="肯尼亚" type="Sprite2D" parent="国家层" unique_id=1579323281]
+z_index = -6
+position = Vector2(-553.32, 183)
+scale = Vector2(0.16327225, 0.16326633)
+texture = ExtResource("83_c081")
+metadata/kind = "country"
+metadata/file = "c081.png"
+metadata/tex = "肯尼亚"
+metadata/idx = 119
+
+[node name="塞内加尔" type="Sprite2D" parent="国家层" unique_id=1475911459]
+z_index = -14
+position = Vector2(-855.93, 96.52)
+scale = Vector2(0.16098087, 0.1621123)
+texture = ExtResource("84_c082")
+metadata/kind = "country"
+metadata/file = "c082.png"
+metadata/tex = "塞内加尔"
+metadata/idx = 112
+
+[node name="加蓬" type="Sprite2D" parent="国家层" unique_id=1888739212]
+z_index = -5
+position = Vector2(-705.86, 187.9)
+scale = Vector2(0.16325203, 0.16327645)
+texture = ExtResource("85_c083")
+metadata/kind = "country"
+metadata/file = "c083.png"
+metadata/tex = "加蓬"
+metadata/idx = 116
+
+[node name="土耳其" type="Sprite2D" parent="国家层" unique_id=533006521]
+z_index = -6
+position = Vector2(-569.34, -64.68)
+scale = Vector2(0.12794931, 0.12795699)
+texture = ExtResource("86_c084")
+metadata/kind = "country"
+metadata/file = "c084.png"
+metadata/tex = "Turko"
+metadata/idx = 84
+
+[node name="意大利" type="Sprite2D" parent="国家层" unique_id=1954587446]
+z_index = -6
+position = Vector2(-702.36, -85.5)
+scale = Vector2(0.12794495, 0.1279446)
+texture = ExtResource("87_c085")
+metadata/kind = "country"
+metadata/file = "c085.png"
+metadata/tex = "Italy"
+metadata/idx = 85
+
+[node name="西班牙" type="Sprite2D" parent="国家层" unique_id=167145373]
+z_index = -6
+position = Vector2(-789.84, -72.12)
+scale = Vector2(0.12794304, 0.12793991)
+texture = ExtResource("88_c086")
+metadata/kind = "country"
+metadata/file = "c086.png"
+metadata/tex = "Spain"
+metadata/idx = 86
+
+[node name="葡萄牙" type="Sprite2D" parent="国家层" unique_id=749425353]
+z_index = -6
+position = Vector2(-820.92, -69.48)
+scale = Vector2(0.12794872, 0.12794788)
+texture = ExtResource("89_c087")
+metadata/kind = "country"
+metadata/file = "c087.png"
+metadata/tex = "Portugal"
+metadata/idx = 87
+
+[node name="比利时" type="Sprite2D" parent="国家层" unique_id=322352151]
+z_index = -6
+position = Vector2(-749.28, -158.64)
+scale = Vector2(0.1279558, 0.12793103)
+texture = ExtResource("90_c088")
+metadata/kind = "country"
+metadata/file = "c088.png"
+metadata/tex = "Belgium"
+metadata/idx = 88
+
+[node name="尼德兰" type="Sprite2D" parent="国家层" unique_id=1745496404]
+z_index = -6
+position = Vector2(-744.96, -173.88)
+scale = Vector2(0.12796703, 0.1279703)
+texture = ExtResource("91_c089")
+metadata/kind = "country"
+metadata/file = "c089.png"
+metadata/tex = "niggerlands"
+metadata/idx = 89
+
+[node name="丹麦" type="Sprite2D" parent="国家层" unique_id=2100642976]
+z_index = -6
+position = Vector2(-707.34, -214.32)
+scale = Vector2(0.1279448, 0.12793893)
+texture = ExtResource("92_c090")
+metadata/kind = "country"
+metadata/file = "c090.png"
+metadata/tex = "Dania"
+metadata/idx = 90
+
+[node name="挪威" type="Sprite2D" parent="国家层" unique_id=743289978]
+z_index = -6
+position = Vector2(-671.34, -325.86)
+scale = Vector2(0.12795, 0.12794979)
+texture = ExtResource("93_c091")
+metadata/kind = "country"
+metadata/file = "c091.png"
+metadata/tex = "Norwegia"
+metadata/idx = 91
+
+[node name="沙特阿拉伯" type="Sprite2D" parent="国家层" unique_id=2134024721]
+z_index = -6
+position = Vector2(-512.61, 37.7)
+scale = Vector2(0.12794606, 0.12794471)
+texture = ExtResource("94_c092")
+metadata/kind = "country"
+metadata/file = "c092.png"
+metadata/tex = "Саудовская аравия серый"
+metadata/idx = 101
+
+[node name="阿联酋" type="Sprite2D" parent="国家层" unique_id=1282403841]
+z_index = -6
+position = Vector2(-460.97, 37.09)
+scale = Vector2(0.12794644, 0.1279762)
+texture = ExtResource("95_c093")
+metadata/kind = "country"
+metadata/file = "c093.png"
+metadata/tex = "ОАЭ серый"
+metadata/idx = 102
+
+[node name="卡塔尔" type="Sprite2D" parent="国家层" unique_id=2100407261]
+z_index = -6
+position = Vector2(-478.14, 29.99)
+scale = Vector2(0.128, 0.12795454)
+texture = ExtResource("96_c094")
+metadata/kind = "country"
+metadata/file = "c094.png"
+metadata/tex = "Бахрейн серый"
+metadata/idx = 103
+
+[node name="约旦" type="Sprite2D" parent="国家层" unique_id=962333085]
+z_index = -6
+position = Vector2(-559.14, -9.42)
+scale = Vector2(0.12795, 0.1279386)
+texture = ExtResource("97_c095")
+metadata/kind = "country"
+metadata/file = "c095.png"
+metadata/tex = "Палестина серый"
+metadata/idx = 104
+
+[node name="阿曼" type="Sprite2D" parent="国家层" unique_id=1058800803]
+z_index = -6
+position = Vector2(-449.82, 54.48)
+scale = Vector2(0.12793957, 0.12794118)
+texture = ExtResource("98_c096")
+metadata/kind = "country"
+metadata/file = "c096.png"
+metadata/tex = "Оман серый"
+metadata/idx = 105
+
+[node name="吉布提" type="Sprite2D" parent="国家层" unique_id=1057815873]
+z_index = -6
+position = Vector2(-527.94, 112.94)
+scale = Vector2(0.12789474, 0.128)
+texture = ExtResource("99_c097")
+metadata/kind = "country"
+metadata/file = "c097.png"
+metadata/tex = "11"
+metadata/idx = 106
+
+[node name="塞拉利昂" type="Sprite2D" parent="国家层" unique_id=2024296316]
+z_index = -6
+position = Vector2(-850.43, 114.37)
+scale = Vector2(0.16325359, 0.16326202)
+texture = ExtResource("100_c098")
+metadata/kind = "country"
+metadata/file = "c098.png"
+metadata/tex = "塞拉利昂"
+metadata/idx = 107
+
+[node name="多哥" type="Sprite2D" parent="国家层" unique_id=211081140]
+z_index = -6
+position = Vector2(-770.46, 131.92)
+scale = Vector2(0.12795454, 0.1279386)
+texture = ExtResource("101_c099")
+metadata/kind = "country"
+metadata/file = "c099.png"
+metadata/tex = "19"
+metadata/idx = 108
+
+[node name="马来西亚" type="Sprite2D" parent="国家层" unique_id=1810538686]
+z_index = -6
+position = Vector2(-135.35, 162.84)
+scale = Vector2(0.12769806, 0.12711287)
+texture = ExtResource("102_c100")
+metadata/kind = "country"
+metadata/file = "c100.png"
+metadata/tex = "maluzya"
+metadata/idx = 49
+
+[node name="文莱" type="Sprite2D" parent="国家层" unique_id=1547564849]
+z_index = -3
+position = Vector2(-107, 155.6)
+scale = Vector2(0.12847058, 0.1284)
+texture = ExtResource("103_c101")
+metadata/kind = "country"
+metadata/file = "c101.png"
+metadata/tex = "文莱"
+metadata/idx = 111
+
+[node name="津巴布韦" type="Sprite2D" parent="国家层" unique_id=1957644437]
+z_index = -5
+position = Vector2(-607.99, 296.71)
+scale = Vector2(0.16324638, 0.1632659)
+texture = ExtResource("104_c102")
+metadata/kind = "country"
+metadata/file = "c102.png"
+metadata/tex = "津巴布韦"
+metadata/idx = 127
+
+[node name="南非" type="Sprite2D" parent="国家层" unique_id=550806769]
+z_index = -5
+position = Vector2(-649.99, 331.51)
+scale = Vector2(0.16146438, 0.16326024)
+texture = ExtResource("105_c103")
+metadata/kind = "country"
+metadata/file = "c103.png"
+metadata/tex = "南非"
+metadata/idx = 131
+
+[node name="马达加斯加" type="Sprite2D" parent="国家层" unique_id=1303917337]
+z_index = 2
+position = Vector2(-512.77, 298.87)
+scale = Vector2(0.16324742, 0.16325703)
+texture = ExtResource("106_c104")
+metadata/kind = "country"
+metadata/file = "c104.png"
+metadata/tex = "马达加斯加"
+metadata/idx = 133
+
+[node name="卢旺达" type="Sprite2D" parent="国家层" unique_id=2067772509]
+z_index = 2
+position = Vector2(-600.58, 197.03)
+scale = Vector2(0.1632653, 0.16326667)
+texture = ExtResource("107_c105")
+metadata/kind = "country"
+metadata/file = "c105.png"
+metadata/tex = "卢旺达"
+metadata/idx = 120
+
+[node name="布隆迪" type="Sprite2D" parent="国家层" unique_id=566457088]
+z_index = 2
+position = Vector2(-600.92, 196.93)
+scale = Vector2(0.1632653, 0.16326667)
+texture = ExtResource("108_c106")
+metadata/kind = "country"
+metadata/file = "c106.png"
+metadata/tex = "布隆迪"
+metadata/idx = 121
+
+[node name="博茨瓦纳" type="Sprite2D" parent="国家层" unique_id=1741783415]
+z_index = 2
+position = Vector2(-635.99, 312.63)
+scale = Vector2(0.16326667, 0.16325678)
+texture = ExtResource("109_c107")
+metadata/kind = "country"
+metadata/file = "c107.png"
+metadata/tex = "博茨瓦纳"
+metadata/idx = 129
+
+[node name="马拉维" type="Sprite2D" parent="国家层" unique_id=2019823600]
+z_index = 2
+position = Vector2(-571.94, 261.07)
+scale = Vector2(0.16326007, 0.16325396)
+texture = ExtResource("110_c108")
+metadata/kind = "country"
+metadata/file = "c108.png"
+metadata/tex = "马拉维"
+metadata/idx = 125
+
+[node name="斯威士兰" type="Sprite2D" parent="国家层" unique_id=57825772]
+z_index = 2
+position = Vector2(-599.2, 336.85)
+scale = Vector2(0.16324022, 0.16322835)
+texture = ExtResource("111_c109")
+metadata/kind = "country"
+metadata/file = "c109.png"
+metadata/tex = "斯威士兰"
+metadata/idx = 130
+
+[node name="莱索托" type="Sprite2D" parent="国家层" unique_id=428539065]
+z_index = 2
+position = Vector2(-617.18, 355.73)
+scale = Vector2(0.16327272, 0.16326316)
+texture = ExtResource("112_c110")
+metadata/kind = "country"
+metadata/file = "c110.png"
+metadata/tex = "莱索托"
+metadata/idx = 132
+
+[node name="印度尼西亚" type="Sprite2D" parent="国家层" unique_id=1093384650]
+z_index = -6
+position = Vector2(-88.37, 198.3)
+scale = Vector2(0.13372558, 0.13311088)
+texture = ExtResource("113_c111")
+metadata/kind = "country"
+metadata/file = "c111.png"
+metadata/tex = "印度尼西亚"
+metadata/idx = 50
+
+[node name="巴布亚新几内亚" type="Sprite2D" parent="国家层" unique_id=1689304110]
+z_index = -6
+position = Vector2(86.16, 231.07)
+scale = Vector2(0.12769231, 0.12710486)
+texture = ExtResource("114_c112")
+metadata/kind = "country"
+metadata/file = "c112.png"
+metadata/tex = "巴布亚新几内亚"
+metadata/idx = 134
+
+[node name="澳大利亚" type="Sprite2D" parent="国家层" unique_id=146091434]
+z_index = -6
+position = Vector2(-13.55, 381.87)
+scale = Vector2(0.13867188, 0.13802667)
+texture = ExtResource("115_c113")
+metadata/kind = "country"
+metadata/file = "c113.png"
+metadata/tex = "澳大利亚"
+metadata/idx = 135
+
+[node name="新西兰" type="Sprite2D" parent="国家层" unique_id=1869092342]
+z_index = -6
+position = Vector2(163.49, 460.87)
+scale = Vector2(0.12769409, 0.1271028)
+texture = ExtResource("116_c114")
+metadata/kind = "country"
+metadata/file = "c114.png"
+metadata/tex = "新西兰"
+metadata/idx = 136
+
+[node name="美国" type="Sprite2D" parent="国家层" unique_id=907829669]
+z_index = 2
+position = Vector2(629.49, -215.07)
+scale = Vector2(0.38765943, 0.38765636)
+texture = ExtResource("117_c115")
+metadata/kind = "country"
+metadata/file = "c115.png"
+metadata/tex = "美国"
+metadata/idx = 51
+
+[node name="加拿大" type="Sprite2D" parent="国家层" unique_id=1400695976]
+z_index = 2
+position = Vector2(629.88, -212.7)
+scale = Vector2(0.38765943, 0.38765636)
+texture = ExtResource("118_c116")
+metadata/kind = "country"
+metadata/file = "c116.png"
+metadata/tex = "加拿大"
+metadata/idx = 137
+
+[node name="墨西哥" type="Sprite2D" parent="国家层" unique_id=1479728081]
+z_index = 2
+position = Vector2(629.49, -217.5)
+scale = Vector2(0.38765943, 0.38765636)
+texture = ExtResource("119_c117")
+metadata/kind = "country"
+metadata/file = "c117.png"
+metadata/tex = "墨西哥"
+metadata/idx = 140
+
+[node name="古巴" type="Sprite2D" parent="国家层" unique_id=888821179]
+z_index = 2
+position = Vector2(784.4521, 23.3703)
+scale = Vector2(0.3876695, 0.38765305)
+texture = ExtResource("120_c118")
+metadata/kind = "country"
+metadata/file = "c118.png"
+metadata/tex = "古巴"
+metadata/idx = 138
+
+[node name="危地马拉" type="Sprite2D" parent="国家层" unique_id=1736778193]
+z_index = 2
+position = Vector2(784.4521, 23.3703)
+scale = Vector2(0.3876695, 0.38765305)
+texture = ExtResource("121_c119")
+metadata/kind = "country"
+metadata/file = "c119.png"
+metadata/tex = "危地马拉"
+metadata/idx = 149
+
+[node name="萨尔瓦多" type="Sprite2D" parent="国家层" unique_id=1050474733]
+z_index = 2
+position = Vector2(784.4521, 23.3703)
+scale = Vector2(0.3876695, 0.38765305)
+texture = ExtResource("122_c120")
+metadata/kind = "country"
+metadata/file = "c120.png"
+metadata/tex = "萨尔瓦多"
+metadata/idx = 148
+
+[node name="伯利兹" type="Sprite2D" parent="国家层" unique_id=854510630]
+z_index = 2
+position = Vector2(784.4521, 23.3703)
+scale = Vector2(0.3876695, 0.38765305)
+texture = ExtResource("123_c121")
+metadata/kind = "country"
+metadata/file = "c121.png"
+metadata/tex = "伯利兹"
+metadata/idx = 142
+
+[node name="洪都拉斯" type="Sprite2D" parent="国家层" unique_id=641186043]
+z_index = 2
+position = Vector2(784.4521, 23.3703)
+scale = Vector2(0.3876695, 0.38765305)
+texture = ExtResource("124_c122")
+metadata/kind = "country"
+metadata/file = "c122.png"
+metadata/tex = "洪都拉斯"
+metadata/idx = 146
+
+[node name="尼加拉瓜" type="Sprite2D" parent="国家层" unique_id=813670063]
+z_index = 2
+position = Vector2(784.4521, 23.3703)
+scale = Vector2(0.3876695, 0.38765305)
+texture = ExtResource("125_c123")
+metadata/kind = "country"
+metadata/file = "c123.png"
+metadata/tex = "尼加拉瓜"
+metadata/idx = 147
+
+[node name="哥斯达黎加" type="Sprite2D" parent="国家层" unique_id=1841750709]
+z_index = 2
+position = Vector2(784.4521, 23.3703)
+scale = Vector2(0.3876695, 0.38765305)
+texture = ExtResource("126_c124")
+metadata/kind = "country"
+metadata/file = "c124.png"
+metadata/tex = "哥斯达黎加"
+metadata/idx = 144
+
+[node name="巴拿马" type="Sprite2D" parent="国家层" unique_id=140482270]
+z_index = 2
+position = Vector2(784.4521, 23.3703)
+scale = Vector2(0.3876695, 0.38765305)
+texture = ExtResource("127_c125")
+metadata/kind = "country"
+metadata/file = "c125.png"
+metadata/tex = "巴拿马"
+metadata/idx = 141
+
+[node name="多米尼加" type="Sprite2D" parent="国家层" unique_id=564988586]
+z_index = 2
+position = Vector2(784.4521, 23.3703)
+scale = Vector2(0.3876695, 0.38765305)
+texture = ExtResource("128_c126")
+metadata/kind = "country"
+metadata/file = "c126.png"
+metadata/tex = "多米尼加"
+metadata/idx = 143
+
+[node name="海地" type="Sprite2D" parent="国家层" unique_id=1181534295]
+z_index = 2
+position = Vector2(784.4521, 23.3703)
+scale = Vector2(0.3876695, 0.38765305)
+texture = ExtResource("129_c127")
+metadata/kind = "country"
+metadata/file = "c127.png"
+metadata/tex = "海地"
+metadata/idx = 139
+
+[node name="牙买加" type="Sprite2D" parent="国家层" unique_id=799399805]
+z_index = -6
+position = Vector2(784.4401, 29.34)
+scale = Vector2(0.48, 0.48)
+texture = ExtResource("130_c128")
+metadata/kind = "country"
+metadata/file = "c128.png"
+metadata/tex = "牙买加"
+metadata/idx = 152
+
+[node name="新喀里多尼亚" type="Sprite2D" parent="国家层" unique_id=338489664]
+z_index = -6
+position = Vector2(185.35, 325.46)
+scale = Vector2(0.12770492, 0.12712766)
+texture = ExtResource("131_c129")
+metadata/kind = "country"
+metadata/file = "c129.png"
+metadata/tex = "新喀"
+metadata/idx = 154
+
+[node name="所罗门群岛" type="Sprite2D" parent="国家层" unique_id=765395216]
+z_index = -6
+position = Vector2(153.64, 243.44)
+scale = Vector2(0.12768519, 0.1271228)
+texture = ExtResource("132_c130")
+metadata/kind = "country"
+metadata/file = "c130.png"
+metadata/tex = "所罗门群岛"
+metadata/idx = 161
+
+[node name="斐济" type="Sprite2D" parent="国家层" unique_id=231788372]
+z_index = -6
+position = Vector2(258.2, 299.98)
+scale = Vector2(0.12771429, 0.12710936)
+texture = ExtResource("133_c131")
+metadata/kind = "country"
+metadata/file = "c131.png"
+metadata/tex = "斐济"
+metadata/idx = 160
+
+[node name="瓦努阿图" type="Sprite2D" parent="国家层" unique_id=2114174605]
+z_index = -6
+position = Vector2(201.37, 298.01)
+scale = Vector2(0.1277, 0.12710021)
+texture = ExtResource("134_c132")
+metadata/kind = "country"
+metadata/file = "c132.png"
+metadata/tex = "瓦努阿图"
+metadata/idx = 159
+
+[node name="阿根廷" type="Sprite2D" parent="国家层" unique_id=525727393]
+z_index = -29
+position = Vector2(881.2577, 386.7488)
+scale = Vector2(0.29065892, 0.27892432)
+texture = ExtResource("135_c133")
+metadata/kind = "country"
+metadata/file = "c133.png"
+metadata/tex = "Aregntina"
+metadata/idx = 71
+
+[node name="玻利维亚" type="Sprite2D" parent="国家层" unique_id=1934596642]
+z_index = -29
+position = Vector2(879, 210)
+scale = Vector2(0.2937809, 0.28977862)
+texture = ExtResource("136_c134")
+metadata/kind = "country"
+metadata/file = "c134.png"
+metadata/tex = "Boliviya"
+metadata/idx = 72
+
+[node name="巴西" type="Sprite2D" parent="国家层" unique_id=108167769]
+z_index = -29
+position = Vector2(930.00006, 207)
+scale = Vector2(0.2701752, 0.26973596)
+texture = ExtResource("137_c135")
+metadata/kind = "country"
+metadata/file = "c135.png"
+metadata/tex = "Braziliya"
+metadata/idx = 73
+
+[node name="智利" type="Sprite2D" parent="国家层" unique_id=1645672629]
+z_index = -29
+position = Vector2(832.5297, 374.3396)
+scale = Vector2(0.35506243, 0.3095927)
+texture = ExtResource("138_c136")
+metadata/kind = "country"
+metadata/file = "c136.png"
+metadata/tex = "Chili"
+metadata/idx = 74
+
+[node name="哥伦比亚" type="Sprite2D" parent="国家层" unique_id=565688664]
+z_index = -29
+position = Vector2(821, 90)
+scale = Vector2(0.29412207, 0.2845388)
+texture = ExtResource("139_c137")
+metadata/kind = "country"
+metadata/file = "c137.png"
+metadata/tex = "Columbia"
+metadata/idx = 75
+
+[node name="厄瓜多尔" type="Sprite2D" parent="国家层" unique_id=1210696504]
+z_index = -29
+position = Vector2(792, 120)
+scale = Vector2(0.33320957, 0.32504836)
+texture = ExtResource("140_c138")
+metadata/kind = "country"
+metadata/file = "c138.png"
+metadata/tex = "Eqvador"
+metadata/idx = 76
+
+[node name="圭亚那" type="Sprite2D" parent="国家层" unique_id=1429402139]
+z_index = -29
+position = Vector2(907.99994, 81)
+scale = Vector2(0.34810355, 0.3178064)
+texture = ExtResource("141_c139")
+metadata/kind = "country"
+metadata/file = "c139.png"
+metadata/tex = "Gayana"
+metadata/idx = 77
+
+[node name="法国#2" type="Sprite2D" parent="国家层" unique_id=2141152370]
+z_index = -29
+position = Vector2(953, 85.00001)
+scale = Vector2(0.40049717, 0.37588373)
+texture = ExtResource("142_c140")
+metadata/kind = "country"
+metadata/file = "c140.png"
+metadata/tex = "Gviana"
+metadata/idx = 21
+
+[node name="巴拉圭" type="Sprite2D" parent="国家层" unique_id=567248566]
+z_index = -29
+position = Vector2(905, 258)
+scale = Vector2(0.30918267, 0.3057401)
+texture = ExtResource("143_c141")
+metadata/kind = "country"
+metadata/file = "c141.png"
+metadata/tex = "Paragvay"
+metadata/idx = 79
+
+[node name="秘鲁" type="Sprite2D" parent="国家层" unique_id=1832861848]
+z_index = -29
+position = Vector2(812.99994, 170)
+scale = Vector2(0.29233333, 0.28194344)
+texture = ExtResource("144_c142")
+metadata/kind = "country"
+metadata/file = "c142.png"
+metadata/tex = "Peru"
+metadata/idx = 80
+
+[node name="苏里南" type="Sprite2D" parent="国家层" unique_id=1591746399]
+z_index = -29
+position = Vector2(929, 87)
+scale = Vector2(0.3627608, 0.36073738)
+texture = ExtResource("145_c143")
+metadata/kind = "country"
+metadata/file = "c143.png"
+metadata/tex = "Surinam"
+metadata/idx = 81
+
+[node name="乌拉圭" type="Sprite2D" parent="国家层" unique_id=514056534]
+z_index = -29
+position = Vector2(924.00006, 320)
+scale = Vector2(0.33834016, 0.33210796)
+texture = ExtResource("146_c144")
+metadata/kind = "country"
+metadata/file = "c144.png"
+metadata/tex = "Urugvay"
+metadata/idx = 82
+
+[node name="委内瑞拉" type="Sprite2D" parent="国家层" unique_id=1725569018]
+z_index = -29
+position = Vector2(862.00006, 83)
+scale = Vector2(0.29024342, 0.2975515)
+texture = ExtResource("147_c145")
+metadata/kind = "country"
+metadata/file = "c145.png"
+metadata/tex = "Venesuela"
+metadata/idx = 83
+
+[node name="Folk" type="Sprite2D" parent="国家层" unique_id=1951044169]
+z_index = -29
+position = Vector2(907.3999, 489.4487)
+scale = Vector2(0.37200448, 0.44139272)
+texture = ExtResource("148_c146")
+metadata/kind = "country"
+metadata/file = "c146.png"
+metadata/tex = "Folk"
+metadata/idx = -2
+
+[node name="part_014.5" type="Sprite2D" parent="国家层" unique_id=269139194]
+visible = false
+z_index = 2
+position = Vector2(-519.0292, -18.6616)
+scale = Vector2(0.12765983, 0.12825802)
+texture = ExtResource("186_p_014_5")
+metadata/kind = "part"
+metadata/file = "p_014_5.png"
+metadata/tex = "irak-kuveit"
+metadata/country = 14
+metadata/part = 5
+metadata/orig = "014.5"
+
+[node name="part_001.4" type="Sprite2D" parent="国家层" unique_id=191735712]
+visible = false
+z_index = 2
+position = Vector2(-168.6676, -56.6136)
+scale = Vector2(0.17423491, 0.17571715)
+texture = ExtResource("187_p_001_4")
+metadata/kind = "part"
+metadata/file = "p_001_4.png"
+metadata/tex = "China - mong"
+metadata/country = 1
+metadata/part = 4
+metadata/orig = "001.4"
+
+[node name="part_008.0" type="Sprite2D" parent="国家层" unique_id=1759852156]
+visible = false
+z_index = 2
+position = Vector2(-504.2836, -31.4872)
+scale = Vector2(0.128, 0.128)
+texture = ExtResource("188_p_008_0")
+metadata/kind = "part"
+metadata/file = "p_008_0.png"
+metadata/tex = "curdistan_iran"
+metadata/country = 8
+metadata/part = 0
+metadata/orig = "008.0"
+
+[node name="part_001.6" type="Sprite2D" parent="国家层" unique_id=1276191039]
+visible = false
+z_index = 2
+position = Vector2(-168.6676, -56.6136)
+scale = Vector2(0.17423491, 0.17571715)
+texture = ExtResource("189_p_001_6")
+metadata/kind = "part"
+metadata/file = "p_001_6.png"
+metadata/tex = "China - taiwan + ind"
+metadata/country = 1
+metadata/part = 6
+metadata/orig = "001.6"
+
+[node name="part_014.3" type="Sprite2D" parent="国家层" unique_id=1391266515]
+visible = false
+z_index = 2
+position = Vector2(-530.434, -38.348)
+scale = Vector2(0.1740834, 0.16919763)
+texture = ExtResource("190_p_014_3")
+metadata/kind = "part"
+metadata/file = "p_014_3.png"
+metadata/tex = "curdistan_syr+irak"
+metadata/country = 14
+metadata/part = 3
+metadata/orig = "014.3"
+
+[node name="part_084.1" type="Sprite2D" parent="国家层" unique_id=622081583]
+visible = false
+z_index = 2
+position = Vector2(-525.442, -49.676)
+scale = Vector2(0.16934045, 0.18051594)
+texture = ExtResource("191_p_084_1")
+metadata/kind = "part"
+metadata/file = "p_084_1.png"
+metadata/tex = "kurd_large"
+metadata/country = 84
+metadata/part = 1
+metadata/orig = "084.1"
+
+[node name="part_007.2" type="Sprite2D" parent="国家层" unique_id=2112963374]
+visible = false
+z_index = 2
+position = Vector2(-179.7908, -299.1992)
+scale = Vector2(0.5021688, 0.50100553)
+texture = ExtResource("192_p_007_2")
+metadata/kind = "part"
+metadata/file = "p_007_2.png"
+metadata/tex = "SOV_IMP"
+metadata/country = 7
+metadata/part = 2
+metadata/orig = "007.2"
+
+[node name="part_001.0" type="Sprite2D" parent="国家层" unique_id=2015230572]
+visible = false
+z_index = 2
+position = Vector2(-168.5012, -56.7672)
+scale = Vector2(0.17414878, 0.1758231)
+texture = ExtResource("193_p_001_0")
+metadata/kind = "part"
+metadata/file = "p_001_0.png"
+metadata/tex = "China - full"
+metadata/country = 1
+metadata/part = 0
+metadata/orig = "001.0"
+
+[node name="part_054.0" type="Sprite2D" parent="国家层" unique_id=1725372866]
+visible = false
+z_index = 2
+position = Vector2(-827.138, 3.8472)
+scale = Vector2(0.15598078, 0.1558016)
+texture = ExtResource("194_p_054_0")
+metadata/kind = "part"
+metadata/file = "p_054_0.png"
+metadata/tex = "mor+sadr"
+metadata/country = 54
+metadata/part = 0
+metadata/orig = "054.0"
+
+[node name="part_099.0" type="Sprite2D" parent="国家层" unique_id=997795183]
+visible = false
+z_index = 2
+position = Vector2(-544.7188, 92.8904)
+scale = Vector2(0.12807555, 0.1277789)
+texture = ExtResource("195_p_099_0")
+metadata/kind = "part"
+metadata/file = "p_099_0.png"
+metadata/tex = "eritrea"
+metadata/country = 99
+metadata/part = 0
+metadata/orig = "099.0"
+
+[node name="part_013.0" type="Sprite2D" parent="国家层" unique_id=1818559744]
+visible = false
+z_index = 2
+position = Vector2(-674.818, 23.924)
+scale = Vector2(0.12782446, 0.12828337)
+texture = ExtResource("196_p_013_0")
+metadata/kind = "part"
+metadata/file = "p_013_0.png"
+metadata/tex = "Ливия + территория Чада"
+metadata/country = 13
+metadata/part = 0
+metadata/orig = "013.0"
+
+[node name="part_030.1" type="Sprite2D" parent="国家层" unique_id=584044359]
+visible = false
+z_index = -2
+position = Vector2(-669.0401, 24.9685)
+scale = Vector2(0.41818884, 0.41671687)
+texture = ExtResource("197_p_030_1")
+metadata/kind = "part"
+metadata/file = "p_030_1.png"
+metadata/tex = "OAR2"
+metadata/country = 30
+metadata/part = 1
+metadata/orig = "030.1"
+
+[node name="part_017.0" type="Sprite2D" parent="国家层" unique_id=589297698]
+visible = false
+z_index = 2
+position = Vector2(-714.5108, -165.5544)
+scale = Vector2(0.12782452, 0.12828346)
+texture = ExtResource("198_p_017_0")
+metadata/kind = "part"
+metadata/file = "p_017_0.png"
+metadata/tex = "UnitedGermany"
+metadata/country = 17
+metadata/part = 0
+metadata/orig = "017.0"
+
+[node name="part_035.0" type="Sprite2D" parent="国家层" unique_id=644684261]
+visible = false
+z_index = 2
+position = Vector2(-545.1796, -46.8856)
+scale = Vector2(0.128, 0.128)
+texture = ExtResource("199_p_035_0")
+metadata/kind = "part"
+metadata/file = "p_035_0.png"
+metadata/tex = "curdistan_syr"
+metadata/country = 35
+metadata/part = 0
+metadata/orig = "035.0"
+
+[node name="part_014.2" type="Sprite2D" parent="国家层" unique_id=1746151687]
+visible = false
+z_index = 2
+position = Vector2(-514.4532, -41.4136)
+scale = Vector2(0.1740834, 0.16919756)
+texture = ExtResource("200_p_014_2")
+metadata/kind = "part"
+metadata/file = "p_014_2.png"
+metadata/tex = "curdistan_irak+iran"
+metadata/country = 14
+metadata/part = 2
+metadata/orig = "014.2"
+
+[node name="part_045.0" type="Sprite2D" parent="国家层" unique_id=700339800]
+visible = false
+z_index = 2
+position = Vector2(-620.5716, -63.0776)
+scale = Vector2(0.12837116, 0.12796058)
+texture = ExtResource("201_p_045_0")
+metadata/kind = "part"
+metadata/file = "p_045_0.png"
+metadata/tex = "grece+kipr"
+metadata/country = 45
+metadata/part = 0
+metadata/orig = "045.0"
+
+[node name="part_014.0" type="Sprite2D" parent="国家层" unique_id=820171292]
+visible = false
+z_index = 2
+position = Vector2(-517.186, -41.4072)
+scale = Vector2(0.128, 0.128)
+texture = ExtResource("202_p_014_0")
+metadata/kind = "part"
+metadata/file = "p_014_0.png"
+metadata/tex = "curdistan_irak"
+metadata/country = 14
+metadata/part = 0
+metadata/orig = "014.0"
+
+[node name="part_100.0" type="Sprite2D" parent="国家层" unique_id=1736949228]
+visible = false
+z_index = 2
+position = Vector2(-553.8964, 102.4776)
+scale = Vector2(0.12807547, 0.12777917)
+texture = ExtResource("203_p_100_0")
+metadata/kind = "part"
+metadata/file = "p_100_0.png"
+metadata/tex = "tigray"
+metadata/country = 100
+metadata/part = 0
+metadata/orig = "100.0"
+
+[node name="part_025.0" type="Sprite2D" parent="国家层" unique_id=1635040471]
+visible = false
+z_index = 2
+position = Vector2(-492.93, 90.484)
+scale = Vector2(0.12782446, 0.12828355)
+texture = ExtResource("204_p_025_0")
+metadata/kind = "part"
+metadata/file = "p_025_0.png"
+metadata/tex = "United Yemen"
+metadata/country = 25
+metadata/part = 0
+metadata/orig = "025.0"
+
+[node name="part_021.0" type="Sprite2D" parent="国家层" unique_id=26758205]
+visible = false
+z_index = 2
+position = Vector2(-748.61, -103.7432)
+scale = Vector2(0.12807561, 0.1277789)
+texture = ExtResource("205_p_021_0")
+metadata/kind = "part"
+metadata/file = "p_021_0.png"
+metadata/tex = "Единая Европа"
+metadata/country = 21
+metadata/part = 0
+metadata/orig = "021.0"
+
+[node name="part_084.3" type="Sprite2D" parent="国家层" unique_id=713263402]
+visible = false
+z_index = 2
+position = Vector2(-547.5476, -34.38)
+scale = Vector2(0.12807548, 0.12777878)
+texture = ExtResource("206_p_084_3")
+metadata/kind = "part"
+metadata/file = "p_084_3.png"
+metadata/tex = "Siria_khatai"
+metadata/country = 84
+metadata/part = 3
+metadata/orig = "084.3"
+
+[node name="part_086.0" type="Sprite2D" parent="国家层" unique_id=1178293921]
+visible = false
+z_index = 2
+position = Vector2(-786.9972, -92.2616)
+scale = Vector2(0.1276597, 0.12825789)
+texture = ExtResource("207_p_086_0")
+metadata/kind = "part"
+metadata/file = "p_086_0.png"
+metadata/tex = "country_basks"
+metadata/country = 86
+metadata/part = 0
+metadata/orig = "086.0"
+
+[node name="part_046.0" type="Sprite2D" parent="国家层" unique_id=1239298171]
+visible = false
+z_index = 2
+position = Vector2(-32.6317, -58.6514)
+scale = Vector2(0.12837128, 0.12796064)
+texture = ExtResource("208_p_046_0")
+metadata/kind = "part"
+metadata/file = "p_046_0.png"
+metadata/tex = "United Korea"
+metadata/country = 46
+metadata/part = 0
+metadata/orig = "046.0"
+
+[node name="part_030.0" type="Sprite2D" parent="国家层" unique_id=1700251430]
+visible = false
+z_index = -2
+position = Vector2(-669.794, 24.0085)
+scale = Vector2(0.4163072, 0.41630715)
+texture = ExtResource("209_p_030_0")
+metadata/kind = "part"
+metadata/file = "p_030_0.png"
+metadata/tex = "OAR1"
+metadata/country = 30
+metadata/part = 0
+metadata/orig = "030.0"
+
+[node name="part_001.9" type="Sprite2D" parent="国家层" unique_id=2045135909]
+visible = false
+z_index = 1
+position = Vector2(-282.626, -89.868)
+scale = Vector2(0.12782449, 0.12828344)
+texture = ExtResource("210_p_001_9")
+metadata/kind = "part"
+metadata/file = "p_001_9.png"
+metadata/tex = "urz"
+metadata/country = 1
+metadata/part = 9
+metadata/orig = "001.9"
+
+[node name="part_001.10" type="Sprite2D" parent="国家层" unique_id=1961718879]
+visible = false
+z_index = 2
+position = Vector2(-168.6676, -56.6136)
+scale = Vector2(0.17423491, 0.17571707)
+texture = ExtResource("211_p_001_10")
+metadata/kind = "part"
+metadata/file = "p_001_10.png"
+metadata/tex = "China"
+metadata/country = 1
+metadata/part = 10
+metadata/orig = "001.10"
+
+[node name="part_001.3" type="Sprite2D" parent="国家层" unique_id=258839904]
+visible = false
+z_index = 2
+position = Vector2(-168.6676, -56.6136)
+scale = Vector2(0.17423491, 0.17571715)
+texture = ExtResource("212_p_001_3")
+metadata/kind = "part"
+metadata/file = "p_001_3.png"
+metadata/tex = "China - mong + taiwan"
+metadata/country = 1
+metadata/part = 3
+metadata/orig = "001.3"
+
+[node name="part_003.0" type="Sprite2D" parent="国家层" unique_id=1398344833]
+visible = false
+z_index = 2
+position = Vector2(-660.8276, -143.116)
+scale = Vector2(0.12782444, 0.12828358)
+texture = ExtResource("213_p_003_0")
+metadata/kind = "part"
+metadata/file = "p_003_0.png"
+metadata/tex = "Slovak"
+metadata/country = 3
+metadata/part = 0
+metadata/orig = "003.0"
+
+[node name="part_042.0" type="Sprite2D" parent="国家层" unique_id=83686391]
+visible = false
+z_index = 2
+position = Vector2(-530.1831, 132.9582)
+scale = Vector2(0.16367355, 0.16367362)
+texture = ExtResource("214_p_042_0")
+metadata/kind = "part"
+metadata/file = "p_042_0.png"
+metadata/tex = "Somali_OGADEN"
+metadata/country = 42
+metadata/part = 0
+metadata/orig = "042.0"
+
+[node name="part_001.8" type="Sprite2D" parent="国家层" unique_id=421476791]
+visible = false
+z_index = 1
+position = Vector2(-258.5492, -15.756)
+scale = Vector2(0.12833427, 0.12866203)
+texture = ExtResource("215_p_001_8")
+metadata/kind = "part"
+metadata/file = "p_001_8.png"
+metadata/tex = "tiba_big"
+metadata/country = 1
+metadata/part = 8
+metadata/orig = "001.8"
+
+[node name="part_014.4" type="Sprite2D" parent="国家层" unique_id=792564701]
+visible = false
+z_index = 2
+position = Vector2(-514.2983, -22.5963)
+scale = Vector2(0.12934135, 0.12929232)
+texture = ExtResource("216_p_014_4")
+metadata/kind = "part"
+metadata/file = "p_014_4.png"
+metadata/tex = "Irak-Huzestan"
+metadata/country = 14
+metadata/part = 4
+metadata/orig = "014.4"
+
+[node name="part_084.4" type="Sprite2D" parent="国家层" unique_id=114087841]
+visible = false
+z_index = 2
+position = Vector2(-570.1652, -61.0296)
+scale = Vector2(0.12837122, 0.12796065)
+texture = ExtResource("217_p_084_4")
+metadata/kind = "part"
+metadata/file = "p_084_4.png"
+metadata/tex = "Turkey+kipr"
+metadata/country = 84
+metadata/part = 4
+metadata/orig = "084.4"
+
+[node name="part_020.0" type="Sprite2D" parent="国家层" unique_id=587426716]
+visible = false
+z_index = 2
+position = Vector2(-656.2068, -83.3656)
+scale = Vector2(0.12782449, 0.12828326)
+texture = ExtResource("218_p_020_0")
+metadata/kind = "part"
+metadata/file = "p_020_0.png"
+metadata/tex = "Grand_albania"
+metadata/country = 20
+metadata/part = 0
+metadata/orig = "020.0"
+
+[node name="part_020.1" type="Sprite2D" parent="国家层" unique_id=959695613]
+visible = false
+z_index = 2
+position = Vector2(-656.3476, -81.4712)
+scale = Vector2(0.12782449, 0.12828328)
+texture = ExtResource("219_p_020_1")
+metadata/kind = "part"
+metadata/file = "p_020_1.png"
+metadata/tex = "Grand_albania2"
+metadata/country = 20
+metadata/part = 1
+metadata/orig = "020.1"
+
+[node name="part_001.7" type="Sprite2D" parent="国家层" unique_id=2068327904]
+visible = false
+z_index = 1
+position = Vector2(-257.794, -15.2952)
+scale = Vector2(0.12782446, 0.12943801)
+texture = ExtResource("220_p_001_7")
+metadata/kind = "part"
+metadata/file = "p_001_7.png"
+metadata/tex = "tiba"
+metadata/country = 1
+metadata/part = 7
+metadata/orig = "001.7"
+
+[node name="part_001.2" type="Sprite2D" parent="国家层" unique_id=1719076103]
+visible = false
+z_index = 2
+position = Vector2(-168.6676, -56.6136)
+scale = Vector2(0.17423491, 0.17571715)
+texture = ExtResource("221_p_001_2")
+metadata/kind = "part"
+metadata/file = "p_001_2.png"
+metadata/tex = "China - mong + ind"
+metadata/country = 1
+metadata/part = 2
+metadata/orig = "001.2"
+
+[node name="part_007.1" type="Sprite2D" parent="国家层" unique_id=1031409392]
+visible = false
+z_index = 2
+position = Vector2(-179.7908, -299.1992)
+scale = Vector2(0.5021688, 0.50100553)
+texture = ExtResource("222_p_007_1")
+metadata/kind = "part"
+metadata/file = "p_007_1.png"
+metadata/tex = "SOV_MONG+BOL+POL"
+metadata/country = 7
+metadata/part = 1
+metadata/orig = "007.1"
+
+[node name="part_001.5" type="Sprite2D" parent="国家层" unique_id=1677216054]
+visible = false
+z_index = 2
+position = Vector2(-168.6676, -56.6136)
+scale = Vector2(0.17423491, 0.17571715)
+texture = ExtResource("223_p_001_5")
+metadata/kind = "part"
+metadata/file = "p_001_5.png"
+metadata/tex = "China - taiwan"
+metadata/country = 1
+metadata/part = 5
+metadata/orig = "001.5"
+
+[node name="part_010.0" type="Sprite2D" parent="国家层" unique_id=730264441]
+visible = false
+z_index = 2
+position = Vector2(-32.6317, -58.6514)
+scale = Vector2(0.12837128, 0.12796064)
+texture = ExtResource("224_p_010_0")
+metadata/kind = "part"
+metadata/file = "p_010_0.png"
+metadata/tex = "United Korea"
+metadata/country = 10
+metadata/part = 0
+metadata/orig = "010.0"
+
+[node name="part_024.0" type="Sprite2D" parent="国家层" unique_id=266814608]
+visible = false
+z_index = 2
+position = Vector2(-492.93, 90.484)
+scale = Vector2(0.12782446, 0.12828355)
+texture = ExtResource("225_p_024_0")
+metadata/kind = "part"
+metadata/file = "p_024_0.png"
+metadata/tex = "United Yemen"
+metadata/country = 24
+metadata/part = 0
+metadata/orig = "024.0"
+
+[node name="part_086.1" type="Sprite2D" parent="国家层" unique_id=856758596]
+visible = false
+z_index = 2
+position = Vector2(-765.1604, -84.9272)
+scale = Vector2(0.12765959, 0.128258)
+texture = ExtResource("226_p_086_1")
+metadata/kind = "part"
+metadata/file = "p_086_1.png"
+metadata/tex = "katalonia"
+metadata/country = 86
+metadata/part = 1
+metadata/orig = "086.1"
+
+[node name="part_007.0" type="Sprite2D" parent="国家层" unique_id=1395470304]
+visible = false
+z_index = 2
+position = Vector2(-163.0356, -299.6728)
+scale = Vector2(0.48595482, 0.48482916)
+texture = ExtResource("227_p_007_0")
+metadata/kind = "part"
+metadata/file = "p_007_0.png"
+metadata/tex = "SOV_PROLIVI"
+metadata/country = 7
+metadata/part = 0
+metadata/orig = "007.0"
+
+[node name="part_016.0" type="Sprite2D" parent="国家层" unique_id=1754185156]
+visible = false
+z_index = 2
+position = Vector2(-714.5108, -165.5544)
+scale = Vector2(0.12782452, 0.12828346)
+texture = ExtResource("228_p_016_0")
+metadata/kind = "part"
+metadata/file = "p_016_0.png"
+metadata/tex = "UnitedGermany"
+metadata/country = 16
+metadata/part = 0
+metadata/orig = "016.0"
+
+[node name="part_094.0" type="Sprite2D" parent="国家层" unique_id=1906989301]
+visible = false
+z_index = 2
+position = Vector2(-580.418, -37.58)
+scale = Vector2(0.12837143, 0.12796094)
+texture = ExtResource("229_p_094_0")
+metadata/kind = "part"
+metadata/file = "p_094_0.png"
+metadata/tex = "united cipr"
+metadata/country = 94
+metadata/part = 0
+metadata/orig = "094.0"
+
+[node name="part_014.1" type="Sprite2D" parent="国家层" unique_id=922806559]
+visible = false
+z_index = 2
+position = Vector2(-524.9402, -41.3944)
+scale = Vector2(0.17437118, 0.17402439)
+texture = ExtResource("230_p_014_1")
+metadata/kind = "part"
+metadata/file = "p_014_1.png"
+metadata/tex = "curistan_iran+irak+syr"
+metadata/country = 14
+metadata/part = 1
+metadata/orig = "014.1"
+
+[node name="part_001.1" type="Sprite2D" parent="国家层" unique_id=2013624868]
+visible = false
+z_index = 2
+position = Vector2(-168.6676, -56.6136)
+scale = Vector2(0.17423491, 0.17571715)
+texture = ExtResource("231_p_001_1")
+metadata/kind = "part"
+metadata/file = "p_001_1.png"
+metadata/tex = "China - ind"
+metadata/country = 1
+metadata/part = 1
+metadata/orig = "001.1"
+
+[node name="part_084.0" type="Sprite2D" parent="国家层" unique_id=393310119]
+visible = false
+z_index = 2
+position = Vector2(-533.89, -62.86)
+scale = Vector2(0.128, 0.128)
+texture = ExtResource("232_p_084_0")
+metadata/kind = "part"
+metadata/file = "p_084_0.png"
+metadata/tex = "curdistan_tur"
+metadata/country = 84
+metadata/part = 0
+metadata/orig = "084.0"
+
+[node name="part_059.0" type="Sprite2D" parent="国家层" unique_id=600159155]
+visible = false
+z_index = 2
+position = Vector2(-835.9713, 49.1285)
+scale = Vector2(0.12777285, 0.12890656)
+texture = ExtResource("233_p_059_0")
+metadata/kind = "part"
+metadata/file = "p_059_0.png"
+metadata/tex = "mad+sar"
+metadata/country = 59
+metadata/part = 0
+metadata/orig = "059.0"
+
+[node name="part_011.0" type="Sprite2D" parent="国家层" unique_id=1284161989]
+visible = false
+position = Vector2(-165.1604, 87.6936)
+scale = Vector2(0.176, 0.176)
+texture = ExtResource("234_p_011_0")
+metadata/kind = "part"
+metadata/file = "p_011_0.png"
+metadata/tex = "印支联邦"
+metadata/country = 11
+metadata/part = 0
+metadata/orig = "011.0"
+
+[node name="part_001.11" type="Sprite2D" parent="国家层" unique_id=959254438]
+visible = false
+z_index = -1
+position = Vector2(-120.066, -66.99601)
+scale = Vector2(0.24128003, 0.2432)
+texture = ExtResource("235_p_001_11")
+metadata/kind = "part"
+metadata/file = "p_001_11.png"
+metadata/tex = "great-china"
+metadata/country = 1
+metadata/part = 11
+metadata/orig = "001.11"
+
+[node name="part_030.2" type="Sprite2D" parent="国家层" unique_id=816556494]
+visible = false
+position = Vector2(-658.05, 20.084)
+scale = Vector2(0.41728, 0.41728005)
+texture = ExtResource("236_p_030_2")
+metadata/kind = "part"
+metadata/file = "p_030_2.png"
+metadata/tex = "Great-uar"
+metadata/country = 30
+metadata/part = 2
+metadata/orig = "030.2"
+
+[node name="part_027.0" type="Sprite2D" parent="国家层" unique_id=383487548]
+visible = false
+z_index = 2
+position = Vector2(-668.674, -127.628)
+scale = Vector2(0.134144, 0.13311996)
+texture = ExtResource("237_p_027_0")
+metadata/kind = "part"
+metadata/file = "p_027_0.png"
+metadata/tex = "奥匈"
+metadata/country = 27
+metadata/part = 0
+metadata/orig = "027.0"
+
+[node name="part_049.0" type="Sprite2D" parent="国家层" unique_id=1371329782]
+visible = false
+z_index = -3
+position = Vector2(-136.2017, 161.4882)
+scale = Vector2(0.128, 0.128)
+texture = ExtResource("238_p_049_0")
+metadata/kind = "part"
+metadata/file = "p_049_0.png"
+metadata/tex = "合并后马来西亚"
+metadata/country = 49
+metadata/part = 0
+metadata/orig = "049.0"
+
+[node name="part_050.0" type="Sprite2D" parent="国家层" unique_id=481685183]
+visible = false
+z_index = -6
+position = Vector2(-48.1428, 241.684)
+scale = Vector2(0.12044784, 0.12044766)
+texture = ExtResource("239_p_050_0")
+metadata/kind = "part"
+metadata/file = "p_050_0.png"
+metadata/tex = "东帝汶"
+metadata/country = 50
+metadata/part = 0
+metadata/orig = "050.0"
+
+[node name="part_134.0" type="Sprite2D" parent="国家层" unique_id=904817649]
+visible = false
+z_index = -6
+position = Vector2(54.1407, 221.3205)
+scale = Vector2(0.12769277, 0.12768003)
+texture = ExtResource("241_p_134_0")
+metadata/kind = "part"
+metadata/file = "p_134_0.png"
+metadata/tex = "合并巴布亚"
+metadata/country = 134
+metadata/part = 0
+metadata/orig = "134.0"
+
+[node name="part_140.0" type="Sprite2D" parent="国家层" unique_id=1512025575]
+visible = false
+z_index = 2
+position = Vector2(693.2102, -36.2859)
+scale = Vector2(0.38766086, 0.38766098)
+texture = ExtResource("242_p_140_0")
+metadata/kind = "part"
+metadata/file = "p_140_0.png"
+metadata/tex = "南墨西哥"
+metadata/country = 140
+metadata/part = 0
+metadata/orig = "140.0"
+
+[node name="part_084.5" type="Sprite2D" parent="国家层" unique_id=1802079061]
+visible = false
+z_index = -6
+position = Vector2(-516.249, -25.932)
+scale = Vector2(0.19455996, 0.19455998)
+texture = ExtResource("244_p_084_5")
+metadata/kind = "part"
+metadata/file = "p_084_5.png"
+metadata/tex = "大土耳其"
+metadata/country = 84
+metadata/part = 5
+metadata/orig = "084.5"
+
+[node name="part_053.0" type="Sprite2D" parent="国家层" unique_id=1584767003]
+visible = false
+position = Vector2(-602.8334, 108.6101)
+scale = Vector2(0.17024004, 0.17024003)
+texture = ExtResource("245_p_053_0")
+metadata/kind = "part"
+metadata/file = "p_053_0.png"
+metadata/tex = "南苏丹"
+metadata/country = 53
+metadata/part = 0
+metadata/orig = "053.0"
+
+[node name="part_053.1" type="Sprite2D" parent="国家层" unique_id=91042433]
+visible = false
+position = Vector2(-599.4606, 102.8091)
+scale = Vector2(0.12760316, 0.12760326)
+texture = ExtResource("246_p_053_1")
+metadata/kind = "part"
+metadata/file = "p_053_1.png"
+metadata/tex = "达尔富尔"
+metadata/country = 53
+metadata/part = 1
+metadata/orig = "053.1"
+
+[node name="part_041.0" type="Sprite2D" parent="国家层" unique_id=739127680]
+visible = false
+z_index = -6
+position = Vector2(-530.0462, 132.8494)
+scale = Vector2(0.16303366, 0.16303359)
+texture = ExtResource("248_p_041_0")
+metadata/kind = "part"
+metadata/file = "p_041_0.png"
+metadata/tex = "合并索马里埃塞"
+metadata/country = 41
+metadata/part = 0
+metadata/orig = "041.0"
+
+[node name="part_041.1" type="Sprite2D" parent="国家层" unique_id=517873109]
+visible = false
+z_index = -6
+position = Vector2(-530.0462, 132.8494)
+scale = Vector2(0.16303366, 0.16303359)
+texture = ExtResource("249_p_041_1")
+metadata/kind = "part"
+metadata/file = "p_041_1.png"
+metadata/tex = "非洲之角"
+metadata/country = 41
+metadata/part = 1
+metadata/orig = "041.1"
+
+[node name="part_042.2" type="Sprite2D" parent="国家层" unique_id=832553663]
+visible = false
+z_index = 2
+position = Vector2(-513.1591, 152.9915)
+scale = Vector2(0.16127998, 0.16192003)
+texture = ExtResource("251_p_042_2")
+metadata/kind = "part"
+metadata/file = "p_042_2.png"
+metadata/tex = "大索马里其一"
+metadata/country = 42
+metadata/part = 2
+metadata/orig = "042.2"
+
+[node name="part_042.1" type="Sprite2D" parent="国家层" unique_id=1352291582]
+visible = false
+z_index = 8
+position = Vector2(-515.5732, 152.9915)
+scale = Vector2(0.16192003, 0.16191997)
+texture = ExtResource("252_p_042_1")
+metadata/kind = "part"
+metadata/file = "p_042_1.png"
+metadata/tex = "仅西南角索马里"
+metadata/country = 42
+metadata/part = 1
+metadata/orig = "042.1"
+
+[node name="part_153.0" type="Sprite2D" parent="国家层" unique_id=1872170153]
+visible = false
+z_index = -4
+position = Vector2(-649.9348, 330.8859)
+scale = Vector2(0.16098562, 0.16098566)
+texture = ExtResource("262_p_153_0")
+metadata/kind = "part"
+metadata/file = "p_153_0.png"
+metadata/tex = "纳米比亚"
+metadata/country = 153
+metadata/part = 0
+metadata/orig = "153.0"
+
+[node name="part_157.0" type="Sprite2D" parent="国家层" unique_id=1286135618]
+visible = false
+z_index = 2
+position = Vector2(-517.186, -41.4072)
+scale = Vector2(0.128, 0.128)
+texture = ExtResource("263_p_157_0")
+metadata/kind = "part"
+metadata/file = "p_157_0.png"
+metadata/tex = "curdistan_irak"
+metadata/country = 157
+metadata/part = 0
+metadata/orig = "157.0"
+
+[node name="part_157.1" type="Sprite2D" parent="国家层" unique_id=1229326195]
+visible = false
+z_index = 2
+position = Vector2(-545.1796, -46.8856)
+scale = Vector2(0.128, 0.128)
+texture = ExtResource("264_p_157_1")
+metadata/kind = "part"
+metadata/file = "p_157_1.png"
+metadata/tex = "curdistan_syr"
+metadata/country = 157
+metadata/part = 1
+metadata/orig = "157.1"
+
+[node name="part_157.2" type="Sprite2D" parent="国家层" unique_id=700308616]
+visible = false
+z_index = 2
+position = Vector2(-530.434, -38.348)
+scale = Vector2(0.1740834, 0.16919763)
+texture = ExtResource("265_p_157_2")
+metadata/kind = "part"
+metadata/file = "p_157_2.png"
+metadata/tex = "curdistan_syr+irak"
+metadata/country = 157
+metadata/part = 2
+metadata/orig = "157.2"
+
+[node name="part_163.0" type="Sprite2D" parent="国家层" unique_id=1061912389]
+visible = false
+z_index = -6
+position = Vector2(-644.3719, 203.325)
+scale = Vector2(0.43458566, 0.4345855)
+texture = ExtResource("266_p_163_0")
+metadata/kind = "part"
+metadata/file = "p_163_0.png"
+metadata/tex = "加丹加"
+metadata/country = 163
+metadata/part = 0
+metadata/orig = "163.0"
+
+[node name="part_013.1" type="Sprite2D" parent="国家层" unique_id=2136689543]
+visible = false
+z_index = -6
+position = Vector2(-645.5431, 49.1682)
+scale = Vector2(0.25836805, 0.25951996)
+texture = ExtResource("271_p_013_1")
+metadata/kind = "part"
+metadata/file = "p_013_1.png"
+metadata/tex = "利乍联邦"
+metadata/country = 13
+metadata/part = 1
+metadata/orig = "013.1"
+
+[node name="part_149.0" type="Sprite2D" parent="国家层" unique_id=997257694]
+visible = false
+z_index = -6
+position = Vector2(785.1334, 0.861)
+scale = Vector2(0.387661, 0.3876607)
+texture = ExtResource("272_p_149_0")
+metadata/kind = "part"
+metadata/file = "p_149_0.png"
+metadata/tex = "危地马拉完整"
+metadata/country = 149
+metadata/part = 0
+metadata/orig = "149.0"
+
+[node name="part_112.1" type="Sprite2D" parent="国家层" unique_id=1962606995]
+visible = false
+z_index = -6
+position = Vector2(-855.9431, 95.9547)
+scale = Vector2(0.16098565, 0.16098556)
+texture = ExtResource("277_p_112_1")
+metadata/kind = "part"
+metadata/file = "p_112_1.png"
+metadata/tex = "塞内加尔"
+metadata/country = 112
+metadata/part = 1
+metadata/orig = "112.1"
+
+[node name="part_164.0" type="Sprite2D" parent="国家层" unique_id=751155382]
+visible = false
+z_index = -6
+position = Vector2(-724.3847, 127.9765)
+scale = Vector2(0.128, 0.128)
+texture = ExtResource("281_p_164_0")
+metadata/kind = "part"
+metadata/file = "p_164_0.png"
+metadata/tex = "尼日利亚北方"
+metadata/country = 164
+metadata/part = 0
+metadata/orig = "164.0"
+
+[node name="part_165.0" type="Sprite2D" parent="国家层" unique_id=1650171795]
+visible = false
+z_index = -6
+position = Vector2(-724.3847, 127.9765)
+scale = Vector2(0.128, 0.128)
+texture = ExtResource("282_p_165_0")
+metadata/kind = "part"
+metadata/file = "p_165_0.png"
+metadata/tex = "尼日利亚西南方"
+metadata/country = 165
+metadata/part = 0
+metadata/orig = "165.0"
+
+[node name="war_ogon (3)" type="Sprite2D" parent="国家层" unique_id=637969801]
+visible = false
+z_index = 10
+position = Vector2(-495.298, -8.628)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 3
+metadata/special = false
+metadata/orig = "ogon (3)"
+
+[node name="war_ogon (19)" type="Sprite2D" parent="国家层" unique_id=596154689]
+visible = false
+z_index = 10
+position = Vector2(-42.05, -75.956)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 16
+metadata/special = false
+metadata/orig = "ogon (19)"
+
+[node name="war_ogon (27)" type="Sprite2D" parent="国家层" unique_id=1433679838]
+visible = false
+z_index = 10
+position = Vector2(-546.754, 130.252)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 24
+metadata/special = false
+metadata/orig = "ogon (27)"
+
+[node name="war_ogon (21)" type="Sprite2D" parent="国家层" unique_id=363617145]
+visible = false
+z_index = 10
+position = Vector2(-653.762, -89.396)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 18
+metadata/special = false
+metadata/orig = "ogon (21)"
+
+[node name="war_ogon (8)" type="Sprite2D" parent="国家层" unique_id=905441250]
+visible = false
+z_index = 10
+position = Vector2(-152.514, 49.484)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = -3
+metadata/special = true
+metadata/orig = "ogon (8)"
+
+[node name="war_ogon (32)" type="Sprite2D" parent="国家层" unique_id=402238596]
+visible = false
+z_index = 10
+position = Vector2(-523.586, -24.884)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 29
+metadata/special = false
+metadata/orig = "ogon (32)"
+
+[node name="war_ogon (30)" type="Sprite2D" parent="国家层" unique_id=1281186620]
+visible = false
+z_index = 10
+position = Vector2(-178.114, 66.508)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 27
+metadata/special = false
+metadata/orig = "ogon (30)"
+
+[node name="war_ogon (14)" type="Sprite2D" parent="国家层" unique_id=2079101367]
+visible = false
+z_index = 10
+position = Vector2(-521.666, -46.9)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 11
+metadata/special = false
+metadata/orig = "ogon (14)"
+
+[node name="war_ogon (25)" type="Sprite2D" parent="国家层" unique_id=1118003633]
+visible = false
+z_index = 10
+position = Vector2(-25.922, -151.86)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 22
+metadata/special = false
+metadata/orig = "ogon (25)"
+
+[node name="war_ogon (35)" type="Sprite2D" parent="国家层" unique_id=413545650]
+visible = false
+z_index = 10
+position = Vector2(-773.954, -79.412)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 32
+metadata/special = false
+metadata/orig = "ogon (35)"
+
+[node name="war_ogon (15)" type="Sprite2D" parent="国家层" unique_id=1247024745]
+visible = false
+z_index = 10
+position = Vector2(-516.162, -64.692)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 12
+metadata/special = false
+metadata/orig = "ogon (15)"
+
+[node name="war_ogon (26)" type="Sprite2D" parent="国家层" unique_id=1033519410]
+visible = false
+z_index = 10
+position = Vector2(-700.738, -93.876)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 23
+metadata/special = false
+metadata/orig = "ogon (26)"
+
+[node name="war_ogon (22)" type="Sprite2D" parent="国家层" unique_id=1347132015]
+visible = false
+z_index = 10
+position = Vector2(-656.578, -68.532)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 19
+metadata/special = false
+metadata/orig = "ogon (22)"
+
+[node name="war_ogon (29)" type="Sprite2D" parent="国家层" unique_id=164101475]
+visible = false
+z_index = 10
+position = Vector2(-534.466, 110.284)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 26
+metadata/special = false
+metadata/orig = "ogon (29)"
+
+[node name="war_ogon (13)" type="Sprite2D" parent="国家层" unique_id=52187558]
+visible = false
+z_index = 10
+position = Vector2(-549.57, -45.492)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 10
+metadata/special = false
+metadata/orig = "ogon (13)"
+
+[node name="war_ogon (0)" type="Sprite2D" parent="国家层" unique_id=220385482]
+visible = false
+z_index = 10
+position = Vector2(-35.0099, -57.524)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 0
+metadata/special = false
+metadata/orig = "ogon (0)"
+
+[node name="war_ogon (31)" type="Sprite2D" parent="国家层" unique_id=895595895]
+visible = false
+z_index = 10
+position = Vector2(-504.514, -2.74)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 28
+metadata/special = false
+metadata/orig = "ogon (31)"
+
+[node name="war_ogon (23)" type="Sprite2D" parent="国家层" unique_id=153000239]
+visible = false
+z_index = 10
+position = Vector2(-660.034, 53.964)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 20
+metadata/special = false
+metadata/orig = "ogon (23)"
+
+[node name="war_ogon (7)" type="Sprite2D" parent="国家层" unique_id=1431250346]
+visible = false
+z_index = 10
+position = Vector2(-232.2579, 15.692)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = -2
+metadata/special = true
+metadata/orig = "ogon (7)"
+
+[node name="war_ogon (28)" type="Sprite2D" parent="国家层" unique_id=1490591304]
+visible = false
+z_index = 10
+position = Vector2(-558.274, 110.54)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 25
+metadata/special = false
+metadata/orig = "ogon (28)"
+
+[node name="war_ogon (6)" type="Sprite2D" parent="国家层" unique_id=1222245853]
+visible = false
+z_index = 10
+position = Vector2(-468.546, -13.748)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = -1
+metadata/special = true
+metadata/orig = "ogon (6)"
+
+[node name="war_ogon (16)" type="Sprite2D" parent="国家层" unique_id=1302632398]
+visible = false
+z_index = 10
+position = Vector2(34.2381, -48.052)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 36
+metadata/special = false
+metadata/orig = "ogon (16)"
+
+[node name="war_ogon (11)" type="Sprite2D" parent="国家层" unique_id=994010155]
+visible = false
+z_index = 10
+position = Vector2(-570.05, -64.436)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 8
+metadata/special = false
+metadata/orig = "ogon (11)"
+
+[node name="war_ogon (9)" type="Sprite2D" parent="国家层" unique_id=885613413]
+visible = false
+z_index = 10
+position = Vector2(-52.674, 106.316)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = -4
+metadata/special = true
+metadata/orig = "ogon (9)"
+
+[node name="war_ogon (5)" type="Sprite2D" parent="国家层" unique_id=75325175]
+visible = false
+z_index = 10
+position = Vector2(-393.794, -28.724)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 5
+metadata/special = false
+metadata/orig = "ogon (5)"
+
+[node name="war_ogon (17)" type="Sprite2D" parent="国家层" unique_id=1097958440]
+visible = false
+z_index = 10
+position = Vector2(-580.0852, -45.3896)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 14
+metadata/special = false
+metadata/orig = "ogon (17)"
+
+[node name="war_ogon (20)" type="Sprite2D" parent="国家层" unique_id=492041680]
+visible = false
+z_index = 10
+position = Vector2(-642.498, -143.156)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 17
+metadata/special = false
+metadata/orig = "ogon (20)"
+
+[node name="war_ogon (34)" type="Sprite2D" parent="国家层" unique_id=932806074]
+visible = false
+z_index = 10
+position = Vector2(-794.562, -84.532)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 31
+metadata/special = false
+metadata/orig = "ogon (34)"
+
+[node name="war_ogon (18)" type="Sprite2D" parent="国家层" unique_id=410865803]
+visible = false
+z_index = 10
+position = Vector2(-511.81, 144.332)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 15
+metadata/special = false
+metadata/orig = "ogon (18)"
+
+[node name="war_ogon (4)" type="Sprite2D" parent="国家层" unique_id=1130768383]
+visible = false
+z_index = 10
+position = Vector2(-567.874, -19.508)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 4
+metadata/special = false
+metadata/orig = "ogon (4)"
+
+[node name="war_ogon (10)" type="Sprite2D" parent="国家层" unique_id=472954568]
+visible = false
+z_index = 10
+position = Vector2(-316.738, 39.372)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 7
+metadata/special = false
+metadata/orig = "ogon (10)"
+
+[node name="war_ogon (12)" type="Sprite2D" parent="国家层" unique_id=1129499803]
+visible = false
+z_index = 10
+position = Vector2(-538.05, -55.988)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 9
+metadata/special = false
+metadata/orig = "ogon (12)"
+
+[node name="war_ogon (33)" type="Sprite2D" parent="国家层" unique_id=47272861]
+visible = false
+z_index = 10
+position = Vector2(-801.602, -66.228)
+scale = Vector2(0.29, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 30
+metadata/special = false
+metadata/orig = "ogon (33)"
+
+[node name="war_ogon (1)" type="Sprite2D" parent="国家层" unique_id=344246235]
+visible = false
+z_index = 10
+position = Vector2(-157.25, 110.924)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 1
+metadata/special = false
+metadata/orig = "ogon (1)"
+
+[node name="war_ogon (2)" type="Sprite2D" parent="国家层" unique_id=1204982449]
+visible = false
+z_index = 10
+position = Vector2(-188.098, 91.468)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 2
+metadata/special = false
+metadata/orig = "ogon (2)"
+
+[node name="war_ogon (24)" type="Sprite2D" parent="国家层" unique_id=2013410262]
+visible = false
+z_index = 10
+position = Vector2(-508.866, 94.796)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = 21
+metadata/special = false
+metadata/orig = "ogon (24)"
+
+[node name="war_ogon (36)" type="Sprite2D" parent="国家层" unique_id=407682900]
+visible = false
+z_index = 10
+position = Vector2(-29.25, -75.956)
+scale = Vector2(0.295, 0.3)
+texture = ExtResource("185_war_icon")
+metadata/kind = "war"
+metadata/file = "war_icon.png"
+metadata/tex = "战争图标"
+metadata/war_num = -5
+metadata/special = true
+metadata/orig = "ogon (36)"
+
+[node name="part_057.0" type="Sprite2D" parent="国家层" unique_id=1157459664]
+visible = false
+z_index = 10
+position = Vector2(-667.1982, 94.8654)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("283_p_057_0")
+metadata/kind = "part"
+metadata/file = "p_057_0.png"
+metadata/tex = "ogon"
+metadata/country = 57
+metadata/part = 0
+metadata/orig = "057.0"
+
+[node name="part_118.0" type="Sprite2D" parent="国家层" unique_id=927863667]
+visible = false
+z_index = 10
+position = Vector2(-583.9982, 174.6914)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("284_p_118_0")
+metadata/kind = "part"
+metadata/file = "p_118_0.png"
+metadata/tex = "ogon"
+metadata/country = 118
+metadata/part = 0
+metadata/orig = "118.0"
+
+[node name="part_033.0" type="Sprite2D" parent="国家层" unique_id=733257264]
+visible = false
+z_index = 10
+position = Vector2(-215.5873, 56.3029)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("285_p_033_0")
+metadata/kind = "part"
+metadata/file = "p_033_0.png"
+metadata/tex = "ogon"
+metadata/country = 33
+metadata/part = 0
+metadata/orig = "033.0"
+
+[node name="part_141.0" type="Sprite2D" parent="国家层" unique_id=748757085]
+visible = false
+z_index = 10
+position = Vector2(795.879, 29.1912)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("286_p_141_0")
+metadata/kind = "part"
+metadata/file = "p_141_0.png"
+metadata/tex = "ogon"
+metadata/country = 141
+metadata/part = 0
+metadata/orig = "141.0"
+
+[node name="part_058.0" type="Sprite2D" parent="国家层" unique_id=1903046950]
+visible = false
+z_index = 10
+position = Vector2(-795.0804, 105.4779)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("287_p_058_0")
+metadata/kind = "part"
+metadata/file = "p_058_0.png"
+metadata/tex = "ogon"
+metadata/country = 58
+metadata/part = 0
+metadata/orig = "058.0"
+
+[node name="part_127.0" type="Sprite2D" parent="国家层" unique_id=2118985000]
+visible = false
+z_index = 10
+position = Vector2(-602.8462, 312.6395)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("240_p_127_0")
+metadata/kind = "part"
+metadata/file = "p_127_0.png"
+metadata/tex = "ogon"
+metadata/country = 127
+metadata/part = 0
+metadata/orig = "127.0"
+
+[node name="part_140.1" type="Sprite2D" parent="国家层" unique_id=632881898]
+visible = false
+z_index = 10
+position = Vector2(713.4266, -5.8475037)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("243_p_140_1")
+metadata/kind = "part"
+metadata/file = "p_140_1.png"
+metadata/tex = "ogon"
+metadata/country = 140
+metadata/part = 1
+metadata/orig = "140.1"
+
+[node name="part_053.2" type="Sprite2D" parent="国家层" unique_id=1777720766]
+visible = false
+z_index = 10
+position = Vector2(-611.097, 125.802986)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("247_p_053_2")
+metadata/kind = "part"
+metadata/file = "p_053_2.png"
+metadata/tex = "ogon"
+metadata/country = 53
+metadata/part = 2
+metadata/orig = "053.2"
+
+[node name="part_138.0" type="Sprite2D" parent="国家层" unique_id=1723043684]
+visible = false
+z_index = 10
+position = Vector2(774.581, -35.445004)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("250_p_138_0")
+metadata/kind = "part"
+metadata/file = "p_138_0.png"
+metadata/tex = "ogon"
+metadata/country = 138
+metadata/part = 0
+metadata/orig = "138.0"
+
+[node name="part_119.0" type="Sprite2D" parent="国家层" unique_id=628170373]
+visible = false
+z_index = 10
+position = Vector2(-536.1582, 173.89392)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("253_p_119_0")
+metadata/kind = "part"
+metadata/file = "p_119_0.png"
+metadata/tex = "ogon"
+metadata/country = 119
+metadata/part = 0
+metadata/orig = "119.0"
+
+[node name="part_119.1" type="Sprite2D" parent="国家层" unique_id=538536364]
+visible = false
+z_index = 10
+position = Vector2(-556.9172, 178.64148)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("254_p_119_1")
+metadata/kind = "part"
+metadata/file = "p_119_1.png"
+metadata/tex = "ogon"
+metadata/country = 119
+metadata/part = 1
+metadata/orig = "119.1"
+
+[node name="part_113.0" type="Sprite2D" parent="国家层" unique_id=824688593]
+visible = false
+z_index = 10
+position = Vector2(-865.4395, 101.80048)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("255_p_113_0")
+metadata/kind = "part"
+metadata/file = "p_113_0.png"
+metadata/tex = "ogon"
+metadata/country = 113
+metadata/part = 0
+metadata/orig = "113.0"
+
+[node name="part_122.0" type="Sprite2D" parent="国家层" unique_id=2086094444]
+visible = false
+z_index = 10
+position = Vector2(-587.1905, 190.05139)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("256_p_122_0")
+metadata/kind = "part"
+metadata/file = "p_122_0.png"
+metadata/tex = "ogon"
+metadata/country = 122
+metadata/part = 0
+metadata/orig = "122.0"
+
+[node name="part_131.0" type="Sprite2D" parent="国家层" unique_id=1264532039]
+visible = false
+z_index = 10
+position = Vector2(-665.1246, 343.1509)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("257_p_131_0")
+metadata/kind = "part"
+metadata/file = "p_131_0.png"
+metadata/tex = "ogon"
+metadata/country = 131
+metadata/part = 0
+metadata/orig = "131.0"
+
+[node name="part_131.1" type="Sprite2D" parent="国家层" unique_id=800987837]
+visible = false
+z_index = 10
+position = Vector2(-665.1246, 289.3909)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("258_p_131_1")
+metadata/kind = "part"
+metadata/file = "p_131_1.png"
+metadata/tex = "ogon"
+metadata/country = 131
+metadata/part = 1
+metadata/orig = "131.1"
+
+[node name="part_131_2" type="Sprite2D" parent="国家层" unique_id=1404271267]
+visible = false
+z_index = 10
+position = Vector2(-675.1086, 286.06287)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("259_p_131_2")
+metadata/kind = "part"
+metadata/file = "p_131_2.png"
+metadata/tex = "ogon"
+metadata/country = 131
+metadata/part = 2
+metadata/orig = "131.2"
+
+[node name="part_131.3" type="Sprite2D" parent="国家层" unique_id=367875313]
+visible = false
+z_index = 10
+position = Vector2(-641.643, 331.16498)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("260_p_131_3")
+metadata/kind = "part"
+metadata/file = "p_131_3.png"
+metadata/tex = "ogon"
+metadata/country = 131
+metadata/part = 3
+metadata/orig = "131.3"
+
+[node name="part_131.4" type="Sprite2D" parent="国家层" unique_id=810977539]
+visible = false
+z_index = 10
+position = Vector2(-597.099, 323.4389)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("261_p_131_4")
+metadata/kind = "part"
+metadata/file = "p_131_4.png"
+metadata/tex = "ogon"
+metadata/country = 131
+metadata/part = 4
+metadata/orig = "131.4"
+
+[node name="part_117.0" type="Sprite2D" parent="国家层" unique_id=1468181016]
+visible = false
+z_index = 10
+position = Vector2(-625.3807, 218.6402)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("267_p_117_0")
+metadata/kind = "part"
+metadata/file = "p_117_0.png"
+metadata/tex = "ogon"
+metadata/country = 117
+metadata/part = 0
+metadata/orig = "117.0"
+
+[node name="part_117.1" type="Sprite2D" parent="国家层" unique_id=2005550407]
+visible = false
+z_index = 10
+position = Vector2(-639.9956, 190.3406)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("268_p_117_1")
+metadata/kind = "part"
+metadata/file = "p_117_1.png"
+metadata/tex = "ogon"
+metadata/country = 117
+metadata/part = 1
+metadata/orig = "117.1"
+
+[node name="part_066.0" type="Sprite2D" parent="国家层" unique_id=204763458]
+visible = false
+z_index = 10
+position = Vector2(-702.3905, 155.3851)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("269_p_066_0")
+metadata/kind = "part"
+metadata/file = "p_066_0.png"
+metadata/tex = "ogon"
+metadata/country = 66
+metadata/part = 0
+metadata/orig = "066.0"
+
+[node name="part_126.0" type="Sprite2D" parent="国家层" unique_id=866394157]
+visible = false
+z_index = 10
+position = Vector2(-575.81, 290.5506)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("270_p_126_0")
+metadata/kind = "part"
+metadata/file = "p_126_0.png"
+metadata/tex = "ogon"
+metadata/country = 126
+metadata/part = 0
+metadata/orig = "126.0"
+
+[node name="part_149.1" type="Sprite2D" parent="国家层" unique_id=1418996807]
+visible = false
+z_index = 10
+position = Vector2(747.7907, 5.296196)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("273_p_149_1")
+metadata/kind = "part"
+metadata/file = "p_149_1.png"
+metadata/tex = "ogon"
+metadata/country = 149
+metadata/part = 1
+metadata/orig = "149.1"
+
+[node name="part_149.2" type="Sprite2D" parent="国家层" unique_id=656309341]
+visible = false
+z_index = 10
+position = Vector2(756.0301, 0.22349548)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("274_p_149_2")
+metadata/kind = "part"
+metadata/file = "p_149_2.png"
+metadata/tex = "ogon"
+metadata/country = 149
+metadata/part = 2
+metadata/orig = "149.2"
+
+[node name="part_147.0" type="Sprite2D" parent="国家层" unique_id=1801875538]
+visible = false
+z_index = 10
+position = Vector2(773.1116, 15.443993)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("275_p_147_0")
+metadata/kind = "part"
+metadata/file = "p_147_0.png"
+metadata/tex = "ogon"
+metadata/country = 147
+metadata/part = 0
+metadata/orig = "147.0"
+
+[node name="part_123.0" type="Sprite2D" parent="国家层" unique_id=1330827352]
+visible = false
+z_index = 13
+position = Vector2(-670.1281, 254.88852)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("276_p_123_0")
+metadata/kind = "part"
+metadata/file = "p_123_0.png"
+metadata/tex = "ogon"
+metadata/country = 123
+metadata/part = 0
+metadata/orig = "123.0"
+
+[node name="part_107.0" type="Sprite2D" parent="国家层" unique_id=1374214233]
+visible = false
+z_index = 10
+position = Vector2(-846.3265, 133.3115)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("279_p_107_0")
+metadata/kind = "part"
+metadata/file = "p_107_0.png"
+metadata/tex = "ogon"
+metadata/country = 107
+metadata/part = 0
+metadata/orig = "107.0"
+
+[node name="part_060.0" type="Sprite2D" parent="国家层" unique_id=2104677777]
+visible = false
+z_index = 10
+position = Vector2(-730.242, 128.89038)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("280_p_060_0")
+metadata/kind = "part"
+metadata/file = "p_060_0.png"
+metadata/tex = "ogon"
+metadata/country = 60
+metadata/part = 0
+metadata/orig = "060.0"

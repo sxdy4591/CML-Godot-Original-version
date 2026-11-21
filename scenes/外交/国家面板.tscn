@@ -1,0 +1,371 @@
+[gd_scene format=3 uid="uid://b4w1g2tqn4wli"]
+
+[ext_resource type="Texture2D" uid="uid://dil4r7ro3leow" path="res://assets/ui/外交/地图模式背景.png" id="8_qy4bt"]
+[ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="17_v5qqf"]
+[ext_resource type="Script" uid="uid://b8mw212rnvge2" path="res://scenes/外交/国家面板.gd" id="45_pb6ma"]
+[ext_resource type="Texture2D" uid="uid://cpq8xydpuokky" path="res://assets/ui/外交/国家面板背景.png" id="46_ve70n"]
+[ext_resource type="Texture2D" uid="uid://ctca8avwht3dr" path="res://assets/ui/外交/国家面板关闭.png" id="47_vqwm3"]
+[ext_resource type="Texture2D" uid="uid://cbly2j53d8w5v" path="res://assets/ui/外交/国家面板关闭覆盖.png" id="48_ihuqk"]
+[ext_resource type="Texture2D" uid="uid://t6c7sjpm4ijr" path="res://assets/ui/外交/国家属性背景.png" id="49_cqjq1"]
+[ext_resource type="Texture2D" uid="uid://xbwrlmkopmyv" path="res://assets/ui/外交/政府类型_苏式社会主义.png" id="50_leers"]
+[ext_resource type="Texture2D" uid="uid://biqv8cd8li0a0" path="res://assets/ui/外交/军事联盟_华沙条约.png" id="51_32v34"]
+[ext_resource type="Texture2D" uid="uid://dpg1ssoi4myaf" path="res://assets/ui/外交/经济联盟_经互会.png" id="52_vkq10"]
+[ext_resource type="Texture2D" uid="uid://c4muktgqqwe6b" path="res://assets/ui/外交/在某国影响下_苏联.png" id="53_leers"]
+[ext_resource type="Texture2D" uid="uid://d13jw6ini7wcs" path="res://assets/ui/外交/国家互动按钮背景.png" id="54_32v34"]
+
+[sub_resource type="StyleBoxFlat" id="sb_auto_off"]
+bg_color = Color(0, 0, 0, 0.25)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="sb_auto_on"]
+bg_color = Color(1, 1, 1, 0.30)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="国家面板" type="CanvasLayer" unique_id=742949105]
+visible = false
+script = ExtResource("45_pb6ma")
+
+[node name="背景" type="TextureRect" parent="." unique_id=2038508092]
+mouse_filter = 0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -254.0
+offset_right = 1640.0
+grow_vertical = 0
+texture = ExtResource("46_ve70n")
+expand_mode = 1
+stretch_mode = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="关闭背景" type="TextureRect" parent="." unique_id=1533306585]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -340.0
+offset_right = 279.0
+offset_bottom = -53.0
+grow_vertical = 0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_qy4bt")
+metadata/_edit_use_anchors_ = true
+
+[node name="关闭" type="TextureButton" parent="." unique_id=1550883285]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -338.0
+offset_right = 628.0
+offset_bottom = 288.0
+grow_vertical = 0
+scale = Vector2(0.13, 0.13)
+texture_normal = ExtResource("47_vqwm3")
+texture_hover = ExtResource("48_ihuqk")
+metadata/_edit_use_anchors_ = true
+
+[node name="当前选中国家名称" type="Label" parent="." unique_id=1973141611]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -246.0
+offset_right = 344.0
+offset_bottom = -209.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("17_v5qqf")
+theme_override_font_sizes/font_size = 22
+text = "苏联"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="国家属性背景" type="TextureRect" parent="." unique_id=1052982624]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -202.0
+offset_right = 349.0
+offset_bottom = -151.0
+grow_vertical = 0
+texture = ExtResource("49_cqjq1")
+metadata/_edit_use_anchors_ = true
+
+[node name="政府类型" type="TextureRect" parent="." unique_id=642610366]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.999999
+offset_top = -197.99994
+offset_right = 136.0
+offset_bottom = -77.99994
+grow_vertical = 0
+scale = Vector2(0.34, 0.34)
+texture = ExtResource("50_leers")
+metadata/_edit_use_anchors_ = true
+
+[node name="军事联盟" type="TextureRect" parent="." unique_id=1226814457]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 63.000008
+offset_top = -197.99994
+offset_right = 183.0
+offset_bottom = -77.99994
+grow_vertical = 0
+scale = Vector2(0.34, 0.34)
+texture = ExtResource("51_32v34")
+metadata/_edit_use_anchors_ = true
+
+[node name="经济联盟" type="TextureRect" parent="." unique_id=11946238]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 109.999985
+offset_top = -197.99994
+offset_right = 229.99998
+offset_bottom = -77.99994
+grow_vertical = 0
+scale = Vector2(0.34, 0.34)
+texture = ExtResource("52_vkq10")
+metadata/_edit_use_anchors_ = true
+
+[node name="贸易伙伴" type="TextureRect" parent="." unique_id=281754020]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 156.99998
+offset_top = -197.99994
+offset_right = 277.0
+offset_bottom = -77.99994
+grow_vertical = 0
+scale = Vector2(0.34, 0.34)
+metadata/_edit_use_anchors_ = true
+
+[node name="在某国影响下" type="TextureRect" parent="." unique_id=441754020]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 203.99998
+offset_top = -197.99994
+offset_right = 324.0
+offset_bottom = -77.99994
+grow_vertical = 0
+scale = Vector2(0.34, 0.34)
+texture = ExtResource("53_leers")
+metadata/_edit_use_anchors_ = true
+
+[node name="联盟" type="TextureRect" parent="." unique_id=541754020]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 251.0
+offset_top = -197.99994
+offset_right = 371.0
+offset_bottom = -77.99994
+grow_vertical = 0
+scale = Vector2(0.34, 0.34)
+metadata/_edit_use_anchors_ = true
+
+[node name="傀儡" type="TextureRect" parent="." unique_id=641754020]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 298.0
+offset_top = -197.99994
+offset_right = 418.0
+offset_bottom = -77.99994
+grow_vertical = 0
+scale = Vector2(0.34, 0.34)
+metadata/_edit_use_anchors_ = true
+
+[node name="互动按钮" type="Button" parent="." unique_id=2006736957]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -142.0
+offset_right = 184.0
+offset_bottom = -90.0
+grow_vertical = 0
+scale = Vector2(0.87, 0.87)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_v5qqf")
+theme_override_font_sizes/font_size = 22
+icon = ExtResource("54_32v34")
+flat = true
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="互动按钮2" type="Button" parent="." unique_id=1053465208]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 160.99998
+offset_top = -142.0
+offset_right = 328.0
+offset_bottom = -90.0
+grow_vertical = 0
+scale = Vector2(0.87, 0.87)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_v5qqf")
+theme_override_font_sizes/font_size = 22
+icon = ExtResource("54_32v34")
+flat = true
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="互动按钮3" type="Button" parent="." unique_id=792336673]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -72.0
+offset_right = 184.00002
+offset_bottom = -20.0
+grow_vertical = 0
+scale = Vector2(0.87, 0.87)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_v5qqf")
+theme_override_font_sizes/font_size = 22
+icon = ExtResource("54_32v34")
+flat = true
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="互动按钮4" type="Button" parent="." unique_id=277974183]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 160.99998
+offset_top = -72.0
+offset_right = 328.0
+offset_bottom = -20.0
+grow_vertical = 0
+scale = Vector2(0.87, 0.87)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_v5qqf")
+theme_override_font_sizes/font_size = 22
+icon = ExtResource("54_32v34")
+flat = true
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="自动1" type="Button" parent="." unique_id=2006736961]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = -94.0
+offset_right = 100.0
+offset_bottom = -74.0
+grow_vertical = 0
+tooltip_text = "自动执行：每月 1 号检查一次，条件满足且资源够才替玩家按下"
+toggle_mode = true
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("sb_auto_off")
+theme_override_styles/hover = SubResource("sb_auto_off")
+theme_override_styles/pressed = SubResource("sb_auto_on")
+theme_override_styles/hover_pressed = SubResource("sb_auto_on")
+text = ""
+metadata/_edit_use_anchors_ = true
+
+[node name="自动2" type="Button" parent="." unique_id=2006736962]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 223.0
+offset_top = -94.0
+offset_right = 243.0
+offset_bottom = -74.0
+grow_vertical = 0
+tooltip_text = "自动执行：勾上后每月 1 号检查一次，条件满足且资源够才替玩家按下"
+toggle_mode = true
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("sb_auto_off")
+theme_override_styles/hover = SubResource("sb_auto_off")
+theme_override_styles/pressed = SubResource("sb_auto_on")
+theme_override_styles/hover_pressed = SubResource("sb_auto_on")
+text = ""
+metadata/_edit_use_anchors_ = true
+
+[node name="自动3" type="Button" parent="." unique_id=2006736963]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = -24.0
+offset_right = 100.0
+offset_bottom = -4.0
+grow_vertical = 0
+tooltip_text = "自动执行：勾上后每月 1 号检查一次，条件满足且资源够才替玩家按下"
+toggle_mode = true
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("sb_auto_off")
+theme_override_styles/hover = SubResource("sb_auto_off")
+theme_override_styles/pressed = SubResource("sb_auto_on")
+theme_override_styles/hover_pressed = SubResource("sb_auto_on")
+text = ""
+metadata/_edit_use_anchors_ = true
+
+[node name="自动4" type="Button" parent="." unique_id=2006736964]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 223.0
+offset_top = -24.0
+offset_right = 243.0
+offset_bottom = -4.0
+grow_vertical = 0
+tooltip_text = "自动执行：勾上后每月 1 号检查一次，条件满足且资源够才替玩家按下"
+toggle_mode = true
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("sb_auto_off")
+theme_override_styles/hover = SubResource("sb_auto_off")
+theme_override_styles/pressed = SubResource("sb_auto_on")
+theme_override_styles/hover_pressed = SubResource("sb_auto_on")
+text = ""
+metadata/_edit_use_anchors_ = true
+
+[node name="执行当前互动按钮所需条件及检查" type="RichTextLabel" parent="." unique_id=1212368593]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 352.0
+offset_top = -236.0
+offset_right = 1375.0
+offset_bottom = -14.0
+grow_vertical = 0
+theme_override_colors/default_color = Color(1, 1, 0, 1)
+theme_override_fonts/normal_font = ExtResource("17_v5qqf")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+metadata/_edit_use_anchors_ = true

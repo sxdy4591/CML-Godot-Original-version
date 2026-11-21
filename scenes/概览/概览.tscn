@@ -1,0 +1,286 @@
+[gd_scene format=3 uid="uid://bv5deye14wdui"]
+
+[ext_resource type="Texture2D" uid="uid://ce2jmwkw2o7h8" path="res://assets/ui/概览/概览背景.png" id="1_yw3s2"]
+[ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="6_j2qql"]
+[ext_resource type="Texture2D" uid="uid://du4cog4r5uq7y" path="res://assets/ui/概览/плашка.png" id="17_q3aln"]
+[ext_resource type="Texture2D" uid="uid://bnfxcvb8w8fmk" path="res://assets/ui/概览/切换显示按钮背景.png" id="18_oy31c"]
+[ext_resource type="Script" uid="uid://b8mrtf2wpgjj3" path="res://scenes/概览/概览.gd" id="19_overview"]
+[ext_resource type="PackedScene" uid="uid://ce3cbk18lse3v" path="res://scenes/通用/TopState.tscn" id="90_bar"]
+[ext_resource type="PackedScene" uid="uid://dab4f1a2d3e45" path="res://scenes/通用/导航栏.tscn" id="91_nav"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_modifier_panel"]
+content_margin_left = 6.0
+content_margin_top = 4.0
+content_margin_right = 6.0
+content_margin_bottom = 4.0
+bg_color = Color(0.949, 0.909, 0.847, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.361, 0.133, 0.2, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="概览" type="Control" unique_id=103169998]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("19_overview")
+
+[node name="背景" type="TextureRect" parent="." unique_id=938139217]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_yw3s2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="状态栏" parent="." unique_id=175753559 instance=ExtResource("90_bar")]
+
+[node name="导航栏" parent="." unique_id=937660062 instance=ExtResource("91_nav")]
+current_screen = "overview"
+
+[node name="概览背景" type="TextureRect" parent="." unique_id=559995425]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 192.0
+offset_right = 1336.0
+offset_bottom = 1028.0
+texture = ExtResource("17_q3aln")
+
+[node name="显示交易概览" type="Button" parent="." unique_id=1638218866]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 256.0
+offset_right = 381.0
+offset_bottom = 347.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_j2qql")
+theme_override_font_sizes/font_size = 40
+text = "交易
+"
+icon = ExtResource("18_oy31c")
+flat = true
+icon_alignment = 1
+
+[node name="交易概览" type="RichTextLabel" parent="." unique_id=1534055131]
+visible = false
+layout_mode = 0
+offset_left = 484.0
+offset_top = 202.0
+offset_right = 1321.0
+offset_bottom = 1017.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_j2qql")
+theme_override_fonts/bold_font = ExtResource("6_j2qql")
+theme_override_fonts/bold_italics_font = ExtResource("6_j2qql")
+theme_override_fonts/italics_font = ExtResource("6_j2qql")
+theme_override_fonts/mono_font = ExtResource("6_j2qql")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "尚未开始游戏"
+horizontal_alignment = 1
+
+[node name="显示影响概览" type="Button" parent="." unique_id=96887634]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 352.0
+offset_right = 381.0
+offset_bottom = 443.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_j2qql")
+theme_override_font_sizes/font_size = 40
+text = "影响
+"
+icon = ExtResource("18_oy31c")
+flat = true
+icon_alignment = 1
+
+[node name="影响概览" type="RichTextLabel" parent="." unique_id=1966787965]
+visible = false
+layout_mode = 0
+offset_left = 484.0
+offset_top = 202.0
+offset_right = 1321.0
+offset_bottom = 1017.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_j2qql")
+theme_override_fonts/bold_font = ExtResource("6_j2qql")
+theme_override_fonts/bold_italics_font = ExtResource("6_j2qql")
+theme_override_fonts/italics_font = ExtResource("6_j2qql")
+theme_override_fonts/mono_font = ExtResource("6_j2qql")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "尚未开始游戏"
+horizontal_alignment = 1
+
+[node name="显示领土概览" type="Button" parent="." unique_id=1825013116]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 448.0
+offset_right = 381.0
+offset_bottom = 539.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_j2qql")
+theme_override_font_sizes/font_size = 40
+text = "领土
+"
+icon = ExtResource("18_oy31c")
+flat = true
+icon_alignment = 1
+
+[node name="领土概览" type="RichTextLabel" parent="." unique_id=1751078060]
+visible = false
+layout_mode = 0
+offset_left = 484.0
+offset_top = 202.0
+offset_right = 1321.0
+offset_bottom = 1017.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_j2qql")
+theme_override_fonts/bold_font = ExtResource("6_j2qql")
+theme_override_fonts/bold_italics_font = ExtResource("6_j2qql")
+theme_override_fonts/italics_font = ExtResource("6_j2qql")
+theme_override_fonts/mono_font = ExtResource("6_j2qql")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "尚未开始游戏"
+horizontal_alignment = 1
+
+[node name="显示形势概览" type="Button" parent="." unique_id=1212024508]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 544.0
+offset_right = 381.0
+offset_bottom = 635.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_j2qql")
+theme_override_font_sizes/font_size = 40
+text = "形势"
+icon = ExtResource("18_oy31c")
+flat = true
+icon_alignment = 1
+
+[node name="形势概览" type="RichTextLabel" parent="." unique_id=238692429]
+visible = false
+layout_mode = 0
+offset_left = 484.0
+offset_top = 202.0
+offset_right = 1321.0
+offset_bottom = 1017.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_j2qql")
+theme_override_fonts/bold_font = ExtResource("6_j2qql")
+theme_override_fonts/bold_italics_font = ExtResource("6_j2qql")
+theme_override_fonts/italics_font = ExtResource("6_j2qql")
+theme_override_fonts/mono_font = ExtResource("6_j2qql")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "尚未开始游戏"
+horizontal_alignment = 1
+
+[node name="显示凝聚力概览" type="Button" parent="." unique_id=402819111]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 640.0
+offset_right = 381.0
+offset_bottom = 731.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_j2qql")
+theme_override_font_sizes/font_size = 40
+text = "凝聚力"
+icon = ExtResource("18_oy31c")
+flat = true
+icon_alignment = 1
+
+[node name="凝聚力概览" type="RichTextLabel" parent="." unique_id=584539173]
+visible = false
+layout_mode = 0
+offset_left = 484.0
+offset_top = 202.0
+offset_right = 1321.0
+offset_bottom = 1017.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_j2qql")
+theme_override_fonts/bold_font = ExtResource("6_j2qql")
+theme_override_fonts/bold_italics_font = ExtResource("6_j2qql")
+theme_override_fonts/italics_font = ExtResource("6_j2qql")
+theme_override_fonts/mono_font = ExtResource("6_j2qql")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "尚未开始游戏"
+horizontal_alignment = 1
+
+[node name="显示盟友概览" type="Button" parent="." unique_id=856656387]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 736.0
+offset_right = 381.0
+offset_bottom = 827.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_j2qql")
+theme_override_font_sizes/font_size = 40
+text = "盟友"
+icon = ExtResource("18_oy31c")
+flat = true
+icon_alignment = 1
+
+[node name="盟友概览" type="RichTextLabel" parent="." unique_id=1963411870]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 202.0
+offset_right = 1321.0
+offset_bottom = 1017.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_j2qql")
+theme_override_fonts/bold_font = ExtResource("6_j2qql")
+theme_override_fonts/bold_italics_font = ExtResource("6_j2qql")
+theme_override_fonts/italics_font = ExtResource("6_j2qql")
+theme_override_fonts/mono_font = ExtResource("6_j2qql")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "尚未开始游戏"
+horizontal_alignment = 1
+
+[node name="修正显示区域" type="Control" parent="." unique_id=2077424178]
+anchors_preset = 0
+offset_left = 1344.0
+offset_top = 192.0
+offset_right = 1856.0
+offset_bottom = 1048.0
+
+[node name="底板" type="Panel" parent="修正显示区域" unique_id=1301399959]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_modifier_panel")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="修正显示区域" unique_id=576205130]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="修正列表" type="VBoxContainer" parent="修正显示区域/ScrollContainer" unique_id=1671344058]
+layout_mode = 2
+size_flags_horizontal = 3

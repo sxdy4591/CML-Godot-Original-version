@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://dab4f1a2d3e45"]
+
+[ext_resource type="Script" path="res://scenes/通用/导航栏.gd" id="1_65lms"]
+[ext_resource type="Texture2D" uid="uid://62en00leihu5" path="res://assets/ui/主游戏UI/切场景菜单背景.png" id="2_navbg"]
+[ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="4_font"]
+
+[node name="导航栏" type="CanvasLayer" unique_id=1007205109]
+script = ExtResource("1_65lms")
+
+[node name="切场景菜单背景" type="TextureRect" parent="." unique_id=225504180]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 71.0
+offset_bottom = 159.0
+texture = ExtResource("2_navbg")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="世界地图" type="Button" parent="." unique_id=194019547]
+offset_left = 56.0
+offset_top = 80.0
+offset_right = 335.0
+offset_bottom = 145.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 45
+text = "世界地图"
+icon = ExtResource("2_navbg")
+flat = true
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+metadata/screen_id = "diplomacy"
+metadata/scene_path = "res://scenes/外交/外交.tscn"
+
+[node name="派系" type="Button" parent="." unique_id=1310487811]
+offset_left = 366.0
+offset_top = 80.0
+offset_right = 645.0
+offset_bottom = 145.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 45
+text = "派系"
+icon = ExtResource("2_navbg")
+flat = true
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+metadata/screen_id = "faction"
+metadata/scene_path = "res://scenes/派系/派系.tscn"
+
+[node name="经济" type="Button" parent="." unique_id=1327585915]
+offset_left = 676.0
+offset_top = 80.0
+offset_right = 955.0
+offset_bottom = 145.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 45
+text = "经济"
+icon = ExtResource("2_navbg")
+flat = true
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+metadata/screen_id = "economy"
+metadata/scene_path = "res://scenes/经济/经济.tscn"
+
+[node name="科学" type="Button" parent="." unique_id=767988167]
+offset_left = 986.0
+offset_top = 80.0
+offset_right = 1265.0
+offset_bottom = 145.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 45
+text = "科学"
+icon = ExtResource("2_navbg")
+flat = true
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+metadata/screen_id = "science"
+metadata/scene_path = "res://scenes/科学/科学.tscn"
+
+[node name="概览" type="Button" parent="." unique_id=90751825]
+offset_left = 1296.0
+offset_top = 80.0
+offset_right = 1575.0
+offset_bottom = 145.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 45
+text = "概览"
+icon = ExtResource("2_navbg")
+flat = true
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+metadata/screen_id = "overview"
+metadata/scene_path = "res://scenes/概览/概览.tscn"
+
+[node name="政治" type="Button" parent="." unique_id=1849096870]
+offset_left = 1606.0
+offset_top = 80.0
+offset_right = 1885.0
+offset_bottom = 145.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 45
+text = "政治"
+icon = ExtResource("2_navbg")
+flat = true
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+metadata/screen_id = "politics"
+metadata/scene_path = "res://scenes/政治/政治.tscn"
+
+[node name="战争" type="Button" parent="." unique_id=1976339663]
+offset_left = 1916.0
+offset_top = 80.0
+offset_right = 2195.0
+offset_bottom = 145.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 45
+text = "战争"
+icon = ExtResource("2_navbg")
+flat = true
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+metadata/screen_id = "war"
+metadata/scene_path = "res://scenes/战争/战争.tscn"

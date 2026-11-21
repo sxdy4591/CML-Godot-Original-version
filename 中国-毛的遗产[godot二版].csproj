@@ -1,0 +1,77 @@
+<Project Sdk="Godot.NET.Sdk/4.7.2">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- Android: 必须 net10.0 — Godot 4.7.2 引擎 .NET 仅支持 hostfxr/CoreCLR(源码 gd_mono.cpp 无 MonoVM 路径),
+         而 CoreCLR 安卓运行时 = Linux-Bionic 包(Microsoft.NETCore.App.Runtime.linux-bionic-arm64),
+         仅在 .NET 10 GA(>=10.0.6) 发布; .NET 9 的 bionic 包(Mono.linux-arm64)只有 preview, MonoVM 包引擎不加载。
+         配合导出预设 dotnet/android_use_linux_bionic=true 使用。 -->
+    <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net10.0</TargetFramework>
+    <!-- Godot.NET.Sdk/Sdk/Android.props 默认 UseMonoRuntime=true → 强制解析 Mono 风味包
+         (Microsoft.NETCore.App.Runtime.Mono.linux-arm64 仅存在于 preview, NU1102 必失败);
+         关闭后按 RID 选 CoreCLR 包 → 产出引擎所需的 libhostfxr.so。
+         ⚠ 仅当走 AOT 路线时, 此值与 PublishAot 冲突无需管(Android.props 在 PublishAot=true 时自动 false)。 -->
+    <UseMonoRuntime Condition=" '$(GodotTargetPlatform)' == 'android' ">false</UseMonoRuntime>
+    <!-- ===================== Android NativeAOT(社区验证配方, 见 robomico.cn 教程 / PR #97908) =====================
+         引擎 4.7.2 Android 的 .NET 只有三条路: hostfxr(res:// 加载有引擎 bug) / 旧版 coreclr(需混合符号, 无运行时满足)
+         / NativeAOT(按名加载 lib<程序集名>.so → 唯一可行)。
+         启用前提: 机器有 clang/lld 链接器(LLVM 或 Android NDK), 否则 AOT 最后一步报
+         "Platform linker ('clang' or 'gcc') not found in PATH"。
+         已实测: DisableUnsupportedError=true 可绕过 ILCompiler 的 Cross-OS 检查(Windows→linux-bionic)。
+         TrimmerRootAssembly 全量根集: 本工程桥层大量反射(Type.GetType 按类名、Assembly.GetTypes() 枚举
+         事件/结局派生类、GetField 按字段名), 必须保留 GodotSharp + 游戏程序集全部类型, 否则运行时全空引用。
+         LinkerArg(Wl 的 undefined-version 参数): .NET 8 时代已知 bug 的规避参数, 条件化仅 linux-bionic 生效。 -->
+    <PublishAOT Condition=" '$(GodotTargetPlatform)' == 'android' ">true</PublishAOT>
+    <PublishAotUsingRuntimePack Condition=" '$(GodotTargetPlatform)' == 'android' ">true</PublishAotUsingRuntimePack>
+    <DisableUnsupportedError Condition=" '$(GodotTargetPlatform)' == 'android' ">true</DisableUnsupportedError>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>中国毛的遗产godot二版</RootNamespace>
+    <Version>0.7.0.0</Version>
+    <InformationalVersion>0.7.0</InformationalVersion>
+    <!-- Godot 4.7 的 ScriptSignalsGenerator 生成代码使用集合表达式(C# 12), 低于 12 无法编译.
+         反编译代码本身只需 `文件作用域命名空间`(C# 10), 12 是超集; 新版 Roslyn 的 ref 安全
+         误报(CS8374)统一在 NoWarn 里静音. -->
+    <LangVersion>12.0</LangVersion>
+    <!-- 原版存档使用 BinaryFormatter(逆向代码 Savescript/LoadInScript);.NET8 默认禁用,此处重新启用 -->
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    <!-- 反编译代码固有警告静音: private Awake 等隐藏 MonoBehaviour 基类成员(CS0114/CS0108),
+         运行时由 UnityRuntime 泵反射按方法名调用, 无实际影响 -->
+    <NoWarn>$(NoWarn);SYSLIB0011;CS0114;CS0108;CS8374;SYSLIB0050</NoWarn>
+  </PropertyGroup>
+
+  <!-- Android NativeAOT: TrimmerRootAssembly 全量根集 — 桥层大量反射(Type.GetType 按类名、
+       Assembly.GetTypes() 枚举事件/结局派生类、GetField 按字段名), 必须整体保留 GodotSharp 与游戏程序集,
+       否则 AOT 裁剪后运行时全空引用。 -->
+  <ItemGroup Condition=" '$(GodotTargetPlatform)' == 'android' ">
+    <TrimmerRootAssembly Include="GodotSharp" />
+    <TrimmerRootAssembly Include="$(TargetName)" />
+  </ItemGroup>
+  <!-- .NET 8 时代 linux-bionic 链接已知 bug 的规避参数 -->
+  <ItemGroup Condition=" '$(GodotTargetPlatform)' == 'android' and $(RuntimeIdentifier.StartsWith('linux-bionic')) ">
+    <LinkerArg Include="-Wl,--undefined-version" />
+  </ItemGroup>
+
+  <!-- Android 自定义构建会把导出产物暂存到 android\build\src\main\assets\,
+       其中含 .cs 源文件副本; 默认通配可能把它们一并编译, 造成重复定义。
+       显式排除整个 android\ 目录(它只是构建暂存, 不是项目源码)。 -->
+  <ItemGroup>
+    <Compile Remove="android/**/*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+  <Compile Remove="src\original\Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <!-- 原版文本数据(data/*.txt): 直接嵌入程序集。
+       这些 .txt 不是 Godot 资源, export_filter=all_resources 不会打包它们,
+       嵌入 DLL 后无论 pck 是否包含都能在运行时读到, 根治导出丢文本问题。 -->
+  <ItemGroup>
+    <EmbeddedResource Include="data/*.txt" LogicalName="%(Filename)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MoonSharp" Version="2.0.0" />
+  </ItemGroup>
+  <!-- 原版 Steamworks 程序集(libs/Assembly-CSharp-firstpass.dll)依赖 UnityEngine.CoreModule
+       (Unity 原生), 在 Godot 下无法加载; 现已由 src/compat/SteamworksShims.cs 提供同名桩,
+       故不再引用该 DLL。 -->
+     <PropertyGroup>
+     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+     </PropertyGroup>
+</Project>

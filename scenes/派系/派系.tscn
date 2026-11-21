@@ -1,0 +1,1336 @@
+[gd_scene format=3 uid="uid://dly5fmobnogab"]
+
+[ext_resource type="Script" uid="uid://ktsxx6vt7sv5" path="res://scenes/派系/派系.gd" id="1_5yr24"]
+[ext_resource type="Texture2D" uid="uid://c48dqomn2o0hh" path="res://assets/ui/派系/派系背景图.png" id="1_tf04v"]
+[ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="5_nr6g2"]
+[ext_resource type="Texture2D" uid="uid://dkma5lbcy2t6j" path="res://assets/ui/派系/军队力量背景图.png" id="14_hjfdx"]
+[ext_resource type="Texture2D" uid="uid://bb03te4j7fjt4" path="res://assets/ui/派系/军队力量图标.png" id="15_0krkq"]
+[ext_resource type="Texture2D" uid="uid://bxqb2y5qyp385" path="res://assets/ui/派系/左栏卡片背景.png" id="16_nr6g2"]
+[ext_resource type="Texture2D" uid="uid://bhw43riufx3j8" path="res://assets/ui/派系/左栏卡片背景覆盖.png" id="17_8ij5d"]
+[ext_resource type="Texture2D" uid="uid://8cvwd2a67tgm" path="res://assets/ui/派系/右侧底色.png" id="19_2kbdk"]
+[ext_resource type="Texture2D" uid="uid://dagdrpoxcyy5h" path="res://assets/ui/派系/类型背景.png" id="20_on5gx"]
+[ext_resource type="Texture2D" uid="uid://c0sjqmafxfnp4" path="res://assets/ui/派系/生育政策背景.png" id="21_on5gx"]
+[ext_resource type="Texture2D" uid="uid://c1bx0jigool1y" path="res://assets/ui/派系/派系背景.png" id="22_664wx"]
+[ext_resource type="Texture2D" uid="uid://csee6xxjlbop7" path="res://assets/ui/派系/禁止.png" id="23_7ik0l"]
+[ext_resource type="Texture2D" uid="uid://btgoyfutkq8l2" path="res://assets/ui/派系/饼图背景.png" id="24_cw14h"]
+[ext_resource type="Texture2D" uid="uid://bnapnopbpqi4i" path="res://assets/ui/派系/支持.png" id="27_t3xfp"]
+[ext_resource type="Texture2D" uid="uid://c6cbw1p4l2vcn" path="res://assets/ui/派系/生育政策按钮背景.png" id="29_5tyo3"]
+[ext_resource type="Texture2D" uid="uid://buochq5e2fqi7" path="res://assets/ui/派系/右栏背景.png" id="29_xskvm"]
+[ext_resource type="Texture2D" uid="uid://bwa7sihr2qifl" path="res://assets/ui/派系/右栏政策介绍.png" id="30_fxqvd"]
+[ext_resource type="Script" uid="uid://beaco4pprp3ui" path="res://scenes/派系/派系饼图.gd" id="30_pie"]
+[ext_resource type="Texture2D" uid="uid://b1lgv4d66blrj" path="res://assets/ui/外交/右侧栏展开按钮.png" id="31_axfdf"]
+[ext_resource type="Texture2D" uid="uid://84h14pkjg236" path="res://assets/ui/派系/政策背景图标.png" id="32_axfdf"]
+[ext_resource type="PackedScene" uid="uid://ce3cbk18lse3v" path="res://scenes/通用/TopState.tscn" id="90_bar"]
+[ext_resource type="PackedScene" uid="uid://dab4f1a2d3e45" path="res://scenes/通用/导航栏.tscn" id="91_nav"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t3xfp"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xskvm"]
+bg_color = Color(0.6, 0.6, 0.6, 0.24705882)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f86lt"]
+bg_color = Color(0.6, 0.6, 0.6, 0.4509804)
+
+[node name="Control" type="Control" unique_id=1094361100]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5yr24")
+
+[node name="背景层" type="CanvasLayer" parent="." unique_id=915607589]
+layer = -1
+
+[node name="派系背景图" type="TextureRect" parent="背景层" unique_id=1326782302]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_tf04v")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="状态栏" parent="." unique_id=2057575870 instance=ExtResource("90_bar")]
+
+[node name="导航栏" parent="." unique_id=1716831839 instance=ExtResource("91_nav")]
+
+[node name="军队力量背景图" type="TextureRect" parent="." unique_id=1480023552]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 192.0
+offset_right = 235.0
+offset_bottom = 256.0
+texture = ExtResource("14_hjfdx")
+expand_mode = 1
+
+[node name="军队力量图标" type="TextureRect" parent="." unique_id=1481712386]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 198.0
+offset_right = 107.0
+offset_bottom = 250.0
+texture = ExtResource("15_0krkq")
+expand_mode = 1
+
+[node name="军队力量" type="Label" parent="." unique_id=968857079]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 197.0
+offset_right = 229.0
+offset_bottom = 255.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 51
+text = "100.0"
+horizontal_alignment = 1
+
+[node name="经济类型背景" type="TextureButton" parent="." unique_id=35077576]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 273.0
+offset_right = 410.0
+offset_bottom = 393.0
+texture_normal = ExtResource("16_nr6g2")
+texture_hover = ExtResource("17_8ij5d")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="经济类型标题" type="Label" parent="." unique_id=1998684405]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 282.0
+offset_right = 282.0
+offset_bottom = 315.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 29
+text = "经济类型"
+
+[node name="经济类型显示" type="Label" parent="." unique_id=1515793836]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 324.0
+offset_right = 404.0
+offset_bottom = 387.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 35
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="经济类型切换" type="Button" parent="." unique_id=352547526]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 273.0
+offset_right = 408.0
+offset_bottom = 392.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_t3xfp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xskvm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f86lt")
+icon_alignment = 1
+
+[node name="党政背景" type="TextureButton" parent="." unique_id=465666277]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 400.0
+offset_right = 410.0
+offset_bottom = 520.0
+texture_normal = ExtResource("16_nr6g2")
+texture_hover = ExtResource("17_8ij5d")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="党政标题" type="Label" parent="." unique_id=1367603555]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 410.0
+offset_right = 315.0
+offset_bottom = 443.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 29
+text = "党政"
+
+[node name="党政显示" type="Label" parent="." unique_id=1481402026]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 451.0
+offset_right = 404.0
+offset_bottom = 514.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 35
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="党政切换" type="Button" parent="." unique_id=149318873]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 401.0
+offset_right = 408.0
+offset_bottom = 520.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_t3xfp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xskvm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f86lt")
+icon_alignment = 1
+
+[node name="人权背景" type="TextureButton" parent="." unique_id=1555962163]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 528.0
+offset_right = 410.0
+offset_bottom = 648.0
+texture_normal = ExtResource("16_nr6g2")
+texture_hover = ExtResource("17_8ij5d")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="人权标题" type="Label" parent="." unique_id=2091536777]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 538.0
+offset_right = 315.0
+offset_bottom = 571.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 29
+text = "人权"
+
+[node name="人权显示" type="Label" parent="." unique_id=835527966]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 579.0
+offset_right = 404.0
+offset_bottom = 642.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 35
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="人权切换" type="Button" parent="." unique_id=1983169954]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 529.0
+offset_right = 408.0
+offset_bottom = 648.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_t3xfp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xskvm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f86lt")
+icon_alignment = 1
+
+[node name="国家体制背景" type="TextureButton" parent="." unique_id=1327522882]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 656.0
+offset_right = 410.0
+offset_bottom = 776.0
+texture_normal = ExtResource("16_nr6g2")
+texture_hover = ExtResource("17_8ij5d")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="国家体制标题" type="Label" parent="." unique_id=432335427]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 666.0
+offset_right = 283.0
+offset_bottom = 699.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 29
+text = "国家体制"
+
+[node name="国家体制显示" type="Label" parent="." unique_id=1835123277]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 707.0
+offset_right = 404.0
+offset_bottom = 770.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 35
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="国家体制切换" type="Button" parent="." unique_id=1799660552]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 657.0
+offset_right = 408.0
+offset_bottom = 776.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_t3xfp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xskvm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f86lt")
+icon_alignment = 1
+
+[node name="传统与宗教背景" type="TextureButton" parent="." unique_id=986685205]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 784.0
+offset_right = 410.0
+offset_bottom = 904.0
+texture_normal = ExtResource("16_nr6g2")
+texture_hover = ExtResource("17_8ij5d")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="传统与宗教标题" type="Label" parent="." unique_id=465937074]
+layout_mode = 0
+offset_left = 151.0
+offset_top = 794.0
+offset_right = 296.0
+offset_bottom = 827.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 29
+text = "传统与宗教"
+
+[node name="传统与宗教显示" type="Label" parent="." unique_id=1003537532]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 835.0
+offset_right = 404.0
+offset_bottom = 898.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 35
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="传统与宗教切换" type="Button" parent="." unique_id=2004162472]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 785.0
+offset_right = 408.0
+offset_bottom = 904.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_t3xfp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xskvm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f86lt")
+icon_alignment = 1
+
+[node name="军事力量背景" type="TextureButton" parent="." unique_id=1295438514]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 912.0
+offset_right = 410.0
+offset_bottom = 1032.0
+texture_normal = ExtResource("16_nr6g2")
+texture_hover = ExtResource("17_8ij5d")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="军事力量标题" type="Label" parent="." unique_id=849356274]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 922.0
+offset_right = 309.0
+offset_bottom = 955.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 29
+text = "军事力量"
+
+[node name="军事力量显示" type="Label" parent="." unique_id=549081314]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 963.0
+offset_right = 404.0
+offset_bottom = 1026.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 35
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="军事力量切换" type="Button" parent="." unique_id=160819865]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 913.0
+offset_right = 408.0
+offset_bottom = 1032.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_t3xfp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xskvm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f86lt")
+icon_alignment = 1
+
+[node name="右侧底色" type="TextureRect" parent="." unique_id=1142206028]
+layout_mode = 0
+offset_left = 437.0
+offset_top = 204.0
+offset_right = 1420.0
+offset_bottom = 1037.0
+texture = ExtResource("19_2kbdk")
+
+[node name="政体类型背景" type="TextureRect" parent="." unique_id=579022141]
+layout_mode = 0
+offset_left = 443.0
+offset_top = 210.0
+offset_right = 926.0
+offset_bottom = 373.0
+texture = ExtResource("20_on5gx")
+
+[node name="政体类型" type="Label" parent="." unique_id=1069824506]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 242.0
+offset_right = 888.0
+offset_bottom = 338.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="政治路线类型背景" type="TextureRect" parent="." unique_id=1805771290]
+layout_mode = 0
+offset_left = 931.0
+offset_top = 210.0
+offset_right = 1414.0
+offset_bottom = 373.0
+texture = ExtResource("20_on5gx")
+
+[node name="政治路线类型" type="Label" parent="." unique_id=1680669905]
+layout_mode = 0
+offset_left = 968.0
+offset_top = 242.0
+offset_right = 1376.0
+offset_bottom = 338.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="中共党内派系背景图" type="TextureRect" parent="." unique_id=1707048687]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 386.0
+offset_right = 922.0
+offset_bottom = 441.0
+texture = ExtResource("21_on5gx")
+
+[node name="中共党内派系" type="Label" parent="." unique_id=13573174]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 400.0
+offset_right = 914.0
+offset_bottom = 435.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 20
+text = "中共党内派系"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="极左派背景" type="TextureRect" parent="." unique_id=172374306]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 451.0
+offset_right = 922.0
+offset_bottom = 547.0
+texture = ExtResource("22_664wx")
+expand_mode = 1
+
+[node name="极左派" type="Label" parent="." unique_id=1176394223]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 468.0
+offset_right = 800.0
+offset_bottom = 533.0
+theme_override_colors/font_color = Color(0.725, 0.008, 0.008, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 30
+text = "极左派"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="支持极左派" type="TextureButton" parent="." unique_id=671265866]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 481.0
+offset_right = 523.0
+offset_bottom = 520.0
+toggle_mode = true
+texture_normal = ExtResource("23_7ik0l")
+texture_pressed = ExtResource("27_t3xfp")
+texture_hover = ExtResource("27_t3xfp")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="禁止极左派" type="TextureButton" parent="." unique_id=1980144902]
+layout_mode = 0
+offset_left = 846.0
+offset_top = 481.0
+offset_right = 889.0
+offset_bottom = 520.0
+toggle_mode = true
+texture_normal = ExtResource("27_t3xfp")
+texture_pressed = ExtResource("23_7ik0l")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="保守派背景" type="TextureRect" parent="." unique_id=1912625589]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 555.0
+offset_right = 922.0
+offset_bottom = 651.0
+texture = ExtResource("22_664wx")
+expand_mode = 1
+
+[node name="保守派" type="Label" parent="." unique_id=679436393]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 572.0
+offset_right = 800.0
+offset_bottom = 637.0
+theme_override_colors/font_color = Color(0.588, 0.102, 0.984, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 30
+text = "保守派"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="支持保守派" type="TextureButton" parent="." unique_id=1091822438]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 585.0
+offset_right = 523.0
+offset_bottom = 624.0
+toggle_mode = true
+texture_normal = ExtResource("23_7ik0l")
+texture_pressed = ExtResource("27_t3xfp")
+texture_hover = ExtResource("27_t3xfp")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="温和派背景" type="TextureRect" parent="." unique_id=1414061241]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 659.0
+offset_right = 922.0
+offset_bottom = 755.0
+texture = ExtResource("22_664wx")
+expand_mode = 1
+
+[node name="禁止温和派" type="TextureButton" parent="." unique_id=32986762]
+layout_mode = 0
+offset_left = 846.0
+offset_top = 689.0
+offset_right = 889.0
+offset_bottom = 728.0
+toggle_mode = true
+texture_normal = ExtResource("27_t3xfp")
+texture_pressed = ExtResource("23_7ik0l")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="温和派" type="Label" parent="." unique_id=851929863]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 676.0
+offset_right = 800.0
+offset_bottom = 741.0
+theme_override_colors/font_color = Color(0.98, 0.337, 0.325, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 30
+text = "温和派"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="支持温和派" type="TextureButton" parent="." unique_id=979906789]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 689.0
+offset_right = 523.0
+offset_bottom = 728.0
+toggle_mode = true
+texture_normal = ExtResource("23_7ik0l")
+texture_pressed = ExtResource("27_t3xfp")
+texture_hover = ExtResource("27_t3xfp")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="改革派背景" type="TextureRect" parent="." unique_id=1629514144]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 763.0
+offset_right = 922.0
+offset_bottom = 859.0
+texture = ExtResource("22_664wx")
+expand_mode = 1
+
+[node name="支持改革派" type="TextureButton" parent="." unique_id=1848605054]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 793.0
+offset_right = 523.0
+offset_bottom = 832.0
+toggle_mode = true
+texture_normal = ExtResource("23_7ik0l")
+texture_pressed = ExtResource("27_t3xfp")
+texture_hover = ExtResource("27_t3xfp")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="禁止改革派" type="TextureButton" parent="." unique_id=1181042685]
+layout_mode = 0
+offset_left = 846.0
+offset_top = 793.0
+offset_right = 889.0
+offset_bottom = 832.0
+toggle_mode = true
+texture_normal = ExtResource("27_t3xfp")
+texture_pressed = ExtResource("23_7ik0l")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="改革派" type="Label" parent="." unique_id=1202670113]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 780.0
+offset_right = 800.0
+offset_bottom = 845.0
+theme_override_colors/font_color = Color(0, 0.659, 0.043, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 30
+text = "改革派"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="自由派背景" type="TextureRect" parent="." unique_id=1719038536]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 868.0
+offset_right = 922.0
+offset_bottom = 964.0
+texture = ExtResource("22_664wx")
+expand_mode = 1
+
+[node name="支持自由派" type="TextureButton" parent="." unique_id=908697258]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 897.0
+offset_right = 523.0
+offset_bottom = 936.0
+toggle_mode = true
+texture_normal = ExtResource("23_7ik0l")
+texture_pressed = ExtResource("27_t3xfp")
+texture_hover = ExtResource("27_t3xfp")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="禁止自由派" type="TextureButton" parent="." unique_id=446569220]
+layout_mode = 0
+offset_left = 846.0
+offset_top = 897.0
+offset_right = 889.0
+offset_bottom = 936.0
+toggle_mode = true
+texture_normal = ExtResource("27_t3xfp")
+texture_pressed = ExtResource("23_7ik0l")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="自由派" type="Label" parent="." unique_id=726926416]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 884.0
+offset_right = 800.0
+offset_bottom = 949.0
+theme_override_colors/font_color = Color(0, 0.502, 0.737, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 30
+text = "自由派"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="饼图背景" type="TextureRect" parent="." unique_id=954619277]
+layout_mode = 0
+offset_left = 959.0
+offset_top = 467.0
+offset_right = 1369.0
+offset_bottom = 826.0
+texture = ExtResource("24_cw14h")
+
+[node name="派系饼图" type="Control" parent="." unique_id=911340459]
+anchors_preset = 0
+offset_left = 966.0
+offset_top = 472.0
+offset_right = 1364.0
+offset_bottom = 821.0
+script = ExtResource("30_pie")
+
+[node name="生育政策背景" type="TextureRect" parent="." unique_id=895124966]
+layout_mode = 0
+offset_left = 927.0
+offset_top = 830.0
+offset_right = 1401.0
+offset_bottom = 885.0
+texture = ExtResource("21_on5gx")
+
+[node name="生育政策" type="Label" parent="." unique_id=301824067]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 836.0
+offset_right = 1236.0
+offset_bottom = 879.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 37
+text = "家庭政策"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="一胎制" type="Button" parent="." unique_id=970002362]
+layout_mode = 0
+offset_left = 926.0
+offset_top = 904.0
+offset_right = 1408.0
+offset_bottom = 967.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9490196, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 39
+toggle_mode = true
+text = "一胎制"
+icon = ExtResource("21_on5gx")
+icon_alignment = 1
+expand_icon = true
+
+[node name="二胎制" type="Button" parent="." unique_id=1012862115]
+layout_mode = 0
+offset_left = 927.0
+offset_top = 949.0
+offset_right = 1409.0
+offset_bottom = 1012.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9490196, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 39
+toggle_mode = true
+text = "二胎制"
+icon = ExtResource("21_on5gx")
+icon_alignment = 1
+expand_icon = true
+
+[node name="无限制" type="Button" parent="." unique_id=968961804]
+layout_mode = 0
+offset_left = 1168.0
+offset_top = 949.0
+offset_right = 1650.0
+offset_bottom = 1012.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.9490196, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9490196, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 39
+toggle_mode = true
+text = "无限制"
+icon = ExtResource("21_on5gx")
+icon_alignment = 1
+expand_icon = true
+
+[node name="演讲" type="Button" parent="." unique_id=1098271231]
+visible = false
+layout_mode = 0
+offset_left = 951.0
+offset_top = 423.0
+offset_right = 1151.0
+offset_bottom = 453.0
+tooltip_text = "Update in May and November"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 18
+text = "演讲"
+icon = ExtResource("29_5tyo3")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="经济同盟" type="Button" parent="." unique_id=1934683356]
+layout_mode = 0
+offset_left = 1176.0
+offset_top = 423.0
+offset_right = 1376.0
+offset_bottom = 453.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 18
+text = "经济同盟"
+icon = ExtResource("29_5tyo3")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="选举" type="Button" parent="." unique_id=1063187249]
+layout_mode = 0
+offset_left = 951.0
+offset_top = 386.0
+offset_right = 1151.0
+offset_bottom = 416.0
+tooltip_text = "每年一次"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 18
+text = "选举"
+icon = ExtResource("29_5tyo3")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="军事同盟" type="Button" parent="." unique_id=1187328431]
+layout_mode = 0
+offset_left = 1176.0
+offset_top = 386.0
+offset_right = 1376.0
+offset_bottom = 416.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 18
+text = "军事同盟"
+icon = ExtResource("29_5tyo3")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="右栏背景" type="TextureRect" parent="." unique_id=2104346500]
+layout_mode = 0
+offset_left = 1488.0
+offset_top = 204.0
+offset_right = 1862.0
+offset_bottom = 923.0
+texture = ExtResource("29_xskvm")
+
+[node name="右栏政策介绍展开" type="TextureButton" parent="." unique_id=1013647042]
+visible = false
+layout_mode = 0
+offset_left = 1568.0
+offset_top = 1080.0
+offset_right = 1608.0
+offset_bottom = 1318.0
+rotation = -1.5707964
+texture_normal = ExtResource("31_axfdf")
+
+[node name="右栏政策介绍" type="Control" parent="." unique_id=1368863571]
+anchors_preset = 0
+offset_left = 1568.0
+offset_top = 1080.0
+offset_right = 1608.0
+offset_bottom = 1120.0
+
+[node name="右栏政策介绍背景" type="TextureRect" parent="右栏政策介绍" unique_id=1320457045]
+layout_mode = 0
+offset_left = -204.0
+offset_top = -144.0
+offset_right = 336.0
+offset_bottom = 414.0
+texture = ExtResource("30_fxqvd")
+
+[node name="右栏政策介绍收回" type="TextureButton" parent="右栏政策介绍" unique_id=1151877710]
+layout_mode = 0
+offset_left = 240.0
+offset_top = -168.0
+offset_right = 280.0
+offset_bottom = 70.0
+rotation = 1.5707964
+texture_normal = ExtResource("31_axfdf")
+
+[node name="右栏政策介绍文案" type="RichTextLabel" parent="右栏政策介绍" unique_id=243015377]
+layout_mode = 0
+offset_left = -104.0
+offset_top = -136.0
+offset_right = 336.0
+offset_bottom = 414.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("5_nr6g2")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+scroll_active = false
+
+[node name="右栏经济类型" type="GridContainer" parent="." unique_id=2043003623]
+columns = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 6
+visible = false
+anchors_preset = 0
+offset_left = 1493.0
+offset_top = 208.0
+offset_right = 1857.0
+offset_bottom = 386.0
+
+[node name="中央计划经济" type="Button" parent="右栏经济类型" unique_id=1666872368]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 15
+text = "中央计划经济"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="中式计划经济" type="Button" parent="右栏经济类型" unique_id=345347908]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 15
+text = "中式计划经济"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="国家资本主义" type="Button" parent="右栏经济类型" unique_id=991858082]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 15
+text = "国家资本主义"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="国控资本主义" type="Button" parent="右栏经济类型" unique_id=1394240279]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 15
+text = "国控资本主义"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="市场经济" type="Button" parent="右栏经济类型" unique_id=255292199]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 15
+text = "市场经济"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="自由市场" type="Button" parent="右栏经济类型" unique_id=1458025116]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 15
+text = "自由市场"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="右栏党政" type="GridContainer" parent="." unique_id=2147456495]
+columns = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 6
+visible = false
+anchors_preset = 0
+offset_left = 1493.0
+offset_top = 208.0
+offset_right = 1857.0
+offset_bottom = 386.0
+
+[node name="无产阶级专政" type="Button" parent="右栏党政" unique_id=745309898]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "无产阶级专政"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="人民民主专政" type="Button" parent="右栏党政" unique_id=1653186547]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "人民民主专政"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="联合政府" type="Button" parent="右栏党政" unique_id=160279031]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "联合政府"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="西式民主" type="Button" parent="右栏党政" unique_id=1523216757]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "西式民主"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="右栏人权" type="GridContainer" parent="." unique_id=1777318600]
+columns = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 6
+visible = false
+anchors_preset = 0
+offset_left = 1493.0
+offset_top = 208.0
+offset_right = 1857.0
+offset_bottom = 386.0
+
+[node name="舆论一律" type="Button" parent="右栏人权" unique_id=596535209]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "舆论一律"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="纪律约束" type="Button" parent="右栏人权" unique_id=1874527528]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "纪律约束"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="自然限制" type="Button" parent="右栏人权" unique_id=338295245]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "自然限制"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="多元自由" type="Button" parent="右栏人权" unique_id=98539841]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "多元自由"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="右栏国家体制" type="GridContainer" parent="." unique_id=592192026]
+columns = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 6
+visible = false
+anchors_preset = 0
+offset_left = 1493.0
+offset_top = 208.0
+offset_right = 1857.0
+offset_bottom = 386.0
+
+[node name="单一制" type="Button" parent="右栏国家体制" unique_id=770360286]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 15
+text = "单一制"
+icon = ExtResource("32_axfdf")
+flat = true
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="区域自治" type="Button" parent="右栏国家体制" unique_id=421067468]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 15
+text = "区域自治"
+icon = ExtResource("32_axfdf")
+flat = true
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="联邦制" type="Button" parent="右栏国家体制" unique_id=734659436]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 15
+text = "联邦制"
+icon = ExtResource("32_axfdf")
+flat = true
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="邦联制" type="Button" parent="右栏国家体制" unique_id=762746967]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 15
+text = "邦联制"
+icon = ExtResource("32_axfdf")
+flat = true
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="右栏传统与宗教" type="GridContainer" parent="." unique_id=832272418]
+columns = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 6
+visible = false
+anchors_preset = 0
+offset_left = 1493.0
+offset_top = 208.0
+offset_right = 1857.0
+offset_bottom = 386.0
+
+[node name="文化革命" type="Button" parent="右栏传统与宗教" unique_id=416722024]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "文化革命"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="国家无神论" type="Button" parent="右栏传统与宗教" unique_id=1536968132]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "国家无神论"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="宗教管制" type="Button" parent="右栏传统与宗教" unique_id=328409046]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "宗教管制"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="世俗化" type="Button" parent="右栏传统与宗教" unique_id=972712462]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "世俗化"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="尊崇传统" type="Button" parent="右栏传统与宗教" unique_id=2046095121]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "尊崇传统"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="政教协定" type="Button" parent="右栏传统与宗教" unique_id=1274250410]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "政教协定"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="右栏军事力量" type="GridContainer" parent="." unique_id=1632472749]
+columns = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 6
+visible = false
+anchors_preset = 0
+offset_left = 1493.0
+offset_top = 208.0
+offset_right = 1857.0
+offset_bottom = 386.0
+
+[node name="全民皆兵" type="Button" parent="右栏军事力量" unique_id=1704708349]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "全民皆兵"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="积极建军" type="Button" parent="右栏军事力量" unique_id=1850749638]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "积极建军"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="国防建设" type="Button" parent="右栏军事力量" unique_id=1528295315]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "国防建设"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="职业化军队" type="Button" parent="右栏军事力量" unique_id=1918032311]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 49)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 19
+text = "职业化军队"
+icon = ExtResource("32_axfdf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="右栏条件显示" type="Label" parent="." unique_id=1041981016]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.77900004
+anchor_top = 0.356
+anchor_right = 0.96700007
+anchor_bottom = 0.84900004
+offset_left = -2.6800537
+offset_top = 2.519989
+offset_right = -0.6401367
+offset_bottom = 0.079956055
+theme_override_colors/font_color = Color(0.9717987, 0.7901859, 0.27066344, 1)
+theme_override_fonts/font = ExtResource("5_nr6g2")
+theme_override_font_sizes/font_size = 15
+text = "预算中的资金:10[未满足]
+
+
+党内团结度高于:60[满足]
+
+
+极左派领导[未满足]
+
+
+
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

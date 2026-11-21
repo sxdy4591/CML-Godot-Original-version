@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://cb1wvmuscp64r"]
+
+[ext_resource type="Script" uid="uid://cqeqon3tad476" path="res://scenes/关于/关于.gd" id="1_about"]
+[ext_resource type="Texture2D" uid="uid://b38i80xdwkwj2" path="res://assets/ui/战争/战争界面背景.png" id="2_4m8nb"]
+[ext_resource type="Texture2D" uid="uid://cfgjt7xid6e4m" path="res://assets/other/qq.jpg" id="3_or31s"]
+[ext_resource type="Texture2D" uid="uid://bjrijj4u7r6bm" path="res://assets/other/1 (1).png" id="4_1nypn"]
+[ext_resource type="Texture2D" uid="uid://dckimw12k81lg" path="res://assets/other/1 (2).png.png" id="5_qnel2"]
+[ext_resource type="FontFile" uid="uid://dbgq15wdpa7ck" path="res://assets/fonts/方正跃进简体.ttf" id="6_or31s"]
+
+[node name="关于" type="Control" unique_id=203181202]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_about")
+
+[node name="背景图" type="TextureRect" parent="." unique_id=542285026]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0015625
+anchor_top = -0.0009259259
+anchor_right = 1.0213542
+anchor_bottom = 1.0305556
+texture = ExtResource("2_4m8nb")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="返回主菜单" type="Button" parent="." unique_id=1012651766]
+layout_mode = 1
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 240.0
+offset_bottom = 104.0
+theme_override_font_sizes/font_size = 32
+text = "返回主菜单"
+
+[node name="qq群" type="TextureRect" parent="." unique_id=436309206]
+layout_mode = 0
+offset_left = 1379.0
+offset_top = 100.0
+offset_right = 1802.0
+offset_bottom = 851.8374
+texture = ExtResource("3_or31s")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="demo1" type="TextureRect" parent="." unique_id=1084896332]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 155.0
+offset_right = 753.1111
+offset_bottom = 528.0
+texture = ExtResource("4_1nypn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="demo2" type="TextureRect" parent="." unique_id=1426282532]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 555.0
+offset_right = 753.1111
+offset_bottom = 928.0
+texture = ExtResource("5_qnel2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="二版介绍" type="Label" parent="." unique_id=309536209]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 948.0
+offset_right = 929.0
+offset_bottom = 1068.0
+theme_override_colors/font_color = Color(0.63888407, 2.0214916e-06, 4.813075e-07, 1)
+theme_override_fonts/font = ExtResource("6_or31s")
+theme_override_font_sizes/font_size = 106
+text = "二版概念UI[开发中]"
+
+[node name="一版介绍" type="Label" parent="." unique_id=1540796132]
+layout_mode = 0
+offset_left = 1348.0
+offset_top = 968.0
+offset_right = 1853.0
+offset_bottom = 1088.0
+theme_override_colors/font_color = Color(0.63888407, 2.0214916e-06, 4.813075e-07, 1)
+theme_override_fonts/font = ExtResource("6_or31s")
+theme_override_font_sizes/font_size = 70
+text = "一版资源分享"
+
+[connection signal="pressed" from="返回主菜单" to="." method="_on_返回主菜单_pressed"]

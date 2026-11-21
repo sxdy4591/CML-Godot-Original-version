@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://db47bnr0pf0b5"]
+
+[ext_resource type="Texture2D" uid="uid://blrge8el0h1wf" path="res://assets/ui/ESC菜单/ESC背景.png" id="16_qo2jh"]
+[ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="17_v5qqf"]
+[ext_resource type="Texture2D" uid="uid://bf36qtmdti3rd" path="res://assets/ui/加载/加载文本栏.png" id="19_puxd1"]
+[ext_resource type="Script" uid="uid://dpg371khkc858" path="res://scenes/通用/ESC菜单.gd" id="39_7aa6i"]
+
+[node name="ESC菜单" type="CanvasLayer" unique_id=88805292]
+script = ExtResource("39_7aa6i")
+
+[node name="ESC菜单背景" type="TextureRect" parent="." unique_id=1469376975]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -173.0
+offset_top = -303.0
+offset_right = 135.0
+offset_bottom = 259.0
+texture = ExtResource("16_qo2jh")
+
+[node name="Label" type="Label" parent="." unique_id=2130791309]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -260.0
+offset_right = 115.0
+offset_bottom = -188.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.47479695, 1.1130236e-06, 3.6098064e-07, 1)
+theme_override_constants/line_spacing = -12
+theme_override_fonts/font = ExtResource("17_v5qqf")
+theme_override_font_sizes/font_size = 27
+text = "中国:毛的遗产
+[Godot移植]"
+horizontal_alignment = 1
+
+[node name="存档" type="Button" parent="." unique_id=1649490135]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -180.0
+offset_right = 70.0
+offset_bottom = -96.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_v5qqf")
+theme_override_font_sizes/font_size = 28
+text = "存档"
+icon = ExtResource("19_puxd1")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="加载" type="Button" parent="." unique_id=534433302]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -110.0
+offset_right = 70.0
+offset_bottom = -26.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_v5qqf")
+theme_override_font_sizes/font_size = 28
+text = "加载
+"
+icon = ExtResource("19_puxd1")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="设置" type="Button" parent="." unique_id=1456121837]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -37.0
+offset_right = 70.0
+offset_bottom = 47.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_v5qqf")
+theme_override_font_sizes/font_size = 28
+text = "设置
+"
+icon = ExtResource("19_puxd1")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="退出" type="Button" parent="." unique_id=216678351]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = 36.0
+offset_right = 70.0
+offset_bottom = 120.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_v5qqf")
+theme_override_font_sizes/font_size = 28
+text = "退出
+"
+icon = ExtResource("19_puxd1")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="结束" type="Button" parent="." unique_id=216678352]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = 106.0
+offset_right = 70.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_v5qqf")
+theme_override_font_sizes/font_size = 28
+text = "结 束
+"
+icon = ExtResource("19_puxd1")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="关闭" type="Button" parent="." unique_id=216678360]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -117.0
+offset_top = 196.0
+offset_right = 68.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_v5qqf")
+theme_override_font_sizes/font_size = 24
+text = "关闭"
+icon = ExtResource("19_puxd1")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="存档" to="." method="_on_存档_pressed"]
+[connection signal="pressed" from="加载" to="." method="_on_加载_pressed"]
+[connection signal="pressed" from="设置" to="." method="_on_设置_pressed"]
+[connection signal="pressed" from="退出" to="." method="_on_退出_pressed"]
+[connection signal="pressed" from="结束" to="." method="_on_结束_pressed"]
+[connection signal="pressed" from="关闭" to="." method="_on_关闭_pressed"]

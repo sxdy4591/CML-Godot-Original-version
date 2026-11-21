@@ -1,0 +1,106 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/战争/战争.gd" id="1_war"]
+[ext_resource type="Texture2D" path="res://assets/ui/战争/战争界面背景.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/ui/战争/军事介入点背景.png" id="3_panel"]
+[ext_resource type="FontFile" path="res://assets/ui/theme/font.ttf" id="4_font"]
+[ext_resource type="PackedScene" path="res://scenes/通用/TopState.tscn" id="5_state"]
+[ext_resource type="PackedScene" path="res://scenes/通用/导航栏.tscn" id="6_nav"]
+
+[node name="战争" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_war")
+
+[node name="背景" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="状态栏" parent="." instance=ExtResource("5_state")]
+
+[node name="导航栏" parent="." instance=ExtResource("6_nav")]
+
+[node name="军事介入点背景" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 800.0
+offset_right = 254.0
+offset_bottom = 945.0
+mouse_filter = 2
+texture = ExtResource("3_panel")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="军事介入点数值" type="Label" parent="."]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 808.0
+offset_right = 248.0
+offset_bottom = 880.0
+theme_override_colors/font_color = Color(0.3, 0.15, 0.05, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 44
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="军事介入点文字" type="Label" parent="."]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 889.0
+offset_right = 249.0
+offset_bottom = 941.0
+theme_override_colors/font_color = Color(0.3, 0.15, 0.05, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 20
+text = "军事介入点"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="战争列表滚动" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 176.0
+offset_right = 1800.0
+offset_bottom = 1040.0
+horizontal_scroll_mode = 0
+
+[node name="战争列表" type="VBoxContainer" parent="战争列表滚动"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="空列表提示" type="Label" parent="."]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 520.0
+offset_right = 1600.0
+offset_bottom = 580.0
+theme_override_colors/font_color = Color(0.75, 0.72, 0.68, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 28
+text = "暂无进行中的战争"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="返回" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1800.0
+offset_top = 955.0
+offset_right = 1900.0
+offset_bottom = 1025.0
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 24
+text = "返回"

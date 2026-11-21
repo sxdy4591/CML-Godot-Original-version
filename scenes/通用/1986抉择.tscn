@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://r6qwt218ctg5"]
+
+[ext_resource type="Script" uid="uid://dy8g4ua86vvhd" path="res://scenes/通用/1986抉择.gd" id="1_reborn"]
+[ext_resource type="Texture2D" uid="uid://c23mmls5tc6km" path="res://assets/ui/common/切场景菜单背景.png" id="2_bg"]
+[ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="3_font"]
+[ext_resource type="Texture2D" uid="uid://bnfxcvb8w8fmk" path="res://assets/ui/概览/切换显示按钮背景.png" id="4_xgq5u"]
+
+[node name="1986抉择" type="CanvasLayer" unique_id=589226014]
+layer = 60
+script = ExtResource("1_reborn")
+
+[node name="遮罩" type="ColorRect" parent="." unique_id=356242001]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.66)
+
+[node name="面板" type="TextureRect" parent="." unique_id=2103091326]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -660.0
+offset_top = -390.0
+offset_right = 660.0
+offset_bottom = 390.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="标题" type="Label" parent="面板" unique_id=1519405182]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 50.0
+offset_right = 1268.0
+offset_bottom = 114.0
+theme_override_colors/font_color = Color(0.36, 0.09, 0.06, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 42
+text = "是时候为了我们的未来！"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="正文" type="RichTextLabel" parent="面板" unique_id=1912328072]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 108.0
+offset_right = 1264.0
+offset_bottom = 650.0
+mouse_filter = 1
+theme_override_colors/default_color = Color(0.18, 0.12, 0.08, 1)
+theme_override_fonts/normal_font = ExtResource("3_font")
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "[center]同志！[/center]
+　　我们已经迈上实现中华民族伟大复兴的光明大道！未来纵有艰难险阻，但只要不忘初心，砥砺前行，必然能赢得更加伟大的胜利和荣光。你就像我们的太阳，指引着人民前进的方向。
+
+　　在这里可以选择继续掌权，直至永远，按照你的意愿塑造世界秩序，且在任何时候都可以结束游戏。但从新的时间段开始，将无法取得任何成就。
+
+　　当然，也可以就此功成身退：只要选取右侧的按钮，即可结束游戏进入摘要窗口。此界面将对你这几年的执政作出评判，同时也会展示全球未来的走向。最最重要的是，可以解锁成就！
+
+[center]现在由你抉择。[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="继续掌权" type="Button" parent="面板" unique_id=1664785335]
+layout_mode = 0
+offset_left = 452.0
+offset_top = 634.0
+offset_right = 792.0
+offset_bottom = 706.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 30
+text = "继续掌权"
+icon = ExtResource("4_xgq5u")
+flat = true
+icon_alignment = 1
+
+[node name="功成身退" type="Button" parent="面板" unique_id=1415550106]
+layout_mode = 0
+offset_left = 852.0
+offset_top = 634.0
+offset_right = 1192.0
+offset_bottom = 706.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 30
+text = "功成身退"
+icon = ExtResource("4_xgq5u")
+flat = true
+icon_alignment = 1

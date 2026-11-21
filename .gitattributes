@@ -1,0 +1,33 @@
+# 统一换行：仓库内一律 LF（Windows 上由编辑器/工具自行处理）
+* text=auto eol=lf
+
+# Godot 文本资源：必须 LF，且按文本 merge（冲突时按行看）
+*.tscn    text eol=lf
+*.tres    text eol=lf
+*.gd      text eol=lf
+*.cs      text eol=lf
+*.godot   text eol=lf
+*.cfg     text eol=lf
+*.import  text eol=lf
+*.ps1     text eol=lf
+*.py      text eol=lf
+*.mjs     text eol=lf
+*.md      text eol=lf
+*.json    text eol=lf
+
+# 二进制：不做换行转换，也不做文本 diff
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.webp    binary
+*.bmp     binary
+*.ttf     binary
+*.otf     binary
+*.wav     binary
+*.ogg     binary
+*.mp3     binary
+*.res     binary
+*.scn     binary
+*.dll     binary
+*.pdb     binary
+*.zip     binary

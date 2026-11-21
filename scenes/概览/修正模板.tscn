@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://h5f64dki332c"]
+
+[ext_resource type="Script" uid="uid://ccg0mnnuwri5h" path="res://scenes/概览/修正模板.gd" id="1_cjxle"]
+[ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="2_font"]
+
+[node name="修正模板" type="VBoxContainer" unique_id=347179006]
+theme_override_constants/separation = 14
+script = ExtResource("1_cjxle")
+
+[node name="横排" type="HBoxContainer" parent="." unique_id=100677075]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="图标" type="TextureRect" parent="横排" unique_id=744976430]
+custom_minimum_size = Vector2(104, 93)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="纵排" type="VBoxContainer" parent="横排" unique_id=1810186397]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="名称" type="Label" parent="横排/纵排" unique_id=1434750376]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.58, 0.09, 0.07, 1)
+theme_override_colors/font_outline_color = Color(0.58, 0.09, 0.07, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 28
+text = "修正名"
+autowrap_mode = 3
+
+[node name="效果" type="RichTextLabel" parent="横排/纵排" unique_id=1807964086]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(0.09, 0.06, 0.05, 1)
+theme_override_fonts/normal_font = ExtResource("2_font")
+theme_override_font_sizes/normal_font_size = 19
+bbcode_enabled = true
+fit_content = true
+scroll_active = false

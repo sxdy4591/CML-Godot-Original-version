@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://bydan4iqthbaa"]
+
+[ext_resource type="Script" uid="uid://bewf4gcklphop" path="res://scenes/主菜单/主菜单.gd" id="1_pxw8f"]
+[ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="2_i5hij"]
+[ext_resource type="Texture2D" uid="uid://dyguj0ay7w44n" path="res://assets/ui/主菜单/主菜单按钮.png" id="2_ngrxy"]
+[ext_resource type="Texture2D" uid="uid://vcsjiyi2j6yf" path="res://assets/ui/主菜单/menyu_fon.png" id="2_psws0"]
+
+[node name="Control" type="Control" unique_id=1650672303]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pxw8f")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1793982612]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+texture = ExtResource("2_psws0")
+expand_mode = 1
+
+[node name="开始" type="Button" parent="." unique_id=878493979 groups=["UI场景"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.391146
+anchor_top = 0.755556
+anchor_right = 0.624479
+anchor_bottom = 0.888889
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.4467768, 0.446777, 0.44677794, 1)
+theme_override_fonts/font = ExtResource("2_i5hij")
+theme_override_font_sizes/font_size = 62
+text = "开始游戏"
+icon = ExtResource("2_ngrxy")
+flat = true
+icon_alignment = 1
+
+[node name="关于" type="Button" parent="." unique_id=776111374]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.642188
+anchor_top = 0.827778
+anchor_right = 0.875521
+anchor_bottom = 0.961111
+rotation = -0.61086524
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.4467768, 0.446777, 0.44677794, 1)
+theme_override_fonts/font = ExtResource("2_i5hij")
+theme_override_font_sizes/font_size = 62
+text = "关于"
+icon = ExtResource("2_ngrxy")
+flat = true
+icon_alignment = 1
+
+[node name="退出" type="Button" parent="." unique_id=1820177510]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.766667
+anchor_top = 0.87037
+anchor_right = 1.0
+anchor_bottom = 1.003704
+rotation = -0.61086524
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.4467768, 0.446777, 0.44677794, 1)
+theme_override_fonts/font = ExtResource("2_i5hij")
+theme_override_font_sizes/font_size = 62
+text = "退出游戏"
+icon = ExtResource("2_ngrxy")
+flat = true
+icon_alignment = 1
+
+[node name="加载" type="Button" parent="." unique_id=510100475]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.184896
+anchor_top = 0.585185
+anchor_right = 0.418229
+anchor_bottom = 0.718519
+rotation = 0.61086524
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.4467768, 0.446777, 0.44677794, 1)
+theme_override_fonts/font = ExtResource("2_i5hij")
+theme_override_font_sizes/font_size = 62
+text = "加载"
+icon = ExtResource("2_ngrxy")
+flat = true
+icon_alignment = 1
+
+[node name="设置" type="Button" parent="." unique_id=2082171365]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.047396
+anchor_top = 0.62963
+anchor_right = 0.280729
+anchor_bottom = 0.762963
+rotation = 0.61086524
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.4467768, 0.446777, 0.44677794, 1)
+theme_override_fonts/font = ExtResource("2_i5hij")
+theme_override_font_sizes/font_size = 62
+text = "设置"
+icon = ExtResource("2_ngrxy")
+flat = true
+icon_alignment = 1
+
+[node name="项目信息" type="Label" parent="." unique_id=1449533189]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.682813
+anchor_top = 0.022222
+anchor_right = 0.991667
+anchor_bottom = 0.068519
+offset_left = -39.000977
+offset_top = 0.00024032593
+offset_right = 1.9993896
+offset_bottom = 0.00023651123
+tooltip_auto_translate_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_i5hij")
+theme_override_font_sizes/font_size = 43
+text = "中国:毛的遗产[改版-Godot移植]"
+horizontal_alignment = 2
+
+[node name="版本信息" type="RichTextLabel" parent="." unique_id=1759426325]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86927086
+anchor_top = 0.08981481
+anchor_right = 0.9916667
+anchor_bottom = 0.32037037
+tooltip_text = "内容对齐 1.132"
+mouse_filter = 0
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="检测更新" type="Button" parent="." unique_id=2086443394]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7630208
+anchor_top = 0.33055556
+anchor_right = 0.99635416
+anchor_bottom = 0.46388888
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.4467768, 0.446777, 0.44677794, 1)
+theme_override_fonts/font = ExtResource("2_i5hij")
+theme_override_font_sizes/font_size = 62
+text = "检测更新"
+icon = ExtResource("2_ngrxy")
+flat = true
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="开始" to="." method="_on_开始游戏_pressed"]
+[connection signal="pressed" from="关于" to="." method="_on_关于_pressed"]
+[connection signal="pressed" from="退出" to="." method="_on_退出_pressed"]
+[connection signal="pressed" from="加载" to="." method="_on_加载_pressed"]
+[connection signal="pressed" from="设置" to="." method="_on_设置_pressed"]
