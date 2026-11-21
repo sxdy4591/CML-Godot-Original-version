@@ -199,12 +199,12 @@ public partial class UnityRuntime : Node
 					if (_startedSet.Add(mb)) InvokeLifecycle(mb, "Start");
 					if (mb.enabled)
 					{
-						// 世界时间仅在外交场景推进: 经济/科学/政治/决议/设置等界面时间冻结,
-						// 快捷键(空格/1-4/F5/F9 由 TimeScript.Update 驱动)也随之只在外交生效
-						if ((mb is TimeScript || mb is EventScript) && !IsSceneTimeActive())
-						{
-							continue;
-						}
+						// 世界时间(TimeScript)与事件倒计时(EventScript)只能有一个驱动器:
+						// 它们由 GameHost.Tick 手动调用(TimeScript 负责日结算/钳制, EventScript 负责
+						// 8f→1.2 日阈值的倒计时换算). 引擎再泵一次 = 每帧日结算与倒计时跑两遍,
+						// 随机分支/事件需求/结局判定都会双跑. 这里只跳过这两类的 Update,
+						// Awake/Start 仍由上面统一派发.
+						if (mb is TimeScript || mb is EventScript) continue;
 						InvokeLifecycle(mb, "Update");
 					}
 				}

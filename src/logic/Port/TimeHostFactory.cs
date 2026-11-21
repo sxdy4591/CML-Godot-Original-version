@@ -56,7 +56,15 @@ public static class TimeHostFactory
     private static GameObject Create(string name, params Type[] components)
     {
         var go = new GameObject(name);
-        foreach (var type in components) Stub.Attach(go, type);
+        foreach (var type in components)
+        {
+            Stub.Attach(go, type);
+            // EvetnnashScript.Awake 里 map1 = Find("MapChanges"); 不跑 Awake 的话
+            // in1992_script 的"功成身退"走到 Button (4).OnMouseDown() 第一句
+            // map1.EventRead() 就是空引用, 结局根本切不出去.
+            if (type == typeof(EvetnnashScript))
+                Stub.On(go, type, Lifecycle.Scene).Activate();
+        }
         return go;
     }
 

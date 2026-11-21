@@ -8,7 +8,7 @@ const 条目场景 := preload("res://scenes/决议/决议条目.tscn")
 @onready var 空提示: Label = $决议滚动/空提示
 
 var _签名: String = ""
-var _决议自动: bool = false
+var _决议自动: String = ""
 
 
 func _ready() -> void:
@@ -30,12 +30,16 @@ func _返回() -> void:
 func _收到快照(panel: String, data: Dictionary) -> void:
 	if panel != 面板:
 		return
-	# 决议自动开关的真值在逻辑层, 这里只负责抄进 playerprefs
-	var 自动 := bool(data["auto_decision"])
-	if 自动 != _决议自动:
-		_决议自动 = 自动
-		UISettings.set_bool("auto_decision", 自动)
 	var items: Array = data["decisions"]
+	# 每条周期型决议自己的自动开关: 快照带回的全部勾选抄进 playerprefs(逻辑层只在进外交时读回)
+	var 自动串 := PackedStringArray()
+	for item in items:
+		if bool(item["autoable"]) and bool(item["auto"]):
+			自动串.append(str(int(item["index"])))
+	var 新自动 := ",".join(自动串)
+	if 新自动 != _决议自动:
+		_决议自动 = 新自动
+		UISettings.set_string("auto_decisions", 新自动)
 	# 原版 FocusesScript.Repaint 的排布: 可执行置顶, 条件未满足居中, 已完成沉底
 	var 可执行: Array = []
 	var 未满足: Array = []
@@ -51,7 +55,7 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 	# 条目没变就不重建: 重建会把滚动位置弹回顶部
 	var 签名 := ""
 	for item in 排序:
-		签名 += "%d:%s:%s;" % [int(item["index"]), str(item["available"]), str(item["completed"])]
+		签名 += "%d:%s:%s:%s;" % [int(item["index"]), str(item["available"]), str(item["completed"]), str(item["auto"])]
 	if 签名 == _签名:
 		return
 	_签名 = 签名

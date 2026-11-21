@@ -41,7 +41,7 @@ func _ready() -> void:
 
 	# 自动化勾选落在 playerprefs, 进游玩场景时推回逻辑层(bridge 只搬运, 不读配置)
 	UiBridge.set_auto_types(UISettings.get_string("auto_types", ""))
-	UiBridge.set_auto_decision(UISettings.get_bool("auto_decision", false))
+	UiBridge.set_auto_decisions(UISettings.get_string("auto_decisions", ""))
 	# 自动存档开关/槽位同样落盘在 playerprefs, 推回原版 GlobalScript 才真的会存
 	UiBridge.set_save_options(UISettings.get_int("autosave", 1), UISettings.get_int("saveplace", 1))
 
@@ -169,3 +169,18 @@ func _toggle_esc_menu() -> void:
 
 func _on_go_back_request() -> void:
 	_toggle_esc_menu()
+
+
+func _show_retire() -> void:
+	var 退休面板 := get_node_or_null("1986抉择")
+	if 退休面板 == null:
+		return
+	退休面板.visible = true
+	get_tree().paused = true
+
+
+func _hide_retire() -> void:
+	var 退休面板 := get_node_or_null("1986抉择")
+	if 退休面板 != null:
+		退休面板.visible = false
+	get_tree().paused = false

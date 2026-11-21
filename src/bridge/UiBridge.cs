@@ -94,7 +94,11 @@ public partial class UiBridge : Node
     // 勾选真值在逻辑层 Automation, bridge 只搬运.
     public void set_auto_types(string text) => Automation.SetTypesString(text);
 
-    public void set_auto_decision(bool on) => Automation.SetDecision(on);
+    // 周期型决议的自动勾选: 逐条独立(下标清单 "24,25"), 没有总开关
+    public void set_auto_decisions(string text) => Automation.SetDecisionTypesString(text);
+
+    // 1986 抉择的入口是否出现: 原版 CascadScrupt 判定(1986 年后), 桥层只转发结果
+    public bool retire_available() => RetirePane.Available();
 
     // 自动存档开关(0关/1每月/2半年)与保存槽位(1..5): 设置页落盘在 playerprefs,
     // 原版真值在 GlobalScript.autosavej / savePlace, 进游玩场景时推回.

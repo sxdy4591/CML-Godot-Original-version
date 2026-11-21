@@ -11,8 +11,10 @@ func _ready() -> void:
 
 func _继续掌权() -> void:
 	visible = false
+	get_parent().call("_hide_retire")
 
 
 func _功成身退() -> void:
+	get_parent().call("_hide_retire")
 	UiBridge.act(面板, "功成身退", [])
 	visible = false

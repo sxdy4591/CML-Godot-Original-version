@@ -196,7 +196,17 @@ public sealed class MapPane : IPanel
             .Put("parts", BuildVisibleParts(state))
             .Put("wars", BuildVisibleWars(state))
             .Put("highlight", InteractiveList())
+            // 分裂出来的小国(南苏丹/达尔富尔等)在场景里只是母国的一个 part 块,
+            // 视图按名字把 part 归到真正的国家索引(上色/点击都用它).
+            .Put("names", CountryNames(state))
             .Build();
+    }
+
+    static List<object> CountryNames(GameState state)
+    {
+        var names = new List<object>(state.allcountries.Length);
+        for (var i = 0; i < state.allcountries.Length; i++) names.Add(state.allcountries[i].name ?? "");
+        return names;
     }
 
     public void Act(string action, List<object> args)
@@ -286,6 +296,13 @@ public sealed class MapPane : IPanel
             probe.Set("this_num", num);
             probe.Set("special", special);
             probe.Set("war", new Sprite { name = "war" });
+            // 视图给的是 Godot 坐标(tscn 里 war_ogon 节点的 position = 原版世界坐标 *100, y 取反,
+            // 父级 AllWars 偏移 -6.7373/2.933、缩放 0.128 已折算在内).
+            // 反推回原版 localPosition, Repaint 才会在"未迁移"时原样留着、迁移时给出新坐标.
+            var px = (float)(double)icon["x"];
+            var py = (float)(double)icon["y"];
+            probe.Go.transform.localPosition = new UnityEngine.Vector3(
+                (px + 673.73f) / 12.8f, -(py + 293.3f) / 12.8f, 0f);
             WarProbes.Add(probe);
         }
     }
@@ -302,10 +319,15 @@ public sealed class MapPane : IPanel
             probe.Invoke("Repaint");
             var renderer = probe.Also<SpriteRenderer>();
             if (renderer.sprite == null) continue;
+            // 原版 Repaint 会把图标搬去新的 localPosition(如叙利亚内战 37 征用 3/8/29 号节点),
+            // 这里把搬完的位置一起给视图, 否则图标永远停在初始国家上.
+            var local = probe.Go.transform.localPosition;
             wars.Add(new Dictionary<string, object>
             {
                 ["war"] = WarIcons[i].Num,
                 ["special"] = WarIcons[i].Special,
+                ["x"] = 12.8 * local.x - 673.73,
+                ["y"] = -12.8 * local.y - 293.3,
             });
         }
         return wars;

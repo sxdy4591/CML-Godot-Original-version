@@ -12,7 +12,9 @@
 //   · 冷却:     TimeScript.cs:2227 起每月递减 desnull[]、按 %3/%6 复位按钮门禁,
 //     归零后把 completedDecisions 复位; 本文件不记任何计时器, 只跟着原版走。
 //
-// 开关是"类别"级的(见 Categories): 设置页的勾列表和外交面板按钮旁的勾是同一份数据,
+// 开关分两层: 互动按钮仍按"类别"(一个 this_type 一个勾, 见 Categories);
+// 周期型决议改为**逐条**独立(决议页每个条目一个勾, 没有"一勾全自动"的总开关),
+// 两条链各自持久化: playerprefs 的 auto_types / auto_decisions。
 // 默认全关, 玩家勾了才跑; 勾选结果由 GDScript 侧写进 playerprefs(逻辑层不读配置)。
 //
 // 触发时机: 月份变化(原版在月初 1 号的日结算里复位按钮门禁、递减决议冷却),
@@ -61,6 +63,9 @@ public static class Automation
     // 玩家勾上的类别; 默认空 = 全关(玩家原话: 自动化默认关闭, 勾选后持久保存)
     static readonly HashSet<int> Enabled = new();
 
+    // 周期型决议的自动开关: 逐条独立(决议页每个条目一个勾), 没有"一类全自动"的总开关
+    static readonly HashSet<int> EnabledDecisions = new();
+
     static Port.DiploSet _set;
     static int _lastMonth = -1;
     static bool _scanning;
@@ -69,23 +74,28 @@ public static class Automation
     // 本轮已执行的条数, 供 UI 显示"自动化干了什么"
     public static int Launched { get; private set; }
 
-    public static bool DecisionEnabled { get; private set; }
-
     public static bool IsAutoable(int type) => System.Array.IndexOf(Categories, type) >= 0;
 
     public static bool IsAutoableDecision(int index) => AutoDecisions.Contains(index);
 
     public static bool IsEnabled(int type) => Enabled.Contains(type);
 
+    public static bool IsDecisionEnabled(int index) => EnabledDecisions.Contains(index);
+
     public static void ToggleType(int type)
     {
         if (!Enabled.Remove(type)) Enabled.Add(type);
     }
 
-    public static void ToggleDecision() => DecisionEnabled = !DecisionEnabled;
+    public static void ToggleDecision(int index)
+    {
+        if (!EnabledDecisions.Remove(index)) EnabledDecisions.Add(index);
+    }
 
     // 勾选状态的真值在本类; GDScript 只是把它抄到 playerprefs, 启动时再抄回来
     public static string TypesString() => string.Join(",", Enabled);
+
+    public static string DecisionTypesString() => string.Join(",", EnabledDecisions);
 
     public static void SetTypesString(string text)
     {
@@ -94,7 +104,12 @@ public static class Automation
             Enabled.Add(int.Parse(part));
     }
 
-    public static void SetDecision(bool on) => DecisionEnabled = on;
+    public static void SetDecisionTypesString(string text)
+    {
+        EnabledDecisions.Clear();
+        foreach (var part in text.Split(',', System.StringSplitOptions.RemoveEmptyEntries))
+            EnabledDecisions.Add(int.Parse(part));
+    }
 
     public static void Reset()
     {
@@ -108,7 +123,7 @@ public static class Automation
     {
         var state = GameHost.State;
         if (GameHost.Speed <= 0) return;
-        if (Enabled.Count == 0 && !DecisionEnabled) return;
+        if (Enabled.Count == 0 && EnabledDecisions.Count == 0) return;
 
         // 原版按钮门禁在月初 1 号的日结算里复位(TimeScript.cs:2227 三的倍数 / 2240 六的倍数),
         // 决议冷却也每月递减并复位 completedDecisions(2289 起)。用"月份变化"触发:
@@ -192,11 +207,15 @@ public static class Automation
 
     static void RunDecisions()
     {
-        if (!DecisionEnabled) return;
+        if (EnabledDecisions.Count == 0) return;
+        // 原版 DecisionButtonScript.OnMouseDown → FocusesScript.Repaint() → CreateDecisions():
+        // 决议池先按当前局势重建, 自动执行才会用上当前分支的效果(而不是开局那版).
+        GameHost.Global.CreateDecisions();
         var state = GameHost.State;
         var global = GameHost.Global;
         for (var i = 0; i < state.decisions.Length; i++)
         {
+            if (!EnabledDecisions.Contains(i)) continue;
             if (!AutoDecisions.Contains(i)) continue;
             if (state.completedDecisions[i]) continue;
             var decision = state.decisions[i];

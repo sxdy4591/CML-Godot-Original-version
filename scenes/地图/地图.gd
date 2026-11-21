@@ -12,6 +12,7 @@ const 面板 := "地图"
 var _sprites: Array[Dictionary] = []
 var _colors: Array = []
 var _index_map: Array = []
+var _names: Array = []
 var _parts := {}
 var _wars := {}
 var _selected_country: int = -1
@@ -71,6 +72,9 @@ func _登记战争图标() -> void:
 		列表.append({
 			"war": 号,
 			"special": bool(sp.get_meta("special", false)),
+			# 原版 AllWars 局部坐标反推用(见 MapPane.RegisterWarIcons)
+			"x": sp.position.x,
+			"y": sp.position.y,
 		})
 	UiBridge.act(面板, "登记战争图标", [列表])
 
@@ -84,7 +88,8 @@ func _collect_sprites() -> void:
 		var kind := str(sp.get_meta("kind", "country"))
 		# 战争图标有一部分是 part_XXX.0(metadata/tex="ogon"), 它们是图标不是领土块:
 		# 显隐仍由 parts 标志控制, 但不参与国家着色
-		var tinted := kind != "war" and str(sp.get_meta("tex", "")) != "ogon"
+		var 是图标 := str(sp.get_meta("tex", "")) == "ogon"
+		var tinted := kind != "war" and not 是图标
 		var img: Image = null
 		if kind != "war":
 			var 键 := sp.texture.resource_path
@@ -96,6 +101,7 @@ func _collect_sprites() -> void:
 		_sprites.append({
 			"node": sp,
 			"kind": kind,
+			"ogon": 是图标,
 			"tinted": tinted,
 			"img": img,
 			"z": float(sp.z_index),
@@ -110,12 +116,14 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 		return
 	_colors = data["colors"]
 	_index_map = data["index_map"]
+	_names = data["names"]
+	_归类分裂块()
 	_parts.clear()
 	for p in data["parts"]:
 		_parts["%d:%d" % [p["country"], p["part"]]] = true
 	_wars.clear()
 	for w in data["wars"]:
-		_wars["%d:%s" % [w["war"], w["special"]]] = true
+		_wars["%d:%s" % [w["war"], w["special"]]] = Vector2(float(w["x"]), float(w["y"]))
 	_高亮.clear()
 	for h in data["highlight"]:
 		_高亮[int(h)] = true
@@ -178,15 +186,43 @@ func _应用领土() -> void:
 		])
 
 
+# 分裂出来的小国在场景里只是母国的一个 part 块(part_053.0 = 南苏丹, part_053.1 = 达尔富尔...),
+# 原版场景里这些块没有独立的国家号, 移植场景的 metadata 只有母国+块号.
+# 这里按国家名表把块归到它自己的国家索引: 上色、点击都走 idx, 否则整块永远跟母国同色、
+# 点下去也只打开母国(南苏丹/达尔富尔这类外交上存在的国家等于点不到).
+func _归类分裂块() -> void:
+	var 名表 := {}
+	for i in _names.size():
+		var n := str(_names[i]).replace(" ", "")
+		if not n.is_empty():
+			名表[n] = i
+	for d in _sprites:
+		if d["kind"] != "part":
+			continue
+		var sp: Sprite2D = d["node"]
+		var tex := str(sp.get_meta("tex", "")).replace(" ", "")
+		if tex.is_empty() or tex == "ogon":
+			continue
+		var 母国 := int(sp.get_meta("country", -1))
+		if 名表.has(tex) and int(名表[tex]) != 母国:
+			sp.set_meta("idx", int(名表[tex]))
+		elif sp.has_meta("idx"):
+			sp.remove_meta("idx")
+
+
 func _应用战争() -> void:
 	for d in _sprites:
 		if d["kind"] != "war":
 			continue
 		var sp: Sprite2D = d["node"]
-		sp.visible = _wars.has("%d:%s" % [
+		var key := "%d:%s" % [
 			int(sp.get_meta("war_num", -1)),
 			bool(sp.get_meta("special", false)),
-		])
+		]
+		sp.visible = _wars.has(key)
+		# 原版 at_war_script.Repaint 会把图标搬到新地点; 用逻辑层算好的位置, 而不是 tscn 初始坐标
+		if sp.visible:
+			sp.position = _wars[key]
 
 
 func _应用选中() -> void:
@@ -269,7 +305,8 @@ func _click(world_pos: Vector2) -> void:
 
 func _pick(world_pos: Vector2) -> int:
 	for i in _sprites.size():
-		if _sprites[i]["kind"] == "war":
+		# war 图标与 tex=ogon 的 part(以 parts 形式表现的战争图标)在原版里没有碰撞体, 不参与点选
+		if _sprites[i]["kind"] == "war" or _sprites[i]["ogon"]:
 			continue
 		var sp: Sprite2D = _sprites[i]["node"]
 		if not sp.visible:

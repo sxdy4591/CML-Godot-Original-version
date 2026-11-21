@@ -15,6 +15,11 @@ public sealed class DecisionPane : IPanel
     {
         var state = GameHost.State;
         EnsureBack();
+        // 原版决议场景每次打开都走 FocusesScript.Awake → CreateDecisions(), 执行后也走
+        // Repaint() → CreateDecisions(): 决议池是按"当前局势"重新构造的(阵营领袖/修正/
+        // 傀儡这类三元分支在构造时定型). 只建一次就会把开局那版分支固化, 条件看起来
+        // 满足却永远不亮、选了效果也不是当前局势该有的那套.
+        GameHost.Global.CreateDecisions();
         if (_buttons == null || _buttons.Length != state.decisions.Length)
             _buttons = new DecisionButtonScript[state.decisions.Length];
 
@@ -33,13 +38,13 @@ public sealed class DecisionPane : IPanel
                 ["available"] = button.background_sprite.sprite == button.ready,
                 ["completed"] = state.completedDecisions[i],
                 ["icon"] = button.focus_sprite.sprite == null ? "" : button.focus_sprite.sprite.name,
+                // 每个周期型决议一条自己的开关(原版没有总开关)
                 ["autoable"] = Automation.IsAutoableDecision(i),
-                ["auto"] = Automation.DecisionEnabled,
+                ["auto"] = Automation.IsDecisionEnabled(i),
             });
         }
         return new PanelSnapshot()
             .Put("decisions", list)
-            .Put("auto_decision", Automation.DecisionEnabled)
             .Build();
     }
 
@@ -53,7 +58,8 @@ public sealed class DecisionPane : IPanel
                 Ensure(index, GameHost.State.decisions[index]).OnMouseDown();
                 break;
             case "切换自动":
-                Automation.ToggleDecision();
+                // 每条决议独立开关
+                Automation.ToggleDecision((int)(long)args[0]);
                 break;
             default:
                 throw new System.ArgumentOutOfRangeException(nameof(action), action, "决议面板没有该动作");

@@ -88,6 +88,11 @@ public static class GameHost
             .SetValue(Clock, state);
         ResetRoundState();
         ResetTimeHostState();
+        // 原版读档会重新载入外交场景: MapChangesScript.Awake → EventWrite(gameState)
+        // 按存档里的 Events_active/time/number 把地图事件图标摆回来.
+        // 这里没有场景重载, 不显式补这一句, 存档时停在图上的事件读档后就消失了.
+        Port.DiploHost.Ensure();
+        Port.DiploHost.Ui.Map.EventWrite(state);
     }
 
     // 新局/读档共用: 清掉"每局重新开始"的静态缓存与一次性计时,
@@ -107,6 +112,10 @@ public static class GameHost
     {
         if (Clock == null) return;
         foreach (var icon in Clock.alarmIcons) icon.SetActive(false);
+        // 原版新局/读档会重建整个外交场景, events[] 是场景里预置的 inactive 对象;
+        // 移植版时钟常驻, 上一档停在图上的事件不倒回 inactive 就会带进新档
+        // (读档时随后由 ReplaceState 的 EventWrite 按存档重新点亮).
+        foreach (var marker in Clock.events) marker.SetActive(false);
     }
 
     // 原版 TimeScript 是 Diplomacy 场景对象: 切到经济/政治/事件等独立场景时它随场景卸载,
@@ -117,6 +126,7 @@ public static class GameHost
     static readonly System.Reflection.MethodInfo ClockUpdateMethod =
         typeof(TimeScript).GetMethod("Update",
             System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+
 
     // 原版 DiffScript 把难度写进 PlayerPrefs("our_diff_in"), GlobalScript.Init 再读回 gameState.diff;
     // GameStartScript 按 diff 设置开局数据(牛棚小酌 0: 预算 +500 = 53.0).

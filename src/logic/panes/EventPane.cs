@@ -13,6 +13,9 @@ public sealed class EventPane : IPanel
     Component _script;
     int _number = -1;
     string _result = "";
+    // 事件类 Awake 把 GameState 缓存在字段 a 里; 读档/重开换掉 gameState 后,
+    // 同编号事件若复用旧脚本, 文本与结果都会写进上一档的对象.
+    GameState _state;
 
     public Dictionary<string, object> Snapshot()
     {
@@ -138,7 +141,15 @@ public sealed class EventPane : IPanel
 
     void EnsureScript(int number)
     {
-        if (_script != null && _number == number) return;
+        var state = GameHost.State;
+        // 同一档里同一事件编号才复用; 换档(读档/重开)必须重建, 否则事件类 Awake 缓存的
+        // GameState 引用还指向上一个档.
+        if (_script != null && _number == number && _state == state) return;
+        // 原版事件场景 doneventscript.Awake 的第一件事: 把当前事件记成已发生.
+        // 由地图事件图标进来时 EventScript.OnMouseDown 已经写过一次; 但外交按钮 / 决议
+        // 直接 LoadScene("Event") 不经过 EventScript, 这一行就是它唯一的落地处 ——
+        // 漏掉后所有"事件结束后才出现的进一步按钮/决议条件"永远不满足.
+        if (state.number_event != 60000) state.event_done[state.number_event] = true;
         var type = typeof(Event1).Assembly.GetType("Event" + number);
         // 原版 doneventscript.Awake 用 thisObject.AddComponent(EventN), Unity 负责跑 Awake;
         // 事件类把 GameState 缓存(a)与结算用的派生数值都放在 Awake 里, 不跑就:
@@ -150,6 +161,7 @@ public sealed class EventPane : IPanel
         AchievementCenter.Register(stub.Also<achievements>());
         _script = stub.Activate().Typed<Component>();
         _number = number;
+        _state = state;
         _result = "";
     }
 }

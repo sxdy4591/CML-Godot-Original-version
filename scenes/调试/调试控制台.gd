@@ -39,12 +39,16 @@ func _input(event: InputEvent) -> void:
 		return
 	if _ui.get_int("difficulty", 2) != 0:
 		return
+	# 一个物理键可以绑多条作弊: 原版 key_action_* 本来就是各自独立的键码,
+	# 命中几条就执行几条(以前命中第一条就 return, 后面被挡掉 → "绑上了按了没反应")
+	var 命中 := false
 	for i in 13:
 		var 键码: int = _ui.get_int("key_action_%d" % (100 + i), 0)
 		if 键码 != 0 and 键 == 键码:
 			UiBridge.act(面板, "作弊", [i])
-			get_viewport().set_input_as_handled()
-			return
+			命中 = true
+	if 命中:
+		get_viewport().set_input_as_handled()
 
 
 func _on_关闭_pressed() -> void:

@@ -20,6 +20,9 @@ func _ready() -> void:
 	# 暂停期间菜单要照常响应（含 ESC 键），故整层不随 get_tree().paused 冻结
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().paused = true
+	# "结束"入口是否出现由原版 CascadScrupt 判定(1986 年后), 这里只照结果显隐
+	var 结束 := find_child("结束", true, false) as BaseButton
+	结束.visible = UiBridge.retire_available() and get_parent().has_method("_show_retire")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
@@ -46,6 +49,9 @@ func _on_退出_pressed() -> void:
 
 func _on_结束_pressed() -> void:
 	_关闭()
+	# 1986 抉择面板在外交场景里, 由容器负责显示与暂停
+	if get_parent().has_method("_show_retire"):
+		get_parent().call("_show_retire")
 
 func _on_关闭_pressed() -> void:
 	_关闭()

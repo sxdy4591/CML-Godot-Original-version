@@ -48,7 +48,6 @@ limit_smoothed = true
 script = ExtResource("15_kwgjq")
 
 [node name="国家面板" parent="." unique_id=962363444 instance=ExtResource("9_panel")]
-visible = false
 
 [node name="状态栏" parent="." unique_id=1150695568 instance=ExtResource("90_bar")]
 

@@ -868,7 +868,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("5_nr6g2")
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-scroll_active = false
+scroll_active = true
 
 [node name="右栏经济类型" type="GridContainer" parent="." unique_id=2043003623]
 columns = 2

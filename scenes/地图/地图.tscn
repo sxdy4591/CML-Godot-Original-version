@@ -259,7 +259,7 @@ script = ExtResource("1_map")
 
 [node name="part_162.0" type="Sprite2D" parent="国家层" unique_id=944191220]
 visible = false
-z_index = 10
+z_index = -1019
 position = Vector2(-711.2046, 72.3976)
 scale = Vector2(0.65629435, 0.6528)
 texture = ExtResource("278_p_162_0")
@@ -271,7 +271,7 @@ metadata/part = 0
 metadata/orig = "162.0"
 
 [node name="苏联" type="Sprite2D" parent="国家层" unique_id=2113780771]
-z_index = -6
+z_index = -800
 position = Vector2(-163.8, -299.16)
 scale = Vector2(0.12794928, 0.12794948)
 texture = ExtResource("2_c000")
@@ -281,7 +281,7 @@ metadata/tex = "СССР серый"
 metadata/idx = 7
 
 [node name="芬兰" type="Sprite2D" parent="国家层" unique_id=1162053866]
-z_index = -6
+z_index = -849
 position = Vector2(-626.22, -326.64)
 scale = Vector2(0.12794964, 0.12795213)
 texture = ExtResource("3_c001")
@@ -291,7 +291,7 @@ metadata/tex = "финляндия серый"
 metadata/idx = 26
 
 [node name="罗马尼亚" type="Sprite2D" parent="国家层" unique_id=1159354824]
-z_index = -6
+z_index = -849
 position = Vector2(-630.06, -119.7)
 scale = Vector2(0.12795871, 0.12795454)
 texture = ExtResource("4_c002")
@@ -301,7 +301,7 @@ metadata/tex = "Румыния серый"
 metadata/idx = 5
 
 [node name="波兰" type="Sprite2D" parent="国家层" unique_id=1742514278]
-z_index = -6
+z_index = -849
 position = Vector2(-663.9, -173.34)
 scale = Vector2(0.12795652, 0.12795871)
 texture = ExtResource("5_c003")
@@ -311,7 +311,7 @@ metadata/tex = "Польша серый"
 metadata/idx = 2
 
 [node name="匈牙利" type="Sprite2D" parent="国家层" unique_id=679503168]
-z_index = -6
+z_index = -849
 position = Vector2(-661.38, -129.9)
 scale = Vector2(0.12794872, 0.12795918)
 texture = ExtResource("6_c004")
@@ -321,7 +321,7 @@ metadata/tex = "венгрия серый"
 metadata/idx = 4
 
 [node name="捷克斯洛伐克" type="Sprite2D" parent="国家层" unique_id=103060804]
-z_index = -6
+z_index = -849
 position = Vector2(-674.16, -149.22)
 scale = Vector2(0.12795833, 0.1279661)
 texture = ExtResource("7_c005")
@@ -331,7 +331,7 @@ metadata/tex = "Чехословакия серый"
 metadata/idx = 3
 
 [node name="英国" type="Sprite2D" parent="国家层" unique_id=1447258757]
-z_index = -6
+z_index = -849
 position = Vector2(-672.24, -225.72)
 scale = Vector2(0.1279483, 0.12794787)
 texture = ExtResource("8_c006")
@@ -341,7 +341,7 @@ metadata/tex = "NATO_sery"
 metadata/idx = 92
 
 [node name="保加利亚" type="Sprite2D" parent="国家层" unique_id=1254757690]
-z_index = -6
+z_index = -849
 position = Vector2(-626.88, -93.48)
 scale = Vector2(0.12795138, 0.12792553)
 texture = ExtResource("9_c007")
@@ -351,7 +351,7 @@ metadata/tex = "Болгария серый"
 metadata/idx = 6
 
 [node name="瑞典" type="Sprite2D" parent="国家层" unique_id=285834327]
-z_index = -6
+z_index = -849
 position = Vector2(-672.9, -293.4)
 scale = Vector2(0.12795, 0.1279519)
 texture = ExtResource("10_c008")
@@ -361,7 +361,7 @@ metadata/tex = "Швеция серый"
 metadata/idx = 28
 
 [node name="民主德国" type="Sprite2D" parent="国家层" unique_id=1690337947]
-z_index = -6
+z_index = -849
 position = Vector2(-702.9, -177.54)
 scale = Vector2(0.1279661, 0.12794118)
 texture = ExtResource("11_c009")
@@ -371,7 +371,7 @@ metadata/tex = "ГДР серый"
 metadata/idx = 16
 
 [node name="联邦德国" type="Sprite2D" parent="国家层" unique_id=864405894]
-z_index = -6
+z_index = -849
 position = Vector2(-717.6, -165.66)
 scale = Vector2(0.12796196, 0.12794013)
 texture = ExtResource("12_c010")
@@ -381,9 +381,9 @@ metadata/tex = "ФРГсерый"
 metadata/idx = 17
 
 [node name="南斯拉夫" type="Sprite2D" parent="国家层" unique_id=1368963359]
-z_index = -6
+z_index = -849
 position = Vector2(-669.06, -103.08)
-scale = Vector2(0.12795044, 0.12793814)
+scale = Vector2(0.12795044, 0.12793812)
 texture = ExtResource("13_c011")
 metadata/kind = "country"
 metadata/file = "c011.png"
@@ -391,7 +391,7 @@ metadata/tex = "Югославия серый"
 metadata/idx = 15
 
 [node name="阿尔巴尼亚" type="Sprite2D" parent="国家层" unique_id=1481293839]
-z_index = -6
+z_index = -849
 position = Vector2(-657.78, -80.1)
 scale = Vector2(0.12795454, 0.12795918)
 texture = ExtResource("14_c012")
@@ -401,7 +401,7 @@ metadata/tex = "Албания серый"
 metadata/idx = 20
 
 [node name="法国" type="Sprite2D" parent="国家层" unique_id=49087566]
-z_index = -6
+z_index = -849
 position = Vector2(-761.34, -123.54)
 scale = Vector2(0.12795454, 0.12794752)
 texture = ExtResource("15_c013")
@@ -411,7 +411,7 @@ metadata/tex = "Франция серый"
 metadata/idx = 21
 
 [node name="爱尔兰" type="Sprite2D" parent="国家层" unique_id=143858474]
-z_index = -6
+z_index = -849
 position = Vector2(-823.62, -186.78)
 scale = Vector2(0.12793268, 0.12796053)
 texture = ExtResource("16_c014")
@@ -421,7 +421,7 @@ metadata/tex = "Ирландия серый"
 metadata/idx = 29
 
 [node name="利比亚" type="Sprite2D" parent="国家层" unique_id=408937837]
-z_index = -6
+z_index = -849
 position = Vector2(-674.76, 22.08)
 scale = Vector2(0.127942, 0.1279454)
 texture = ExtResource("17_c015")
@@ -431,7 +431,7 @@ metadata/tex = "Ливия серый"
 metadata/idx = 13
 
 [node name="埃及" type="Sprite2D" parent="国家层" unique_id=1719982153]
-z_index = -6
+z_index = -849
 position = Vector2(-599.4, 20.16)
 scale = Vector2(0.12794922, 0.12795275)
 texture = ExtResource("18_c016")
@@ -441,7 +441,7 @@ metadata/tex = "египет серый"
 metadata/idx = 30
 
 [node name="阿富汗" type="Sprite2D" parent="国家层" unique_id=1645687699]
-z_index = -6
+z_index = -849
 position = Vector2(-381, -28.98)
 scale = Vector2(0.12795454, 0.12795635)
 texture = ExtResource("19_c017")
@@ -451,7 +451,7 @@ metadata/tex = "Авганистан серый"
 metadata/idx = 12
 
 [node name="蒙古" type="Sprite2D" parent="国家层" unique_id=548338028]
-z_index = -6
+z_index = -840
 position = Vector2(-170.82, -129.3)
 scale = Vector2(0.12794837, 0.12794945)
 texture = ExtResource("20_c018")
@@ -461,7 +461,7 @@ metadata/tex = "Монголия серый"
 metadata/idx = 9
 
 [node name="中国" type="Sprite2D" parent="国家层" unique_id=783259766]
-z_index = -6
+z_index = -849
 position = Vector2(-168.96, -56.46)
 scale = Vector2(0.34885743, 0.34886244)
 texture = ExtResource("21_c019")
@@ -471,7 +471,7 @@ metadata/tex = "Китай серый"
 metadata/idx = 1
 
 [node name="台湾" type="Sprite2D" parent="国家层" unique_id=572812720]
-z_index = -6
+z_index = -849
 position = Vector2(-70.56, 40.62)
 scale = Vector2(0.12793478, 0.12796512)
 texture = ExtResource("22_c020")
@@ -481,7 +481,7 @@ metadata/tex = "Тайвань серый"
 metadata/idx = 38
 
 [node name="伊朗" type="Sprite2D" parent="国家层" unique_id=352530378]
-z_index = -6
+z_index = -849
 position = Vector2(-462.72, -19.44)
 scale = Vector2(0.12795249, 0.12794776)
 texture = ExtResource("23_c021")
@@ -491,7 +491,7 @@ metadata/tex = "Иран серый"
 metadata/idx = 8
 
 [node name="巴基斯坦" type="Sprite2D" parent="国家层" unique_id=1662868305]
-z_index = -6
+z_index = -849
 position = Vector2(-370.74, -5.34)
 scale = Vector2(0.12794644, 0.12795198)
 texture = ExtResource("24_c022")
@@ -501,7 +501,7 @@ metadata/tex = "Пакистан серый"
 metadata/idx = 31
 
 [node name="尼泊尔" type="Sprite2D" parent="国家层" unique_id=1163470873]
-z_index = -6
+z_index = -849
 position = Vector2(-285.18, 9.96)
 scale = Vector2(0.12795213, 0.12796296)
 texture = ExtResource("25_c023")
@@ -511,7 +511,7 @@ metadata/tex = "Непал серый"
 metadata/idx = 43
 
 [node name="不丹" type="Sprite2D" parent="国家层" unique_id=850153061]
-z_index = -6
+z_index = -849
 position = Vector2(-248.76, 15.72)
 scale = Vector2(0.1279375, 0.12793478)
 texture = ExtResource("26_c024")
@@ -521,7 +521,7 @@ metadata/tex = "Бутан серый"
 metadata/idx = 97
 
 [node name="印度" type="Sprite2D" parent="国家层" unique_id=241548817]
-z_index = -6
+z_index = -849
 position = Vector2(-293.46, 52.14)
 scale = Vector2(0.1279491, 0.12794818)
 texture = ExtResource("27_c025")
@@ -531,7 +531,7 @@ metadata/tex = "Индия серый"
 metadata/idx = 19
 
 [node name="孟加拉" type="Sprite2D" parent="国家层" unique_id=744087709]
-z_index = -6
+z_index = -849
 position = Vector2(-249.42, 39.96)
 scale = Vector2(0.12796296, 0.12794521)
 texture = ExtResource("28_c026")
@@ -541,7 +541,7 @@ metadata/tex = "Бангладеш серый"
 metadata/idx = 32
 
 [node name="缅甸" type="Sprite2D" parent="国家层" unique_id=359772449]
-z_index = -6
+z_index = -849
 position = Vector2(-211.81, 66.18)
 scale = Vector2(0.1304717, 0.12795354)
 texture = ExtResource("29_c027")
@@ -551,7 +551,7 @@ metadata/tex = "Birma_sery"
 metadata/idx = 33
 
 [node name="朝鲜" type="Sprite2D" parent="国家层" unique_id=1979569589]
-z_index = -6
+z_index = -849
 position = Vector2(-32.88, -74.67)
 scale = Vector2(0.1279392, 0.12795731)
 texture = ExtResource("30_c028")
@@ -561,7 +561,7 @@ metadata/tex = "Северная корея серый"
 metadata/idx = 10
 
 [node name="韩国" type="Sprite2D" parent="国家层" unique_id=1855369735]
-z_index = -6
+z_index = -849
 position = Vector2(-30.96, -41.76)
 scale = Vector2(0.12792683, 0.12795454)
 texture = ExtResource("31_c029")
@@ -571,7 +571,7 @@ metadata/tex = "Южная корея  серый"
 metadata/idx = 46
 
 [node name="日本" type="Sprite2D" parent="国家层" unique_id=781079168]
-z_index = -6
+z_index = -849
 position = Vector2(9.24, -39.24)
 scale = Vector2(0.12794466, 0.1279515)
 texture = ExtResource("32_c030")
@@ -581,7 +581,7 @@ metadata/tex = "япония серый"
 metadata/idx = 44
 
 [node name="越南" type="Sprite2D" parent="国家层" unique_id=1320176418]
-z_index = -6
+z_index = -849
 position = Vector2(-159.36, 87.9)
 scale = Vector2(0.17691056, 0.17693359)
 texture = ExtResource("33_c031")
@@ -591,7 +591,7 @@ metadata/tex = "Вьетнам серый"
 metadata/idx = 11
 
 [node name="老挝" type="Sprite2D" parent="国家层" unique_id=643123328]
-z_index = -6
+z_index = -849
 position = Vector2(-170.22, 74.46)
 scale = Vector2(0.12795454, 0.12795238)
 texture = ExtResource("34_c032")
@@ -601,7 +601,7 @@ metadata/tex = "Лаос серый"
 metadata/idx = 22
 
 [node name="柬埔寨" type="Sprite2D" parent="国家层" unique_id=1749943271]
-z_index = -6
+z_index = -849
 position = Vector2(-163.8, 109.62)
 scale = Vector2(0.12794355, 0.12795454)
 texture = ExtResource("35_c033")
@@ -611,7 +611,7 @@ metadata/tex = "Камбоджа серый"
 metadata/idx = 23
 
 [node name="泰国" type="Sprite2D" parent="国家层" unique_id=245732872]
-z_index = -6
+z_index = -849
 position = Vector2(-184.26, 105.12)
 scale = Vector2(0.12794738, 0.12794286)
 texture = ExtResource("36_c034")
@@ -621,7 +621,7 @@ metadata/tex = "тайланд серый"
 metadata/idx = 34
 
 [node name="叙利亚" type="Sprite2D" parent="国家层" unique_id=1194752189]
-z_index = -6
+z_index = -849
 position = Vector2(-547.68, -34.08)
 scale = Vector2(0.12794872, 0.12796429)
 texture = ExtResource("37_c035")
@@ -631,7 +631,7 @@ metadata/tex = "Сирия серый"
 metadata/idx = 35
 
 [node name="伊拉克" type="Sprite2D" parent="国家层" unique_id=1415134043]
-z_index = -6
+z_index = -849
 position = Vector2(-521.52, -22.62)
 scale = Vector2(0.12794644, 0.12794492)
 texture = ExtResource("38_c036")
@@ -641,7 +641,7 @@ metadata/tex = "Ирак серый"
 metadata/idx = 14
 
 [node name="黎巴嫩" type="Sprite2D" parent="国家层" unique_id=85294662]
-z_index = -6
+z_index = -849
 position = Vector2(-566.22, -27.06)
 scale = Vector2(0.12791666, 0.12793478)
 texture = ExtResource("39_c037")
@@ -651,7 +651,7 @@ metadata/tex = "Ливан серый"
 metadata/idx = 93
 
 [node name="以色列" type="Sprite2D" parent="国家层" unique_id=1486425522]
-z_index = -6
+z_index = -849
 position = Vector2(-571.32, -10.5)
 scale = Vector2(0.12795454, 0.1279717)
 texture = ExtResource("40_c038")
@@ -661,7 +661,7 @@ metadata/tex = "Израиль серый"
 metadata/idx = 37
 
 [node name="莫桑比克" type="Sprite2D" parent="国家层" unique_id=901333570]
-z_index = -6
+z_index = -849
 position = Vector2(-568.74, 293.62)
 scale = Vector2(0.16326436, 0.16326466)
 texture = ExtResource("41_c039")
@@ -671,7 +671,7 @@ metadata/tex = "莫桑比克"
 metadata/idx = 126
 
 [node name="科威特" type="Sprite2D" parent="国家层" unique_id=246026468]
-z_index = -6
+z_index = -849
 position = Vector2(-498.48, 4.2)
 scale = Vector2(0.12793478, 0.1279762)
 texture = ExtResource("42_c040")
@@ -681,7 +681,7 @@ metadata/tex = "Кувейт серый"
 metadata/idx = 36
 
 [node name="安哥拉" type="Sprite2D" parent="国家层" unique_id=65763164]
-z_index = -6
+z_index = -849
 position = Vector2(-672.46, 247.83)
 scale = Vector2(0.16325153, 0.16326278)
 texture = ExtResource("43_c041")
@@ -691,7 +691,7 @@ metadata/tex = "安哥拉"
 metadata/idx = 123
 
 [node name="赞比亚" type="Sprite2D" parent="国家层" unique_id=1610996301]
-z_index = -6
+z_index = -849
 position = Vector2(-612.55, 260.44)
 scale = Vector2(0.15905903, 0.16326924)
 texture = ExtResource("44_c042")
@@ -701,7 +701,7 @@ metadata/tex = "赞比亚"
 metadata/idx = 124
 
 [node name="赤道几内亚" type="Sprite2D" parent="国家层" unique_id=269010588]
-z_index = -6
+z_index = -849
 position = Vector2(-714.85, 174.77)
 scale = Vector2(0.16326924, 0.16326316)
 texture = ExtResource("45_c043")
@@ -711,7 +711,7 @@ metadata/tex = "赤道几内亚"
 metadata/idx = 115
 
 [node name="坦桑尼亚" type="Sprite2D" parent="国家层" unique_id=1381660057]
-z_index = -6
+z_index = -849
 position = Vector2(-571.56, 220.27)
 scale = Vector2(0.16325545, 0.16325498)
 texture = ExtResource("46_c044")
@@ -721,7 +721,7 @@ metadata/tex = "坦桑尼亚"
 metadata/idx = 122
 
 [node name="瑞士" type="Sprite2D" parent="国家层" unique_id=849397844]
-z_index = -6
+z_index = -849
 position = Vector2(-727.14, -126.72)
 scale = Vector2(0.1279717, 0.12794118)
 texture = ExtResource("47_c045")
@@ -731,7 +731,7 @@ metadata/tex = "Швейцария серый"
 metadata/idx = 39
 
 [node name="奥地利" type="Sprite2D" parent="国家层" unique_id=1545025433]
-z_index = -6
+z_index = -849
 position = Vector2(-697.8, -133.92)
 scale = Vector2(0.12794945, 0.12793478)
 texture = ExtResource("48_c046")
@@ -741,7 +741,7 @@ metadata/tex = "Австрия серый"
 metadata/idx = 27
 
 [node name="卢森堡" type="Sprite2D" parent="国家层" unique_id=1386824399]
-z_index = -8
+z_index = -551
 position = Vector2(-739.56, -152.52)
 scale = Vector2(0.128, 0.12803571)
 texture = ExtResource("49_c047")
@@ -751,7 +751,7 @@ metadata/tex = "Люксембург серый"
 metadata/idx = 0
 
 [node name="南也门" type="Sprite2D" parent="国家层" unique_id=320894334]
-z_index = -8
+z_index = -551
 position = Vector2(-490.2, 90.42)
 scale = Vector2(0.12795275, 0.12795731)
 texture = ExtResource("50_c048")
@@ -761,7 +761,7 @@ metadata/tex = "Народная республика йемен серый"
 metadata/idx = 24
 
 [node name="北也门" type="Sprite2D" parent="国家层" unique_id=1896353068]
-z_index = -8
+z_index = -551
 position = Vector2(-516.36, 93)
 scale = Vector2(0.12795454, 0.12794644)
 texture = ExtResource("51_c049")
@@ -771,7 +771,8 @@ metadata/tex = "Йемен серый"
 metadata/idx = 25
 
 [node name="罗马尼亚#2" type="Sprite2D" parent="国家层" unique_id=502726848]
-z_index = -6
+visible = false
+z_index = -845
 position = Vector2(-610.02, -128.1)
 scale = Vector2(0.1279762, 0.12793268)
 texture = ExtResource("52_c050")
@@ -781,7 +782,8 @@ metadata/tex = "Moldavorumynia_sery"
 metadata/idx = 5
 
 [node name="保加利亚#2" type="Sprite2D" parent="国家层" unique_id=2143662309]
-z_index = -6
+visible = false
+z_index = -845
 position = Vector2(-648.42, -84.42)
 scale = Vector2(0.12798387, 0.128)
 texture = ExtResource("53_c051")
@@ -791,7 +793,7 @@ metadata/tex = "Bolgarkedonia"
 metadata/idx = 6
 
 [node name="阿尔及利亚" type="Sprite2D" parent="国家层" unique_id=1314258373]
-z_index = -6
+z_index = -845
 position = Vector2(-765.48, 9.42)
 scale = Vector2(0.12794492, 0.12794492)
 texture = ExtResource("54_c052")
@@ -801,7 +803,7 @@ metadata/tex = "Alzhir_sery"
 metadata/idx = 40
 
 [node name="埃塞俄比亚" type="Sprite2D" parent="国家层" unique_id=1448892451]
-z_index = -6
+z_index = -845
 position = Vector2(-540.06, 118.92)
 scale = Vector2(0.12795058, 0.12795322)
 texture = ExtResource("55_c053")
@@ -811,7 +813,7 @@ metadata/tex = "Efiopia_sery"
 metadata/idx = 41
 
 [node name="索马里" type="Sprite2D" parent="国家层" unique_id=81231393]
-z_index = -6
+z_index = -845
 position = Vector2(-530.34, 133.02)
 scale = Vector2(0.1632659, 0.16325611)
 texture = ExtResource("56_c054")
@@ -821,7 +823,7 @@ metadata/tex = "索马里"
 metadata/idx = 42
 
 [node name="希腊" type="Sprite2D" parent="国家层" unique_id=492250481]
-z_index = -6
+z_index = -845
 position = Vector2(-635.58, -60.06)
 scale = Vector2(0.12795454, 0.12795)
 texture = ExtResource("57_c055")
@@ -831,7 +833,7 @@ metadata/tex = "Греция серый"
 metadata/idx = 45
 
 [node name="斯里兰卡" type="Sprite2D" parent="国家层" unique_id=1300439390]
-z_index = -14
+z_index = 0
 position = Vector2(-305.22, 138.3)
 scale = Vector2(0.1279, 0.12793478)
 texture = ExtResource("58_c056")
@@ -841,7 +843,7 @@ metadata/tex = "Шри-Ланка серый"
 metadata/idx = 96
 
 [node name="菲律宾" type="Sprite2D" parent="国家层" unique_id=1839973139]
-z_index = -6
+z_index = -849
 position = Vector2(-66.42, 102.3)
 scale = Vector2(0.12795044, 0.12794378)
 texture = ExtResource("59_c057")
@@ -851,7 +853,7 @@ metadata/tex = "Филиппины серый"
 metadata/idx = 47
 
 [node name="分裂的塞浦路斯" type="Sprite2D" parent="国家层" unique_id=1031147907]
-z_index = -6
+z_index = -849
 position = Vector2(-580.56, -37.56)
 scale = Vector2(0.12794644, 0.12796874)
 texture = ExtResource("60_c058")
@@ -861,7 +863,7 @@ metadata/tex = "Kipr_sery_voen_karta"
 metadata/idx = 94
 
 [node name="苏丹" type="Sprite2D" parent="国家层" unique_id=421249633]
-z_index = -6
+z_index = -849
 position = Vector2(-599.44, 102.9)
 scale = Vector2(0.12773684, 0.12794565)
 texture = ExtResource("61_c059")
@@ -871,7 +873,7 @@ metadata/tex = "9"
 metadata/idx = 53
 
 [node name="摩洛哥" type="Sprite2D" parent="国家层" unique_id=89213854]
-z_index = -6
+z_index = -849
 position = Vector2(-816.12, -13.74)
 scale = Vector2(0.12794118, 0.12795454)
 texture = ExtResource("62_c060")
@@ -881,7 +883,7 @@ metadata/tex = "2"
 metadata/idx = 54
 
 [node name="突尼斯" type="Sprite2D" parent="国家层" unique_id=325697670]
-z_index = -6
+z_index = -849
 position = Vector2(-719.58, -27.84)
 scale = Vector2(0.12796874, 0.12793814)
 texture = ExtResource("63_c061")
@@ -891,7 +893,7 @@ metadata/tex = "3"
 metadata/idx = 55
 
 [node name="尼日尔" type="Sprite2D" parent="国家层" unique_id=899009555]
-z_index = -6
+z_index = -849
 position = Vector2(-728.22, 77.22)
 scale = Vector2(0.12794444, 0.12794644)
 texture = ExtResource("64_c062")
@@ -901,7 +903,7 @@ metadata/tex = "7"
 metadata/idx = 56
 
 [node name="乍得" type="Sprite2D" parent="国家层" unique_id=1387592351]
-z_index = -6
+z_index = -849
 position = Vector2(-666.6, 90.06)
 scale = Vector2(0.12795833, 0.12794974)
 texture = ExtResource("65_c063")
@@ -911,7 +913,7 @@ metadata/tex = "8"
 metadata/idx = 57
 
 [node name="马里" type="Sprite2D" parent="国家层" unique_id=1591355120]
-z_index = -6
+z_index = -849
 position = Vector2(-798.12, 77.1)
 scale = Vector2(0.12795213, 0.12795198)
 texture = ExtResource("66_c064")
@@ -921,7 +923,7 @@ metadata/tex = "6"
 metadata/idx = 58
 
 [node name="毛里塔尼亚" type="Sprite2D" parent="国家层" unique_id=90240573]
-z_index = -6
+z_index = -849
 position = Vector2(-840.43, 50.07)
 scale = Vector2(0.16333754, 0.16327)
 texture = ExtResource("67_c065")
@@ -931,7 +933,7 @@ metadata/tex = "毛里塔尼亚"
 metadata/idx = 59
 
 [node name="尼日利亚" type="Sprite2D" parent="国家层" unique_id=1368404542]
-z_index = -6
+z_index = -849
 position = Vector2(-724.8, 128.58)
 scale = Vector2(0.12794118, 0.12795044)
 texture = ExtResource("68_c066")
@@ -941,7 +943,7 @@ metadata/tex = "22"
 metadata/idx = 60
 
 [node name="上沃尔特" type="Sprite2D" parent="国家层" unique_id=2066616091]
-z_index = -6
+z_index = -849
 position = Vector2(-784.08, 110.16)
 scale = Vector2(0.12794444, 0.12795454)
 texture = ExtResource("69_c067")
@@ -951,7 +953,7 @@ metadata/tex = "18"
 metadata/idx = 61
 
 [node name="贝宁" type="Sprite2D" parent="国家层" unique_id=289725412]
-z_index = -6
+z_index = -849
 position = Vector2(-761.82, 127.32)
 scale = Vector2(0.12791666, 0.12795775)
 texture = ExtResource("70_c068")
@@ -961,7 +963,7 @@ metadata/tex = "20"
 metadata/idx = 62
 
 [node name="科特迪瓦" type="Sprite2D" parent="国家层" unique_id=1415669964]
-z_index = -6
+z_index = -849
 position = Vector2(-807.12, 137.94)
 scale = Vector2(0.12793478, 0.12796667)
 texture = ExtResource("71_c069")
@@ -971,7 +973,7 @@ metadata/tex = "16"
 metadata/idx = 64
 
 [node name="加纳" type="Sprite2D" parent="国家层" unique_id=1144793901]
-z_index = -6
+z_index = -849
 position = Vector2(-781.5, 135.66)
 scale = Vector2(0.12795, 0.1279392)
 texture = ExtResource("72_c070")
@@ -981,7 +983,7 @@ metadata/tex = "17"
 metadata/idx = 63
 
 [node name="喀麦隆" type="Sprite2D" parent="国家层" unique_id=112052919]
-z_index = -6
+z_index = -849
 position = Vector2(-700.38, 141.74)
 scale = Vector2(0.16326134, 0.16326296)
 texture = ExtResource("73_c071")
@@ -991,7 +993,7 @@ metadata/tex = "喀麦隆"
 metadata/idx = 66
 
 [node name="利比里亚" type="Sprite2D" parent="国家层" unique_id=1507504199]
-z_index = -6
+z_index = -849
 position = Vector2(-829.74, 144.36)
 scale = Vector2(0.12793478, 0.12796874)
 texture = ExtResource("74_c072")
@@ -1001,7 +1003,7 @@ metadata/tex = "15"
 metadata/idx = 67
 
 [node name="几内亚" type="Sprite2D" parent="国家层" unique_id=1888937907]
-z_index = -6
+z_index = -849
 position = Vector2(-850.49, 114.3)
 scale = Vector2(0.16325359, 0.16312835)
 texture = ExtResource("75_c073")
@@ -1011,7 +1013,7 @@ metadata/tex = "几内亚"
 metadata/idx = 68
 
 [node name="中非共和国" type="Sprite2D" parent="国家层" unique_id=596757307]
-z_index = -6
+z_index = -849
 position = Vector2(-654.12, 142.5)
 scale = Vector2(0.12797946, 0.12796915)
 texture = ExtResource("76_c074")
@@ -1021,7 +1023,7 @@ metadata/tex = "24"
 metadata/idx = 65
 
 [node name="西撒哈拉" type="Sprite2D" parent="国家层" unique_id=1176332351]
-z_index = -6
+z_index = -849
 position = Vector2(-851.45, 32.92)
 scale = Vector2(0.15258242, 0.15491304)
 texture = ExtResource("77_c075")
@@ -1031,7 +1033,7 @@ metadata/tex = "4"
 metadata/idx = 18
 
 [node name="几内亚比绍" type="Sprite2D" parent="国家层" unique_id=1887306740]
-z_index = -6
+z_index = -843
 position = Vector2(-850.49, 114.41)
 scale = Vector2(0.16325359, 0.16625668)
 texture = ExtResource("78_c076")
@@ -1041,7 +1043,7 @@ metadata/tex = "几内亚比绍"
 metadata/idx = 114
 
 [node name="冈比亚" type="Sprite2D" parent="国家层" unique_id=1923320608]
-z_index = -6
+z_index = -849
 position = Vector2(-850.15, 114.24)
 scale = Vector2(0.16325359, 0.16393048)
 texture = ExtResource("79_c077")
@@ -1051,7 +1053,7 @@ metadata/tex = "冈比亚"
 metadata/idx = 113
 
 [node name="刚果（布）" type="Sprite2D" parent="国家层" unique_id=1754594002]
-z_index = -6
+z_index = -849
 position = Vector2(-687.66, 186.12)
 scale = Vector2(0.16325372, 0.16326582)
 texture = ExtResource("80_c078")
@@ -1061,7 +1063,7 @@ metadata/tex = "刚果布"
 metadata/idx = 52
 
 [node name="刚果（金）" type="Sprite2D" parent="国家层" unique_id=2000537975]
-z_index = -6
+z_index = -839
 position = Vector2(-601.68, 181.14)
 scale = Vector2(0.16326179, 0.16326368)
 texture = ExtResource("81_c079")
@@ -1071,7 +1073,7 @@ metadata/tex = "刚果金"
 metadata/idx = 117
 
 [node name="乌干达" type="Sprite2D" parent="国家层" unique_id=2111256575]
-z_index = -6
+z_index = -849
 position = Vector2(-584.64, 174.96)
 scale = Vector2(0.16324323, 0.16326445)
 texture = ExtResource("82_c080")
@@ -1081,7 +1083,7 @@ metadata/tex = "乌干达"
 metadata/idx = 118
 
 [node name="肯尼亚" type="Sprite2D" parent="国家层" unique_id=1579323281]
-z_index = -6
+z_index = -849
 position = Vector2(-553.32, 183)
 scale = Vector2(0.16327225, 0.16326633)
 texture = ExtResource("83_c081")
@@ -1091,7 +1093,7 @@ metadata/tex = "肯尼亚"
 metadata/idx = 119
 
 [node name="塞内加尔" type="Sprite2D" parent="国家层" unique_id=1475911459]
-z_index = -14
+z_index = 0
 position = Vector2(-855.93, 96.52)
 scale = Vector2(0.16098087, 0.1621123)
 texture = ExtResource("84_c082")
@@ -1101,7 +1103,7 @@ metadata/tex = "塞内加尔"
 metadata/idx = 112
 
 [node name="加蓬" type="Sprite2D" parent="国家层" unique_id=1888739212]
-z_index = -5
+z_index = -849
 position = Vector2(-705.86, 187.9)
 scale = Vector2(0.16325203, 0.16327645)
 texture = ExtResource("85_c083")
@@ -1111,7 +1113,7 @@ metadata/tex = "加蓬"
 metadata/idx = 116
 
 [node name="土耳其" type="Sprite2D" parent="国家层" unique_id=533006521]
-z_index = -6
+z_index = -845
 position = Vector2(-569.34, -64.68)
 scale = Vector2(0.12794931, 0.12795699)
 texture = ExtResource("86_c084")
@@ -1121,7 +1123,7 @@ metadata/tex = "Turko"
 metadata/idx = 84
 
 [node name="意大利" type="Sprite2D" parent="国家层" unique_id=1954587446]
-z_index = -6
+z_index = -845
 position = Vector2(-702.36, -85.5)
 scale = Vector2(0.12794495, 0.1279446)
 texture = ExtResource("87_c085")
@@ -1131,7 +1133,7 @@ metadata/tex = "Italy"
 metadata/idx = 85
 
 [node name="西班牙" type="Sprite2D" parent="国家层" unique_id=167145373]
-z_index = -6
+z_index = -845
 position = Vector2(-789.84, -72.12)
 scale = Vector2(0.12794304, 0.12793991)
 texture = ExtResource("88_c086")
@@ -1141,7 +1143,7 @@ metadata/tex = "Spain"
 metadata/idx = 86
 
 [node name="葡萄牙" type="Sprite2D" parent="国家层" unique_id=749425353]
-z_index = -6
+z_index = -800
 position = Vector2(-820.92, -69.48)
 scale = Vector2(0.12794872, 0.12794788)
 texture = ExtResource("89_c087")
@@ -1151,7 +1153,7 @@ metadata/tex = "Portugal"
 metadata/idx = 87
 
 [node name="比利时" type="Sprite2D" parent="国家层" unique_id=322352151]
-z_index = -6
+z_index = -800
 position = Vector2(-749.28, -158.64)
 scale = Vector2(0.1279558, 0.12793103)
 texture = ExtResource("90_c088")
@@ -1161,7 +1163,7 @@ metadata/tex = "Belgium"
 metadata/idx = 88
 
 [node name="尼德兰" type="Sprite2D" parent="国家层" unique_id=1745496404]
-z_index = -6
+z_index = -800
 position = Vector2(-744.96, -173.88)
 scale = Vector2(0.12796703, 0.1279703)
 texture = ExtResource("91_c089")
@@ -1171,7 +1173,7 @@ metadata/tex = "niggerlands"
 metadata/idx = 89
 
 [node name="丹麦" type="Sprite2D" parent="国家层" unique_id=2100642976]
-z_index = -6
+z_index = -800
 position = Vector2(-707.34, -214.32)
 scale = Vector2(0.1279448, 0.12793893)
 texture = ExtResource("92_c090")
@@ -1181,7 +1183,7 @@ metadata/tex = "Dania"
 metadata/idx = 90
 
 [node name="挪威" type="Sprite2D" parent="国家层" unique_id=743289978]
-z_index = -6
+z_index = -800
 position = Vector2(-671.34, -325.86)
 scale = Vector2(0.12795, 0.12794979)
 texture = ExtResource("93_c091")
@@ -1191,7 +1193,7 @@ metadata/tex = "Norwegia"
 metadata/idx = 91
 
 [node name="沙特阿拉伯" type="Sprite2D" parent="国家层" unique_id=2134024721]
-z_index = -6
+z_index = -800
 position = Vector2(-512.61, 37.7)
 scale = Vector2(0.12794606, 0.12794471)
 texture = ExtResource("94_c092")
@@ -1201,7 +1203,7 @@ metadata/tex = "Саудовская аравия серый"
 metadata/idx = 101
 
 [node name="阿联酋" type="Sprite2D" parent="国家层" unique_id=1282403841]
-z_index = -6
+z_index = -800
 position = Vector2(-460.97, 37.09)
 scale = Vector2(0.12794644, 0.1279762)
 texture = ExtResource("95_c093")
@@ -1211,7 +1213,7 @@ metadata/tex = "ОАЭ серый"
 metadata/idx = 102
 
 [node name="卡塔尔" type="Sprite2D" parent="国家层" unique_id=2100407261]
-z_index = -6
+z_index = -800
 position = Vector2(-478.14, 29.99)
 scale = Vector2(0.128, 0.12795454)
 texture = ExtResource("96_c094")
@@ -1221,7 +1223,7 @@ metadata/tex = "Бахрейн серый"
 metadata/idx = 103
 
 [node name="约旦" type="Sprite2D" parent="国家层" unique_id=962333085]
-z_index = -6
+z_index = -800
 position = Vector2(-559.14, -9.42)
 scale = Vector2(0.12795, 0.1279386)
 texture = ExtResource("97_c095")
@@ -1231,7 +1233,7 @@ metadata/tex = "Палестина серый"
 metadata/idx = 104
 
 [node name="阿曼" type="Sprite2D" parent="国家层" unique_id=1058800803]
-z_index = -6
+z_index = -800
 position = Vector2(-449.82, 54.48)
 scale = Vector2(0.12793957, 0.12794118)
 texture = ExtResource("98_c096")
@@ -1241,7 +1243,7 @@ metadata/tex = "Оман серый"
 metadata/idx = 105
 
 [node name="吉布提" type="Sprite2D" parent="国家层" unique_id=1057815873]
-z_index = -6
+z_index = -800
 position = Vector2(-527.94, 112.94)
 scale = Vector2(0.12789474, 0.128)
 texture = ExtResource("99_c097")
@@ -1251,7 +1253,7 @@ metadata/tex = "11"
 metadata/idx = 106
 
 [node name="塞拉利昂" type="Sprite2D" parent="国家层" unique_id=2024296316]
-z_index = -6
+z_index = -800
 position = Vector2(-850.43, 114.37)
 scale = Vector2(0.16325359, 0.16326202)
 texture = ExtResource("100_c098")
@@ -1261,7 +1263,7 @@ metadata/tex = "塞拉利昂"
 metadata/idx = 107
 
 [node name="多哥" type="Sprite2D" parent="国家层" unique_id=211081140]
-z_index = -6
+z_index = -800
 position = Vector2(-770.46, 131.92)
 scale = Vector2(0.12795454, 0.1279386)
 texture = ExtResource("101_c099")
@@ -1271,7 +1273,7 @@ metadata/tex = "19"
 metadata/idx = 108
 
 [node name="马来西亚" type="Sprite2D" parent="国家层" unique_id=1810538686]
-z_index = -6
+z_index = -800
 position = Vector2(-135.35, 162.84)
 scale = Vector2(0.12769806, 0.12711287)
 texture = ExtResource("102_c100")
@@ -1281,7 +1283,7 @@ metadata/tex = "maluzya"
 metadata/idx = 49
 
 [node name="文莱" type="Sprite2D" parent="国家层" unique_id=1547564849]
-z_index = -3
+z_index = -800
 position = Vector2(-107, 155.6)
 scale = Vector2(0.12847058, 0.1284)
 texture = ExtResource("103_c101")
@@ -1291,7 +1293,7 @@ metadata/tex = "文莱"
 metadata/idx = 111
 
 [node name="津巴布韦" type="Sprite2D" parent="国家层" unique_id=1957644437]
-z_index = -5
+z_index = -849
 position = Vector2(-607.99, 296.71)
 scale = Vector2(0.16324638, 0.1632659)
 texture = ExtResource("104_c102")
@@ -1301,7 +1303,7 @@ metadata/tex = "津巴布韦"
 metadata/idx = 127
 
 [node name="南非" type="Sprite2D" parent="国家层" unique_id=550806769]
-z_index = -5
+z_index = -849
 position = Vector2(-649.99, 331.51)
 scale = Vector2(0.16146438, 0.16326024)
 texture = ExtResource("105_c103")
@@ -1311,7 +1313,7 @@ metadata/tex = "南非"
 metadata/idx = 131
 
 [node name="马达加斯加" type="Sprite2D" parent="国家层" unique_id=1303917337]
-z_index = 2
+z_index = -849
 position = Vector2(-512.77, 298.87)
 scale = Vector2(0.16324742, 0.16325703)
 texture = ExtResource("106_c104")
@@ -1321,7 +1323,7 @@ metadata/tex = "马达加斯加"
 metadata/idx = 133
 
 [node name="卢旺达" type="Sprite2D" parent="国家层" unique_id=2067772509]
-z_index = 2
+z_index = -839
 position = Vector2(-600.58, 197.03)
 scale = Vector2(0.1632653, 0.16326667)
 texture = ExtResource("107_c105")
@@ -1331,7 +1333,7 @@ metadata/tex = "卢旺达"
 metadata/idx = 120
 
 [node name="布隆迪" type="Sprite2D" parent="国家层" unique_id=566457088]
-z_index = 2
+z_index = -839
 position = Vector2(-600.92, 196.93)
 scale = Vector2(0.1632653, 0.16326667)
 texture = ExtResource("108_c106")
@@ -1341,7 +1343,7 @@ metadata/tex = "布隆迪"
 metadata/idx = 121
 
 [node name="博茨瓦纳" type="Sprite2D" parent="国家层" unique_id=1741783415]
-z_index = 2
+z_index = -849
 position = Vector2(-635.99, 312.63)
 scale = Vector2(0.16326667, 0.16325678)
 texture = ExtResource("109_c107")
@@ -1351,7 +1353,7 @@ metadata/tex = "博茨瓦纳"
 metadata/idx = 129
 
 [node name="马拉维" type="Sprite2D" parent="国家层" unique_id=2019823600]
-z_index = 2
+z_index = -849
 position = Vector2(-571.94, 261.07)
 scale = Vector2(0.16326007, 0.16325396)
 texture = ExtResource("110_c108")
@@ -1361,7 +1363,7 @@ metadata/tex = "马拉维"
 metadata/idx = 125
 
 [node name="斯威士兰" type="Sprite2D" parent="国家层" unique_id=57825772]
-z_index = 2
+z_index = -849
 position = Vector2(-599.2, 336.85)
 scale = Vector2(0.16324022, 0.16322835)
 texture = ExtResource("111_c109")
@@ -1371,7 +1373,7 @@ metadata/tex = "斯威士兰"
 metadata/idx = 130
 
 [node name="莱索托" type="Sprite2D" parent="国家层" unique_id=428539065]
-z_index = 2
+z_index = -849
 position = Vector2(-617.18, 355.73)
 scale = Vector2(0.16327272, 0.16326316)
 texture = ExtResource("112_c110")
@@ -1381,7 +1383,7 @@ metadata/tex = "莱索托"
 metadata/idx = 132
 
 [node name="印度尼西亚" type="Sprite2D" parent="国家层" unique_id=1093384650]
-z_index = -6
+z_index = -800
 position = Vector2(-88.37, 198.3)
 scale = Vector2(0.13372558, 0.13311088)
 texture = ExtResource("113_c111")
@@ -1391,7 +1393,7 @@ metadata/tex = "印度尼西亚"
 metadata/idx = 50
 
 [node name="巴布亚新几内亚" type="Sprite2D" parent="国家层" unique_id=1689304110]
-z_index = -6
+z_index = -849
 position = Vector2(86.16, 231.07)
 scale = Vector2(0.12769231, 0.12710486)
 texture = ExtResource("114_c112")
@@ -1401,7 +1403,7 @@ metadata/tex = "巴布亚新几内亚"
 metadata/idx = 134
 
 [node name="澳大利亚" type="Sprite2D" parent="国家层" unique_id=146091434]
-z_index = -6
+z_index = -800
 position = Vector2(-13.55, 381.87)
 scale = Vector2(0.13867188, 0.13802667)
 texture = ExtResource("115_c113")
@@ -1411,7 +1413,7 @@ metadata/tex = "澳大利亚"
 metadata/idx = 135
 
 [node name="新西兰" type="Sprite2D" parent="国家层" unique_id=1869092342]
-z_index = -6
+z_index = -800
 position = Vector2(163.49, 460.87)
 scale = Vector2(0.12769409, 0.1271028)
 texture = ExtResource("116_c114")
@@ -1421,7 +1423,7 @@ metadata/tex = "新西兰"
 metadata/idx = 136
 
 [node name="美国" type="Sprite2D" parent="国家层" unique_id=907829669]
-z_index = 2
+z_index = -849
 position = Vector2(629.49, -215.07)
 scale = Vector2(0.38765943, 0.38765636)
 texture = ExtResource("117_c115")
@@ -1431,7 +1433,7 @@ metadata/tex = "美国"
 metadata/idx = 51
 
 [node name="加拿大" type="Sprite2D" parent="国家层" unique_id=1400695976]
-z_index = 2
+z_index = -849
 position = Vector2(629.88, -212.7)
 scale = Vector2(0.38765943, 0.38765636)
 texture = ExtResource("118_c116")
@@ -1441,7 +1443,7 @@ metadata/tex = "加拿大"
 metadata/idx = 137
 
 [node name="墨西哥" type="Sprite2D" parent="国家层" unique_id=1479728081]
-z_index = 2
+z_index = -849
 position = Vector2(629.49, -217.5)
 scale = Vector2(0.38765943, 0.38765636)
 texture = ExtResource("119_c117")
@@ -1451,7 +1453,7 @@ metadata/tex = "墨西哥"
 metadata/idx = 140
 
 [node name="古巴" type="Sprite2D" parent="国家层" unique_id=888821179]
-z_index = 2
+z_index = -849
 position = Vector2(784.4521, 23.3703)
 scale = Vector2(0.3876695, 0.38765305)
 texture = ExtResource("120_c118")
@@ -1461,7 +1463,7 @@ metadata/tex = "古巴"
 metadata/idx = 138
 
 [node name="危地马拉" type="Sprite2D" parent="国家层" unique_id=1736778193]
-z_index = 2
+z_index = -849
 position = Vector2(784.4521, 23.3703)
 scale = Vector2(0.3876695, 0.38765305)
 texture = ExtResource("121_c119")
@@ -1471,7 +1473,7 @@ metadata/tex = "危地马拉"
 metadata/idx = 149
 
 [node name="萨尔瓦多" type="Sprite2D" parent="国家层" unique_id=1050474733]
-z_index = 2
+z_index = -849
 position = Vector2(784.4521, 23.3703)
 scale = Vector2(0.3876695, 0.38765305)
 texture = ExtResource("122_c120")
@@ -1481,7 +1483,7 @@ metadata/tex = "萨尔瓦多"
 metadata/idx = 148
 
 [node name="伯利兹" type="Sprite2D" parent="国家层" unique_id=854510630]
-z_index = 2
+z_index = -849
 position = Vector2(784.4521, 23.3703)
 scale = Vector2(0.3876695, 0.38765305)
 texture = ExtResource("123_c121")
@@ -1491,7 +1493,7 @@ metadata/tex = "伯利兹"
 metadata/idx = 142
 
 [node name="洪都拉斯" type="Sprite2D" parent="国家层" unique_id=641186043]
-z_index = 2
+z_index = -849
 position = Vector2(784.4521, 23.3703)
 scale = Vector2(0.3876695, 0.38765305)
 texture = ExtResource("124_c122")
@@ -1501,7 +1503,7 @@ metadata/tex = "洪都拉斯"
 metadata/idx = 146
 
 [node name="尼加拉瓜" type="Sprite2D" parent="国家层" unique_id=813670063]
-z_index = 2
+z_index = -849
 position = Vector2(784.4521, 23.3703)
 scale = Vector2(0.3876695, 0.38765305)
 texture = ExtResource("125_c123")
@@ -1511,7 +1513,7 @@ metadata/tex = "尼加拉瓜"
 metadata/idx = 147
 
 [node name="哥斯达黎加" type="Sprite2D" parent="国家层" unique_id=1841750709]
-z_index = 2
+z_index = -849
 position = Vector2(784.4521, 23.3703)
 scale = Vector2(0.3876695, 0.38765305)
 texture = ExtResource("126_c124")
@@ -1521,7 +1523,7 @@ metadata/tex = "哥斯达黎加"
 metadata/idx = 144
 
 [node name="巴拿马" type="Sprite2D" parent="国家层" unique_id=140482270]
-z_index = 2
+z_index = -849
 position = Vector2(784.4521, 23.3703)
 scale = Vector2(0.3876695, 0.38765305)
 texture = ExtResource("127_c125")
@@ -1531,7 +1533,7 @@ metadata/tex = "巴拿马"
 metadata/idx = 141
 
 [node name="多米尼加" type="Sprite2D" parent="国家层" unique_id=564988586]
-z_index = 2
+z_index = -849
 position = Vector2(784.4521, 23.3703)
 scale = Vector2(0.3876695, 0.38765305)
 texture = ExtResource("128_c126")
@@ -1541,7 +1543,7 @@ metadata/tex = "多米尼加"
 metadata/idx = 143
 
 [node name="海地" type="Sprite2D" parent="国家层" unique_id=1181534295]
-z_index = 2
+z_index = -849
 position = Vector2(784.4521, 23.3703)
 scale = Vector2(0.3876695, 0.38765305)
 texture = ExtResource("129_c127")
@@ -1551,7 +1553,7 @@ metadata/tex = "海地"
 metadata/idx = 139
 
 [node name="牙买加" type="Sprite2D" parent="国家层" unique_id=799399805]
-z_index = -6
+z_index = -849
 position = Vector2(784.4401, 29.34)
 scale = Vector2(0.48, 0.48)
 texture = ExtResource("130_c128")
@@ -1561,7 +1563,7 @@ metadata/tex = "牙买加"
 metadata/idx = 152
 
 [node name="新喀里多尼亚" type="Sprite2D" parent="国家层" unique_id=338489664]
-z_index = -6
+z_index = -849
 position = Vector2(185.35, 325.46)
 scale = Vector2(0.12770492, 0.12712766)
 texture = ExtResource("131_c129")
@@ -1571,7 +1573,7 @@ metadata/tex = "新喀"
 metadata/idx = 154
 
 [node name="所罗门群岛" type="Sprite2D" parent="国家层" unique_id=765395216]
-z_index = -6
+z_index = -849
 position = Vector2(153.64, 243.44)
 scale = Vector2(0.12768519, 0.1271228)
 texture = ExtResource("132_c130")
@@ -1581,7 +1583,7 @@ metadata/tex = "所罗门群岛"
 metadata/idx = 161
 
 [node name="斐济" type="Sprite2D" parent="国家层" unique_id=231788372]
-z_index = -6
+z_index = -849
 position = Vector2(258.2, 299.98)
 scale = Vector2(0.12771429, 0.12710936)
 texture = ExtResource("133_c131")
@@ -1591,7 +1593,7 @@ metadata/tex = "斐济"
 metadata/idx = 160
 
 [node name="瓦努阿图" type="Sprite2D" parent="国家层" unique_id=2114174605]
-z_index = -6
+z_index = -849
 position = Vector2(201.37, 298.01)
 scale = Vector2(0.1277, 0.12710021)
 texture = ExtResource("134_c132")
@@ -1601,7 +1603,7 @@ metadata/tex = "瓦努阿图"
 metadata/idx = 159
 
 [node name="阿根廷" type="Sprite2D" parent="国家层" unique_id=525727393]
-z_index = -29
+z_index = -849
 position = Vector2(881.2577, 386.7488)
 scale = Vector2(0.29065892, 0.27892432)
 texture = ExtResource("135_c133")
@@ -1611,7 +1613,7 @@ metadata/tex = "Aregntina"
 metadata/idx = 71
 
 [node name="玻利维亚" type="Sprite2D" parent="国家层" unique_id=1934596642]
-z_index = -29
+z_index = -849
 position = Vector2(879, 210)
 scale = Vector2(0.2937809, 0.28977862)
 texture = ExtResource("136_c134")
@@ -1621,7 +1623,7 @@ metadata/tex = "Boliviya"
 metadata/idx = 72
 
 [node name="巴西" type="Sprite2D" parent="国家层" unique_id=108167769]
-z_index = -29
+z_index = -849
 position = Vector2(930.00006, 207)
 scale = Vector2(0.2701752, 0.26973596)
 texture = ExtResource("137_c135")
@@ -1631,7 +1633,7 @@ metadata/tex = "Braziliya"
 metadata/idx = 73
 
 [node name="智利" type="Sprite2D" parent="国家层" unique_id=1645672629]
-z_index = -29
+z_index = -849
 position = Vector2(832.5297, 374.3396)
 scale = Vector2(0.35506243, 0.3095927)
 texture = ExtResource("138_c136")
@@ -1641,7 +1643,7 @@ metadata/tex = "Chili"
 metadata/idx = 74
 
 [node name="哥伦比亚" type="Sprite2D" parent="国家层" unique_id=565688664]
-z_index = -29
+z_index = -849
 position = Vector2(821, 90)
 scale = Vector2(0.29412207, 0.2845388)
 texture = ExtResource("139_c137")
@@ -1651,7 +1653,7 @@ metadata/tex = "Columbia"
 metadata/idx = 75
 
 [node name="厄瓜多尔" type="Sprite2D" parent="国家层" unique_id=1210696504]
-z_index = -29
+z_index = -849
 position = Vector2(792, 120)
 scale = Vector2(0.33320957, 0.32504836)
 texture = ExtResource("140_c138")
@@ -1661,7 +1663,7 @@ metadata/tex = "Eqvador"
 metadata/idx = 76
 
 [node name="圭亚那" type="Sprite2D" parent="国家层" unique_id=1429402139]
-z_index = -29
+z_index = -849
 position = Vector2(907.99994, 81)
 scale = Vector2(0.34810355, 0.3178064)
 texture = ExtResource("141_c139")
@@ -1671,7 +1673,7 @@ metadata/tex = "Gayana"
 metadata/idx = 77
 
 [node name="法国#2" type="Sprite2D" parent="国家层" unique_id=2141152370]
-z_index = -29
+z_index = -849
 position = Vector2(953, 85.00001)
 scale = Vector2(0.40049717, 0.37588373)
 texture = ExtResource("142_c140")
@@ -1681,7 +1683,7 @@ metadata/tex = "Gviana"
 metadata/idx = 21
 
 [node name="巴拉圭" type="Sprite2D" parent="国家层" unique_id=567248566]
-z_index = -29
+z_index = -849
 position = Vector2(905, 258)
 scale = Vector2(0.30918267, 0.3057401)
 texture = ExtResource("143_c141")
@@ -1691,7 +1693,7 @@ metadata/tex = "Paragvay"
 metadata/idx = 79
 
 [node name="秘鲁" type="Sprite2D" parent="国家层" unique_id=1832861848]
-z_index = -29
+z_index = -849
 position = Vector2(812.99994, 170)
 scale = Vector2(0.29233333, 0.28194344)
 texture = ExtResource("144_c142")
@@ -1701,7 +1703,7 @@ metadata/tex = "Peru"
 metadata/idx = 80
 
 [node name="苏里南" type="Sprite2D" parent="国家层" unique_id=1591746399]
-z_index = -29
+z_index = -849
 position = Vector2(929, 87)
 scale = Vector2(0.3627608, 0.36073738)
 texture = ExtResource("145_c143")
@@ -1711,7 +1713,7 @@ metadata/tex = "Surinam"
 metadata/idx = 81
 
 [node name="乌拉圭" type="Sprite2D" parent="国家层" unique_id=514056534]
-z_index = -29
+z_index = -849
 position = Vector2(924.00006, 320)
 scale = Vector2(0.33834016, 0.33210796)
 texture = ExtResource("146_c144")
@@ -1721,7 +1723,7 @@ metadata/tex = "Urugvay"
 metadata/idx = 82
 
 [node name="委内瑞拉" type="Sprite2D" parent="国家层" unique_id=1725569018]
-z_index = -29
+z_index = -849
 position = Vector2(862.00006, 83)
 scale = Vector2(0.29024342, 0.2975515)
 texture = ExtResource("147_c145")
@@ -1731,7 +1733,7 @@ metadata/tex = "Venesuela"
 metadata/idx = 83
 
 [node name="Folk" type="Sprite2D" parent="国家层" unique_id=1951044169]
-z_index = -29
+z_index = -849
 position = Vector2(907.3999, 489.4487)
 scale = Vector2(0.37200448, 0.44139272)
 texture = ExtResource("148_c146")
@@ -1742,7 +1744,7 @@ metadata/idx = -2
 
 [node name="part_014.5" type="Sprite2D" parent="国家层" unique_id=269139194]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-519.0292, -18.6616)
 scale = Vector2(0.12765983, 0.12825802)
 texture = ExtResource("186_p_014_5")
@@ -1755,7 +1757,7 @@ metadata/orig = "014.5"
 
 [node name="part_001.4" type="Sprite2D" parent="国家层" unique_id=191735712]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-168.6676, -56.6136)
 scale = Vector2(0.17423491, 0.17571715)
 texture = ExtResource("187_p_001_4")
@@ -1768,7 +1770,7 @@ metadata/orig = "001.4"
 
 [node name="part_008.0" type="Sprite2D" parent="国家层" unique_id=1759852156]
 visible = false
-z_index = 2
+z_index = 20
 position = Vector2(-504.2836, -31.4872)
 scale = Vector2(0.128, 0.128)
 texture = ExtResource("188_p_008_0")
@@ -1781,7 +1783,7 @@ metadata/orig = "008.0"
 
 [node name="part_001.6" type="Sprite2D" parent="国家层" unique_id=1276191039]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-168.6676, -56.6136)
 scale = Vector2(0.17423491, 0.17571715)
 texture = ExtResource("189_p_001_6")
@@ -1794,7 +1796,7 @@ metadata/orig = "001.6"
 
 [node name="part_014.3" type="Sprite2D" parent="国家层" unique_id=1391266515]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-530.434, -38.348)
 scale = Vector2(0.1740834, 0.16919763)
 texture = ExtResource("190_p_014_3")
@@ -1807,7 +1809,7 @@ metadata/orig = "014.3"
 
 [node name="part_084.1" type="Sprite2D" parent="国家层" unique_id=622081583]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-525.442, -49.676)
 scale = Vector2(0.16934045, 0.18051594)
 texture = ExtResource("191_p_084_1")
@@ -1820,7 +1822,7 @@ metadata/orig = "084.1"
 
 [node name="part_007.2" type="Sprite2D" parent="国家层" unique_id=2112963374]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-179.7908, -299.1992)
 scale = Vector2(0.5021688, 0.50100553)
 texture = ExtResource("192_p_007_2")
@@ -1833,7 +1835,7 @@ metadata/orig = "007.2"
 
 [node name="part_001.0" type="Sprite2D" parent="国家层" unique_id=2015230572]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-168.5012, -56.7672)
 scale = Vector2(0.17414878, 0.1758231)
 texture = ExtResource("193_p_001_0")
@@ -1846,7 +1848,7 @@ metadata/orig = "001.0"
 
 [node name="part_054.0" type="Sprite2D" parent="国家层" unique_id=1725372866]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-827.138, 3.8472)
 scale = Vector2(0.15598078, 0.1558016)
 texture = ExtResource("194_p_054_0")
@@ -1859,7 +1861,7 @@ metadata/orig = "054.0"
 
 [node name="part_099.0" type="Sprite2D" parent="国家层" unique_id=997795183]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-544.7188, 92.8904)
 scale = Vector2(0.12807555, 0.1277789)
 texture = ExtResource("195_p_099_0")
@@ -1872,7 +1874,7 @@ metadata/orig = "099.0"
 
 [node name="part_013.0" type="Sprite2D" parent="国家层" unique_id=1818559744]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-674.818, 23.924)
 scale = Vector2(0.12782446, 0.12828337)
 texture = ExtResource("196_p_013_0")
@@ -1885,7 +1887,7 @@ metadata/orig = "013.0"
 
 [node name="part_030.1" type="Sprite2D" parent="国家层" unique_id=584044359]
 visible = false
-z_index = -2
+z_index = 160
 position = Vector2(-669.0401, 24.9685)
 scale = Vector2(0.41818884, 0.41671687)
 texture = ExtResource("197_p_030_1")
@@ -1898,7 +1900,7 @@ metadata/orig = "030.1"
 
 [node name="part_017.0" type="Sprite2D" parent="国家层" unique_id=589297698]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-714.5108, -165.5544)
 scale = Vector2(0.12782452, 0.12828346)
 texture = ExtResource("198_p_017_0")
@@ -1911,7 +1913,7 @@ metadata/orig = "017.0"
 
 [node name="part_035.0" type="Sprite2D" parent="国家层" unique_id=644684261]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-545.1796, -46.8856)
 scale = Vector2(0.128, 0.128)
 texture = ExtResource("199_p_035_0")
@@ -1924,7 +1926,7 @@ metadata/orig = "035.0"
 
 [node name="part_014.2" type="Sprite2D" parent="国家层" unique_id=1746151687]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-514.4532, -41.4136)
 scale = Vector2(0.1740834, 0.16919756)
 texture = ExtResource("200_p_014_2")
@@ -1937,7 +1939,7 @@ metadata/orig = "014.2"
 
 [node name="part_045.0" type="Sprite2D" parent="国家层" unique_id=700339800]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-620.5716, -63.0776)
 scale = Vector2(0.12837116, 0.12796058)
 texture = ExtResource("201_p_045_0")
@@ -1950,7 +1952,7 @@ metadata/orig = "045.0"
 
 [node name="part_014.0" type="Sprite2D" parent="国家层" unique_id=820171292]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-517.186, -41.4072)
 scale = Vector2(0.128, 0.128)
 texture = ExtResource("202_p_014_0")
@@ -1963,7 +1965,7 @@ metadata/orig = "014.0"
 
 [node name="part_100.0" type="Sprite2D" parent="国家层" unique_id=1736949228]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-553.8964, 102.4776)
 scale = Vector2(0.12807547, 0.12777917)
 texture = ExtResource("203_p_100_0")
@@ -1976,7 +1978,7 @@ metadata/orig = "100.0"
 
 [node name="part_025.0" type="Sprite2D" parent="国家层" unique_id=1635040471]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-492.93, 90.484)
 scale = Vector2(0.12782446, 0.12828355)
 texture = ExtResource("204_p_025_0")
@@ -1989,7 +1991,7 @@ metadata/orig = "025.0"
 
 [node name="part_021.0" type="Sprite2D" parent="国家层" unique_id=26758205]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-748.61, -103.7432)
 scale = Vector2(0.12807561, 0.1277789)
 texture = ExtResource("205_p_021_0")
@@ -2002,7 +2004,7 @@ metadata/orig = "021.0"
 
 [node name="part_084.3" type="Sprite2D" parent="国家层" unique_id=713263402]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-547.5476, -34.38)
 scale = Vector2(0.12807548, 0.12777878)
 texture = ExtResource("206_p_084_3")
@@ -2015,7 +2017,7 @@ metadata/orig = "084.3"
 
 [node name="part_086.0" type="Sprite2D" parent="国家层" unique_id=1178293921]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-786.9972, -92.2616)
 scale = Vector2(0.1276597, 0.12825789)
 texture = ExtResource("207_p_086_0")
@@ -2028,7 +2030,7 @@ metadata/orig = "086.0"
 
 [node name="part_046.0" type="Sprite2D" parent="国家层" unique_id=1239298171]
 visible = false
-z_index = 2
+z_index = 20
 position = Vector2(-32.6317, -58.6514)
 scale = Vector2(0.12837128, 0.12796064)
 texture = ExtResource("208_p_046_0")
@@ -2041,7 +2043,7 @@ metadata/orig = "046.0"
 
 [node name="part_030.0" type="Sprite2D" parent="国家层" unique_id=1700251430]
 visible = false
-z_index = -2
+z_index = 160
 position = Vector2(-669.794, 24.0085)
 scale = Vector2(0.4163072, 0.41630715)
 texture = ExtResource("209_p_030_0")
@@ -2054,7 +2056,7 @@ metadata/orig = "030.0"
 
 [node name="part_001.9" type="Sprite2D" parent="国家层" unique_id=2045135909]
 visible = false
-z_index = 1
+z_index = -100
 position = Vector2(-282.626, -89.868)
 scale = Vector2(0.12782449, 0.12828344)
 texture = ExtResource("210_p_001_9")
@@ -2067,7 +2069,7 @@ metadata/orig = "001.9"
 
 [node name="part_001.10" type="Sprite2D" parent="国家层" unique_id=1961718879]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-168.6676, -56.6136)
 scale = Vector2(0.17423491, 0.17571707)
 texture = ExtResource("211_p_001_10")
@@ -2080,7 +2082,7 @@ metadata/orig = "001.10"
 
 [node name="part_001.3" type="Sprite2D" parent="国家层" unique_id=258839904]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-168.6676, -56.6136)
 scale = Vector2(0.17423491, 0.17571715)
 texture = ExtResource("212_p_001_3")
@@ -2093,7 +2095,7 @@ metadata/orig = "001.3"
 
 [node name="part_003.0" type="Sprite2D" parent="国家层" unique_id=1398344833]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-660.8276, -143.116)
 scale = Vector2(0.12782444, 0.12828358)
 texture = ExtResource("213_p_003_0")
@@ -2106,7 +2108,7 @@ metadata/orig = "003.0"
 
 [node name="part_042.0" type="Sprite2D" parent="国家层" unique_id=83686391]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-530.1831, 132.9582)
 scale = Vector2(0.16367355, 0.16367362)
 texture = ExtResource("214_p_042_0")
@@ -2119,7 +2121,7 @@ metadata/orig = "042.0"
 
 [node name="part_001.8" type="Sprite2D" parent="国家层" unique_id=421476791]
 visible = false
-z_index = 1
+z_index = -100
 position = Vector2(-258.5492, -15.756)
 scale = Vector2(0.12833427, 0.12866203)
 texture = ExtResource("215_p_001_8")
@@ -2132,7 +2134,7 @@ metadata/orig = "001.8"
 
 [node name="part_014.4" type="Sprite2D" parent="国家层" unique_id=792564701]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-514.2983, -22.5963)
 scale = Vector2(0.12934135, 0.12929232)
 texture = ExtResource("216_p_014_4")
@@ -2145,7 +2147,7 @@ metadata/orig = "014.4"
 
 [node name="part_084.4" type="Sprite2D" parent="国家层" unique_id=114087841]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-570.1652, -61.0296)
 scale = Vector2(0.12837122, 0.12796065)
 texture = ExtResource("217_p_084_4")
@@ -2158,7 +2160,7 @@ metadata/orig = "084.4"
 
 [node name="part_020.0" type="Sprite2D" parent="国家层" unique_id=587426716]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-656.2068, -83.3656)
 scale = Vector2(0.12782449, 0.12828326)
 texture = ExtResource("218_p_020_0")
@@ -2171,7 +2173,7 @@ metadata/orig = "020.0"
 
 [node name="part_020.1" type="Sprite2D" parent="国家层" unique_id=959695613]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-656.3476, -81.4712)
 scale = Vector2(0.12782449, 0.12828328)
 texture = ExtResource("219_p_020_1")
@@ -2184,7 +2186,7 @@ metadata/orig = "020.1"
 
 [node name="part_001.7" type="Sprite2D" parent="国家层" unique_id=2068327904]
 visible = false
-z_index = 1
+z_index = -100
 position = Vector2(-257.794, -15.2952)
 scale = Vector2(0.12782446, 0.12943801)
 texture = ExtResource("220_p_001_7")
@@ -2197,7 +2199,7 @@ metadata/orig = "001.7"
 
 [node name="part_001.2" type="Sprite2D" parent="国家层" unique_id=1719076103]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-168.6676, -56.6136)
 scale = Vector2(0.17423491, 0.17571715)
 texture = ExtResource("221_p_001_2")
@@ -2210,7 +2212,7 @@ metadata/orig = "001.2"
 
 [node name="part_007.1" type="Sprite2D" parent="国家层" unique_id=1031409392]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-179.7908, -299.1992)
 scale = Vector2(0.5021688, 0.50100553)
 texture = ExtResource("222_p_007_1")
@@ -2223,7 +2225,7 @@ metadata/orig = "007.1"
 
 [node name="part_001.5" type="Sprite2D" parent="国家层" unique_id=1677216054]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-168.6676, -56.6136)
 scale = Vector2(0.17423491, 0.17571715)
 texture = ExtResource("223_p_001_5")
@@ -2236,7 +2238,7 @@ metadata/orig = "001.5"
 
 [node name="part_010.0" type="Sprite2D" parent="国家层" unique_id=730264441]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-32.6317, -58.6514)
 scale = Vector2(0.12837128, 0.12796064)
 texture = ExtResource("224_p_010_0")
@@ -2249,7 +2251,7 @@ metadata/orig = "010.0"
 
 [node name="part_024.0" type="Sprite2D" parent="国家层" unique_id=266814608]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-492.93, 90.484)
 scale = Vector2(0.12782446, 0.12828355)
 texture = ExtResource("225_p_024_0")
@@ -2262,7 +2264,7 @@ metadata/orig = "024.0"
 
 [node name="part_086.1" type="Sprite2D" parent="国家层" unique_id=856758596]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-765.1604, -84.9272)
 scale = Vector2(0.12765959, 0.128258)
 texture = ExtResource("226_p_086_1")
@@ -2275,7 +2277,7 @@ metadata/orig = "086.1"
 
 [node name="part_007.0" type="Sprite2D" parent="国家层" unique_id=1395470304]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-163.0356, -299.6728)
 scale = Vector2(0.48595482, 0.48482916)
 texture = ExtResource("227_p_007_0")
@@ -2288,7 +2290,7 @@ metadata/orig = "007.0"
 
 [node name="part_016.0" type="Sprite2D" parent="国家层" unique_id=1754185156]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-714.5108, -165.5544)
 scale = Vector2(0.12782452, 0.12828346)
 texture = ExtResource("228_p_016_0")
@@ -2301,7 +2303,7 @@ metadata/orig = "016.0"
 
 [node name="part_094.0" type="Sprite2D" parent="国家层" unique_id=1906989301]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-580.418, -37.58)
 scale = Vector2(0.12837143, 0.12796094)
 texture = ExtResource("229_p_094_0")
@@ -2314,7 +2316,7 @@ metadata/orig = "094.0"
 
 [node name="part_014.1" type="Sprite2D" parent="国家层" unique_id=922806559]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-524.9402, -41.3944)
 scale = Vector2(0.17437118, 0.17402439)
 texture = ExtResource("230_p_014_1")
@@ -2327,7 +2329,7 @@ metadata/orig = "014.1"
 
 [node name="part_001.1" type="Sprite2D" parent="国家层" unique_id=2013624868]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-168.6676, -56.6136)
 scale = Vector2(0.17423491, 0.17571715)
 texture = ExtResource("231_p_001_1")
@@ -2340,7 +2342,7 @@ metadata/orig = "001.1"
 
 [node name="part_084.0" type="Sprite2D" parent="国家层" unique_id=393310119]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-533.89, -62.86)
 scale = Vector2(0.128, 0.128)
 texture = ExtResource("232_p_084_0")
@@ -2353,7 +2355,7 @@ metadata/orig = "084.0"
 
 [node name="part_059.0" type="Sprite2D" parent="国家层" unique_id=600159155]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-835.9713, 49.1285)
 scale = Vector2(0.12777285, 0.12890656)
 texture = ExtResource("233_p_059_0")
@@ -2366,6 +2368,7 @@ metadata/orig = "059.0"
 
 [node name="part_011.0" type="Sprite2D" parent="国家层" unique_id=1284161989]
 visible = false
+z_index = 44
 position = Vector2(-165.1604, 87.6936)
 scale = Vector2(0.176, 0.176)
 texture = ExtResource("234_p_011_0")
@@ -2378,7 +2381,7 @@ metadata/orig = "011.0"
 
 [node name="part_001.11" type="Sprite2D" parent="国家层" unique_id=959254438]
 visible = false
-z_index = -1
+z_index = 99
 position = Vector2(-120.066, -66.99601)
 scale = Vector2(0.24128003, 0.2432)
 texture = ExtResource("235_p_001_11")
@@ -2391,6 +2394,7 @@ metadata/orig = "001.11"
 
 [node name="part_030.2" type="Sprite2D" parent="国家层" unique_id=816556494]
 visible = false
+z_index = 42
 position = Vector2(-658.05, 20.084)
 scale = Vector2(0.41728, 0.41728005)
 texture = ExtResource("236_p_030_2")
@@ -2403,7 +2407,7 @@ metadata/orig = "030.2"
 
 [node name="part_027.0" type="Sprite2D" parent="国家层" unique_id=383487548]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(-668.674, -127.628)
 scale = Vector2(0.134144, 0.13311996)
 texture = ExtResource("237_p_027_0")
@@ -2416,7 +2420,7 @@ metadata/orig = "027.0"
 
 [node name="part_049.0" type="Sprite2D" parent="国家层" unique_id=1371329782]
 visible = false
-z_index = -3
+z_index = 312
 position = Vector2(-136.2017, 161.4882)
 scale = Vector2(0.128, 0.128)
 texture = ExtResource("238_p_049_0")
@@ -2429,7 +2433,7 @@ metadata/orig = "049.0"
 
 [node name="part_050.0" type="Sprite2D" parent="国家层" unique_id=481685183]
 visible = false
-z_index = -6
+z_index = 600
 position = Vector2(-48.1428, 241.684)
 scale = Vector2(0.12044784, 0.12044766)
 texture = ExtResource("239_p_050_0")
@@ -2442,7 +2446,7 @@ metadata/orig = "050.0"
 
 [node name="part_134.0" type="Sprite2D" parent="国家层" unique_id=904817649]
 visible = false
-z_index = -6
+z_index = 600
 position = Vector2(54.1407, 221.3205)
 scale = Vector2(0.12769277, 0.12768003)
 texture = ExtResource("241_p_134_0")
@@ -2455,7 +2459,7 @@ metadata/orig = "134.0"
 
 [node name="part_140.0" type="Sprite2D" parent="国家层" unique_id=1512025575]
 visible = false
-z_index = 2
+z_index = -160
 position = Vector2(693.2102, -36.2859)
 scale = Vector2(0.38766086, 0.38766098)
 texture = ExtResource("242_p_140_0")
@@ -2468,7 +2472,7 @@ metadata/orig = "140.0"
 
 [node name="part_084.5" type="Sprite2D" parent="国家层" unique_id=1802079061]
 visible = false
-z_index = -6
+z_index = 600
 position = Vector2(-516.249, -25.932)
 scale = Vector2(0.19455996, 0.19455998)
 texture = ExtResource("244_p_084_5")
@@ -2481,6 +2485,7 @@ metadata/orig = "084.5"
 
 [node name="part_053.0" type="Sprite2D" parent="国家层" unique_id=1584767003]
 visible = false
+z_index = 0
 position = Vector2(-602.8334, 108.6101)
 scale = Vector2(0.17024004, 0.17024003)
 texture = ExtResource("245_p_053_0")
@@ -2493,6 +2498,7 @@ metadata/orig = "053.0"
 
 [node name="part_053.1" type="Sprite2D" parent="国家层" unique_id=91042433]
 visible = false
+z_index = 0
 position = Vector2(-599.4606, 102.8091)
 scale = Vector2(0.12760316, 0.12760326)
 texture = ExtResource("246_p_053_1")
@@ -2505,7 +2511,7 @@ metadata/orig = "053.1"
 
 [node name="part_041.0" type="Sprite2D" parent="国家层" unique_id=739127680]
 visible = false
-z_index = -6
+z_index = 600
 position = Vector2(-530.0462, 132.8494)
 scale = Vector2(0.16303366, 0.16303359)
 texture = ExtResource("248_p_041_0")
@@ -2518,7 +2524,7 @@ metadata/orig = "041.0"
 
 [node name="part_041.1" type="Sprite2D" parent="国家层" unique_id=517873109]
 visible = false
-z_index = -6
+z_index = 600
 position = Vector2(-530.0462, 132.8494)
 scale = Vector2(0.16303366, 0.16303359)
 texture = ExtResource("249_p_041_1")
@@ -2531,7 +2537,7 @@ metadata/orig = "041.1"
 
 [node name="part_042.2" type="Sprite2D" parent="国家层" unique_id=832553663]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-513.1591, 152.9915)
 scale = Vector2(0.16127998, 0.16192003)
 texture = ExtResource("251_p_042_2")
@@ -2544,7 +2550,7 @@ metadata/orig = "042.2"
 
 [node name="part_042.1" type="Sprite2D" parent="国家层" unique_id=1352291582]
 visible = false
-z_index = 8
+z_index = -780
 position = Vector2(-515.5732, 152.9915)
 scale = Vector2(0.16192003, 0.16191997)
 texture = ExtResource("252_p_042_1")
@@ -2557,7 +2563,7 @@ metadata/orig = "042.1"
 
 [node name="part_153.0" type="Sprite2D" parent="国家层" unique_id=1872170153]
 visible = false
-z_index = -4
+z_index = 376
 position = Vector2(-649.9348, 330.8859)
 scale = Vector2(0.16098562, 0.16098566)
 texture = ExtResource("262_p_153_0")
@@ -2570,7 +2576,7 @@ metadata/orig = "153.0"
 
 [node name="part_157.0" type="Sprite2D" parent="国家层" unique_id=1286135618]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-517.186, -41.4072)
 scale = Vector2(0.128, 0.128)
 texture = ExtResource("263_p_157_0")
@@ -2583,7 +2589,7 @@ metadata/orig = "157.0"
 
 [node name="part_157.1" type="Sprite2D" parent="国家层" unique_id=1229326195]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-545.1796, -46.8856)
 scale = Vector2(0.128, 0.128)
 texture = ExtResource("264_p_157_1")
@@ -2596,7 +2602,7 @@ metadata/orig = "157.1"
 
 [node name="part_157.2" type="Sprite2D" parent="国家层" unique_id=700308616]
 visible = false
-z_index = 2
+z_index = -150
 position = Vector2(-530.434, -38.348)
 scale = Vector2(0.1740834, 0.16919763)
 texture = ExtResource("265_p_157_2")
@@ -2609,7 +2615,7 @@ metadata/orig = "157.2"
 
 [node name="part_163.0" type="Sprite2D" parent="国家层" unique_id=1061912389]
 visible = false
-z_index = -6
+z_index = 600
 position = Vector2(-644.3719, 203.325)
 scale = Vector2(0.43458566, 0.4345855)
 texture = ExtResource("266_p_163_0")
@@ -2622,7 +2628,7 @@ metadata/orig = "163.0"
 
 [node name="part_013.1" type="Sprite2D" parent="国家层" unique_id=2136689543]
 visible = false
-z_index = -6
+z_index = 600
 position = Vector2(-645.5431, 49.1682)
 scale = Vector2(0.25836805, 0.25951996)
 texture = ExtResource("271_p_013_1")
@@ -2635,7 +2641,7 @@ metadata/orig = "013.1"
 
 [node name="part_149.0" type="Sprite2D" parent="国家层" unique_id=997257694]
 visible = false
-z_index = -6
+z_index = 600
 position = Vector2(785.1334, 0.861)
 scale = Vector2(0.387661, 0.3876607)
 texture = ExtResource("272_p_149_0")
@@ -2648,7 +2654,7 @@ metadata/orig = "149.0"
 
 [node name="part_112.1" type="Sprite2D" parent="国家层" unique_id=1962606995]
 visible = false
-z_index = -6
+z_index = 600
 position = Vector2(-855.9431, 95.9547)
 scale = Vector2(0.16098565, 0.16098556)
 texture = ExtResource("277_p_112_1")
@@ -2661,7 +2667,7 @@ metadata/orig = "112.1"
 
 [node name="part_164.0" type="Sprite2D" parent="国家层" unique_id=751155382]
 visible = false
-z_index = -6
+z_index = 600
 position = Vector2(-724.3847, 127.9765)
 scale = Vector2(0.128, 0.128)
 texture = ExtResource("281_p_164_0")
@@ -2674,7 +2680,7 @@ metadata/orig = "164.0"
 
 [node name="part_165.0" type="Sprite2D" parent="国家层" unique_id=1650171795]
 visible = false
-z_index = -6
+z_index = 600
 position = Vector2(-724.3847, 127.9765)
 scale = Vector2(0.128, 0.128)
 texture = ExtResource("282_p_165_0")
@@ -2687,7 +2693,7 @@ metadata/orig = "165.0"
 
 [node name="war_ogon (3)" type="Sprite2D" parent="国家层" unique_id=637969801]
 visible = false
-z_index = 10
+z_index = -828
 position = Vector2(-495.298, -8.628)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2700,7 +2706,7 @@ metadata/orig = "ogon (3)"
 
 [node name="war_ogon (19)" type="Sprite2D" parent="国家层" unique_id=596154689]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(-42.05, -75.956)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2713,7 +2719,7 @@ metadata/orig = "ogon (19)"
 
 [node name="war_ogon (27)" type="Sprite2D" parent="国家层" unique_id=1433679838]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(-546.754, 130.252)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2726,7 +2732,7 @@ metadata/orig = "ogon (27)"
 
 [node name="war_ogon (21)" type="Sprite2D" parent="国家层" unique_id=363617145]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(-653.762, -89.396)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2739,7 +2745,7 @@ metadata/orig = "ogon (21)"
 
 [node name="war_ogon (8)" type="Sprite2D" parent="国家层" unique_id=905441250]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(-152.514, 49.484)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2752,7 +2758,7 @@ metadata/orig = "ogon (8)"
 
 [node name="war_ogon (32)" type="Sprite2D" parent="国家层" unique_id=402238596]
 visible = false
-z_index = 10
+z_index = -103
 position = Vector2(-523.586, -24.884)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2765,7 +2771,7 @@ metadata/orig = "ogon (32)"
 
 [node name="war_ogon (30)" type="Sprite2D" parent="国家层" unique_id=1281186620]
 visible = false
-z_index = 10
+z_index = -103
 position = Vector2(-178.114, 66.508)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2778,7 +2784,7 @@ metadata/orig = "ogon (30)"
 
 [node name="war_ogon (14)" type="Sprite2D" parent="国家层" unique_id=2079101367]
 visible = false
-z_index = 10
+z_index = 1283
 position = Vector2(-521.666, -46.9)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2791,7 +2797,7 @@ metadata/orig = "ogon (14)"
 
 [node name="war_ogon (25)" type="Sprite2D" parent="国家层" unique_id=1118003633]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(-25.922, -151.86)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2804,7 +2810,7 @@ metadata/orig = "ogon (25)"
 
 [node name="war_ogon (35)" type="Sprite2D" parent="国家层" unique_id=413545650]
 visible = false
-z_index = 10
+z_index = -103
 position = Vector2(-773.954, -79.412)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2817,7 +2823,7 @@ metadata/orig = "ogon (35)"
 
 [node name="war_ogon (15)" type="Sprite2D" parent="国家层" unique_id=1247024745]
 visible = false
-z_index = 10
+z_index = -721
 position = Vector2(-516.162, -64.692)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2830,7 +2836,7 @@ metadata/orig = "ogon (15)"
 
 [node name="war_ogon (26)" type="Sprite2D" parent="国家层" unique_id=1033519410]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(-700.738, -93.876)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2843,7 +2849,7 @@ metadata/orig = "ogon (26)"
 
 [node name="war_ogon (22)" type="Sprite2D" parent="国家层" unique_id=1347132015]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(-656.578, -68.532)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2856,7 +2862,7 @@ metadata/orig = "ogon (22)"
 
 [node name="war_ogon (29)" type="Sprite2D" parent="国家层" unique_id=164101475]
 visible = false
-z_index = 10
+z_index = -103
 position = Vector2(-534.466, 110.284)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2869,7 +2875,7 @@ metadata/orig = "ogon (29)"
 
 [node name="war_ogon (13)" type="Sprite2D" parent="国家层" unique_id=52187558]
 visible = false
-z_index = 10
+z_index = -721
 position = Vector2(-549.57, -45.492)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2882,7 +2888,7 @@ metadata/orig = "ogon (13)"
 
 [node name="war_ogon (0)" type="Sprite2D" parent="国家层" unique_id=220385482]
 visible = false
-z_index = 10
+z_index = -828
 position = Vector2(-35.0099, -57.524)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2895,7 +2901,7 @@ metadata/orig = "ogon (0)"
 
 [node name="war_ogon (31)" type="Sprite2D" parent="国家层" unique_id=895595895]
 visible = false
-z_index = 10
+z_index = -103
 position = Vector2(-504.514, -2.74)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2908,7 +2914,7 @@ metadata/orig = "ogon (31)"
 
 [node name="war_ogon (23)" type="Sprite2D" parent="国家层" unique_id=153000239]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(-660.034, 53.964)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2921,7 +2927,7 @@ metadata/orig = "ogon (23)"
 
 [node name="war_ogon (7)" type="Sprite2D" parent="国家层" unique_id=1431250346]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(-232.2579, 15.692)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2934,7 +2940,7 @@ metadata/orig = "ogon (7)"
 
 [node name="war_ogon (28)" type="Sprite2D" parent="国家层" unique_id=1490591304]
 visible = false
-z_index = 10
+z_index = -103
 position = Vector2(-558.274, 110.54)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2947,7 +2953,7 @@ metadata/orig = "ogon (28)"
 
 [node name="war_ogon (6)" type="Sprite2D" parent="国家层" unique_id=1222245853]
 visible = false
-z_index = 10
+z_index = -721
 position = Vector2(-468.546, -13.748)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2960,7 +2966,7 @@ metadata/orig = "ogon (6)"
 
 [node name="war_ogon (16)" type="Sprite2D" parent="国家层" unique_id=1302632398]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(34.2381, -48.052)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2973,7 +2979,7 @@ metadata/orig = "ogon (16)"
 
 [node name="war_ogon (11)" type="Sprite2D" parent="国家层" unique_id=994010155]
 visible = false
-z_index = 10
+z_index = -721
 position = Vector2(-570.05, -64.436)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2986,7 +2992,7 @@ metadata/orig = "ogon (11)"
 
 [node name="war_ogon (9)" type="Sprite2D" parent="国家层" unique_id=885613413]
 visible = false
-z_index = 10
+z_index = -721
 position = Vector2(-52.674, 106.316)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -2999,7 +3005,7 @@ metadata/orig = "ogon (9)"
 
 [node name="war_ogon (5)" type="Sprite2D" parent="国家层" unique_id=75325175]
 visible = false
-z_index = 10
+z_index = -721
 position = Vector2(-393.794, -28.724)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3012,7 +3018,7 @@ metadata/orig = "ogon (5)"
 
 [node name="war_ogon (17)" type="Sprite2D" parent="国家层" unique_id=1097958440]
 visible = false
-z_index = 10
+z_index = -721
 position = Vector2(-580.0852, -45.3896)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3025,7 +3031,7 @@ metadata/orig = "ogon (17)"
 
 [node name="war_ogon (20)" type="Sprite2D" parent="国家层" unique_id=492041680]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(-642.498, -143.156)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3038,7 +3044,7 @@ metadata/orig = "ogon (20)"
 
 [node name="war_ogon (34)" type="Sprite2D" parent="国家层" unique_id=932806074]
 visible = false
-z_index = 10
+z_index = -103
 position = Vector2(-794.562, -84.532)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3051,7 +3057,7 @@ metadata/orig = "ogon (34)"
 
 [node name="war_ogon (18)" type="Sprite2D" parent="国家层" unique_id=410865803]
 visible = false
-z_index = 10
+z_index = -721
 position = Vector2(-511.81, 144.332)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3064,7 +3070,7 @@ metadata/orig = "ogon (18)"
 
 [node name="war_ogon (4)" type="Sprite2D" parent="国家层" unique_id=1130768383]
 visible = false
-z_index = 10
+z_index = -721
 position = Vector2(-567.874, -19.508)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3077,7 +3083,7 @@ metadata/orig = "ogon (4)"
 
 [node name="war_ogon (10)" type="Sprite2D" parent="国家层" unique_id=472954568]
 visible = false
-z_index = 10
+z_index = -721
 position = Vector2(-316.738, 39.372)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3090,7 +3096,7 @@ metadata/orig = "ogon (10)"
 
 [node name="war_ogon (12)" type="Sprite2D" parent="国家层" unique_id=1129499803]
 visible = false
-z_index = 10
+z_index = -721
 position = Vector2(-538.05, -55.988)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3103,7 +3109,7 @@ metadata/orig = "ogon (12)"
 
 [node name="war_ogon (33)" type="Sprite2D" parent="国家层" unique_id=47272861]
 visible = false
-z_index = 10
+z_index = -103
 position = Vector2(-801.602, -66.228)
 scale = Vector2(0.29, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3116,7 +3122,7 @@ metadata/orig = "ogon (33)"
 
 [node name="war_ogon (1)" type="Sprite2D" parent="国家层" unique_id=344246235]
 visible = false
-z_index = 10
+z_index = -828
 position = Vector2(-157.25, 110.924)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3129,7 +3135,7 @@ metadata/orig = "ogon (1)"
 
 [node name="war_ogon (2)" type="Sprite2D" parent="国家层" unique_id=1204982449]
 visible = false
-z_index = 10
+z_index = -828
 position = Vector2(-188.098, 91.468)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3142,7 +3148,7 @@ metadata/orig = "ogon (2)"
 
 [node name="war_ogon (24)" type="Sprite2D" parent="国家层" unique_id=2013410262]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(-508.866, 94.796)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3155,7 +3161,7 @@ metadata/orig = "ogon (24)"
 
 [node name="war_ogon (36)" type="Sprite2D" parent="国家层" unique_id=407682900]
 visible = false
-z_index = 10
+z_index = -160
 position = Vector2(-29.25, -75.956)
 scale = Vector2(0.295, 0.3)
 texture = ExtResource("185_war_icon")
@@ -3168,7 +3174,7 @@ metadata/orig = "ogon (36)"
 
 [node name="part_057.0" type="Sprite2D" parent="国家层" unique_id=1157459664]
 visible = false
-z_index = 10
+z_index = 900
 position = Vector2(-667.1982, 94.8654)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("283_p_057_0")
@@ -3181,7 +3187,7 @@ metadata/orig = "057.0"
 
 [node name="part_118.0" type="Sprite2D" parent="国家层" unique_id=927863667]
 visible = false
-z_index = 10
+z_index = 1310
 position = Vector2(-583.9982, 174.6914)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("284_p_118_0")
@@ -3194,7 +3200,7 @@ metadata/orig = "118.0"
 
 [node name="part_033.0" type="Sprite2D" parent="国家层" unique_id=733257264]
 visible = false
-z_index = 10
+z_index = 900
 position = Vector2(-215.5873, 56.3029)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("285_p_033_0")
@@ -3207,7 +3213,7 @@ metadata/orig = "033.0"
 
 [node name="part_141.0" type="Sprite2D" parent="国家层" unique_id=748757085]
 visible = false
-z_index = 10
+z_index = -174
 position = Vector2(795.879, 29.1912)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("286_p_141_0")
@@ -3220,7 +3226,7 @@ metadata/orig = "141.0"
 
 [node name="part_058.0" type="Sprite2D" parent="国家层" unique_id=1903046950]
 visible = false
-z_index = 10
+z_index = 900
 position = Vector2(-795.0804, 105.4779)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("287_p_058_0")
@@ -3233,7 +3239,7 @@ metadata/orig = "058.0"
 
 [node name="part_127.0" type="Sprite2D" parent="国家层" unique_id=2118985000]
 visible = false
-z_index = 10
+z_index = 416
 position = Vector2(-602.8462, 312.6395)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("240_p_127_0")
@@ -3246,7 +3252,7 @@ metadata/orig = "127.0"
 
 [node name="part_140.1" type="Sprite2D" parent="国家层" unique_id=632881898]
 visible = false
-z_index = 10
+z_index = 1310
 position = Vector2(713.4266, -5.8475037)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("243_p_140_1")
@@ -3259,7 +3265,7 @@ metadata/orig = "140.1"
 
 [node name="part_053.2" type="Sprite2D" parent="国家层" unique_id=1777720766]
 visible = false
-z_index = 10
+z_index = 1310
 position = Vector2(-611.097, 125.802986)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("247_p_053_2")
@@ -3272,7 +3278,7 @@ metadata/orig = "053.2"
 
 [node name="part_138.0" type="Sprite2D" parent="国家层" unique_id=1723043684]
 visible = false
-z_index = 10
+z_index = 1310
 position = Vector2(774.581, -35.445004)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("250_p_138_0")
@@ -3285,7 +3291,7 @@ metadata/orig = "138.0"
 
 [node name="part_119.0" type="Sprite2D" parent="国家层" unique_id=628170373]
 visible = false
-z_index = 10
+z_index = 1310
 position = Vector2(-536.1582, 173.89392)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("253_p_119_0")
@@ -3298,7 +3304,7 @@ metadata/orig = "119.0"
 
 [node name="part_119.1" type="Sprite2D" parent="国家层" unique_id=538536364]
 visible = false
-z_index = 10
+z_index = 1310
 position = Vector2(-556.9172, 178.64148)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("254_p_119_1")
@@ -3311,7 +3317,7 @@ metadata/orig = "119.1"
 
 [node name="part_113.0" type="Sprite2D" parent="国家层" unique_id=824688593]
 visible = false
-z_index = 10
+z_index = 1310
 position = Vector2(-865.4395, 101.80048)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("255_p_113_0")
@@ -3324,7 +3330,7 @@ metadata/orig = "113.0"
 
 [node name="part_122.0" type="Sprite2D" parent="国家层" unique_id=2086094444]
 visible = false
-z_index = 10
+z_index = 1310
 position = Vector2(-587.1905, 190.05139)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("256_p_122_0")
@@ -3337,7 +3343,7 @@ metadata/orig = "122.0"
 
 [node name="part_131.0" type="Sprite2D" parent="国家层" unique_id=1264532039]
 visible = false
-z_index = 10
+z_index = 423
 position = Vector2(-665.1246, 343.1509)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("257_p_131_0")
@@ -3350,7 +3356,7 @@ metadata/orig = "131.0"
 
 [node name="part_131.1" type="Sprite2D" parent="国家层" unique_id=800987837]
 visible = false
-z_index = 10
+z_index = 423
 position = Vector2(-665.1246, 289.3909)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("258_p_131_1")
@@ -3363,7 +3369,7 @@ metadata/orig = "131.1"
 
 [node name="part_131_2" type="Sprite2D" parent="国家层" unique_id=1404271267]
 visible = false
-z_index = 10
+z_index = 423
 position = Vector2(-675.1086, 286.06287)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("259_p_131_2")
@@ -3376,7 +3382,7 @@ metadata/orig = "131.2"
 
 [node name="part_131.3" type="Sprite2D" parent="国家层" unique_id=367875313]
 visible = false
-z_index = 10
+z_index = 423
 position = Vector2(-641.643, 331.16498)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("260_p_131_3")
@@ -3389,7 +3395,7 @@ metadata/orig = "131.3"
 
 [node name="part_131.4" type="Sprite2D" parent="国家层" unique_id=810977539]
 visible = false
-z_index = 10
+z_index = 423
 position = Vector2(-597.099, 323.4389)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("261_p_131_4")
@@ -3402,7 +3408,7 @@ metadata/orig = "131.4"
 
 [node name="part_117.0" type="Sprite2D" parent="国家层" unique_id=1468181016]
 visible = false
-z_index = 10
+z_index = 610
 position = Vector2(-625.3807, 218.6402)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("267_p_117_0")
@@ -3415,7 +3421,7 @@ metadata/orig = "117.0"
 
 [node name="part_117.1" type="Sprite2D" parent="国家层" unique_id=2005550407]
 visible = false
-z_index = 10
+z_index = 610
 position = Vector2(-639.9956, 190.3406)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("268_p_117_1")
@@ -3428,7 +3434,7 @@ metadata/orig = "117.1"
 
 [node name="part_066.0" type="Sprite2D" parent="国家层" unique_id=204763458]
 visible = false
-z_index = 10
+z_index = 610
 position = Vector2(-702.3905, 155.3851)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("269_p_066_0")
@@ -3441,7 +3447,7 @@ metadata/orig = "066.0"
 
 [node name="part_126.0" type="Sprite2D" parent="国家层" unique_id=866394157]
 visible = false
-z_index = 10
+z_index = 361
 position = Vector2(-575.81, 290.5506)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("270_p_126_0")
@@ -3454,7 +3460,7 @@ metadata/orig = "126.0"
 
 [node name="part_149.1" type="Sprite2D" parent="国家层" unique_id=1418996807]
 visible = false
-z_index = 10
+z_index = 600
 position = Vector2(747.7907, 5.296196)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("273_p_149_1")
@@ -3467,7 +3473,7 @@ metadata/orig = "149.1"
 
 [node name="part_149.2" type="Sprite2D" parent="国家层" unique_id=656309341]
 visible = false
-z_index = 10
+z_index = 600
 position = Vector2(756.0301, 0.22349548)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("274_p_149_2")
@@ -3480,7 +3486,7 @@ metadata/orig = "149.2"
 
 [node name="part_147.0" type="Sprite2D" parent="国家层" unique_id=1801875538]
 visible = false
-z_index = 10
+z_index = 600
 position = Vector2(773.1116, 15.443993)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("275_p_147_0")
@@ -3493,7 +3499,7 @@ metadata/orig = "147.0"
 
 [node name="part_123.0" type="Sprite2D" parent="国家层" unique_id=1330827352]
 visible = false
-z_index = 13
+z_index = 900
 position = Vector2(-670.1281, 254.88852)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("276_p_123_0")
@@ -3506,7 +3512,7 @@ metadata/orig = "123.0"
 
 [node name="part_107.0" type="Sprite2D" parent="国家层" unique_id=1374214233]
 visible = false
-z_index = 10
+z_index = 900
 position = Vector2(-846.3265, 133.3115)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("279_p_107_0")
@@ -3519,7 +3525,7 @@ metadata/orig = "107.0"
 
 [node name="part_060.0" type="Sprite2D" parent="国家层" unique_id=2104677777]
 visible = false
-z_index = 10
+z_index = 900
 position = Vector2(-730.242, 128.89038)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("280_p_060_0")

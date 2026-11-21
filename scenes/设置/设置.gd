@@ -400,9 +400,8 @@ func _bind_auto_types() -> void:
 		var cb := find_child("AutoT%dToggle" % t, true, false) as CheckButton
 		cb.set_pressed_no_signal(已开.has(t))
 		cb.toggled.connect(func(_on: bool): _推自动类型())
-	var dcb := find_child("AutoDecisionToggle", true, false) as CheckButton
-	dcb.set_pressed_no_signal(ui.get_bool("auto_decision", false))
-	dcb.toggled.connect(func(on: bool): ui.set_bool("auto_decision", on))
+	# 周期型决议的自动化改为"决议页逐条勾选"(每条一份开关), 设置页不再有总开关
+	find_child("AutoDecisionRow", true, false).visible = false
 
 
 ## 把 14 个勾的当前状态拼回 "7,8,20" 落盘; 逻辑层在进外交场景时读这一行
@@ -558,7 +557,7 @@ func _on_恢复默认_pressed() -> void:
 	ui.set_bool("paragraph_indent", false)
 	ui.set_bool("interactive_highlight", true)
 	ui.set_string("auto_types", "")
-	ui.set_bool("auto_decision", false)
+	ui.set_string("auto_decisions", "")
 	ui.set_bool("event_pause_after", true)
 	ui.set_int("event_align", 0)
 	for row in CUSTOM_STEP_ROWS:
