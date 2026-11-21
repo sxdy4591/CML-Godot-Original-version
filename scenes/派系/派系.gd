@@ -91,11 +91,11 @@ func _适配政策面板() -> void:
 		_调整面板(get_node(定义["panel"]) as Control)
 
 
-func _调整面板(面板: Control) -> void:
-	var 原: Vector2 = 面板.get_meta("policy_base_size", 面板.size)
-	面板.set_meta("policy_base_size", 原)
-	var 最小 := 面板.get_combined_minimum_size()
-	面板.size = Vector2(maxf(原.x, 最小.x), maxf(原.y, 最小.y))
+func _调整面板(控件: Control) -> void:
+	var 原: Vector2 = 控件.get_meta("policy_base_size", 控件.size)
+	控件.set_meta("policy_base_size", 原)
+	var 最小 := 控件.get_combined_minimum_size()
+	控件.size = Vector2(maxf(原.x, 最小.x), maxf(原.y, 最小.y))
 
 
 func _展开介绍() -> void:
@@ -125,9 +125,9 @@ func _切换政策(index: int) -> void:
 	_隐藏政策面板()
 	if 已展开:
 		return
-	var 面板 := get_node(定义["panel"]) as Control
-	面板.visible = true
-	_调整面板(面板)
+	var 控件 := get_node(定义["panel"]) as Control
+	控件.visible = true
+	_调整面板(控件)
 	_当前政策 = index
 
 

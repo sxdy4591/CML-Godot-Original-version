@@ -147,7 +147,12 @@ public sealed class FactionPane : IPanel
         {
             var parties = new GameObject("Parties (" + m + ")");
             var text = new GameObject("Text");
-            Stub.Attach<Politic_party_name_show>(text);
+            // 原版 Awake 里靠 GetComponent 取 TextMesh/Okoshko, Repaint 用 this_number 取党名;
+            // Doctrine_button_script 会 Find("Parties (m)").Find("Text") 调它, 组件与编号都要备齐.
+            var partyName = Stub.On<Politic_party_name_show>(text, Lifecycle.None);
+            partyName.Also<TextMesh>();
+            partyName.Also<OkoshkoScript>();
+            partyName.Set("this_number", m);
             text.transform.SetParent(parties.transform);
             var znack = new GameObject("Znack");
             znack.AddComponent<SpriteRenderer>();

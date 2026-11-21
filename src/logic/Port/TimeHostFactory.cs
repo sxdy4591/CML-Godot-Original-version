@@ -35,8 +35,9 @@ public static class TimeHostFactory
         Create("SteamManager", typeof(SteamManager));
         new GameObject("Global(Clone)");
 
-        // 时钟本体交给泵: Awake/Start/Update 按原版顺序每帧驱动(时间推进/月度结算)
-        var timeStub = Stub.Take<TimeScript>("TimeScript", Lifecycle.Pump);
+        // 时钟本体交给泵: Awake/Start/Update 按原版顺序每帧驱动(时间推进/月度结算).
+        // 对象名必须与原版场景一致(Text_time): in1992_script.Awake 靠 Find("Text_time") 取它.
+        var timeStub = Stub.Take<TimeScript>("Text_time", Lifecycle.Pump);
         timeStub.Go.AddComponent<TextMesh>();
         var achievements = Stub.Attach<AchievementsAlias>(timeStub.Go);
         var time = timeStub.Typed<TimeScript>();

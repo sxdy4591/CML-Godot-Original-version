@@ -109,12 +109,16 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 		var 有: bool = i < options.size()
 		var 可点: bool = 有 and bool(options[i]["enabled"])
 		选项文本[i].visible = 有
-		if 有 and _已选 < 0:
+		if not 有:
+			# 本事件没有第 i 个选项: 右侧方框要一并藏掉, 否则会多出空框(与文本行错位)
+			选项按钮[i].visible = false
+			选项按钮[i].disabled = true
+		elif _已选 < 0:
 			# 原版不可用的选项会 Destroy 掉按钮(galka_stuk), 只留文本; 这里同样把方框藏掉
 			选项文本[i].text = _纯文本(options[i]["text"])
 			选项按钮[i].visible = 可点
 			选项按钮[i].disabled = not 可点
-		elif 有:
+		else:
 			# 已选: 冻结选项显示(不再按原版重算可用性), 避免"点过几遍后选项变灰消失"
 			选项按钮[i].visible = true
 			选项按钮[i].disabled = true
