@@ -27,6 +27,7 @@ enum 页 { 描述, 选项, 结果 }
 var _快照: Dictionary = {}
 var _页: int = 页.描述
 var _已选: int = -1
+var _已确认: bool = false
 var _编号: int = -1
 var _ui: Node
 static var _插图池: Array[String] = []
@@ -51,14 +52,9 @@ func _ready() -> void:
 
 
 func _选择(index: int) -> void:
-	# 原版点选项即定案(Results_text 只结算一次): 已选后不再重复执行,
-	# 否则每按一次都会再跑一遍 ResultsOfEvents, 事件效果累加、选项条件被改写成不可用.
-	if _已选 >= 0:
-		选项按钮[index].set_pressed_no_signal(false)
-		选项按钮[_已选].set_pressed_no_signal(true)
+	# 选中阶段可以随便改选; 只有按右翻确认(结算)之后才锁死, 避免重复结算 ResultsOfEvents.
+	if _已确认:
 		return
-	# 点选项只是"选中", 不结算: 结算(ResultsOfEvents, 会扣预算/特工)在右翻确认时才做,
-	# 否则玩家刚点选项、还没确认就看到右上角数值变了.
 	print("[事件] 选择=", index)
 	_已选 = index
 	for i in 选项按钮.size():
@@ -83,6 +79,7 @@ func _右翻页() -> void:
 				return
 			# 右翻 = 确认选择: 这一刻才结算(与原版点选项后立刻 LoadScene(Results) 同一时机)
 			UiBridge.act(面板, "选择", [_已选])
+			_已确认 = true
 			UiBridge.request(面板)
 			_页 = 页.结果
 		页.结果:
@@ -109,6 +106,7 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 	if 编号 != _编号:
 		_编号 = 编号
 		_已选 = -1
+		_已确认 = false
 		_页 = 页.描述
 	var options: Array = data["options"]
 	for i in 选项按钮.size():
@@ -119,18 +117,19 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 			# 本事件没有第 i 个选项: 右侧方框要一并藏掉, 否则会多出空框(与文本行错位)
 			选项按钮[i].visible = false
 			选项按钮[i].disabled = true
-		elif _已选 < 0:
-			# 原版不可用的选项会 Destroy 掉按钮(galka_stuk), 只留文本; 这里同样把方框藏掉
-			选项文本[i].text = _纯文本(options[i]["text"])
-			选项按钮[i].visible = 可点
-			选项按钮[i].disabled = not 可点
-		else:
-			# 已选: 冻结选项显示. 不能设 disabled(TextureButton 的勾选图会退回普通态),
+		elif _已确认:
+			# 已确认结算: 冻结选项显示. 不能设 disabled(TextureButton 的勾选图会退回普通态),
 			# 用 IGNORE 让它不再接收点击, 同时保持选中态与纹理.
 			选项按钮[i].visible = true
 			选项按钮[i].disabled = false
 			选项按钮[i].mouse_filter = Control.MOUSE_FILTER_IGNORE
 			选项按钮[i].set_pressed_no_signal(i == _已选)
+		else:
+			# 原版不可用的选项会 Destroy 掉按钮(galka_stuk), 只留文本; 这里同样把方框藏掉
+			选项文本[i].text = _纯文本(options[i]["text"])
+			选项按钮[i].visible = 可点
+			选项按钮[i].disabled = not 可点
+			选项按钮[i].mouse_filter = Control.MOUSE_FILTER_STOP
 	_刷新页()
 
 
