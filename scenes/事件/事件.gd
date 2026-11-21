@@ -57,12 +57,12 @@ func _选择(index: int) -> void:
 		选项按钮[index].set_pressed_no_signal(false)
 		选项按钮[_已选].set_pressed_no_signal(true)
 		return
+	# 点选项只是"选中", 不结算: 结算(ResultsOfEvents, 会扣预算/特工)在右翻确认时才做,
+	# 否则玩家刚点选项、还没确认就看到右上角数值变了.
 	print("[事件] 选择=", index)
 	_已选 = index
 	for i in 选项按钮.size():
 		选项按钮[i].set_pressed_no_signal(i == index)
-	UiBridge.act(面板, "选择", [index])
-	UiBridge.request(面板)
 
 
 func _左翻页() -> void:
@@ -79,8 +79,12 @@ func _右翻页() -> void:
 		页.描述:
 			_页 = 页.选项
 		页.选项:
-			if _已选 >= 0:
-				_页 = 页.结果
+			if _已选 < 0:
+				return
+			# 右翻 = 确认选择: 这一刻才结算(与原版点选项后立刻 LoadScene(Results) 同一时机)
+			UiBridge.act(面板, "选择", [_已选])
+			UiBridge.request(面板)
+			_页 = 页.结果
 		页.结果:
 			UiBridge.act(面板, "关闭", [])
 			return
