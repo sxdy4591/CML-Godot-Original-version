@@ -85,7 +85,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\push_clean.ps1 -Remote https://
 
 推送完成后：
 
-1. Settings → Pages：Source = `Deploy from a branch`，分支 `main`，目录 `/site`；
+1. Settings → Pages：**Source = GitHub Actions**（不是 Deploy from a branch；发布由 `.github/workflows/pages.yml` 负责，`site/` 由 workflow 上传）；启用后在 Actions 里手动跑一次 `Deploy Pages`；
 2. Settings → Branches：给 `main` 加保护（Require pull request + Require status checks 选 `CI`）；
 3. 打首版 tag：`git tag v0.7.1 && git push origin v0.7.1`（Release workflow 会校验三处版本一致并建 Release）；
 4. Release 页上传安装包（附件）。

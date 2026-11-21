@@ -34,4 +34,4 @@ if ($remotes -contains "origin") {
 git push -u origin main --force
 if ($LASTEXITCODE -ne 0) { throw "git push failed (check remote url and credentials)" }
 
-Write-Host "Done: main pushed as a single commit. Next: Settings -> Pages -> main /site."
+Write-Host "Done: main pushed as a single commit. Next: Settings -> Pages -> Source = GitHub Actions."
