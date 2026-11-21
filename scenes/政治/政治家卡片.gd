@@ -29,7 +29,13 @@ func setup(info: Dictionary) -> void:
 	职务角标.text = info["post"]
 	状态文字.text = info["status_flag"]
 	状态角标.visible = not 状态文字.text.is_empty()
+	tooltip_text = str(info["tooltip"]).replace("|", "\n")
 	部件表.apply_layers(人像, 节点, _层列表(info))
+
+
+# 原版悬浮框 OkoshkoScript: 文本带 <color=yellow> 标签与 "|" 换行, 默认 tooltip 不解析 BBCode
+func _make_custom_tooltip(for_text: String) -> Control:
+	return 悬浮提示.build_tooltip(for_text)
 
 
 func _层列表(info: Dictionary) -> Array:

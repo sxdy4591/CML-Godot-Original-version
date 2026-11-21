@@ -110,6 +110,10 @@ public sealed class EndingPane : IPanel
         stub.BindTexts("name", "text_t");
         stub.Set("scrollComponent", 造滚动条());
         stub.Set("achieves", 造成就());
+        // 原版场景里 fon 是背景 SpriteRenderer、fon_win 是胜利背景图,
+        // DoneEnding 的胜利分支会写 fon.sprite = fon_win(缺了就 NRE, 整段结局文本都不生成).
+        stub.Set("fon", stub.Also<SpriteRenderer>());
+        stub.Set("fon_win", new Sprite { name = "fon_win" });
         return stub;
     }
 

@@ -184,3 +184,12 @@ func _hide_retire() -> void:
 	if 退休面板 != null:
 		退休面板.visible = false
 	get_tree().paused = false
+
+
+## 1986 抉择的弹出/收起由逻辑层驱动（原版 TimeScript.Reborn 在 1986-1-1 打开 ending），
+## 桥层 retire_changed 信号进来，这里只切显隐与暂停状态。
+func _set_retire(open: bool) -> void:
+	if open:
+		_show_retire()
+	else:
+		_hide_retire()

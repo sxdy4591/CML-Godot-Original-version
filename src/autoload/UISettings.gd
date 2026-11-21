@@ -17,7 +17,17 @@ func _ready() -> void:
 	# **只写一次**(配置里还没有 ui_scale 时), 之后完全以玩家在设置页里的选择为准。
 	if OS.has_feature("mobile") and not _cfg.has_section_key("ui", "ui_scale"):
 		set_int("ui_scale", 145)
+	_apply_original_cursor()
 	get_tree().node_added.connect(_on_node_added)
+
+# 原版指针: assets/ui/common/光标_原版.png(50x50 五星红旗箭头).
+# 原版游戏全局只有一个鼠标样式, 这里把 Godot 的每种 CursorShape 都指到同一张图,
+# 避免悬停按钮时闪回系统手形/文本光标. 热点取箭头尖(左上角).
+func _apply_original_cursor() -> void:
+	var tex := load("res://assets/ui/common/光标_原版.png") as Texture2D
+	var hotspot := Vector2(2, 2)
+	for shape in 17:
+		Input.set_custom_mouse_cursor(tex, shape, hotspot)
 
 # ---------- 持久化 ----------
 

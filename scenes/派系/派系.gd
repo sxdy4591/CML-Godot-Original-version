@@ -206,8 +206,10 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 	for i in 派系名.size():
 		派系名[i].text = factions[i]["name"]
 	for 名称 in 动作按钮:
+		get_node(名称).tooltip_text = str(factions[动作按钮[名称]]["ally_tip"])
 		get_node(名称).set_pressed_no_signal(bool(factions[动作按钮[名称]]["ally"]))
 	for 名称 in 禁止按钮:
+		get_node(名称).tooltip_text = str(factions[禁止按钮[名称]]["ban_tip"])
 		get_node(名称).set_pressed_no_signal(not bool(factions[禁止按钮[名称]]["enabled"]))
 	for i in 生育按钮.size():
 		生育按钮[i].set_pressed_no_signal(i == int(data["birth_policy"]))

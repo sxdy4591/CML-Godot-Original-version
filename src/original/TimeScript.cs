@@ -11321,6 +11321,10 @@ public class TimeScript : MonoBehaviour
 
 	private void FocusesAIMethod(int country)
 	{
+		// [移植修复] "Start Focus" 共 8 层, 最后一层完成后 now_layer == 层数,
+		// 原版直接查 all_trees[..][now_layer] 抛 ArgumentOutOfRange 并每 tick 刷屏.
+		// 树研究完就是研究完了, AI 保持 now_focus = -1.
+		if (global2.empires[country].now_layer >= FocusManager.all_trees[global2.empires[country].active_tree].Count) return;
 		List<int> list = new List<int>();
 		Empire[] empires = global2.empires;
 		for (int i = 0; i < FocusManager.all_trees[empires[country].active_tree][global2.empires[country].now_layer].Count; i++)

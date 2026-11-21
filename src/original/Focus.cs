@@ -34,7 +34,10 @@ public class Focus : RequestingMinor<Focus>, IRequesting<Focus>
 
 	public string result;
 
-	public Action active;
+	// [移植修复] 树里大量焦点只有条件没有动作链(未走 CreateActive), 原 active 为 null;
+	// AI 焦点完成时 TimeScript.FocusesResearching 调 active() 抛 NRE, now_focus 复位不了,
+	// Repaint 每 tick 重复炸. 空委托 = 无动作焦点完成后无副作用, 即原版语义.
+	public Action active = delegate {};
 
 	private bool condtition_type;
 

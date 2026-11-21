@@ -13,6 +13,12 @@ public sealed class EventPane : IPanel
     Component _script;
     int _number = -1;
     string _result = "";
+    // 原版结算是切到结果页, 不会重算事件正文; 而 TextOfEvents 依赖"正在进行的战争编号"
+    // data[82], 该编号在 ResultsOfEvents 里就被复位成 -10(见 GameState.xxx)。
+    // 结算后再调一次 TextOfEvents 会 ingamewars[-10] 越界(事件 18 战争结束必现),
+    // 所以正文只在未结算时取一次, 结果页复用.
+    string _title = "";
+    string _body = "";
     // 事件类 Awake 把 GameState 缓存在字段 a 里; 读档/重开换掉 gameState 后,
     // 同编号事件若复用旧脚本, 文本与结果都会写进上一档的对象.
     GameState _state;
@@ -22,12 +28,13 @@ public sealed class EventPane : IPanel
         var state = GameHost.State;
         EnsureScript(state.number_event);
 
-        var name = "";
-        var body = "";
-        var args = new object[] { name, body };
-        _script.GetType().GetMethod("TextOfEvents").Invoke(_script, args);
-        name = (string)args[0];
-        body = (string)args[1];
+        if (_result.Length == 0)
+        {
+            var args = new object[] { "", "" };
+            _script.GetType().GetMethod("TextOfEvents").Invoke(_script, args);
+            _title = (string)args[0];
+            _body = (string)args[1];
+        }
 
         var options = new List<object>();
         var kolvo = 0;
@@ -49,8 +56,8 @@ public sealed class EventPane : IPanel
         }
 
         return new PanelSnapshot()
-            .Put("title", name)
-            .Put("body", body)
+            .Put("title", _title)
+            .Put("body", _body)
             .Put("options", options)
             .Put("result", _result)
             .Put("number", state.number_event)
@@ -61,6 +68,15 @@ public sealed class EventPane : IPanel
     {
         switch (action)
         {
+            // 原版每次进事件场景都新建 EventN 对象(doneventscript.Awake);
+            // 新事件可能沿用同一编号(战争结束 18 反复出现), 必须按"进场景"重建状态.
+            case "进入":
+                _script = null;
+                _number = -1;
+                _result = "";
+                _title = "";
+                _body = "";
+                break;
             case "选择":
                 Pick((int)(long)args[0]);
                 break;
@@ -160,8 +176,16 @@ public sealed class EventPane : IPanel
         // 原版事件类的 Set(n) 走 gameObject.GetComponent<achievements>(), 事件对象必须挂组件
         AchievementCenter.Register(stub.Also<achievements>());
         _script = stub.Activate().Typed<Component>();
+        // 318 个用 a 缓存 GameState 的事件类里, 只有 Event1 漏写了 Awake(a 永远 null),
+        // 原版靠 Unity 吞异常把选举结论静默跳过; 移植版没有那层兜底会整页报错.
+        // 其余事件类之后重复赋同一个值, 无副作用.
+        var stateField = _script.GetType().GetField("a",
+            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
+        if (stateField != null) stateField.SetValue(_script, state);
         _number = number;
         _state = state;
         _result = "";
+        _title = "";
+        _body = "";
     }
 }

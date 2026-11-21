@@ -72,6 +72,10 @@ public static class GameHost
         }
     }
 
+    // 原版 TimeScript.Reborn(): 1986-1-1 自动打开 ending 面板并停表(见 TimeScript.Repaint 的
+    // data[19]==1 && data[20]==1 && data[21]==1986 分支). 移植版时钟常驻, 视图按这个状态弹 1986 抉择.
+    public static bool RetireOpen => Clock.ending.activeSelf;
+
     public static void SetSpeed(int speed)
     {
         // SpeedScript.OnMouseDown 会读 map1.okno.active; okno 由外交宿主装配
@@ -116,6 +120,9 @@ public static class GameHost
         // 移植版时钟常驻, 上一档停在图上的事件不倒回 inactive 就会带进新档
         // (读档时随后由 ReplaceState 的 EventWrite 按存档重新点亮).
         foreach (var marker in Clock.events) marker.SetActive(false);
+        // 1986 抉择面板同理: 上一局弹过(is_showed=true)或停在打开状态, 新局到 1986 就永远走不到 Reborn 的打开分支
+        Clock.ending.SetActive(false);
+        Clock.is_showed = false;
     }
 
     // 原版 TimeScript 是 Diplomacy 场景对象: 切到经济/政治/事件等独立场景时它随场景卸载,

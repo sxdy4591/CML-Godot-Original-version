@@ -84,7 +84,10 @@ public static class TimeHostFactory
         economyStub.Activate();
         time.goto_economy = economyStub.Typed<EvetnnashScript>();
 
+        // 原版场景里 ending 是预置的 inactive 面板, 只有 TimeScript.Reborn(1986-1-1) 才 SetActive(true);
+        // 新建 GameObject 默认 active=true, 不关掉的话桥层看到的状态永远"已打开", 差分收不到变化.
         time.ending = new GameObject("ending");
+        time.ending.SetActive(false);
         time.dlc_button = new GameObject("dlc_button");
         time.dlc_button2 = new GameObject("dlc_button2");
         time.crisis_show = new GameObject("crisis_show");

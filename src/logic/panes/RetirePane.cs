@@ -54,12 +54,26 @@ public sealed class RetirePane : IPanel
     {
         switch (action)
         {
+            // 原版 in1992_script: is_left=false 是"功成身退"(按 data[35] 判定结局并切 Ending),
+            // is_left=true 是"继续掌权"(time1.Reborn() 收起 ending + 关掉 iron_and_blood).
             case "功成身退":
-                var stub = Stub.Take<in1992_script>("RetireProbe", Lifecycle.Lazy);
-                stub.Invoke("OnMouseDown");
+                if (_enter == null) _enter = Stub.Take<in1992_script>("RetireEnter", Lifecycle.Lazy);
+                _enter.Invoke("OnMouseDown");
+                break;
+            case "继续掌权":
+                if (_stay == null)
+                {
+                    _stay = Stub.Take<in1992_script>("RetireStay", Lifecycle.Lazy);
+                    _stay.Set("is_left", true);
+                    _stay.Set("this_text", new TextMesh());
+                }
+                _stay.Invoke("OnMouseDown");
                 break;
             default:
                 throw new System.ArgumentOutOfRangeException(nameof(action), action, "1986抉择没有该动作");
         }
     }
+
+    static Stub _enter;
+    static Stub _stay;
 }

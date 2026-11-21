@@ -11,6 +11,8 @@ public partial class UiBridge : Node
 {
     public static UiBridge Instance { get; private set; }
 
+    bool _retireOpen;
+
     const string PanelSnapshotSignal = "panel_snapshot";
     const string MapHighlightSignal = "map_highlight";
     const string SceneRequestedSignal = "scene_requested";
@@ -20,6 +22,8 @@ public partial class UiBridge : Node
     // 成就解锁提示 / 事件内指定音乐(音频总管监听)
     const string AchievementSignal = "achievement_unlocked";
     const string EventMusicSignal = "event_music";
+    // 1986 抉择面板显隐: 原版 TimeScript.Reborn 在 1986-1-1 自动打开 ending(逻辑层状态), 桥层只转发变化
+    const string RetireChangedSignal = "retire_changed";
 
     // 原版 TimeScript 只存在于外交场景(含地图模式); 其它界面里时间与事件倒计时都停
     const string DiplomacyScene = "res://scenes/外交/外交.tscn";
@@ -34,6 +38,7 @@ public partial class UiBridge : Node
         AddUserSignal(DataChangedSignal, new Godot.Collections.Array());
         AddUserSignal(AchievementSignal, new Godot.Collections.Array { "number" });
         AddUserSignal(EventMusicSignal, new Godot.Collections.Array { "name" });
+        AddUserSignal(RetireChangedSignal, new Godot.Collections.Array { "open" });
     }
 
     public override void _Ready()
@@ -49,6 +54,7 @@ public partial class UiBridge : Node
         // GameState.diff 才会在 Global.Init 里读对, 开局数据/难度系数才按模式区分.
         GameHost.SetDifficulty(ReadDifficulty());
         GameHost.Boot();        GD.Print($"[UiBridge] 内核启动完成, 已注册面板: {string.Join(",", PanelRouter.Names)}");
+        _retireOpen = GameHost.RetireOpen;
     }
 
     public override void _ExitTree()
@@ -69,6 +75,13 @@ public partial class UiBridge : Node
         // 自动存档/战争去重/自动化/地图扫描/事件倒计时全在逻辑层按时序推进;
         // 桥层只剩两件事: 每帧叫一次, 把"高亮集合变了"翻成信号.
         GameHost.Tick(delta);
+        // 原版 Reborn 打开/关闭 ending 时, 视图需要跟着弹出/收起 1986 抉择
+        var retire = GameHost.RetireOpen;
+        if (retire != _retireOpen)
+        {
+            _retireOpen = retire;
+            EmitSignal(RetireChangedSignal, retire);
+        }
         // 原版 Set(n) 与自建 Unlock 都只是写 ach_this, 这里做差分把"新解锁"翻成信号
         foreach (var number in AchievementCenter.DrainNewUnlocks()) EmitSignal(AchievementSignal, number);
         if (MapPane.ConsumeDirty()) EmitSignal(MapHighlightSignal, UiVariant.ToArray(MapPane.HighlightList()));

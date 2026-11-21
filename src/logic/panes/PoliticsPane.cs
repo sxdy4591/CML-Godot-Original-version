@@ -71,6 +71,7 @@ public sealed class PoliticsPane : IPanel
             ["face_parts"] = ToInts(p.face_parts),
             ["jacket"] = (int)p.jacket,
             ["status_flag"] = IsConspirator(state, p) ? "阴谋" : p.is_sledstvie ? "审查" : "",
+            ["tooltip"] = index < 0 ? "" : Tooltip(p),
         };
         if (index < 0)
         {
@@ -93,6 +94,15 @@ public sealed class PoliticsPane : IPanel
         card["status"] = status ?? "";
         card["actions"] = PoliticsHost.EnabledActions(index);
         return card;
+    }
+
+    // 卡片悬浮提示: 逐字对齐原版 Politic_Script.Repaint:
+    //   string.Format(other_text[350], other_text[351 + wantedDolzh], loyality / 10f, age)
+    // 350 是"意向职位/忠诚度/年龄"模板, 351..355 是 5 种意向职位名(取自 other_text 数据表).
+    static string Tooltip(Politic p)
+    {
+        var other = GameHost.Global.other_text;
+        return string.Format(other[350], other[351 + p.wantedDolzh], p.loyality / 10f, p.age);
     }
 
     static string PoliticianName(GameState state, int index)

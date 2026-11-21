@@ -47,6 +47,8 @@ func _ready() -> void:
 	结果滚动条.value_changed.connect(_更新提示)
 	结果滚动条.changed.connect(_更新提示)
 	UiBridge.connect("panel_snapshot", _收到快照)
+	# 原版每进一次事件场景都新建事件对象: 通知逻辑层从描述页重新开始(含结算状态)
+	UiBridge.act(面板, "进入", [])
 	UiBridge.request(面板)
 	print("[事件] ready 按钮=", 选项按钮.size(), " 描述可见=", 描述.visible)
 

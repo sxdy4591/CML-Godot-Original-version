@@ -18,6 +18,11 @@ public sealed class FactionPane : IPanel
 
     const BindingFlags Flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 
+    // 1.132 政治场景(level2)序列化真值: Parties (1)(2)(3)(4)(5) 下
+    // Politic_party_name_show / Party_ally_script / Party_zapret 三个组件的 this_number
+    // 依次是 1,2,3,4,0（UnityPy 直读校验）。这是"对象名 → 政党下标"的映射, 不是界面行序。
+    static readonly int[] PartySlots = { 1, 2, 3, 4, 0 };
+
     // 政策类别号 = 原版 Doctrine_script.this_number = 原版 data 槽位
     static readonly int[] PolicyCategories = { 16, 15, 17, 18, 50, 51 };
     static readonly string[] PolicyCategoryNames = { "economy", "party", "human_rights", "state_system", "tradition", "military" };
@@ -51,6 +56,8 @@ public sealed class FactionPane : IPanel
         var state = GameHost.State;
         var multi = state.data[15] > 7;
         var factions = new List<object>(5);
+        // 界面行序 = 原版场景里 Parties 的 Y 从高到低:
+        // Parties (5) y=0.90 → 下标 0; (1) y=-0.14 → 1; (2) -1.15 → 2; (3) -2.17 → 3; (4) -3.19 → 4.
         for (var i = 0; i < 5; i++)
         {
             factions.Add(new Dictionary<string, object>
@@ -60,6 +67,8 @@ public sealed class FactionPane : IPanel
                 ["seats"] = state.party_number[i],
                 ["ally"] = state.is_party_ally[i],
                 ["enabled"] = state.is_party_enabled[i],
+                ["ally_tip"] = HoverTip(Allies[i]),
+                ["ban_tip"] = HoverTip(Bans[i]),
             });
         }
 
@@ -145,6 +154,7 @@ public sealed class FactionPane : IPanel
 
         for (var m = 1; m <= 5; m++)
         {
+            var number = PartySlots[m - 1];
             var parties = new GameObject("Parties (" + m + ")");
             var text = new GameObject("Text");
             // 原版 Awake 里靠 GetComponent 取 TextMesh/Okoshko, Repaint 用 this_number 取党名;
@@ -152,15 +162,21 @@ public sealed class FactionPane : IPanel
             var partyName = Stub.On<Politic_party_name_show>(text, Lifecycle.None);
             partyName.Also<TextMesh>();
             partyName.Also<OkoshkoScript>();
-            partyName.Set("this_number", m);
+            partyName.Set("this_number", number);
             text.transform.SetParent(parties.transform);
             var znack = new GameObject("Znack");
             znack.AddComponent<SpriteRenderer>();
-            Stub.On<Party_ally_script>(znack, Lifecycle.None);
+            var ally = Stub.On<Party_ally_script>(znack, Lifecycle.None);
+            ally.Set("this_number", number);
+            // 1.132 场景序列化: Znack 的 OkoshkoScript.text_en = "同盟"(多党制时 OnMouseEnter 会保持)
+            ally.Also<OkoshkoScript>().text_en = "同盟";
             znack.transform.SetParent(parties.transform);
             var znakc = new GameObject("Znakc (1)");
             znakc.AddComponent<SpriteRenderer>();
-            Stub.On<Party_zapret>(znakc, Lifecycle.None);
+            var ban = Stub.On<Party_zapret>(znakc, Lifecycle.None);
+            ban.Set("this_number", number);
+            // 1.132 场景序列化: Znakc (1) 的 OkoshkoScript.text_en = "禁止"
+            ban.Also<OkoshkoScript>().text_en = "禁止";
             znakc.transform.SetParent(parties.transform);
         }
 
@@ -208,6 +224,7 @@ public sealed class FactionPane : IPanel
         {
             var ally = Stub.Take<Party_ally_script>("Ally" + i, Lifecycle.Lazy);
             ally.Also<SpriteRenderer>();
+            ally.Also<OkoshkoScript>().text_en = "同盟";
             ally.Set("this_number", i);
             ally.Set("doctr1", _doctrine.Typed<Doctrine_script>());
             ally.Set("on", new Sprite { name = "on" });
@@ -216,6 +233,7 @@ public sealed class FactionPane : IPanel
 
             var ban = Stub.Take<Party_zapret>("Ban" + i, Lifecycle.Lazy);
             ban.Also<SpriteRenderer>();
+            ban.Also<OkoshkoScript>().text_en = "禁止";
             ban.Set("this_number", i);
             ban.Set("doctr1", _doctrine.Typed<Doctrine_script>());
             ban.Set("on", new Sprite { name = "on" });
@@ -300,6 +318,17 @@ public sealed class FactionPane : IPanel
     }
 
     static string SpriteName(Stub stub) => ((SpriteRenderer)stub.Also<SpriteRenderer>()).sprite?.name ?? "";
+
+    // 悬浮提示走原版: OnMouseEnter 会把当前状态对应的文案写进 OkoshkoScript
+    // (支持/同盟 由 Party_ally_script 按 data[15] 选, 禁止/我们的政党/允许 由 Party_zapret 判定),
+    // 读完立刻 OnMouseExit 复位图标, 不改游戏状态.
+    static string HoverTip(Stub stub)
+    {
+        stub.Invoke("OnMouseEnter");
+        var tip = stub.Also<OkoshkoScript>().text_en;
+        stub.Invoke("OnMouseExit");
+        return tip;
+    }
 
     // 原版 Party_ally_script.OnMouseDown / Party_zapret.OnMouseDown
     static void ToggleAlly(int index) => Allies[index].Invoke("OnMouseDown");
