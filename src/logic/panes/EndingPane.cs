@@ -127,12 +127,17 @@ public sealed class EndingPane : IPanel
         return go;
     }
 
+    static GameObject _ach;
+
     static GameObject 造成就()
     {
-        var go = new GameObject("Ach(Clone)");
-        var ach = Stub.Attach<achievements>(go);
-
-        ach.ach_this = new bool[1000];
-        return go;
+        // 结局里每页都会造脚本, 成就对象只建一份: 重复建同名 Ach(Clone) 会让
+        // GameObject.Find 拿到哪一份变得不确定, 也会让 AchievementCenter 的实例表一直变长.
+        if (_ach != null) return _ach;
+        _ach = new GameObject("Ach(Clone)");
+        // 结局类里 80 处 achievements.Set(n)(EndingScript 本篇 + Ending1-23 卷宗)都写这个实例;
+        // 不登记到 AchievementCenter 的话, 成就界面按"任一登记实例"聚合读取, 这些解锁永远读不到.
+        AchievementCenter.Register(Stub.Attach<achievements>(_ach));
+        return _ach;
     }
 }

@@ -153,6 +153,9 @@ public sealed class EventPane : IPanel
         UnityEngine.Input.SimulateLeftClickPressed = previousClick;
         UiEvents.RequestScene(
             UnityEngine.SceneManagement.SceneRouter.ConsumeCapturedScene() ?? "Diplomacy");
+        // 设置页「事件结束后自动暂停」: 原版 TimeScript 随事件场景卸载、回来续跑;
+        // 玩家要求停表时在这里把 speed 归零(只改速度, 不动任何数值).
+        if (GameHost.EventPauseAfter) GameHost.PauseTime();
     }
 
     void EnsureScript(int number)

@@ -24,6 +24,8 @@ public partial class UiBridge : Node
     const string EventMusicSignal = "event_music";
     // 1986 抉择面板显隐: 原版 TimeScript.Reborn 在 1986-1-1 自动打开 ending(逻辑层状态), 桥层只转发变化
     const string RetireChangedSignal = "retire_changed";
+    // 事件界面选项快捷键(逻辑层 ShortcutPane 240..247 的语义): 视图据此勾选/上下移动
+    const string EventShortcutSignal = "event_shortcut";
 
     // 原版 TimeScript 只存在于外交场景(含地图模式); 其它界面里时间与事件倒计时都停
     const string DiplomacyScene = "res://scenes/外交/外交.tscn";
@@ -39,6 +41,7 @@ public partial class UiBridge : Node
         AddUserSignal(AchievementSignal, new Godot.Collections.Array { "number" });
         AddUserSignal(EventMusicSignal, new Godot.Collections.Array { "name" });
         AddUserSignal(RetireChangedSignal, new Godot.Collections.Array { "open" });
+        AddUserSignal(EventShortcutSignal, new Godot.Collections.Array { "code" });
     }
 
     public override void _Ready()
@@ -48,6 +51,7 @@ public partial class UiBridge : Node
         UiEvents.ToastRequested += OnToast;
         UiEvents.UnhandledSceneRequested += OnUnhandledScene;
         UiEvents.EventMusicRequested += OnEventMusic;
+        UiEvents.EventShortcutRequested += OnEventShortcut;
         // 原版 SceneManager.LoadScene 的出口: compat 只发原始场景名, 由桥层转成场景请求
         UnityEngine.SceneManagement.SceneRouter.Requested += UiEvents.RequestScene;
         // 设置页的难度([ui] difficulty)必须在 Boot 之前落到原版的 our_diff_in,
@@ -55,6 +59,8 @@ public partial class UiBridge : Node
         GameHost.SetDifficulty(ReadDifficulty());
         GameHost.Boot();        GD.Print($"[UiBridge] 内核启动完成, 已注册面板: {string.Join(",", PanelRouter.Names)}");
         _retireOpen = GameHost.RetireOpen;
+        // 移植版没有 Steam: 成就解锁状态存在 playerprefs, 启动时灌回所有 achievements 实例
+        AchievementCenter.Restore(ReadAchievements());
     }
 
     public override void _ExitTree()
@@ -63,6 +69,7 @@ public partial class UiBridge : Node
         UiEvents.ToastRequested -= OnToast;
         UiEvents.UnhandledSceneRequested -= OnUnhandledScene;
         UiEvents.EventMusicRequested -= OnEventMusic;
+        UiEvents.EventShortcutRequested -= OnEventShortcut;
         Instance = null;
     }
 
@@ -82,13 +89,33 @@ public partial class UiBridge : Node
             _retireOpen = retire;
             EmitSignal(RetireChangedSignal, retire);
         }
-        // 原版 Set(n) 与自建 Unlock 都只是写 ach_this, 这里做差分把"新解锁"翻成信号
-        foreach (var number in AchievementCenter.DrainNewUnlocks()) EmitSignal(AchievementSignal, number);
+        // 原版 Set(n) 与自建 Unlock 都只是写 ach_this, 这里做差分把"新解锁"翻成信号并落盘
+        var unlocked = AchievementCenter.DrainNewUnlocks();
+        if (unlocked.Count > 0)
+        {
+            foreach (var number in unlocked) EmitSignal(AchievementSignal, number);
+            SaveAchievements();
+        }
         if (MapPane.ConsumeDirty()) EmitSignal(MapHighlightSignal, UiVariant.ToArray(MapPane.HighlightList()));
     }
 
     // 桥层自己读 playerprefs 的 [ui] difficulty: UISettings 的 _cfg 要等它自己的 _Ready 才建,
     // 这里在 Boot 之前调用会拿到 null.
+    static string ReadAchievements()
+    {
+        var cfg = new Godot.ConfigFile();
+        cfg.Load("user://playerprefs.ini");
+        return (string)cfg.GetValue("ui", "achievements", "");
+    }
+
+    static void SaveAchievements()
+    {
+        var cfg = new Godot.ConfigFile();
+        cfg.Load("user://playerprefs.ini");
+        cfg.SetValue("ui", "achievements", AchievementCenter.SaveString());
+        cfg.Save("user://playerprefs.ini");
+    }
+
     static int ReadDifficulty()
     {
         var cfg = new Godot.ConfigFile();
@@ -106,12 +133,14 @@ public partial class UiBridge : Node
     // 自动化类别勾选由 GDScript 落盘(playerprefs), 启动/切场景时再推回来.
     // 勾选真值在逻辑层 Automation, bridge 只搬运.
     public void set_auto_types(string text) => Automation.SetTypesString(text);
-
     // 周期型决议的自动勾选: 逐条独立(下标清单 "24,25"), 没有总开关
     public void set_auto_decisions(string text) => Automation.SetDecisionTypesString(text);
 
     // 1986 抉择的入口是否出现: 原版 CascadScrupt 判定(1986 年后), 桥层只转发结果
     public bool retire_available() => RetirePane.Available();
+
+    // 金手指开关的真值在逻辑层 ShortcutPane(设置页只显示与转发)
+    public bool gold() => ShortcutPane.GoldFinger;
 
     // 自动存档开关(0关/1每月/2半年)与保存槽位(1..5): 设置页落盘在 playerprefs,
     // 原版真值在 GlobalScript.autosavej / savePlace, 进游玩场景时推回.
@@ -127,6 +156,8 @@ public partial class UiBridge : Node
             if (AchievementCatalog.Numbers[i] != number) continue;
             result.Add(AchievementCatalog.Titles[i]);
             result.Add(AchievementCatalog.Descs[i].Replace("|", "\n"));
+            // 第三项: 在线图标地址(右下角解锁弹窗与成就页共用同一张图)
+            result.Add(AchievementCatalog.IconUrl(i));
             return result;
         }
         return result;
@@ -150,5 +181,6 @@ public partial class UiBridge : Node
     }
     void OnToast(string text) => EmitSignal(ToastSignal, text);
     void OnEventMusic(string name) => EmitSignal(EventMusicSignal, name);
+    void OnEventShortcut(int code) => EmitSignal(EventShortcutSignal, code);
     void OnUnhandledScene(string name) => GD.PushError($"原版场景未映射: {name}");
 }

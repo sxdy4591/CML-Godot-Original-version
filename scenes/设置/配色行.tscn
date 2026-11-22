@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://p0galvvhdor8"]
+
+[node name="配色行" type="HBoxContainer" unique_id=771483913]
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="." unique_id=246845927]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="颜色" type="ColorPickerButton" parent="." unique_id=1218373858]
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 2
+edit_alpha = false

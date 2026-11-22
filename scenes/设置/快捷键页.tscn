@@ -1,0 +1,1187 @@
+[gd_scene format=3 uid="uid://c8kfrchjrkosl"]
+
+[ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="1_font"]
+[ext_resource type="Texture2D" uid="uid://d13jw6ini7wcs" path="res://assets/ui/外交/国家互动按钮背景.png" id="2_bgbtn"]
+[ext_resource type="Script" uid="uid://cqy44qvu55wiv" path="res://scenes/设置/快捷键页.gd" id="3_keys"]
+
+[sub_resource type="Theme" id="Theme_keys"]
+default_font = ExtResource("1_font")
+
+[node name="快捷键页" type="Control" unique_id=1926677016]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_keys")
+script = ExtResource("3_keys")
+
+[node name="滚动" type="ScrollContainer" parent="." unique_id=1538422389]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 588.0
+offset_top = 218.0
+offset_right = -414.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="列表" type="VBoxContainer" parent="滚动" unique_id=1846490869]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="组时间速度" type="Label" parent="滚动/列表" unique_id=1792402550]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+text = "时间 / 速度"
+
+[node name="Key0行" type="HBoxContainer" parent="滚动/列表" unique_id=1551147441]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key0行" unique_id=1222622435]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "暂停/继续"
+
+[node name="Key0Rebind" type="Button" parent="滚动/列表/Key0行" unique_id=1745794790]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key0Value" type="Label" parent="滚动/列表/Key0行" unique_id=1927580070]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key0清除" type="Button" parent="滚动/列表/Key0行" unique_id=1852885512]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key1行" type="HBoxContainer" parent="滚动/列表" unique_id=1479715704]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key1行" unique_id=1254946525]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "一速"
+
+[node name="Key1Rebind" type="Button" parent="滚动/列表/Key1行" unique_id=1993866055]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key1Value" type="Label" parent="滚动/列表/Key1行" unique_id=2047246740]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key1清除" type="Button" parent="滚动/列表/Key1行" unique_id=1096977895]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key2行" type="HBoxContainer" parent="滚动/列表" unique_id=1600732953]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key2行" unique_id=2032933419]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "二速"
+
+[node name="Key2Rebind" type="Button" parent="滚动/列表/Key2行" unique_id=1464555051]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key2Value" type="Label" parent="滚动/列表/Key2行" unique_id=1386567304]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key2清除" type="Button" parent="滚动/列表/Key2行" unique_id=1725954477]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key3行" type="HBoxContainer" parent="滚动/列表" unique_id=1125550259]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key3行" unique_id=2058542214]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "三速"
+
+[node name="Key3Rebind" type="Button" parent="滚动/列表/Key3行" unique_id=1109596587]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key3Value" type="Label" parent="滚动/列表/Key3行" unique_id=2125922367]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key3清除" type="Button" parent="滚动/列表/Key3行" unique_id=1452807244]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key4行" type="HBoxContainer" parent="滚动/列表" unique_id=1191965162]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key4行" unique_id=1147045629]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "四速"
+
+[node name="Key4Rebind" type="Button" parent="滚动/列表/Key4行" unique_id=1292446838]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key4Value" type="Label" parent="滚动/列表/Key4行" unique_id=1807487948]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key4清除" type="Button" parent="滚动/列表/Key4行" unique_id=1808294034]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="组存档战场" type="Label" parent="滚动/列表" unique_id=1717873207]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+text = "存档 / 战场"
+
+[node name="Key10行" type="HBoxContainer" parent="滚动/列表" unique_id=1122938440]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key10行" unique_id=2056792818]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "保存"
+
+[node name="Key10Rebind" type="Button" parent="滚动/列表/Key10行" unique_id=1999959743]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key10Value" type="Label" parent="滚动/列表/Key10行" unique_id=1929456222]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key10清除" type="Button" parent="滚动/列表/Key10行" unique_id=1899079618]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key11行" type="HBoxContainer" parent="滚动/列表" unique_id=1101321030]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key11行" unique_id=1260825638]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "读取"
+
+[node name="Key11Rebind" type="Button" parent="滚动/列表/Key11行" unique_id=1775696318]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key11Value" type="Label" parent="滚动/列表/Key11行" unique_id=1528705200]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key11清除" type="Button" parent="滚动/列表/Key11行" unique_id=1079431888]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key12行" type="HBoxContainer" parent="滚动/列表" unique_id=1230479483]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key12行" unique_id=1272486667]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "战争面板"
+
+[node name="Key12Rebind" type="Button" parent="滚动/列表/Key12行" unique_id=1994822522]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key12Value" type="Label" parent="滚动/列表/Key12行" unique_id=2001792117]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key12清除" type="Button" parent="滚动/列表/Key12行" unique_id=1936448197]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="组作弊（仅难度0生效）" type="Label" parent="滚动/列表" unique_id=1666985747]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+text = "作弊（仅难度 0 生效）"
+
+[node name="Key100行" type="HBoxContainer" parent="滚动/列表" unique_id=1303459522]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key100行" unique_id=1970528643]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "党内支持 +10"
+
+[node name="Key100Rebind" type="Button" parent="滚动/列表/Key100行" unique_id=2033719766]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key100Value" type="Label" parent="滚动/列表/Key100行" unique_id=2082369629]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key100清除" type="Button" parent="滚动/列表/Key100行" unique_id=1331972202]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key101行" type="HBoxContainer" parent="滚动/列表" unique_id=1350364986]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key101行" unique_id=2033931553]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "人民支持 +10"
+
+[node name="Key101Rebind" type="Button" parent="滚动/列表/Key101行" unique_id=1962154675]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key101Value" type="Label" parent="滚动/列表/Key101行" unique_id=1878282559]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key101清除" type="Button" parent="滚动/列表/Key101行" unique_id=1015225144]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key102行" type="HBoxContainer" parent="滚动/列表" unique_id=1371891107]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key102行" unique_id=1556302147]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "思想自由 +10"
+
+[node name="Key102Rebind" type="Button" parent="滚动/列表/Key102行" unique_id=1225074580]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key102Value" type="Label" parent="滚动/列表/Key102行" unique_id=1990599661]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key102清除" type="Button" parent="滚动/列表/Key102行" unique_id=1328202869]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key103行" type="HBoxContainer" parent="滚动/列表" unique_id=1919242092]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key103行" unique_id=2102613848]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "生活水平 +10"
+
+[node name="Key103Rebind" type="Button" parent="滚动/列表/Key103行" unique_id=1013230714]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key103Value" type="Label" parent="滚动/列表/Key103行" unique_id=1334626356]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key103清除" type="Button" parent="滚动/列表/Key103行" unique_id=1960166346]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key104行" type="HBoxContainer" parent="滚动/列表" unique_id=1393689480]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key104行" unique_id=1395457329]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "国际声望 +10"
+
+[node name="Key104Rebind" type="Button" parent="滚动/列表/Key104行" unique_id=1907474833]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key104Value" type="Label" parent="滚动/列表/Key104行" unique_id=1742920080]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key104清除" type="Button" parent="滚动/列表/Key104行" unique_id=2134131164]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key105行" type="HBoxContainer" parent="滚动/列表" unique_id=1282714823]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key105行" unique_id=1521957719]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "全球影响力 +10"
+
+[node name="Key105Rebind" type="Button" parent="滚动/列表/Key105行" unique_id=1990818222]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key105Value" type="Label" parent="滚动/列表/Key105行" unique_id=2071790448]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key105清除" type="Button" parent="滚动/列表/Key105行" unique_id=1193817916]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key106行" type="HBoxContainer" parent="滚动/列表" unique_id=1995857670]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key106行" unique_id=1402233735]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "预算 +10"
+
+[node name="Key106Rebind" type="Button" parent="滚动/列表/Key106行" unique_id=1873788540]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key106Value" type="Label" parent="滚动/列表/Key106行" unique_id=1189745935]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key106清除" type="Button" parent="滚动/列表/Key106行" unique_id=2019289422]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key107行" type="HBoxContainer" parent="滚动/列表" unique_id=1543565938]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key107行" unique_id=1341389835]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "特工网络 +10"
+
+[node name="Key107Rebind" type="Button" parent="滚动/列表/Key107行" unique_id=1807255541]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key107Value" type="Label" parent="滚动/列表/Key107行" unique_id=1219821041]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key107清除" type="Button" parent="滚动/列表/Key107行" unique_id=1978531760]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key108行" type="HBoxContainer" parent="滚动/列表" unique_id=2010434692]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key108行" unique_id=1629055618]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "军事力量 +10"
+
+[node name="Key108Rebind" type="Button" parent="滚动/列表/Key108行" unique_id=1003200276]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key108Value" type="Label" parent="滚动/列表/Key108行" unique_id=1462027885]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key108清除" type="Button" parent="滚动/列表/Key108行" unique_id=2056974847]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key109行" type="HBoxContainer" parent="滚动/列表" unique_id=1365989434]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key109行" unique_id=1916121900]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "美苏关系 +10"
+
+[node name="Key109Rebind" type="Button" parent="滚动/列表/Key109行" unique_id=1854845541]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key109Value" type="Label" parent="滚动/列表/Key109行" unique_id=2100133237]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key109清除" type="Button" parent="滚动/列表/Key109行" unique_id=1931536612]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key110行" type="HBoxContainer" parent="滚动/列表" unique_id=1466173563]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key110行" unique_id=1919278245]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "阵营援助开关"
+
+[node name="Key110Rebind" type="Button" parent="滚动/列表/Key110行" unique_id=1232036478]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key110Value" type="Label" parent="滚动/列表/Key110行" unique_id=1427594576]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key110清除" type="Button" parent="滚动/列表/Key110行" unique_id=1123938961]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key111行" type="HBoxContainer" parent="滚动/列表" unique_id=1562215323]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key111行" unique_id=1208640929]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "国际声望 -10"
+
+[node name="Key111Rebind" type="Button" parent="滚动/列表/Key111行" unique_id=1448924426]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key111Value" type="Label" parent="滚动/列表/Key111行" unique_id=2130737382]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key111清除" type="Button" parent="滚动/列表/Key111行" unique_id=1566559605]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key112行" type="HBoxContainer" parent="滚动/列表" unique_id=1752065079]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key112行" unique_id=1521044837]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "军事成绩 +10"
+
+[node name="Key112Rebind" type="Button" parent="滚动/列表/Key112行" unique_id=1524132936]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key112Value" type="Label" parent="滚动/列表/Key112行" unique_id=1809347361]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key112清除" type="Button" parent="滚动/列表/Key112行" unique_id=1947634701]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="组超级作弊" type="Label" parent="滚动/列表" unique_id=1942819489]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+text = "超级作弊"
+
+[node name="Key230行" type="HBoxContainer" parent="滚动/列表" unique_id=1191628195]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key230行" unique_id=1157442144]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "人口 +1亿"
+
+[node name="Key230Rebind" type="Button" parent="滚动/列表/Key230行" unique_id=1062906140]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key230Value" type="Label" parent="滚动/列表/Key230行" unique_id=1813213347]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key230清除" type="Button" parent="滚动/列表/Key230行" unique_id=1402603290]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key231行" type="HBoxContainer" parent="滚动/列表" unique_id=1747863132]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key231行" unique_id=1377128469]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "金手指模式"
+
+[node name="Key231Rebind" type="Button" parent="滚动/列表/Key231行" unique_id=1301953707]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key231Value" type="Label" parent="滚动/列表/Key231行" unique_id=1617567782]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key231清除" type="Button" parent="滚动/列表/Key231行" unique_id=1559155731]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="组事件选项" type="Label" parent="滚动/列表" unique_id=1681113207]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+text = "事件选项（勾选 / 上下移动）"
+
+[node name="Key240行" type="HBoxContainer" parent="滚动/列表" unique_id=1287562719]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key240行" unique_id=1423774209]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "选项1"
+
+[node name="Key240Rebind" type="Button" parent="滚动/列表/Key240行" unique_id=1320329009]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key240Value" type="Label" parent="滚动/列表/Key240行" unique_id=1073504486]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key240清除" type="Button" parent="滚动/列表/Key240行" unique_id=122235926]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key241行" type="HBoxContainer" parent="滚动/列表" unique_id=282165665]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key241行" unique_id=1049360168]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "选项2"
+
+[node name="Key241Rebind" type="Button" parent="滚动/列表/Key241行" unique_id=1943676633]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key241Value" type="Label" parent="滚动/列表/Key241行" unique_id=961006669]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key241清除" type="Button" parent="滚动/列表/Key241行" unique_id=1433392018]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key242行" type="HBoxContainer" parent="滚动/列表" unique_id=1781064470]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key242行" unique_id=1779327228]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "选项3"
+
+[node name="Key242Rebind" type="Button" parent="滚动/列表/Key242行" unique_id=327353305]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key242Value" type="Label" parent="滚动/列表/Key242行" unique_id=1249731552]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key242清除" type="Button" parent="滚动/列表/Key242行" unique_id=1495148202]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key243行" type="HBoxContainer" parent="滚动/列表" unique_id=620615474]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key243行" unique_id=1231114469]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "选项4"
+
+[node name="Key243Rebind" type="Button" parent="滚动/列表/Key243行" unique_id=454513762]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key243Value" type="Label" parent="滚动/列表/Key243行" unique_id=267823108]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key243清除" type="Button" parent="滚动/列表/Key243行" unique_id=83547247]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key244行" type="HBoxContainer" parent="滚动/列表" unique_id=26935904]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key244行" unique_id=333572215]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "选项5"
+
+[node name="Key244Rebind" type="Button" parent="滚动/列表/Key244行" unique_id=317373441]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key244Value" type="Label" parent="滚动/列表/Key244行" unique_id=2074536613]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key244清除" type="Button" parent="滚动/列表/Key244行" unique_id=1097788648]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key245行" type="HBoxContainer" parent="滚动/列表" unique_id=959418338]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key245行" unique_id=558399746]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "选项6"
+
+[node name="Key245Rebind" type="Button" parent="滚动/列表/Key245行" unique_id=420154261]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key245Value" type="Label" parent="滚动/列表/Key245行" unique_id=1313263416]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key245清除" type="Button" parent="滚动/列表/Key245行" unique_id=186111121]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key246行" type="HBoxContainer" parent="滚动/列表" unique_id=1463407655]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key246行" unique_id=1715142567]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "上一个选项"
+
+[node name="Key246Rebind" type="Button" parent="滚动/列表/Key246行" unique_id=1892040421]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key246Value" type="Label" parent="滚动/列表/Key246行" unique_id=780245186]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key246清除" type="Button" parent="滚动/列表/Key246行" unique_id=407669409]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key247行" type="HBoxContainer" parent="滚动/列表" unique_id=1317674707]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/Key247行" unique_id=1211982110]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "下一个选项"
+
+[node name="Key247Rebind" type="Button" parent="滚动/列表/Key247行" unique_id=449730458]
+custom_minimum_size = Vector2(140, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "重绑"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Key247Value" type="Label" parent="滚动/列表/Key247行" unique_id=293989638]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.45, 1)
+text = "—"
+
+[node name="Key247清除" type="Button" parent="滚动/列表/Key247行" unique_id=299886260]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "清除"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true

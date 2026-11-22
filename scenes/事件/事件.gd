@@ -47,6 +47,7 @@ func _ready() -> void:
 	结果滚动条.value_changed.connect(_更新提示)
 	结果滚动条.changed.connect(_更新提示)
 	UiBridge.connect("panel_snapshot", _收到快照)
+	UiBridge.connect("event_shortcut", _事件快捷键)
 	# 原版每进一次事件场景都新建事件对象: 通知逻辑层从描述页重新开始(含结算状态)
 	UiBridge.act(面板, "进入", [])
 	UiBridge.request(面板)
@@ -61,6 +62,44 @@ func _选择(index: int) -> void:
 	_已选 = index
 	for i in 选项按钮.size():
 		选项按钮[i].set_pressed_no_signal(i == index)
+
+
+# 快捷键(逻辑层 ShortcutPane 240..247 语义): 240..245 勾选选项 1..6, 246 上一个, 247 下一个.
+# 选中态只是本页的 UI 状态, 真正结算仍然要按右翻确认(与原版点选项后 LoadScene(Results) 同时机).
+func _事件快捷键(code: int) -> void:
+	if _已确认:
+		return
+	if code >= 240 and code <= 245:
+		var i: int = code - 240
+		if 选项可用(i):
+			_页 = 页.选项
+			_刷新页()
+			_选择(i)
+		return
+	_移动选择(-1 if code == 246 else 1)
+
+
+# 原版不可用的选项会 Destroy 掉按钮(只留文本), 所以"能选"= 按钮在且没被禁用
+func 选项可用(i: int) -> bool:
+	return 选项按钮[i].visible and not 选项按钮[i].disabled
+
+
+func _移动选择(步: int) -> void:
+	var 可用: Array[int] = []
+	for i in 选项按钮.size():
+		if 选项可用(i):
+			可用.append(i)
+	if 可用.is_empty():
+		return
+	var 目标: int = 可用[0]
+	var 位置: int = 可用.find(_已选)
+	if 位置 >= 0:
+		目标 = 可用[posmod(位置 + 步, 可用.size())]
+	elif 步 < 0:
+		目标 = 可用[可用.size() - 1]
+	_页 = 页.选项
+	_刷新页()
+	_选择(目标)
 
 
 func _左翻页() -> void:

@@ -24,6 +24,7 @@ const 面板 := "游戏"
 @onready var map_influence: Button = $地图模式/影响地图模式
 @onready var map_military: Button = $地图模式/军事阵营地图模式
 @onready var map_economy: Button = $地图模式/经济阵营地图模式
+@onready var console_button: Button = $地图模式/打开控制台
 
 @onready var world_map: Node2D = $世界地图
 @onready var country_panel: CanvasLayer = $国家面板
@@ -36,6 +37,8 @@ var _esc_button: BaseButton = null
 
 
 func _ready() -> void:
+	# 海洋颜色: 本场景最底层那张 ColorRect 就是海面(设置·画面与配色里可任意取色)
+	($ColorRect as ColorRect).color = UISettings.get_color("map_ocean", Color(0.3783699, 0.75245696, 0.99999887, 1))
 	var nav := find_child("导航栏", true, false)
 	nav.call("set_screen", "diplomacy")
 
@@ -55,6 +58,8 @@ func _ready() -> void:
 	map_influence.pressed.connect(_on_map_mode_pressed.bind(3))
 	map_military.pressed.connect(_on_map_mode_pressed.bind(0))
 	map_economy.pressed.connect(_on_map_mode_pressed.bind(2))
+	console_button.pressed.connect(_open_console)
+	_refresh_console_button()
 
 	world_map.country_selected.connect(_on_map_country_selected)
 
@@ -78,6 +83,7 @@ func _process(delta: float) -> void:
 		return
 	_accum = 0.0
 	UiBridge.request(面板)
+	_refresh_console_button()
 	if _speed > 0:
 		last_speed = _speed
 	_更新速度指示()
@@ -127,6 +133,15 @@ func _on_map_mode_pressed(mode: int) -> void:
 
 func _on_map_country_selected(index: int) -> void:
 	country_panel.call("show_country", index)
+
+
+# 设置·自定义页「调试控制台」开关关闭时, 这个入口按钮整个不出现(设置里改了立即跟随)
+func _refresh_console_button() -> void:
+	console_button.visible = UISettings.get_bool("debug_console", true)
+
+
+func _open_console() -> void:
+	get_node("/root/调试控制台").call("打开")
 
 
 # 国家面板互动(发展贸易等)改的是地图着色来源, 动作后立刻重拉地图色

@@ -833,7 +833,6 @@ metadata/tex = "Греция серый"
 metadata/idx = 45
 
 [node name="斯里兰卡" type="Sprite2D" parent="国家层" unique_id=1300439390]
-z_index = 0
 position = Vector2(-305.22, 138.3)
 scale = Vector2(0.1279, 0.12793478)
 texture = ExtResource("58_c056")
@@ -1093,7 +1092,6 @@ metadata/tex = "肯尼亚"
 metadata/idx = 119
 
 [node name="塞内加尔" type="Sprite2D" parent="国家层" unique_id=1475911459]
-z_index = 0
 position = Vector2(-855.93, 96.52)
 scale = Vector2(0.16098087, 0.1621123)
 texture = ExtResource("84_c082")
@@ -2469,6 +2467,8 @@ metadata/tex = "南墨西哥"
 metadata/country = 140
 metadata/part = 0
 metadata/orig = "140.0"
+metadata/idx = 145.0
+metadata/idx_fixed = true
 
 [node name="part_084.5" type="Sprite2D" parent="国家层" unique_id=1802079061]
 visible = false
@@ -2485,7 +2485,6 @@ metadata/orig = "084.5"
 
 [node name="part_053.0" type="Sprite2D" parent="国家层" unique_id=1584767003]
 visible = false
-z_index = 0
 position = Vector2(-602.8334, 108.6101)
 scale = Vector2(0.17024004, 0.17024003)
 texture = ExtResource("245_p_053_0")
@@ -2498,7 +2497,6 @@ metadata/orig = "053.0"
 
 [node name="part_053.1" type="Sprite2D" parent="国家层" unique_id=91042433]
 visible = false
-z_index = 0
 position = Vector2(-599.4606, 102.8091)
 scale = Vector2(0.12760316, 0.12760326)
 texture = ExtResource("246_p_053_1")

@@ -11,6 +11,8 @@ public static class UiEvents
     public static event Action<string> UnhandledSceneRequested;
     // 指定事件触发时要播的事件音乐(assets/audio/eventmusic/<name>.mp3)
     public static event Action<string> EventMusicRequested;
+    // 事件界面选项的键盘动作: 240..245 = 勾选选项 1..6, 246 = 上一个, 247 = 下一个
+    public static event Action<int> EventShortcutRequested;
 
     public static void RequestScene(string unitySceneName)
     {
@@ -24,4 +26,6 @@ public static class UiEvents
     public static void Toast(string text) => ToastRequested?.Invoke(text);
 
     public static void RequestEventMusic(string name) => EventMusicRequested?.Invoke(name);
+
+    public static void RequestEventShortcut(int code) => EventShortcutRequested?.Invoke(code);
 }

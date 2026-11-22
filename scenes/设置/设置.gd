@@ -1,8 +1,8 @@
 extends Control
-## 设置界面 — 基础页(难度/自动存档/槽位/窗口/快捷键/音乐/音量) + 自定义页(全量)。
+## 设置界面 — 四页: 基础/音乐 | 自定义 | 快捷键 | 画面与配色(外观页自管)。
 ## 自定义页: 调试控制台开关 / 事件段落间距 / 段首空两格 / 事件对齐 /
-## 事件四字号 / 全局UI字体倍率 / 地图边界粗细 / 战争图标大小 / 音量 /
-## 作弊快捷键(13 条)。地图配色行在新版省份地图下无实现, 已隐藏(见 _bind_custom_page)。
+## 事件四字号 / 全局UI字体倍率 / 地图边界粗细 / 战争图标大小 / 音量。
+## 快捷键与地图配色各有专页(快捷键页 / 外观页), 这里的旧"地图配色预设"行已隐藏。
 ## 持久化: 难度/存档/快捷键键码走 C# 桥(原版语义, key_action_*), 自定义项走
 ## UISettings(playerprefs.ini [ui])。 音乐/音量全部走自研 AudioSys 层。
 ## 音量面板(减小/增大/滑条/歌曲名)由 音频信息.gd 独立处理, 本脚本不介入。
@@ -33,16 +33,9 @@ const CUSTOM_STEP_ROWS := [
 ]
 ## 音量行的取值/落盘在 AudioSys, 其余行在 UISettings
 const 音量行 := ["music_volume", "sfx_volume"]
-## 作弊行: [行前缀, 作弊动作 id]
-const CHEAT_ROWS := [
-	["CheatParty", 0], ["CheatPeople", 1], ["CheatThought", 2], ["CheatLiving", 3],
-	["CheatDiplo", 4], ["CheatInfluence", 5], ["CheatBudget", 6], ["CheatAgents", 7],
-	["CheatArmy", 8], ["CheatRelations", 9], ["CheatUssr", 10], ["CheatDiploDown", 11],
-	["CheatMil", 12],
-]
 const 难度名 := ["牛棚小酌", "上山下乡", "斗私批修", "造反有理", "浩荡文革"]
 const 自动存档名 := ["关闭", "每月", "半年"]
-const 槽位名 := ["1 无成就壹档", "2", "3", "4", "5 成就激活档位"]
+const 槽位名 := ["1", "2", "3", "4", "5"]
 
 var _difficulty: int = 2
 var _autosave: int = 0
@@ -68,6 +61,11 @@ func _ready() -> void:
 	_bind_rows()
 	_bind_shortcuts()
 	_bind_custom_page()
+	# 手机版没有实体键盘: 键位重绑无意义, 把「快捷键」页与基础页的重绑行藏起来.
+	if OS.has_feature("mobile"):
+		find_child("快捷键页按钮", true, false).visible = false
+		for row in SHORTCUT_ROWS:
+			find_child(row[0], true, false).visible = false
 	_bind_music()
 	var back := find_child("返回", true, false) as BaseButton
 	if back and not back.pressed.is_connected(_on_返回_pressed):
@@ -77,10 +75,16 @@ func _ready() -> void:
 		reset.pressed.connect(_on_恢复默认_pressed)
 	var page_btn := find_child("基础页按钮", true, false) as BaseButton
 	var page_btn2 := find_child("自定义页按钮", true, false) as BaseButton
+	var page_btn3 := find_child("快捷键页按钮", true, false) as BaseButton
+	var page_btn4 := find_child("外观页按钮", true, false) as BaseButton
 	if page_btn:
 		page_btn.pressed.connect(_switch_page.bind(0))
 	if page_btn2:
 		page_btn2.pressed.connect(_switch_page.bind(1))
+	if page_btn3:
+		page_btn3.pressed.connect(_switch_page.bind(2))
+	if page_btn4:
+		page_btn4.pressed.connect(_switch_page.bind(3))
 	_switch_page(0)
 	_refresh_rows()
 
@@ -104,8 +108,8 @@ func _bind_rows() -> void:
 				+ "保存完成会在右上角弹出「自动存档完成」提示。"
 		elif idx == 2:
 			node.mouse_filter = Control.MOUSE_FILTER_PASS
-			node.tooltip_text = "自动存档位：自动存档与 F5 快捷保存都写入这个槽位（1 无成就壹档 … 5 成就激活档位）。\n" \
-				+ "默认是无成就壹档；自动存档会覆盖该槽，建议专门留一个槽给它。\n" \
+			node.tooltip_text = "自动存档位：自动存档与 F5 快捷保存都写入这个槽位（1 … 5）。\n" \
+				+ "默认 1 号；自动存档会覆盖该槽，建议专门留一个槽给它。\n" \
 				+ "也可以直接到「保存/读档」界面点每个槽右侧的「自动」按钮来选；\n" \
 				+ "再点一次当前带 ✓ 的那个槽 = 取消自动存档。"
 
@@ -144,12 +148,6 @@ func _start_rebind(action: int) -> void:
 	_update_rebind_label(action, "按下任意键…")
 
 func _update_rebind_label(action: int, text: String) -> void:
-	if action >= 100:
-		for row in CHEAT_ROWS:
-			if action == int(row[1]) + 100:
-				_set_label(row[0] + "Value", text)
-				return
-		return
 	for row in SHORTCUT_ROWS:
 		if action == row[1]:
 			_set_label(row[0] + "/值", text)
@@ -328,9 +326,8 @@ func _select_album(i: int) -> void:
 # ---------- 自定义页(全量) ----------
 
 func _bind_custom_page() -> void:
-	# 地图配色: 省份地图重构后, 颜色全部来自原版美术调色板(lut_main/lut_minus),
-	# 旧"柔和"预设只影响已废弃的地图调色板(无消费者)
-	# —— 留着就是假开关。按"纯外观且无实现→隐藏"处理, 不改 .tscn 布局。
+	# 旧的"地图配色预设"循环行没有消费者(省份地图重构后颜色来自原版调色板 + 玩家自选乘色),
+	# 留在这里就是假开关; 真正的配色在「画面与配色」页(四个 ColorPickerButton)。
 	var palette_row := find_child("MapPaletteRow", true, false) as Control
 	palette_row.visible = false
 	# 调试控制台已从 autoload 移除(纯 UI 重构), 其入口与开关一并去掉.
@@ -338,12 +335,20 @@ func _bind_custom_page() -> void:
 	_bind_checkbox("ParagraphIndentToggle", "paragraph_indent", false)
 	# 地图: 可互动国家淡金色高亮(默认开)
 	_bind_checkbox("InteractiveHighlightToggle", "interactive_highlight", true)
+	# 事件结束回到外交后停表(消费者在 EventPane.Close → GameHost.PauseTime)
+	_bind_checkbox("EventPauseToggle", "event_pause_after", true)
 	_bind_auto_types()
 	var console_toggle := find_child("DebugConsoleToggle", true, false) as CheckButton
 	console_toggle.set_pressed_no_signal(ui.get_bool("debug_console", true))
 	console_toggle.toggled.connect(func(on: bool) -> void: ui.set_bool("debug_console", on))
 	var console_open := find_child("DebugConsoleOpen", true, false) as BaseButton
-	console_open.pressed.connect(func() -> void: get_node("/root/调试控制台").visible = true)
+	console_open.pressed.connect(func() -> void: get_node("/root/调试控制台").call("打开"))
+	# 金手指模式: 真值在逻辑层 ShortcutPane, 这里只显示当前状态并转发开关(与快捷键 231 同一动作)
+	var gold := find_child("GoldToggle", true, false) as CheckButton
+	gold.set_pressed_no_signal(UiBridge.gold())
+	gold.toggled.connect(func(on: bool) -> void:
+		if on != UiBridge.gold():
+			UiBridge.act("快捷键", "执行", [231]))
 	_bind_cycle("EventAlign", "event_align", 0, 2, 1, 0, func(v: int) -> String: return 事件对齐名[v])
 	for row in CUSTOM_STEP_ROWS:
 		var lo: int = int(row[2]); var hi: int = int(row[3])
@@ -356,11 +361,6 @@ func _bind_custom_page() -> void:
 			_bind_cycle(row[0], row[1], lo, hi, step, def, func(v: int) -> String: return str(v))
 		else:
 			_bind_cycle(row[0], row[1], lo, hi, step, def, func(v: int) -> String: return str(v))
-	for row in CHEAT_ROWS:
-		var rebind := find_child(row[0] + "Rebind", true, false) as BaseButton
-		if rebind:
-			rebind.pressed.connect(_start_rebind.bind(100 + int(row[1])))
-	print("[设置] 作弊快捷键绑定 ", CHEAT_ROWS.size(), " 行")
 
 func _bind_checkbox(node_name: String, key: String, def: bool) -> void:
 	var cb := find_child(node_name, true, false) as CheckButton
@@ -386,10 +386,12 @@ const AUTO_TYPES := [
 	[1044, "支持拉美非洲右翼武装"],
 	[1057, "干预乌干达内战"],
 	[1061, "援助缅甸共产主义游击队"],
+	[128, "给葡萄牙民主政体来点“尖叫”"],
+	[142, "阿拉伯：武器援助"],
+	[143, "阿拉伯：资金援助"],
+	[144, "阿拉伯：打压对手"],
+	[1054, "尼日利亚：援助革命派"],
 ]
-
-## 事件结束后自动暂停 — 由 设置.tscn 预置 EventPauseToggle 后在此绑定(代码不造控件).
-
 
 func _bind_auto_types() -> void:
 	var 已开 := {}
@@ -404,7 +406,7 @@ func _bind_auto_types() -> void:
 	find_child("AutoDecisionRow", true, false).visible = false
 
 
-## 把 14 个勾的当前状态拼回 "7,8,20" 落盘; 逻辑层在进外交场景时读这一行
+## 把全部勾的当前状态拼回 "7,8,20" 落盘; 逻辑层在进外交场景时读这一行
 func _推自动类型() -> void:
 	var keys := PackedStringArray()
 	for row in AUTO_TYPES:
@@ -478,32 +480,39 @@ func _refresh_cycle(key: String, _lo: int, def: int, fmt: Callable) -> void:
 ## 0=基础/音乐, 1=自定义。隐藏/显示除常驻外的整组子节点(不改场景文件布局)。
 func _switch_page(page: int) -> void:
 	_page = page
-	var keep := ["背景层", "页导航", "自定义页", "返回", "恢复默认"]
+	var keep := ["背景层", "页导航", "自定义页", "快捷键页", "外观页", "返回", "恢复默认"]
 	for child in get_children():
 		if child.name == "自定义页":
 			child.visible = page == 1
+			continue
+		if child.name == "快捷键页":
+			child.visible = page == 2
+			continue
+		if child.name == "外观页":
+			child.visible = page == 3
 			continue
 		if child.name in keep:
 			continue
 		if child is Control:
 			child.visible = page == 0
-	# 切到自定义页时按当前真实值刷新所有数值行(音量在 AudioSys 里会被基础页的
-	# 音频面板改动, 不刷新会显示成旧数字)
-	if page == 1:
+	# 切页时按当前真实值刷新: 音量在 AudioSys 里会被基础页的音频面板改动,
+	# 快捷键在三个页里都有入口, 不刷新会显示成旧数字
+	if page == 0:
+		_refresh_rows()
+	elif page == 1:
 		_refresh_custom_rows()
+	elif page == 2:
+		find_child("快捷键页", true, false).call("_刷新")
 
 
 func _refresh_custom_rows() -> void:
 	for key in _cycle_fmts.keys():
 		_refresh_cycle(str(key), 0, int(_cycle_defs.get(key, 0)), _cycle_fmts[key])
-	for row in CHEAT_ROWS:
-		_refresh_cheat_value(row)
 
 # ---------- 显示 ----------
 
 func _refresh_rows() -> void:
 	_row_value("难度行", 难度名[_difficulty])
-	_row_extra("难度行", "成就", "成就：%s" % ("开启" if _difficulty >= 2 else "关闭"))
 	_row_value("自动保存行", 自动存档名[_autosave])
 	_row_value("保存槽位行", 槽位名[_saveplace - 1])
 	_row_value("窗口模式行", 窗口模式名[_window_mode])
@@ -528,9 +537,6 @@ func _row_extra(row_name: String, child_name: String, text: String) -> void:
 	var lbl := node.get_node(child_name) as Label
 	lbl.text = text
 
-func _refresh_cheat_value(row: Array) -> void:
-	_set_label(row[0] + "Value", _key_text(ui.get_int("key_action_%d" % (100 + int(row[1])), 0)))
-
 # ---------- 返回/默认 ----------
 
 func _on_返回_pressed() -> void:
@@ -539,7 +545,7 @@ func _on_返回_pressed() -> void:
 func _on_恢复默认_pressed() -> void:
 	_difficulty = 2
 	_autosave = 1          # 与 NewAwake 的默认值一致:每月自动存档
-	_saveplace = 1         # 默认写"无成就壹档"(不用成就位)
+	_saveplace = 1         # 默认 1 号槽
 	ui.set_int("difficulty", 2)
 	ui.set_int("autosave", 1)
 	ui.set_int("saveplace", 1)
@@ -566,13 +572,27 @@ func _on_恢复默认_pressed() -> void:
 		ui.set_int(row[1], int(row[5]))
 	for i in range(5):
 		ui.set_int("key_action_%d" % i, _default_key(i))
+		ui.set_int("key_action_mod_%d" % i, 0)
 	for i in range(10, 13):
 		ui.set_int("key_action_%d" % i, 0)
+		ui.set_int("key_action_mod_%d" % i, 0)
 	for i in range(13):
 		ui.set_int("key_action_%d" % (100 + i), 0)
+		ui.set_int("key_action_mod_%d" % (100 + i), 0)
+	ui.set_int("key_action_230", 0)
+	ui.set_int("key_action_mod_230", 0)
+	ui.set_int("key_action_231", 0)
+	ui.set_int("key_action_mod_231", 0)
+	# 事件选项快捷键: 擦掉重绑, 回到逻辑层默认键(数字 1..6 / 上下)
+	for i in range(240, 248):
+		ui.erase("key_action_%d" % i)
+		ui.erase("key_action_mod_%d" % i)
+	# 画面与配色页自己那一套(缩放/通用配色/地图阵营配色)由外观页统一复位
+	find_child("外观页", true, false).call("_恢复默认")
 	var root := get_tree().current_scene
 	ui.apply_font_scale(root, ui.get_scale())
 	_refresh_rows()
+	find_child("快捷键页", true, false).call("_刷新")
 
 func _default_key(action: int) -> int:
 	match action:

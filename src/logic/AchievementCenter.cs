@@ -22,6 +22,7 @@ public static class AchievementCenter
             System.Array.Copy(old, ach.ach_this, old.Length);
         }
         if (!Instances.Contains(ach)) Instances.Add(ach);
+        ApplyKnown(ach);
         return ach;
     }
 
@@ -32,6 +33,38 @@ public static class AchievementCenter
     }
 
     static readonly bool[] Known = new bool[Slots];
+
+    // 移植版没有 Steam: 解锁记录写 playerprefs [ui] achievements(逗号串), 桥层负责读写,
+    // 启动时 Restore 灌回所有实例; 解锁状态跨重启/读档保留.
+    public static void Restore(string text)
+    {
+        foreach (var part in text.Split(',', System.StringSplitOptions.RemoveEmptyEntries))
+            Known[int.Parse(part)] = true;
+        foreach (var ach in Instances) ApplyKnown(ach);
+    }
+
+    public static string SaveString()
+    {
+        var list = new List<string>();
+        for (var i = 0; i < Slots; i++) if (Known[i]) list.Add(i.ToString());
+        return string.Join(",", list);
+    }
+
+    // 调试控制台 achreset: 清空全部解锁记录(内存 + playerprefs 落盘).
+    public static void ResetAll()
+    {
+        System.Array.Clear(Known, 0, Known.Length);
+        foreach (var ach in Instances) System.Array.Clear(ach.ach_this, 0, ach.ach_this.Length);
+        var cfg = new Godot.ConfigFile();
+        cfg.Load("user://playerprefs.ini");
+        cfg.SetValue("ui", "achievements", "");
+        cfg.Save("user://playerprefs.ini");
+    }
+
+    static void ApplyKnown(achievements ach)
+    {
+        for (var i = 0; i < Slots; i++) if (Known[i]) ach.ach_this[i] = true;
+    }
 
     // 每帧调用: 返回"上一帧还没有、现在有"的成就编号(原版 Set 与自建 Unlock 都会走到这里)
     public static List<int> DrainNewUnlocks()

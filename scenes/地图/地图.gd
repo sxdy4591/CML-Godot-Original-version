@@ -19,8 +19,12 @@ var _selected_country: int = -1
 var _hover_country: int = -1
 var _hover_accum: float = 0.0
 var _高亮: Dictionary = {}
+# 玩家改过的阵营配色: 原版双色签名 → 解算后的 main/minus(每次快照按当前地图模式重建)
+var _配色: Dictionary = {}
 var _可互动开: bool = true
 var _脉冲: float = 0.0
+# 玩家自定义配色(设置·画面与配色): 可互动高亮乘色
+var _高亮乘: Color = Color(1, 1, 1, 1)
 
 # 像素命中用的缩放图: 按贴图路径缓存, 跨场景保留(进外交不再逐国 get_image+resize)
 static var _图像缓存: Dictionary = {}
@@ -127,7 +131,10 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 	_高亮.clear()
 	for h in data["highlight"]:
 		_高亮[int(h)] = true
-	_可互动开 = get_node("/root/UISettings").get_bool("interactive_highlight", true)
+	var ui := get_node("/root/UISettings")
+	_可互动开 = ui.get_bool("interactive_highlight", true)
+	_高亮乘 = ui.get_color("map_highlight_tint", Color(1, 1, 1, 1))
+	_配色 = _配色方案(int(data["mode"]))
 	_应用颜色()
 	_应用领土()
 	_应用战争()
@@ -159,10 +166,39 @@ func _应用颜色() -> void:
 			continue
 		var idx := int(sp.get_meta("idx", sp.get_meta("country", -1)))
 		var pair: Dictionary = _colors[idx]
+		var 主: Color = pair["main"]
+		var 副: Color = pair["minus"]
+		var 解: Array = _配色.get(_签名(主, 副), [])
+		if not 解.is_empty():
+			主 = 解[0]
+			副 = 解[1]
 		var mat := 材质(sp)
-		mat.set_shader_parameter("main_color", pair["main"])
-		mat.set_shader_parameter("minus_color", pair["minus"])
+		mat.set_shader_parameter("main_color", 主)
+		mat.set_shader_parameter("minus_color", 副)
 		sp.modulate = Color.WHITE
+
+
+## 玩家挑的是"显示色", 原版双色参数由 UISettings.解算双色 反推; 一次读盘把本模式全部类别算完
+func _配色方案(mode: int) -> Dictionary:
+	var cfg := ConfigFile.new()
+	cfg.load("user://playerprefs.ini")
+	var ui := get_node("/root/UISettings")
+	var 表 := {}
+	for 类 in ui.地图配色类别:
+		if int(类[0]) != mode:
+			continue
+		var 键 := "map_palette_%d_%s" % [mode, 类[1]]
+		var 显: Color = Color(cfg.get_value("ui", 键, ui.原版显示色(类[3], 类[4])))
+		表[_签名(类[3], 类[4])] = ui.解算双色(显)
+	return 表
+
+
+## 原版双色 → 查找键(量化到 0..255: 原版颜色都是确定的常量, 不会撞)
+func _签名(主: Color, 副: Color) -> String:
+	return "%d,%d,%d|%d,%d,%d" % [
+		roundi(主.r * 255), roundi(主.g * 255), roundi(主.b * 255),
+		roundi(副.r * 255), roundi(副.g * 255), roundi(副.b * 255),
+	]
 
 
 # 每国一个 ShaderMaterial: 原版双色公式 out = t + t*(main-minus) - 0.09
@@ -204,8 +240,21 @@ func _归类分裂块() -> void:
 		if tex.is_empty() or tex == "ogon":
 			continue
 		var 母国 := int(sp.get_meta("country", -1))
-		if 名表.has(tex) and int(名表[tex]) != 母国:
-			sp.set_meta("idx", int(名表[tex]))
+		# 场景里写死归属的块(南方民主共和国那块)不参与按名字重映射
+		if sp.has_meta("idx_fixed"):
+			continue
+		var 目标 := -1
+		if 名表.has(tex):
+			目标 = int(名表[tex])
+		else:
+			# 独立后国名会带后缀(南苏丹 → 南苏丹社会主义共和国), 块名仍是旧短名;
+			# 精确匹配失败时用"国名以块名开头"再对一次, 否则整块又并回母国.
+			for n in 名表:
+				if str(n).begins_with(tex):
+					目标 = int(名表[n])
+					break
+		if 目标 >= 0 and 目标 != 母国:
+			sp.set_meta("idx", 目标)
 		elif sp.has_meta("idx"):
 			sp.remove_meta("idx")
 
@@ -227,7 +276,7 @@ func _应用战争() -> void:
 
 func _应用选中() -> void:
 	var 强度 := 0.45 + 0.55 * (0.5 + 0.5 * sin(_脉冲 / 1.2 * TAU))
-	var 金色 := Color(1.0 + 强度, 1.0 + 强度 * 0.75, 1.0 - 强度 * 0.55)
+	var 金色 := Color(1.0 + 强度, 1.0 + 强度 * 0.75, 1.0 - 强度 * 0.55) * _高亮乘
 	for d in _sprites:
 		if d["kind"] == "war" or not d["tinted"]:
 			continue
@@ -238,7 +287,7 @@ func _应用选中() -> void:
 		var 悬停 := _hover_country >= 0 and disp == _hover_country
 		# 高亮集合存的是"点开这国看到的面板"索引(disp): 别名块(18/111 等)要与目标国同亮
 		var 可互动 := _可互动开 and _高亮.has(disp)
-		sp.modulate = 选中高亮 if 选中 else (悬停高亮 if 悬停 else (金色 if 可互动 else Color.WHITE))
+		sp.modulate = 选中高亮 * _高亮乘 if 选中 else (悬停高亮 * _高亮乘 if 悬停 else (金色 if 可互动 else Color.WHITE))
 
 
 # 悬停高亮: 0.1s 采样一次鼠标所在国家(逐像素拾取较重, 不逐帧跑)

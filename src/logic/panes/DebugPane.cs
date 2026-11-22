@@ -138,8 +138,27 @@ public sealed class DebugPane : IPanel
             case "highlight":
                 Log(MapPane.InteractiveText());
                 break;
+            case "faction":
+                Faction(state);
+                break;
+            case "achreset":
+                AchievementCenter.ResetAll();
+                Log("成就解锁状态已重置(内存 + playerprefs)");
+                break;
             case "cheat":
                 Cheat(int.Parse(p[1]));
+                break;
+            case "gold":
+                ShortcutPane.Run(231);
+                Log($"金手指 = {ShortcutPane.GoldFinger}");
+                break;
+            case "pop":
+                ShortcutPane.Run(230);
+                Log($"人口 data[34] = {state.data[34]}");
+                break;
+            case "key":
+                ShortcutPane.Run(int.Parse(p[1]));
+                Log($"快捷键动作 {p[1]} 已执行");
                 break;
             default:
                 Log($"未知命令: {p[0]}（输入 help）");
@@ -201,40 +220,33 @@ public sealed class DebugPane : IPanel
         Log("rel 0|1 值 | mod n 0|1 | diff 0-4 | ironman 0|1");
         Log("war n | list_wars | part 国家 下标 on|off | parts 国家 | map");
         Log("save 槽位 | load 槽位 | cheat 0-12");
+        Log("gold(金手指开关) | pop(人口+1亿) | key 动作号(快捷键同款)");
+        Log("faction(主导派系排查: data[15]/席位/联盟合计)");
+        Log("achreset(重置全部成就解锁状态)");
     }
 
-    // ================= 作弊(与自定义页 13 条顺序一致) =================
+    // 主导派系排查: data[56] 由原版 Results_text.Pereraschyot 在事件结算时算,
+    // 这里按同一套规则复算一遍, 方便定位"席位最多却不是执政"落在哪条分支.
+    static void Faction(GameState state)
+    {
+        var 席位 = "";
+        for (var i = 0; i < state.party_number.Length; i++)
+            席位 += $" [{i}]{state.party_number[i]}{(state.is_party_enabled[i] ? "" : "(未启用)")}{(state.is_party_ally[i] ? "(盟友)" : "")}";
+        Log($"data[15]={state.data[15]} 执政=data[56]={state.data[56]} 满足现状=data[106]={state.data[106]} |{席位}");
+        var 最大 = 0;
+        for (var i = 1; i < state.party_number.Length; i++)
+            if (state.party_number[i] > state.party_number[最大]) 最大 = i;
+        var 联盟 = state.party_number[1];
+        for (var i = 0; i < state.is_party_ally.Length; i++)
+            if (state.is_party_ally[i] && state.is_party_enabled[i] && i != 1) 联盟 += state.party_number[i];
+        Log($"单党最多={最大}({state.party_number[最大]}) 派系1+盟友={联盟} 宪法多数={state.is_konst_max}");
+    }
 
+    // ================= 作弊 =================
+    // 13 条的实现唯一放在 ShortcutPane(设置页/手机面板/调试台共用一份), 这里只转发.
     static void Cheat(int action)
     {
-        var state = GameHost.State;
-        switch (action)
-        {
-            case 0: state.data[1] += 100; break;
-            case 1: state.data[3] += 100; break;
-            case 2: state.data[4] += 100; break;
-            case 3: state.data[5] += 100; break;
-            case 4: state.data[6] += 100; break;
-            case 5: state.data[7] += 100; break;
-            case 6: state.data[8] += 100; break;
-            case 7: state.data[9] += 100; break;
-            case 8: state.data[22] += 100; break;
-            case 9:
-                state.empires[0].relations += 100;
-                state.empires[1].relations += 100;
-                break;
-            case 10:
-                state.relres = !state.relres;
-                break;
-            case 11:
-                state.data[6] -= 100;
-                break;
-            case 12:
-                state.data[0] += 100;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(action), action, "作弊动作只有 0-12");
-        }
+        ShortcutPane.Cheat(action);
         Log($"[作弊] 动作 {action} 已执行");
     }
 }

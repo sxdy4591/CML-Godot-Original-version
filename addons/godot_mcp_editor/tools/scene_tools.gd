@@ -53,7 +53,8 @@ func _to_scene_res_path(project_path: String, scene_path: String) -> String:
 func _load_scene(scene_path: String) -> Array:
 	if not FileAccess.file_exists(scene_path):
 		return [null, {"ok": false, "error": "Scene not found: " + scene_path}]
-	var packed := load(scene_path) as PackedScene
+	# 直接读磁盘: 默认 load() 会命中 ResourceLoader 缓存, 外面手改过的 .tscn 读不到最新内容.
+	var packed := ResourceLoader.load(scene_path, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene
 	if not packed:
 		return [null, {"ok": false, "error": "Failed to load: " + scene_path}]
 	var root := packed.instantiate()

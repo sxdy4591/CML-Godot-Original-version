@@ -17,10 +17,24 @@ namespace UnityEngine
 		private static ConfigFile _cfg;
 		private static bool _loaded = false;
 		private static bool _dirty = false;
+		private static long _stamp = -1;
+
+		// 同一个文件有两个写入者: 本类的 [prefs] 分区(Godot 侧原版语义) 与
+		// UISettings.gd 的 [ui] 分区(设置页自定义项). 两边各持一份 ConfigFile 内存副本,
+		// 谁后 Save 谁就把对方的更新整份覆盖掉 —— 表现就是"设置里改了, 下次启动又变回来".
+		// 所以每次取用前按磁盘 mtime 判断要不要重读, 每次写入前先重读再整份保存.
+		private static string DiskPath => ProjectSettings.GlobalizePath(FileName);
+
+		private static long DiskStamp()
+		{
+			var path = DiskPath;
+			return System.IO.File.Exists(path) ? System.IO.File.GetLastWriteTimeUtc(path).Ticks : 0;
+		}
 
 		private static void EnsureLoaded()
 		{
-			if (_loaded) return;
+			var stamp = DiskStamp();
+			if (_loaded && stamp == _stamp) return;
 			_loaded = true;
 			_cfg = new ConfigFile();
 			Error err = _cfg.Load(FileName);
@@ -28,6 +42,7 @@ namespace UnityEngine
 			{
 				GD.PushWarning($"[PlayerPrefs] 读取 {FileName} 失败: {err}");
 			}
+			_stamp = stamp;
 		}
 
 		private static void SaveIfDirty()
@@ -36,6 +51,7 @@ namespace UnityEngine
 			{
 				_dirty = false;
 				_cfg.Save(FileName);
+				_stamp = DiskStamp();
 			}
 		}
 
@@ -52,6 +68,7 @@ namespace UnityEngine
 			{
 				_cfg.EraseSectionKey("prefs", key);
 				_dirty = true;
+				SaveIfDirty();
 			}
 		}
 
@@ -79,6 +96,7 @@ namespace UnityEngine
 			EnsureLoaded();
 			_cfg.SetValue("prefs", key, value);
 			_dirty = true;
+			SaveIfDirty();
 		}
 
 		public static float GetFloat(string key, float defaultValue = 0f)
@@ -92,6 +110,7 @@ namespace UnityEngine
 			EnsureLoaded();
 			_cfg.SetValue("prefs", key, value);
 			_dirty = true;
+			SaveIfDirty();
 		}
 
 		public static string GetString(string key, string defaultValue = "")
@@ -105,6 +124,7 @@ namespace UnityEngine
 			EnsureLoaded();
 			_cfg.SetValue("prefs", key, value);
 			_dirty = true;
+			SaveIfDirty();
 		}
 	}
 

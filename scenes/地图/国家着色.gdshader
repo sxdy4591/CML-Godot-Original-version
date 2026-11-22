@@ -14,7 +14,9 @@ void fragment() {
 	vec4 tint = COLOR;
 	vec4 tex = texture(TEXTURE, UV);
 	float t = pow(tex.r, 1.0 / 2.2);
-	vec3 c = vec3(t) + vec3(t) * (main_color.rgb - minus_color.rgb) - vec3(0.09);
+	vec3 main = main_color.rgb;
+	vec3 minus = minus_color.rgb;
+	vec3 c = vec3(t) + vec3(t) * (main - minus) - vec3(0.09);
 	c = clamp(c, 0.0, 1.0) * 1.25;
 	COLOR = vec4(c * tint.rgb, tex.a * tint.a);
 }

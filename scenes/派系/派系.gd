@@ -217,6 +217,11 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 	var 席位列 := PackedStringArray()
 	for f in factions:
 		席位列.append("%s: %d 席" % [f["name"], f["seats"]])
+	# 第六段是 data[106]「满足现状者」, 不属于五个派系, 但占饼图一段
+	var 总数: int = int(data["seats_total"])
+	var 现状: int = int(data["idle_seats"])
+	var 占比 := 0.0 if 总数 <= 0 else float(现状) * 100.0 / float(总数)
+	席位列.append("满足现状者: %d 席（%.1f%%）" % [现状, 占比])
 	饼图.tooltip_text = "\n".join(席位列)
 
 	for 定义 in 政策定义:

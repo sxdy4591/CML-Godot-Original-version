@@ -132,16 +132,65 @@ namespace UnityEngine
 			return !Godot.Input.IsPhysicalKeyPressed(k) && UnityRuntimeShim.IsKeyJustReleased(k);
 		}
 
-		//自定义快捷键别名(设置页重绑的空格/1-4): 与内置键等效但在同场景门控内生效
+		//自定义快捷键别名(设置页重绑的空格/1-4/F5/F9/W): 与内置键等效但在同场景门控内生效
 		private static bool TryCustomAlias(KeyCode key, bool justPressed)
 		{
 			int id = CustomAliasId(key);
 			if (id < 0) return false;
-			int custom = PlayerPrefs.GetInt("key_action_" + id, 0);
-			if (custom <= 0 || (KeyCode)custom == key) return false;
-			var ck = (KeyCode)custom;
-			if (justPressed) return IsPhysical(ck) && UnityRuntimeShim.IsKeyJustPressed(KeyCodeMap.ToGodot(ck));
-			return IsPhysical(ck);
+			int custom = CustomKey(id);
+			if (custom <= 0) return false;
+			// 设置页存的是 **Godot 物理键码**(OS.get_keycode_string 同域). 以前强转成 Unity
+			// KeyCode 再走 KeyCodeMap 反查: 字母键 Godot 65 vs Unity 97 差 32, 结果除空格/数字
+			// 之外的绑定全部 ToGodot→None 静默失效("绑上了按了没反应").
+			var ck = (Godot.Key)custom;
+			if (ck == KeyCodeMap.ToGodot(key)) return false;
+			if (!ModMatched(CustomMod(id))) return false;
+			if (justPressed) return Godot.Input.IsPhysicalKeyPressed(ck) && UnityRuntimeShim.IsKeyJustPressed(ck);
+			return Godot.Input.IsPhysicalKeyPressed(ck);
+		}
+
+		// 组合键: 设置页把 Ctrl/Shift/Alt 一起绑进来(1/2/4), 按下的修饰位必须完全一致,
+		// 否则绑了 Shift+5 时按 5 也会触发.
+		private static bool ModMatched(int mod)
+		{
+			var ctrl = Godot.Input.IsPhysicalKeyPressed(Godot.Key.Ctrl);
+			var shift = Godot.Input.IsPhysicalKeyPressed(Godot.Key.Shift);
+			var alt = Godot.Input.IsPhysicalKeyPressed(Godot.Key.Alt);
+			return ((mod & 1) != 0) == ctrl && ((mod & 2) != 0) == shift && ((mod & 4) != 0) == alt;
+		}
+
+		// 设置页的键位写在 playerprefs.ini 的 [ui] 分区(UISettings 管理), 本类历史上用
+		// PlayerPrefs 读的是 [prefs] 分区 —— 两个分区永不相交, 于是"设置里绑好的键从来没生效过".
+		// 这里直接读 [ui], 0.5 秒重读一次文件, 改键后不必重启.
+		private static readonly System.Collections.Generic.Dictionary<int, int> AliasKeys = new();
+		private static readonly System.Collections.Generic.Dictionary<int, int> AliasMods = new();
+		private static ulong _aliasReadAt = ulong.MaxValue;
+
+		private static int CustomMod(int id)
+		{
+			CustomKey(id);
+			return AliasMods.TryGetValue(id, out var value) ? value : 0;
+		}
+
+		private static int CustomKey(int id)
+		{
+			var now = Godot.Time.GetTicksMsec();
+			if (now - _aliasReadAt >= 500)
+			{
+				_aliasReadAt = now;
+				AliasKeys.Clear();
+				AliasMods.Clear();
+				var cfg = new ConfigFile();
+				cfg.Load("user://playerprefs.ini");
+				for (var i = 0; i <= 12; i++)
+				{
+					var field = "key_action_" + i;
+					AliasKeys[i] = cfg.HasSectionKey("ui", field) ? (int)cfg.GetValue("ui", field, 0) : 0;
+					var field_mod = "key_action_mod_" + i;
+					AliasMods[i] = cfg.HasSectionKey("ui", field_mod) ? (int)cfg.GetValue("ui", field_mod, 0) : 0;
+				}
+			}
+			return AliasKeys.TryGetValue(id, out var value) ? value : 0;
 		}
 
 		private static int CustomAliasId(KeyCode key)
@@ -153,14 +202,11 @@ namespace UnityEngine
 				case KeyCode.Alpha2: return 2;
 				case KeyCode.Alpha3: return 3;
 				case KeyCode.Alpha4: return 4;
+				case KeyCode.F5: return 10;
+				case KeyCode.F9: return 11;
+				case KeyCode.W: return 12;
 				default: return -1;
 			}
-		}
-
-		private static bool IsPhysical(KeyCode key)
-		{
-			var k = KeyCodeMap.ToGodot(key);
-			return k != Key.None && Godot.Input.IsPhysicalKeyPressed(k);
 		}
 
 		//仅在"世界地图(外交)"场景生效的游戏热键:

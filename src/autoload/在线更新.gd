@@ -22,7 +22,16 @@ func 拉取内容() -> void:
 ## 不接外部 Callable —— 调用方场景(成就/关于)随时可能被释放.
 var 图片结果: Dictionary = {}
 
+## 图片本地缓存: 下载一次就落盘, 之后直接读盘, 不再重复联网.
+const 图片缓存目录 := "user://图片缓存"
+
 func 请求图片(url: String) -> void:
+	var 路径 := _缓存路径(url)
+	if FileAccess.file_exists(路径):
+		var 缓存图 := Image.new()
+		if 缓存图.load(路径) == OK:
+			图片结果[url] = ImageTexture.create_from_image(缓存图)
+			return
 	# 商店图只是装饰: 离线/连不上 Steam CDN 时静默跳过, 不为每个 URL 刷一条 error
 	请求字节(url, func(数据: PackedByteArray) -> void:
 		var 图 := Image.new()
@@ -31,7 +40,28 @@ func 请求图片(url: String) -> void:
 		if 错误 != OK:
 			push_error("[在线更新] %s 不是可解码的图片: %s" % [url, error_string(错误)])
 			return
-		图片结果[url] = ImageTexture.create_from_image(图), false)
+		DirAccess.make_dir_recursive_absolute(图片缓存目录)
+		var 文件 := FileAccess.open(路径, FileAccess.WRITE)
+		文件.store_buffer(数据)
+		文件.close()
+		图片结果[url] = ImageTexture.create_from_image(图))
+
+## 同步取图(只读本地缓存): 命中返回纹理; 未命中丢后台下载, 返回 null.
+func 取图片(url: String) -> Texture2D:
+	var 路径 := _缓存路径(url)
+	if FileAccess.file_exists(路径):
+		var 图 := Image.new()
+		if 图.load(路径) == OK:
+			return ImageTexture.create_from_image(图)
+	请求图片(url)
+	return null
+
+## 缓存文件名 = url 的 md5 + 原名后缀, 避免 URL 里的非法字符
+func _缓存路径(url: String) -> String:
+	var 后缀 := url.get_extension().to_lower()
+	if 后缀 != "jpg" and 后缀 != "jpeg" and 后缀 != "png":
+		后缀 = "img"
+	return "%s/%s.%s" % [图片缓存目录, url.md5_text(), 后缀]
 
 func 请求文本(url: String, 回调: Callable) -> void:
 	请求字节(url, func(数据: PackedByteArray) -> void:

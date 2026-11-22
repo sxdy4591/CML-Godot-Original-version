@@ -4,11 +4,11 @@
 三处必须一致:
   1. project.godot 的 application/config/version
   2. site/version.json 的 version（在线更新清单）
-  3. git tag（打 tag 发布时, 形如 v0.7.0）
+  3. git tag（打 tag 发布时, 形如 v0.7.2）
 
 用法:
   python3 tools/check_version.py              # 校验 1 与 2
-  python3 tools/check_version.py --tag v0.7.0 # 再校验 tag
+  python3 tools/check_version.py --tag v0.7.2 # 再校验 tag
 """
 
 import json

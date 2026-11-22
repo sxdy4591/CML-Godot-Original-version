@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="中国:毛的遗产[godot二版]"
-config/version="0.7.1"
+config/version="0.7.2"
 run/main_scene="uid://bydan4iqthbaa"
 config/features=PackedStringArray("4.7", "C#", "Mobile")
 boot_splash/image="uid://vcsjiyi2j6yf"
@@ -25,6 +25,8 @@ UiBridge="*res://src/bridge/UiBridge.cs"
 AudioSys="*res://src/autoload/音频总管.gd"
 "按钮特效"="*res://src/autoload/按钮特效.gd"
 UISettings="*res://src/autoload/UISettings.gd"
+"快捷键"="*res://src/autoload/快捷键.gd"
+"触摸滚动"="*res://src/autoload/触摸滚动.gd"
 "触屏提示"="*res://src/autoload/触屏提示.gd"
 "全局管理"="*res://src/autoload/全局管理.tscn"
 "调试控制台"="*res://scenes/调试/调试控制台.tscn"

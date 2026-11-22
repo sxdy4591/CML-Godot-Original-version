@@ -51,6 +51,8 @@ public static class GameHost
 
         // GameStartScript 会按 Country_data 重建国家数组(长度与 parts 槽都会缩水)
         EnsureCountryCapacity(Global.gameState);
+        // GameStartScript 把 iron_and_blood 设成 diff>=2; 移植版不受难度限制, 开局后统一打开
+        成就不设限();
     }
 
     // 原版预设里国家 200 个、parts 至少 12 槽; 开局重建后要补回来, 地图与外交才不越界
@@ -83,6 +85,38 @@ public static class GameHost
         Clock.probel.GetComponent<SpeedScript>().adad(speed);
     }
 
+    // 设置页 [ui] event_pause_after: 事件结束回到外交后是否停表(默认 true).
+    // 这项设置以前只有默认值、没有消费者 —— 事件结束后总是按原速度继续跑.
+    public static bool EventPauseAfter
+    {
+        get
+        {
+            var cfg = new Godot.ConfigFile();
+            cfg.Load("user://playerprefs.ini");
+            return (bool)cfg.GetValue("ui", "event_pause_after", true);
+        }
+    }
+
+    // 停表(原版暂停就是 speed = 0)
+    public static void PauseTime() => Global.speed = 0;
+
+    // 原版 TimeScript.Update 的空格: SpeedScript.Probel() 暂停/恢复
+    public static void ToggleTime()
+    {
+        Port.DiploHost.Ensure();
+        Clock.probel.GetComponent<SpeedScript>().Probel();
+    }
+
+    // 原版 F5/F9: TimeScript.AutoSaveMethod 走的是旧格式 Savescript,
+    // 移植版存档统一在 SaveService(与存档界面同格式), 槽位取设置页的"保存槽位".
+    public static void QuickSave() => Port.SaveService.Save(State, Port.SavePaths.Slot(Global.savePlace));
+
+    public static void QuickLoad()
+    {
+        ReplaceState(Port.SaveService.Load(Port.SavePaths.Slot(Global.savePlace)));
+        UiEvents.RequestScene("Diplomacy");
+    }
+
     // 读档: 换掉 gameState 并重链时钟.
     public static void ReplaceState(GameState state)
     {
@@ -97,7 +131,11 @@ public static class GameHost
         // 这里没有场景重载, 不显式补这一句, 存档时停在图上的事件读档后就消失了.
         Port.DiploHost.Ensure();
         Port.DiploHost.Ui.Map.EventWrite(state);
+        成就不设限();
     }
+
+    // 移植版没有 Steam, 原版的 iron_and_blood 门控只为成就服务; 玩家要求成就不受难度/读档影响.
+    static void 成就不设限() => Global.gameState.iron_and_blood = true;
 
     // 新局/读档共用: 清掉"每局重新开始"的静态缓存与一次性计时,
     // 否则上一档的状态会延续到新档(地图颜色缓存、事件需求日、战争去重月、自动化进度).
@@ -108,6 +146,7 @@ public static class GameHost
         _warDedupMonth = -1;
         Automation.Reset();
         Panes.MapPane.InvalidateColors();
+        Panes.ShortcutPane.Reset();
     }
 
     // 时钟替身是进程内单例: 警报图标一旦被 SetActive(true) 就不会自己熄灭(原版 AlarmIconChange 只亮不灭).
@@ -152,6 +191,8 @@ public static class GameHost
         TickWarDedup();
         Automation.Tick();
         Panes.MapPane.Tick();
+        // 金手指: 开关打开时每帧把数值钉在最高/最低(见 ShortcutPane.Apply 的上限依据)
+        Panes.ShortcutPane.Apply();
         // 原版 Update: 时间推进 + 每日事件需求挂载 + 事件图标超时(会自动切事件场景)
         ClockUpdateMethod.Invoke(Clock, null);
         TickEventMarker(delta);

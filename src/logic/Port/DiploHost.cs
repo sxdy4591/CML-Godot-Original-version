@@ -118,6 +118,16 @@ public static class DiploHost
         }
         // 原版 ShowHideOcno 会把时间清零; 快照只是读数据, 调用后恢复原速度
         var speed = GameHost.Global.speed;
+        // 原版 ChangeIcons 对"没有该图标"的国家只置 nonono, 不清 OkoshkoScript.text;
+        // 同一套 okno 连续看不同国家时会残留上一国的文案(南斯拉夫面板显示"白人南非的傀儡国").
+        // 每国 Repaint 前清空一次, 由本次 ChangeIcons 自己写.
+        for (var i = 0; i < 6; i++)
+        {
+            var znach = set.Map.okno.transform.Find("Znach (" + i + ")").GetComponent<OkoshkoScript>();
+            znach.text = "";
+            znach.text_en = "";
+            znach.nonono = false;
+        }
         set.Probe.this_number = index;
         set.Probe.Repaint();
         // Repaint 第一句就是 map1 = Find("MapChanges"), 会指到面板那套; 重指回本套
@@ -137,7 +147,9 @@ public static class DiploHost
         {
             var znach = set.Map.okno.transform.Find("Znach (" + i + ")");
             var sprite = znach.GetComponent<SpriteRenderer>().sprite;
-            var tooltip = znach.GetComponent<OkoshkoScript>().text;
+            // 原版多数分支写 text, 少数只写 text_en; 两个都清空后再取, 取到谁算谁
+            var okoshko = znach.GetComponent<OkoshkoScript>();
+            var tooltip = string.IsNullOrEmpty(okoshko.text) ? okoshko.text_en : okoshko.text;
             icons.Add(new Dictionary<string, object>
             {
                 ["sprite"] = sprite == null ? "" : sprite.name,

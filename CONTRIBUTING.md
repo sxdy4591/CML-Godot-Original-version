@@ -34,7 +34,7 @@ data: 名字表换回 1.132 TextAsset
 
 - 唯一真值：`project.godot` 的 `application/config/version`，SemVer：`主.次.补`。
 - `site/version.json` 的 `version` 必须与之相等；`tools/check_version.py` 会在 CI 校验。
-- 发布打 tag：`v<版本>`，例如 `v0.7.0`；`Release` workflow 会校验 tag 与两处版本一致。
+- 发布打 tag：`v<版本>`，例如 `v0.7.2`；`Release` workflow 会校验 tag 与两处版本一致。
 - 预发布用后缀：`0.8.0-beta.1`，主菜单显示时自动带 `[beta]`。
 
 ## 发布流程
@@ -87,5 +87,5 @@ powershell -ExecutionPolicy Bypass -File .\tools\push_clean.ps1 -Remote https://
 
 1. Settings → Pages：**Source = GitHub Actions**（不是 Deploy from a branch；发布由 `.github/workflows/pages.yml` 负责，`site/` 由 workflow 上传）；启用后在 Actions 里手动跑一次 `Deploy Pages`；
 2. Settings → Branches：给 `main` 加保护（Require pull request + Require status checks 选 `CI`）；
-3. 打首版 tag：`git tag v0.7.1 && git push origin v0.7.1`（Release workflow 会校验三处版本一致并建 Release）；
+3. 打首版 tag：`git tag v0.7.2 && git push origin v0.7.2`（Release workflow 会校验三处版本一致并建 Release）；
 4. Release 页上传安装包（附件）。

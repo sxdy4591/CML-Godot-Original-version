@@ -88,6 +88,9 @@ public sealed class FactionPane : IPanel
             .Put("army_power", (state.data[22] / 10f).ToString("0.0"))
             .Put("policy_options", BuildPolicyOptions())
             .Put("pie", BuildPie())
+            // 饼图第六段: data[106] 是"满足现状者"的票数(不站任何派系), 提示里要单列
+            .Put("idle_seats", state.data[106])
+            .Put("seats_total", SeatsTotal(state))
             .Put("can_elect", ElectAvailable())
             .Put("can_econ", AllianceAvailable(false))
             .Put("can_mil", AllianceAvailable(true))
@@ -428,6 +431,14 @@ public sealed class FactionPane : IPanel
     }
 
     // 原版 Crushko.Repaint: 6 段累计终点角(度), -1 = 隐藏
+    // 饼图分母: 五党席位 + 满足现状者(原版 Crushko.Repaint 的 num)
+    static int SeatsTotal(GameState state)
+    {
+        var total = state.data[106];
+        foreach (var seats in state.party_number) total += seats;
+        return total;
+    }
+
     static List<object> BuildPie()
     {
         _crushko.Invoke("Repaint");

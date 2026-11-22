@@ -43,4 +43,10 @@ public static class AchievementCatalog
     }
 
     public static int Count => Numbers.Length;
+
+    // 原版成就图标走 Steam CDN(界面/弹窗共用); 空 hash 返回空串(自建成就用本地图)
+    public static string IconUrl(int index)
+        => string.IsNullOrEmpty(Icons[index])
+            ? ""
+            : "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/950740/" + Icons[index] + ".jpg";
 }

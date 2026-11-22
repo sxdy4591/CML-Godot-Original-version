@@ -1,6 +1,6 @@
 {
-  "version": "0.7.1",
+  "version": "0.7.2",
   "url": "https://github.com/sxdy4591/CML-Godot-Original-version/releases/latest",
-  "notes": "首个公开版本（BETA 结束）",
-  "published": "2026-11-21"
+  "notes": "0.7.2：快捷键体系重做（端游重绑修复 / 手机触屏面板 / 预算±5·±10 / 人口+1亿 / 金手指模式）、画面缩放适配方案、地图配色调色板。",
+  "published": "2026-11-22"
 }

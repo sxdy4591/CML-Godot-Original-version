@@ -11,21 +11,27 @@ public sealed class AchievementPane : IPanel
     public Dictionary<string, object> Snapshot()
     {
         var items = new List<object>(AchievementCatalog.Count);
-        for (var i = 0; i < AchievementCatalog.Count; i++)
+        // 已解锁的置顶: 分两遍追加, 组内保持目录顺序
+        for (var pass = 0; pass < 2; pass++)
         {
-            var number = AchievementCatalog.Numbers[i];
-            items.Add(new Dictionary<string, object>
+            for (var i = 0; i < AchievementCatalog.Count; i++)
             {
-                ["number"] = number,
-                ["title"] = AchievementCatalog.Titles[i],
-                // 目录里用 | 表示换行(原版文案的多行描述)
-                ["desc"] = AchievementCatalog.Descs[i].Replace("|", "\n"),
-                // 原版成就: 图标走网络(Steam CDN), 视图拿不到时保留默认图标;
-                // 自建成就(无 Steam hash): 用本地 res://assets/achievements/<编号>.png
-                ["icon"] = LocalIcon(number),
-                ["icon_url"] = IconUrl(AchievementCatalog.Icons[i]),
-                ["unlocked"] = AchievementCenter.Unlocked(number),
-            });
+                var number = AchievementCatalog.Numbers[i];
+                var unlocked = AchievementCenter.Unlocked(number);
+                if (unlocked != (pass == 0)) continue;
+                items.Add(new Dictionary<string, object>
+                {
+                    ["number"] = number,
+                    ["title"] = AchievementCatalog.Titles[i],
+                    // 目录里用 | 表示换行(原版文案的多行描述)
+                    ["desc"] = AchievementCatalog.Descs[i].Replace("|", "\n"),
+                    // 原版成就: 图标走网络(Steam CDN), 视图拿不到时保留默认图标;
+                    // 自建成就(无 Steam hash): 用本地 res://assets/achievements/<编号>.png
+                    ["icon"] = LocalIcon(number),
+                    ["icon_url"] = AchievementCatalog.IconUrl(i),
+                    ["unlocked"] = unlocked,
+                });
+            }
         }
         return new PanelSnapshot()
             .Put("items", items)
@@ -36,10 +42,6 @@ public sealed class AchievementPane : IPanel
 
     static string LocalIcon(int number) => "res://assets/achievements/" + number + ".png";
 
-    static string IconUrl(string hash)
-        => string.IsNullOrEmpty(hash)
-            ? ""
-            : "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/950740/" + hash + ".jpg";
 
     public void Act(string action, List<object> args)
         => throw new System.ArgumentOutOfRangeException(nameof(action), action, "成就面板没有动作");

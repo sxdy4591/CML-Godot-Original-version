@@ -1,0 +1,180 @@
+[gd_scene format=3 uid="uid://lk4bo1jwyl5v"]
+
+[ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="1_font"]
+[ext_resource type="Texture2D" uid="uid://d13jw6ini7wcs" path="res://assets/ui/外交/国家互动按钮背景.png" id="2_bgbtn"]
+[ext_resource type="Script" uid="uid://buhwv4wdtgvy7" path="res://scenes/设置/外观页.gd" id="3_look"]
+
+[sub_resource type="Theme" id="Theme_look"]
+default_font = ExtResource("1_font")
+
+[node name="外观页" type="Control" unique_id=2094805094]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_look")
+script = ExtResource("3_look")
+
+[node name="滚动" type="ScrollContainer" parent="." unique_id=1665397085]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 588.0
+offset_top = 218.0
+offset_right = -414.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="列表" type="VBoxContainer" parent="滚动" unique_id=1140880426]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="组画面" type="Label" parent="滚动/列表" unique_id=1488605712]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+text = "画面缩放"
+
+[node name="StretchRow" type="HBoxContainer" parent="滚动/列表" unique_id=1325083198]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/StretchRow" unique_id=1810346869]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "缩放适配方案"
+
+[node name="StretchPrev" type="Button" parent="滚动/列表/StretchRow" unique_id=1808978553]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "◀"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="StretchValue" type="Label" parent="滚动/列表/StretchRow" unique_id=2127058709]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "拉伸铺满"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StretchNext" type="Button" parent="滚动/列表/StretchRow" unique_id=1649385346]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "▶"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="组配色" type="Label" parent="滚动/列表" unique_id=1058905781]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+text = "通用配色"
+
+[node name="MapTintRow" type="HBoxContainer" parent="滚动/列表" unique_id=1218214460]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/MapTintRow" unique_id=1618172935]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "地图高亮乘色"
+
+[node name="MapTintPicker" type="ColorPickerButton" parent="滚动/列表/MapTintRow" unique_id=2139657373]
+custom_minimum_size = Vector2(260, 48)
+layout_mode = 2
+edit_alpha = false
+
+[node name="OceanRow" type="HBoxContainer" parent="滚动/列表" unique_id=1958815813]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/OceanRow" unique_id=1866308959]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "海洋颜色"
+
+[node name="OceanPicker" type="ColorPickerButton" parent="滚动/列表/OceanRow" unique_id=1682935092]
+custom_minimum_size = Vector2(260, 48)
+layout_mode = 2
+edit_alpha = false
+
+[node name="组意识形态" type="Label" parent="滚动/列表" unique_id=444501402]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+text = "政府类型配色（体制）"
+
+[node name="意识形态配色" type="VBoxContainer" parent="滚动/列表" unique_id=383374970]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="组经济" type="Label" parent="滚动/列表" unique_id=378104858]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+text = "经济模式配色（联盟与贸易）"
+
+[node name="经济配色" type="VBoxContainer" parent="滚动/列表" unique_id=1394279353]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="组军事" type="Label" parent="滚动/列表" unique_id=1621877252]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+text = "军事模式配色（条约组织）"
+
+[node name="军事配色" type="VBoxContainer" parent="滚动/列表" unique_id=242862090]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="组影响" type="Label" parent="滚动/列表" unique_id=1475989171]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+text = "影响模式配色（势力范围）"
+
+[node name="影响配色" type="VBoxContainer" parent="滚动/列表" unique_id=1267662518]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="组操作" type="Label" parent="滚动/列表" unique_id=82241888]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+text = "操作"
+
+[node name="重置外观" type="Button" parent="滚动/列表" unique_id=1117957594]
+custom_minimum_size = Vector2(300, 56)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "本页恢复默认"
+icon = ExtResource("2_bgbtn")
+flat = true
+icon_alignment = 1
+expand_icon = true
