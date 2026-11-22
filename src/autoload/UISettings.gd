@@ -87,8 +87,11 @@ func set_int(key: String, v: int) -> void:
 	_cfg.save("user://playerprefs.ini")
 
 # 擦掉一条设置: 快捷键恢复默认要回到"从没设置过"(缺省走逻辑层默认键), 写 0 不等价
+# 键不存在时 ConfigFile.erase_section_key 会刷一条警告(恢复默认会连擦 16 个默认键), 先看有没有
 func erase(key: String) -> void:
 	_cfg.load("user://playerprefs.ini")
+	if not _cfg.has_section_key("ui", key):
+		return
 	_cfg.erase_section_key("ui", key)
 	_cfg.save("user://playerprefs.ini")
 

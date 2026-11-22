@@ -209,14 +209,20 @@ func 导入专辑包(源: String) -> String:
 		# 每 8 个条目让一帧: 进度条要真的动, 又不能一个文件等一帧把大包拖慢
 		if 已处理 % 8 == 0:
 			await get_tree().process_frame
-		if 文件.ends_with("/"):
+		# zip 规范用 /, 但 Windows 上部分打包工具写的是 \, 统一成 / 再拼路径
+		var 条目路径 := 文件.replace("\\", "/")
+		if 条目路径.ends_with("/"):
 			continue
-		var 相对 := 文件.trim_prefix(顶层 + "/") if 顶层 != "" else 文件
+		var 相对 := 条目路径.trim_prefix(顶层 + "/") if 顶层 != "" else 条目路径
 		if 相对.is_absolute_path() or 相对.contains(".."):
 			continue
 		var 目的 := 目标.path_join(相对)
 		DirAccess.make_dir_recursive_absolute(目的.get_base_dir())
 		var f := FileAccess.open(目的, FileAccess.WRITE)
+		if f == null:
+			zip.close()
+			DirAccess.remove_absolute(临时)
+			return "写入失败（%s）：%s" % [error_string(FileAccess.get_open_error()), 目的]
 		f.store_buffer(zip.read_file(文件))
 		f.close()
 		写入 += 1
@@ -231,9 +237,10 @@ func 导入专辑包(源: String) -> String:
 func _单一顶层目录(条目: PackedStringArray) -> String:
 	var 顶层 := ""
 	for 文件 in 条目:
-		if 文件.ends_with("/"):
+		var 条目路径 := 文件.replace("\\", "/")
+		if 条目路径.ends_with("/"):
 			continue
-		var 段 := 文件.split("/")
+		var 段 := 条目路径.split("/")
 		if 段.size() < 2:
 			return ""
 		if 顶层 == "":
