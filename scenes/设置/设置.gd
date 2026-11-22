@@ -546,7 +546,8 @@ func _refresh_cycle(key: String, _lo: int, def: int, fmt: Callable) -> void:
 ## 0=基础/音乐, 1=自定义。隐藏/显示除常驻外的整组子节点(不改场景文件布局)。
 func _switch_page(page: int) -> void:
 	_page = page
-	var keep := ["背景层", "页导航", "自定义页", "快捷键页", "外观页", "返回", "恢复默认"]
+	# 导入弹窗层必须常驻: 它默认 visible=false, 掉进下面的"非本页就隐藏"分支会被设成 true 全屏挡住界面
+	var keep := ["背景层", "页导航", "自定义页", "快捷键页", "外观页", "返回", "恢复默认", "导入弹窗层"]
 	for child in get_children():
 		if child.name == "自定义页":
 			child.visible = page == 1
