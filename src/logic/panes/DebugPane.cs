@@ -11,6 +11,10 @@ public sealed class DebugPane : IPanel
 {
     public string Name => "调试";
 
+    // 事件选项前置条件开关: 开启后 EventPane 忽略原版 VariantsOfEvents 里被 Destroy 掉的选项,
+    // 全部按可点展示; 结算仍走事件类自己的 ResultsOfEvents, 文案由原版给出.
+    public static bool ForceEventOptions;
+
     static readonly List<object> Lines = new();
 
     static void Log(string text)
@@ -76,6 +80,10 @@ public sealed class DebugPane : IPanel
             case "events":
             case "list_events":
                 Events(p);
+                break;
+            case "evopt":
+                ForceEventOptions = int.Parse(p[1]) != 0;
+                Log($"事件选项前置条件限制 = {(ForceEventOptions ? "已解除(所有选项都能点)" : "恢复默认")}");
                 break;
             case "money":
             case "party":
@@ -498,6 +506,7 @@ public sealed class DebugPane : IPanel
         Log("event n                    强制触发事件(切事件场景)");
         Log("event n 选项               触发并立即按原版结算该选项");
         Log("events [起始号] [关键字]   检索事件正文(每次 30 个)");
+        Log("evopt 0|1                  事件选项无视前置条件(1=所有选项都能点, 结果仍走原版结算)");
         Log("kill 人物                  杀死政治人物");
         Log("pol list | pol 人物 | pol 人物 字段 值 | pol names1|names2 [起始]");
         Log("doctr                      查看当前政体政策");

@@ -157,6 +157,22 @@ public partial class UiBridge : Node
     // 自动存档目标槽(0=关闭): 存档界面的行按钮设定后由 GDScript 落盘, 进游玩场景时推回来
     public void set_auto_slot(int slot) => GameHost.SetAutoSlot(slot);
 
+    // 专辑包: 条目名按 zip 规范解码(有 UTF-8 标志用 UTF-8, 否则 GBK), 解压与进度仍由 GDScript 做.
+    // Godot 的 ZIPReader 只会按 UTF-8 解条目名, Windows 下 GBK 打包的音乐包会整片乱码.
+    public Godot.Collections.Array zip_entry_names(string path)
+    {
+        var result = new Godot.Collections.Array();
+        foreach (var name in AlbumImport.EntryNames(path)) result.Add(name);
+        return result;
+    }
+
+    // 解压 zip 里第 index 个条目到目标路径(条目名编码问题在逻辑层处理, 不走 Godot 的 ZIPReader)
+    public void zip_extract_entry(string zip, int index, string target)
+        => AlbumImport.ExtractEntry(zip, index, target);
+
+    // 读 text 文件: 按 UTF-8 严格校验, 失败则 GBK(专辑 info.json 常见 GBK)
+    public string read_text(string path) => AlbumImport.ReadText(path);
+
     // 成就提示弹窗只需标题/描述: 桥层做一次查表转发, 不让视图去拉整页快照.
     public Godot.Collections.Array achievement_text(int number)
     {

@@ -1498,6 +1498,7 @@ theme_override_constants/separation = 16
 [node name="标题" type="Label" parent="导入弹窗层/居中/专辑导入弹窗/边距/布局" unique_id=398409407]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
 text = "正在解压专辑包…"
 horizontal_alignment = 1
@@ -1506,9 +1507,11 @@ autowrap_mode = 3
 [node name="专辑导入进度" type="ProgressBar" parent="导入弹窗层/居中/专辑导入弹窗/边距/布局" unique_id=1071057785]
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="专辑导入进度文字" type="Label" parent="导入弹窗层/居中/专辑导入弹窗/边距/布局" unique_id=1461048288]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "正在读取压缩包…"
 horizontal_alignment = 1

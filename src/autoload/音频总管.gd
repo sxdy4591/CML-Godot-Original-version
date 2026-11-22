@@ -106,6 +106,9 @@ func _专辑根目录列表() -> Array[String]:
 
 func _候选外置专辑根目录() -> Array[String]:
 	var 结果: Array[String] = []
+	# 导入落点排第一: 导入与扫描必须是同一个根, 否则会出现"导进去了却看不见".
+	# 编辑器里跑时 exe 是 Godot 编辑器、res:// 是项目目录, 两个根不是一回事.
+	结果.append(_导入专辑根())
 	var exe_dir := OS.get_executable_path().get_base_dir()
 	var project_dir := ProjectSettings.globalize_path("res://")
 	for 名 in 外置专辑根目录名候选:
@@ -174,6 +177,7 @@ func _扫描专辑() -> void:
 const 安卓外部专辑根 := "/storage/emulated/0"
 
 signal 专辑导入进度(已: int, 总: int)
+signal 专辑导入完成(消息: String)
 
 func _导入专辑根() -> String:
 	if OS.get_name() == "Android":
@@ -187,57 +191,63 @@ func 导入专辑包(源: String) -> String:
 	# ZIPReader 只认可以随机读的普通路径; 落盘也用 FileAccess, 两种来源都覆盖.
 	var 数据 := FileAccess.get_file_as_bytes(源)
 	if 数据.is_empty():
-		return "读取失败：%s" % 源
+		return _结束("读取失败：%s" % 源)
 	var 临时 := "user://专辑导入.zip"
 	var 临时文件 := FileAccess.open(临时, FileAccess.WRITE)
 	临时文件.store_buffer(数据)
 	临时文件.close()
-	var zip := ZIPReader.new()
-	if zip.open(临时) != OK:
+	# 条目名与内容都交给逻辑层: Godot 的 ZIPReader 一律按 UTF-8 解条目名,
+	# Windows 下 GBK 打包的包会整片乱码, 还会刷一屏 Unicode parsing error.
+	var 名表: Array = UiBridge.zip_entry_names(ProjectSettings.globalize_path(临时))
+	if 名表.is_empty():
 		DirAccess.remove_absolute(临时)
-		return "不是有效的 zip 压缩包"
-	var 条目 := zip.get_files()
-	var 顶层 := _单一顶层目录(条目)
+		return _结束("不是有效的 zip 压缩包")
+	var 顶层 := _单一顶层目录(名表)
+	var 导入根 := _导入专辑根()
 	var 名 := 顶层 if 顶层 != "" else 源.get_file().get_basename()
-	var 目标 := _导入专辑根().path_join(名)
+	# 压缩包最外层目录与专辑根同名(都叫「专辑」)时, 那层只是容器:
+	# 剥掉它直接落到根下, 否则会变成 专辑/专辑/古风DJ 的套娃.
+	var 剥顶层 := 顶层 != "" and 顶层 == 导入根.get_file()
+	var 目标 := 导入根 if 剥顶层 else 导入根.path_join(名)
 	DirAccess.make_dir_recursive_absolute(目标)
 	var 写入 := 0
-	var 已处理 := 0
-	for 文件 in 条目:
-		已处理 += 1
-		专辑导入进度.emit(已处理, 条目.size())
-		# 每 8 个条目让一帧: 进度条要真的动, 又不能一个文件等一帧把大包拖慢
-		if 已处理 % 8 == 0:
-			await get_tree().process_frame
-		# zip 规范用 /, 但 Windows 上部分打包工具写的是 \, 统一成 / 再拼路径
-		var 条目路径 := 文件.replace("\\", "/")
+	# 一个包里可以有多个专辑(专辑/古风DJ/…、专辑/红色浪潮/…): 按相对路径首段收集, 完成时逐个报名字.
+	var 专辑集 := {}
+	for i in 名表.size():
+		var 条目路径: String = 名表[i]
 		if 条目路径.ends_with("/"):
 			continue
 		var 相对 := 条目路径.trim_prefix(顶层 + "/") if 顶层 != "" else 条目路径
 		if 相对.is_absolute_path() or 相对.contains(".."):
 			continue
+		var 段 := 相对.split("/")
+		var 首段: String = 段[0] if 段.size() > 1 else 名
+		专辑集[首段] = true
 		var 目的 := 目标.path_join(相对)
-		DirAccess.make_dir_recursive_absolute(目的.get_base_dir())
-		var f := FileAccess.open(目的, FileAccess.WRITE)
-		if f == null:
-			zip.close()
-			DirAccess.remove_absolute(临时)
-			return "写入失败（%s）：%s" % [error_string(FileAccess.get_open_error()), 目的]
-		f.store_buffer(zip.read_file(文件))
-		f.close()
+		UiBridge.zip_extract_entry(ProjectSettings.globalize_path(临时), i, 目的)
 		写入 += 1
-	zip.close()
+		专辑导入进度.emit(i + 1, 名表.size())
+		# 一条一帧: 进度条按真实条目走, 大包也不会卡住界面
+		await get_tree().process_frame
 	DirAccess.remove_absolute(临时)
 	if 写入 == 0:
-		return "压缩包里没有可导入的文件"
-	重新扫描专辑(目标)
-	return "已导入专辑「%s」（%d 个文件）→ %s" % [名, 写入, 目标]
+		return _结束("压缩包里没有可导入的文件")
+	重新扫描专辑(目标 if not 剥顶层 else "")
+	var 名单 := ""
+	for 专辑名 in 专辑集:
+		名单 += "「%s」" % 专辑名
+	return _结束("已导入%s（%d 个文件）→ %s" % [名单, 写入, 目标])
+
+## 导入结束统一出口: 设置页切走/被释放后, 这里只发信号, 不再回调已释放的界面节点.
+func _结束(消息: String) -> String:
+	专辑导入完成.emit(消息)
+	return 消息
 
 ## zip 里所有文件都在同一个顶层目录下时返回该目录名(专辑包常见结构), 否则返回 "".
-func _单一顶层目录(条目: PackedStringArray) -> String:
+func _单一顶层目录(名表: Array) -> String:
 	var 顶层 := ""
-	for 文件 in 条目:
-		var 条目路径 := 文件.replace("\\", "/")
+	for 文件 in 名表:
+		var 条目路径: String = 文件
 		if 条目路径.ends_with("/"):
 			continue
 		var 段 := 条目路径.split("/")
@@ -296,31 +306,12 @@ func _扫描目录曲目(目录: String) -> Dictionary:
 				continue
 			paths.append(p)
 			names.append(_解析曲目名(条目元素, p))
-		return {"paths": paths, "names": names}
-	# 回退: 扫描目录内音频文件
-	var dir := DirAccess.open(目录)
-	if dir == null:
-		return {"paths": paths, "names": names}
-	dir.list_dir_begin()
-	var f := dir.get_next()
-	while f != "":
-		if not f.begins_with("."):
-			var lower := f.to_lower()
-			var 已加 := false
-			for ext in 音频扩展名:
-				if lower.ends_with(ext):
-					paths.append(目录.path_join(f))
-					names.append(f.get_basename())
-					已加 = true
-					break
-			if not 已加 and lower.ends_with(".import"):
-				var src := f.trim_suffix(".import")
-				var src_path := 目录.path_join(src)
-				if _是音频(src_path) and not paths.has(src_path):
-					paths.append(src_path)
-					names.append(src.get_basename())
-		f = dir.get_next()
-	dir.list_dir_end()
+		# info.json 的曲目表一个都对不上磁盘(改名/子目录/编码不一致)时不能就此判成空专辑,
+		# 继续按目录递归扫, 否则整张专辑被静默跳过
+		if not paths.is_empty():
+			return {"paths": paths, "names": names}
+	# 回退: 递归扫描目录内音频文件
+	_递归收集音频(目录, paths, names)
 	# 路径/曲目名配对同步排序(原实现只排路径, 会导致列表错位)
 	var pairs: Array = []
 	for i in paths.size():
@@ -333,6 +324,36 @@ func _扫描目录曲目(目录: String) -> Dictionary:
 		paths.append(p[0])
 		names.append(p[1])
 	return {"paths": paths, "names": names}
+
+## 递归收集音频: 音乐包常见结构是 顶层专辑目录/子目录(如 古风DJ)/歌.mp3,
+## 只扫一层会把这些专辑判成空目录直接跳过 —— 表现为"导入完加载不了".
+func _递归收集音频(目录: String, paths: Array[String], names: Array[String]) -> void:
+	var dir := DirAccess.open(目录)
+	if dir == null:
+		return
+	dir.list_dir_begin()
+	var f := dir.get_next()
+	while f != "":
+		if not f.begins_with("."):
+			if dir.current_is_dir():
+				_递归收集音频(目录.path_join(f), paths, names)
+			else:
+				var lower := f.to_lower()
+				var 已加 := false
+				for ext in 音频扩展名:
+					if lower.ends_with(ext):
+						paths.append(目录.path_join(f))
+						names.append(f.get_basename())
+						已加 = true
+						break
+				if not 已加 and lower.ends_with(".import"):
+					var src := f.trim_suffix(".import")
+					var src_path := 目录.path_join(src)
+					if _是音频(src_path) and not paths.has(src_path):
+						paths.append(src_path)
+						names.append(src.get_basename())
+		f = dir.get_next()
+	dir.list_dir_end()
 
 func _读专辑名(目录: String) -> String:
 	var info := _读信息json(目录)
@@ -347,7 +368,15 @@ func _读信息json(目录: String) -> Dictionary:
 		var path := 目录.path_join(f)
 		if not FileAccess.file_exists(path):
 			continue
-		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+		# info.json 可能是 GBK(Windows 压缩软件常见), 经逻辑层按 UTF-8/GBK 解码后再解析;
+		# 直接用 FileAccess.get_file_as_string 会刷一屏 Unicode parsing error 且解析失败.
+		# res:// 是打包进 pck 的内置资源, C# 按文件路径读不到, 仍走 FileAccess(内置表本来就是 UTF-8).
+		var 文本: String
+		if path.begins_with("res://"):
+			文本 = FileAccess.get_file_as_string(path)
+		else:
+			文本 = UiBridge.read_text(ProjectSettings.globalize_path(path) if path.begins_with("user://") else path)
+		var parsed: Variant = JSON.parse_string(文本)
 		if parsed is Dictionary:
 			return parsed
 	return {}
@@ -632,6 +661,30 @@ func _查找专辑图片(目录: String, pressed: bool) -> Texture2D:
 			候选.append("cover" + ext)
 	for f in 候选:
 		var tex := _加载图片(目录.path_join(f))
+		if tex != null:
+			return tex
+	# 封面常放在子目录里(专辑/子专辑/封面.jpg): 根目录没有就逐层往下找
+	return _子目录找图片(目录, 候选)
+
+func _子目录找图片(目录: String, 候选: Array[String]) -> Texture2D:
+	var dir := DirAccess.open(目录)
+	if dir == null:
+		return null
+	var 子目录们: Array[String] = []
+	dir.list_dir_begin()
+	var f := dir.get_next()
+	while f != "":
+		if not f.begins_with(".") and dir.current_is_dir():
+			子目录们.append(目录.path_join(f))
+		f = dir.get_next()
+	dir.list_dir_end()
+	for 子 in 子目录们:
+		for 名 in 候选:
+			var tex := _加载图片(子.path_join(名))
+			if tex != null:
+				return tex
+	for 子 in 子目录们:
+		var tex := _子目录找图片(子, 候选)
 		if tex != null:
 			return tex
 	return null

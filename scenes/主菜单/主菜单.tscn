@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://b76re6t5t0oiv" path="res://assets/ui/theme/font.ttf" id="2_i5hij"]
 [ext_resource type="Texture2D" uid="uid://dyguj0ay7w44n" path="res://assets/ui/主菜单/主菜单按钮.png" id="2_ngrxy"]
 [ext_resource type="Texture2D" uid="uid://vcsjiyi2j6yf" path="res://assets/ui/主菜单/menyu_fon.png" id="2_psws0"]
-[ext_resource type="PackedScene" path="res://scenes/成就/成就.tscn" id="3_ach"]
+[ext_resource type="PackedScene" uid="uid://c6vpmp3dg26ba" path="res://scenes/成就/成就.tscn" id="3_ach"]
 
 [node name="Control" type="Control" unique_id=1650672303]
 layout_mode = 3
@@ -176,8 +176,9 @@ icon_alignment = 1
 expand_icon = true
 metadata/_edit_use_anchors_ = true
 
-[node name="成就界面" parent="." instance=ExtResource("3_ach")]
+[node name="成就界面" parent="." unique_id=709130981 instance=ExtResource("3_ach")]
 visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="开始" to="." method="_on_开始游戏_pressed"]
 [connection signal="pressed" from="关于" to="." method="_on_关于_pressed"]

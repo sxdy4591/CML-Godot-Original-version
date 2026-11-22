@@ -82,7 +82,9 @@ public sealed class EventPane : IPanel
             options.Add(new Dictionary<string, object>
             {
                 ["text"] = fake[i],
-                ["enabled"] = !buttons[i].Destroyed,
+                // 控制台 evopt 1: 忽略原版对不满足前置条件选项的 Destroy, 全部当可点;
+                // 文案与结算仍取事件类自己的 VariantsOfEvents/ResultsOfEvents, 不另写规则.
+                ["enabled"] = DebugPane.ForceEventOptions || !buttons[i].Destroyed,
             });
         }
 

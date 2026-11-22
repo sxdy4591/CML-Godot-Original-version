@@ -188,6 +188,9 @@ const 专辑每页 := 9
 ## 曲目槽个数(左1..20 + 右1..20)
 const 曲目槽上限 := 40
 var _专辑页: int = 0
+var _audio: Node
+var _进度回调: Callable
+var _完成回调: Callable
 
 func _bind_music() -> void:
 	var audio := get_node("/root/AudioSys")
@@ -237,37 +240,49 @@ func _bind_music() -> void:
 	var 导入对话框 := find_child("专辑包对话框", true, false) as FileDialog
 	var 弹窗层 := find_child("导入弹窗层", true, false) as Control
 	var 弹窗 := find_child("专辑导入弹窗", true, false) as PanelContainer
+	_audio = audio
 	导入按钮.pressed.connect(func() -> void: 导入对话框.popup_centered_ratio(0.7))
 	导入对话框.file_selected.connect(_专辑包已选中)
 	(弹窗.get_node("边距/布局/关闭") as BaseButton).pressed.connect(func() -> void: 弹窗层.visible = false)
-	audio.专辑导入进度.connect(func(已: int, 总: int) -> void:
+	# 进度/完成用命名回调: 导入是后台协程, 玩家切走设置页时必须能在 _exit_tree 里断开,
+	# 否则信号继续打到已释放的界面节点上(Lambda capture ... was freed).
+	_进度回调 = func(已: int, 总: int) -> void:
 		var 进度条 := 弹窗.get_node("边距/布局/专辑导入进度") as ProgressBar
 		var 进度文字 := 弹窗.get_node("边距/布局/专辑导入进度文字") as Label
 		进度条.max_value = 总
 		进度条.value = 已
-		进度文字.text = "正在解压 %d / %d" % [已, 总])
+		进度文字.text = "正在解压 %d / %d" % [已, 总]
+	audio.专辑导入进度.connect(_进度回调)
+	_完成回调 = func(消息: String) -> void:
+		var 标题 := 弹窗.get_node("边距/布局/标题") as Label
+		var 进度条 := 弹窗.get_node("边距/布局/专辑导入进度") as ProgressBar
+		var 关闭 := 弹窗.get_node("边距/布局/关闭") as BaseButton
+		进度条.value = 进度条.max_value
+		(弹窗.get_node("边距/布局/专辑导入进度文字") as Label).text = ""
+		标题.text = 消息
+		关闭.disabled = false
+		(find_child("导入结果", true, false) as Label).text = 消息
+		_refresh_track_slots()
+		# 导入完成会切到新专辑: 翻到它所在的专辑页, 否则看起来像"没导入"
+		_跳到播放中专辑所在页()
+	audio.专辑导入完成.connect(_完成回调)
+
+func _exit_tree() -> void:
+	if _进度回调.is_valid():
+		_audio.专辑导入进度.disconnect(_进度回调)
+	if _完成回调.is_valid():
+		_audio.专辑导入完成.disconnect(_完成回调)
 
 func _专辑包已选中(路径: String) -> void:
-	var audio := get_node("/root/AudioSys")
 	var 弹窗层 := find_child("导入弹窗层", true, false) as Control
 	var 弹窗 := find_child("专辑导入弹窗", true, false) as PanelContainer
-	var 标题 := 弹窗.get_node("边距/布局/标题") as Label
-	var 进度条 := 弹窗.get_node("边距/布局/专辑导入进度") as ProgressBar
-	var 进度文字 := 弹窗.get_node("边距/布局/专辑导入进度文字") as Label
-	var 关闭 := 弹窗.get_node("边距/布局/关闭") as BaseButton
-	标题.text = "正在解压专辑包…"
-	进度条.value = 0
-	进度文字.text = "正在读取压缩包…"
-	关闭.disabled = true
+	(弹窗.get_node("边距/布局/标题") as Label).text = "正在解压专辑包…"
+	(弹窗.get_node("边距/布局/专辑导入进度") as ProgressBar).value = 0
+	(弹窗.get_node("边距/布局/专辑导入进度文字") as Label).text = "正在读取压缩包…"
+	(弹窗.get_node("边距/布局/关闭") as BaseButton).disabled = true
 	弹窗层.visible = true
-	var 结果: String = await audio.导入专辑包(路径)
-	进度条.value = 进度条.max_value
-	进度文字.text = ""
-	标题.text = 结果
-	关闭.disabled = false
-	(find_child("导入结果", true, false) as Label).text = 结果
-	_refresh_track_slots()
-	_refresh_album_slots()
+	# 不 await: 导入在音频总管这个常驻单例里跑完, 用 专辑导入完成 信号回界面
+	_audio.导入专辑包(路径)
 
 ## 进入设置时翻到"正在播放的专辑"所在页(照搬改版 设置.gd _初始化专辑页码)
 func _跳到播放中专辑所在页() -> void:
@@ -311,7 +326,6 @@ func _refresh_album_slots() -> void:
 			slot.visible = true
 			var btn := slot.get_node("专辑按钮") as TextureButton
 			var icon: Texture2D = audio.获取专辑封面(索引)
-			print("[封面调试] 索引=", 索引, " icon=", icon, " 尺寸=", icon.get_size() if icon else Vector2.ZERO)
 			if icon:
 				btn.texture_normal = icon
 			# 当前播放专辑高亮, 其余压暗(槽无独立高亮资源, 用 modulate 区分)
