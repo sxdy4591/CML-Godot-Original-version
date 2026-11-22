@@ -158,6 +158,9 @@ public sealed class DebugPane : IPanel
             case "faction":
                 Faction(state);
                 break;
+            case "fac":
+                FactionEdit(state, p);
+                break;
             case "mods":
                 LogMods(state);
                 break;
@@ -500,6 +503,9 @@ public sealed class DebugPane : IPanel
         Log("doctr                      查看当前政体政策");
         Log("doctr 槽位 值              直接改写(15政体 16经济 17言论 18结构 50宗教 51军事 52战略)");
         Log("doctrs                     列出每个槽位的可选值");
+        Log("fac                        派系诊断(席位/领袖/执政/联盟)");
+        Log("fac seats 派系 值           改席位 party_number（0极左 1保守 2温和 3改革 4自由）");
+        Log("fac leader 派系 人物号      改派系领袖 faction_leader");
         Log("part 国家 下标 on|off | parts 国家 | map | highlight 国家 | faction");
         Log("save 槽位 | load 槽位 | cheat 0-12 | gold | pop | key 动作号");
         Log("mods | achreset | audio");
@@ -569,6 +575,10 @@ public sealed class DebugPane : IPanel
         for (var i = 0; i < state.party_number.Length; i++)
             席位 += $" [{i}]{state.party_number[i]}{(state.is_party_enabled[i] ? "" : "(未启用)")}{(state.is_party_ally[i] ? "(盟友)" : "")}";
         Log($"data[15]={state.data[15]} 执政=data[56]={state.data[56]} 满足现状=data[106]={state.data[106]} |{席位}");
+        var 领袖 = "";
+        for (var i = 0; i < state.faction_leader.Length; i++)
+            领袖 += $" [{i}]{(state.faction_leader[i] < state.politics.Length ? PoliticianName(state, state.faction_leader[i]) : "空缺")}";
+        Log($"派系领袖:{领袖}");
         var 最大 = 0;
         for (var i = 1; i < state.party_number.Length; i++)
             if (state.party_number[i] > state.party_number[最大]) 最大 = i;
@@ -576,6 +586,25 @@ public sealed class DebugPane : IPanel
         for (var i = 0; i < state.is_party_ally.Length; i++)
             if (state.is_party_ally[i] && state.is_party_enabled[i] && i != 1) 联盟 += state.party_number[i];
         Log($"单党最多={最大}({state.party_number[最大]}) 派系1+盟友={联盟} 宪法多数={state.is_konst_max}");
+    }
+
+    // 派系只开两个写入口: 席位 party_number / 派系领袖 faction_leader(原版政治界面直接读它们).
+    // 派系号 = 界面行序 0极左 1保守 2温和 3改革 4自由(FactionPane.Snapshot 的 i).
+    static void FactionEdit(GameState state, string[] p)
+    {
+        if (p.Length == 1)
+        {
+            Faction(state);
+            return;
+        }
+        var index = int.Parse(p[2]);
+        switch (p[1])
+        {
+            case "seats": state.party_number[index] = int.Parse(p[3]); break;
+            case "leader": state.faction_leader[index] = int.Parse(p[3]); break;
+            default: throw new ArgumentOutOfRangeException(nameof(p), p[1], "派系只有 seats / leader");
+        }
+        Faction(state);
     }
 
     // ================= 作弊 =================
