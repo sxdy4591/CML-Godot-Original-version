@@ -1463,23 +1463,42 @@ offset_bottom = 833.12
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="专辑导入进度" type="ProgressBar" parent="." unique_id=2079549356]
-visible = false
-layout_mode = 0
-offset_left = 858.0
-offset_top = 92.0
-offset_right = 1238.0
-offset_bottom = 118.0
+[node name="专辑导入弹窗" type="PopupPanel" parent="." unique_id=1326518335]
+exclusive = true
 
-[node name="专辑导入进度文字" type="Label" parent="." unique_id=1973141567]
+[node name="布局" type="VBoxContainer" parent="专辑导入弹窗" unique_id=387378098]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 24.0
+offset_right = -28.0
+offset_bottom = -24.0
+theme_override_constants/separation = 14
+
+[node name="标题" type="Label" parent="专辑导入弹窗/布局" unique_id=1858883193]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "正在解压专辑包…"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="专辑导入进度" type="ProgressBar" parent="专辑导入弹窗/布局" unique_id=2079549356]
 visible = false
-layout_mode = 0
-offset_left = 858.0
-offset_top = 120.0
-offset_right = 1238.0
-offset_bottom = 150.0
+layout_mode = 2
+
+[node name="专辑导入进度文字" type="Label" parent="专辑导入弹窗/布局" unique_id=1973141567]
+visible = false
+layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
+
+[node name="关闭" type="Button" parent="专辑导入弹窗/布局" unique_id=407736122]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+disabled = true
+text = "关闭"
 
 [connection signal="pressed" from="返回" to="." method="_on_返回_pressed"]
 [connection signal="pressed" from="恢复默认" to="." method="_on_恢复默认_pressed"]
