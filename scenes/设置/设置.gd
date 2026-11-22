@@ -232,15 +232,32 @@ func _bind_music() -> void:
 	_refresh_track_slots()
 	_refresh_album_slots()
 	_跳到播放中专辑所在页()
-	# 专辑包导入: 打开系统文件管理器选 zip, 解压到 user://专辑/ 后重扫
+	# 专辑包导入: 打开系统文件管理器选 zip, 解压到 exe 同级 / 手机存储根的 专辑/ 后重扫
 	var 导入按钮 := find_child("导入专辑包", true, false) as BaseButton
 	var 导入对话框 := find_child("专辑包对话框", true, false) as FileDialog
+	var 进度条 := find_child("专辑导入进度", true, false) as ProgressBar
+	var 进度文字 := find_child("专辑导入进度文字", true, false) as Label
 	导入按钮.pressed.connect(func() -> void: 导入对话框.popup_centered_ratio(0.7))
 	导入对话框.file_selected.connect(_专辑包已选中)
+	audio.专辑导入进度.connect(func(已: int, 总: int) -> void:
+		进度条.max_value = 总
+		进度条.value = 已
+		进度文字.text = "正在解压 %d / %d" % [已, 总])
 
 func _专辑包已选中(路径: String) -> void:
 	var audio := get_node("/root/AudioSys")
-	var 结果: String = audio.导入专辑包(路径)
+	var 进度条 := find_child("专辑导入进度", true, false) as ProgressBar
+	var 进度文字 := find_child("专辑导入进度文字", true, false) as Label
+	var 导入按钮 := find_child("导入专辑包", true, false) as BaseButton
+	进度条.value = 0
+	进度条.visible = true
+	进度文字.text = "正在读取压缩包…"
+	进度文字.visible = true
+	导入按钮.disabled = true
+	var 结果: String = await audio.导入专辑包(路径)
+	进度条.visible = false
+	进度文字.visible = false
+	导入按钮.disabled = false
 	(find_child("导入结果", true, false) as Label).text = 结果
 	_refresh_track_slots()
 	_refresh_album_slots()

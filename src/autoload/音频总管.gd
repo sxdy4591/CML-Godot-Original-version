@@ -167,8 +167,20 @@ func _扫描专辑() -> void:
 
 ## ============================== 专辑导入 ==============================
 ## 专辑包 = 一个 zip: 里面直接放音频/封面/info.json, 或者只有一个顶层专辑目录.
-## 解压到 user://专辑/<专辑名>/ —— 这是 _候选外置专辑根目录 的首选根, 手机无需存储权限.
-const 导入专辑根 := "user://专辑"
+## 解压到玩家能自己看到、自己加歌的位置:
+##   桌面   = exe 同级 专辑/（与 数据/ 同一套外置策略, 玩家拷文件就能加）
+##   Android = /storage/emulated/0/专辑/（手机存储根, 文件管理器直接能看到）
+## 与 _候选外置专辑根目录() 的第一名一致, 导入完立刻被扫到.
+const 安卓外部专辑根 := "/storage/emulated/0"
+
+signal 专辑导入进度(已: int, 总: int)
+
+func _导入专辑根() -> String:
+	if OS.get_name() == "Android":
+		return 安卓外部专辑根.path_join(外置专辑根目录名候选[0])
+	if OS.has_feature("editor"):
+		return ProjectSettings.globalize_path("res://").path_join(外置专辑根目录名候选[0])
+	return OS.get_executable_path().get_base_dir().path_join(外置专辑根目录名候选[0])
 
 func 导入专辑包(源: String) -> String:
 	# 统一先落盘再解压: Android 的系统文件选择器给的是 content:// URI,
@@ -187,10 +199,16 @@ func 导入专辑包(源: String) -> String:
 	var 条目 := zip.get_files()
 	var 顶层 := _单一顶层目录(条目)
 	var 名 := 顶层 if 顶层 != "" else 源.get_file().get_basename()
-	var 目标 := 导入专辑根.path_join(名)
+	var 目标 := _导入专辑根().path_join(名)
 	DirAccess.make_dir_recursive_absolute(目标)
 	var 写入 := 0
+	var 已处理 := 0
 	for 文件 in 条目:
+		已处理 += 1
+		专辑导入进度.emit(已处理, 条目.size())
+		# 每 8 个条目让一帧: 进度条要真的动, 又不能一个文件等一帧把大包拖慢
+		if 已处理 % 8 == 0:
+			await get_tree().process_frame
 		if 文件.ends_with("/"):
 			continue
 		var 相对 := 文件.trim_prefix(顶层 + "/") if 顶层 != "" else 文件
@@ -207,7 +225,7 @@ func 导入专辑包(源: String) -> String:
 	if 写入 == 0:
 		return "压缩包里没有可导入的文件"
 	重新扫描专辑(目标)
-	return "已导入专辑「%s」（%d 个文件）" % [名, 写入]
+	return "已导入专辑「%s」（%d 个文件）→ %s" % [名, 写入, 目标]
 
 ## zip 里所有文件都在同一个顶层目录下时返回该目录名(专辑包常见结构), 否则返回 "".
 func _单一顶层目录(条目: PackedStringArray) -> String:
