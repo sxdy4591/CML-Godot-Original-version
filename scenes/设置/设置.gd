@@ -235,31 +235,31 @@ func _bind_music() -> void:
 	# 专辑包导入: 打开系统文件管理器选 zip, 解压到 exe 同级 / 手机存储根的 专辑/ 后重扫
 	var 导入按钮 := find_child("导入专辑包", true, false) as BaseButton
 	var 导入对话框 := find_child("专辑包对话框", true, false) as FileDialog
-	var 弹窗 := find_child("专辑导入弹窗", true, false) as PopupPanel
+	var 弹窗层 := find_child("导入弹窗层", true, false) as Control
+	var 弹窗 := find_child("专辑导入弹窗", true, false) as PanelContainer
 	导入按钮.pressed.connect(func() -> void: 导入对话框.popup_centered_ratio(0.7))
 	导入对话框.file_selected.connect(_专辑包已选中)
-	(弹窗.get_node("布局/关闭") as BaseButton).pressed.connect(弹窗.hide)
+	(弹窗.get_node("边距/布局/关闭") as BaseButton).pressed.connect(func() -> void: 弹窗层.visible = false)
 	audio.专辑导入进度.connect(func(已: int, 总: int) -> void:
-		var 进度条 := 弹窗.get_node("布局/专辑导入进度") as ProgressBar
-		var 进度文字 := 弹窗.get_node("布局/专辑导入进度文字") as Label
+		var 进度条 := 弹窗.get_node("边距/布局/专辑导入进度") as ProgressBar
+		var 进度文字 := 弹窗.get_node("边距/布局/专辑导入进度文字") as Label
 		进度条.max_value = 总
 		进度条.value = 已
 		进度文字.text = "正在解压 %d / %d" % [已, 总])
 
 func _专辑包已选中(路径: String) -> void:
 	var audio := get_node("/root/AudioSys")
-	var 弹窗 := find_child("专辑导入弹窗", true, false) as PopupPanel
-	var 标题 := 弹窗.get_node("布局/标题") as Label
-	var 进度条 := 弹窗.get_node("布局/专辑导入进度") as ProgressBar
-	var 进度文字 := 弹窗.get_node("布局/专辑导入进度文字") as Label
-	var 关闭 := 弹窗.get_node("布局/关闭") as BaseButton
+	var 弹窗层 := find_child("导入弹窗层", true, false) as Control
+	var 弹窗 := find_child("专辑导入弹窗", true, false) as PanelContainer
+	var 标题 := 弹窗.get_node("边距/布局/标题") as Label
+	var 进度条 := 弹窗.get_node("边距/布局/专辑导入进度") as ProgressBar
+	var 进度文字 := 弹窗.get_node("边距/布局/专辑导入进度文字") as Label
+	var 关闭 := 弹窗.get_node("边距/布局/关闭") as BaseButton
 	标题.text = "正在解压专辑包…"
 	进度条.value = 0
-	进度条.visible = true
 	进度文字.text = "正在读取压缩包…"
-	进度文字.visible = true
 	关闭.disabled = true
-	弹窗.popup_centered(Vector2i(640, 300))
+	弹窗层.visible = true
 	var 结果: String = await audio.导入专辑包(路径)
 	进度条.value = 进度条.max_value
 	进度文字.text = ""

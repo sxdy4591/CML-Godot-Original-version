@@ -1463,37 +1463,58 @@ offset_bottom = 833.12
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="专辑导入弹窗" type="PopupPanel" parent="." unique_id=1326518335]
-exclusive = true
-
-[node name="布局" type="VBoxContainer" parent="专辑导入弹窗" unique_id=387378098]
-anchors_preset = 15
+[node name="导入弹窗层" type="Control" parent="." unique_id=1925723117]
+visible = false
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 28.0
-offset_top = 24.0
-offset_right = -28.0
-offset_bottom = -24.0
-theme_override_constants/separation = 14
 
-[node name="标题" type="Label" parent="专辑导入弹窗/布局" unique_id=1858883193]
+[node name="遮罩" type="ColorRect" parent="导入弹窗层" unique_id=275580105]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.55)
+
+[node name="居中" type="CenterContainer" parent="导入弹窗层" unique_id=1832697218]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="专辑导入弹窗" type="PanelContainer" parent="导入弹窗层/居中" unique_id=276322169]
+custom_minimum_size = Vector2(680, 320)
+layout_mode = 2
+
+[node name="边距" type="MarginContainer" parent="导入弹窗层/居中/专辑导入弹窗" unique_id=248702131]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 26
+
+[node name="布局" type="VBoxContainer" parent="导入弹窗层/居中/专辑导入弹窗/边距" unique_id=1997266341]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="标题" type="Label" parent="导入弹窗层/居中/专辑导入弹窗/边距/布局" unique_id=398409407]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "正在解压专辑包…"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="专辑导入进度" type="ProgressBar" parent="专辑导入弹窗/布局" unique_id=2079549356]
-visible = false
+[node name="专辑导入进度" type="ProgressBar" parent="导入弹窗层/居中/专辑导入弹窗/边距/布局" unique_id=1071057785]
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 
-[node name="专辑导入进度文字" type="Label" parent="专辑导入弹窗/布局" unique_id=1973141567]
-visible = false
+[node name="专辑导入进度文字" type="Label" parent="导入弹窗层/居中/专辑导入弹窗/边距/布局" unique_id=1461048288]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
+text = "正在读取压缩包…"
+horizontal_alignment = 1
 
-[node name="关闭" type="Button" parent="专辑导入弹窗/布局" unique_id=407736122]
+[node name="关闭" type="Button" parent="导入弹窗层/居中/专辑导入弹窗/边距/布局" unique_id=409201604]
+custom_minimum_size = Vector2(220, 54)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 24
