@@ -13,6 +13,8 @@ public static class UiEvents
     public static event Action<string> EventMusicRequested;
     // 事件界面选项的键盘动作: 240..245 = 勾选选项 1..6, 246 = 上一个, 247 = 下一个
     public static event Action<int> EventShortcutRequested;
+    // 领土块/国家意识形态被改动: 地图着色与显隐要按新数据重取一次快照
+    public static event Action MapDirty;
 
     public static void RequestScene(string unitySceneName)
     {
@@ -28,4 +30,7 @@ public static class UiEvents
     public static void RequestEventMusic(string name) => EventMusicRequested?.Invoke(name);
 
     public static void RequestEventShortcut(int code) => EventShortcutRequested?.Invoke(code);
+
+    public static void RequestMapDirty() => MapDirty?.Invoke();
+
 }

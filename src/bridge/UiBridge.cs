@@ -26,6 +26,8 @@ public partial class UiBridge : Node
     const string RetireChangedSignal = "retire_changed";
     // 事件界面选项快捷键(逻辑层 ShortcutPane 240..247 的语义): 视图据此勾选/上下移动
     const string EventShortcutSignal = "event_shortcut";
+    // 领土块/国家意识形态被控制台改动: 地图按新数据重取一次快照
+    const string MapDirtySignal = "map_dirty";
 
     // 原版 TimeScript 只存在于外交场景(含地图模式); 其它界面里时间与事件倒计时都停
     const string DiplomacyScene = "res://scenes/外交/外交.tscn";
@@ -42,6 +44,7 @@ public partial class UiBridge : Node
         AddUserSignal(EventMusicSignal, new Godot.Collections.Array { "name" });
         AddUserSignal(RetireChangedSignal, new Godot.Collections.Array { "open" });
         AddUserSignal(EventShortcutSignal, new Godot.Collections.Array { "code" });
+        AddUserSignal(MapDirtySignal, new Godot.Collections.Array());
     }
 
     public override void _Ready()
@@ -52,6 +55,7 @@ public partial class UiBridge : Node
         UiEvents.UnhandledSceneRequested += OnUnhandledScene;
         UiEvents.EventMusicRequested += OnEventMusic;
         UiEvents.EventShortcutRequested += OnEventShortcut;
+        UiEvents.MapDirty += OnMapDirty;
         // 原版 SceneManager.LoadScene 的出口: compat 只发原始场景名, 由桥层转成场景请求
         UnityEngine.SceneManagement.SceneRouter.Requested += UiEvents.RequestScene;
         // 设置页的难度([ui] difficulty)必须在 Boot 之前落到原版的 our_diff_in,
@@ -70,6 +74,7 @@ public partial class UiBridge : Node
         UiEvents.UnhandledSceneRequested -= OnUnhandledScene;
         UiEvents.EventMusicRequested -= OnEventMusic;
         UiEvents.EventShortcutRequested -= OnEventShortcut;
+        UiEvents.MapDirty -= OnMapDirty;
         Instance = null;
     }
 
@@ -187,5 +192,6 @@ public partial class UiBridge : Node
     void OnToast(string text) => EmitSignal(ToastSignal, text);
     void OnEventMusic(string name) => EmitSignal(EventMusicSignal, name);
     void OnEventShortcut(int code) => EmitSignal(EventShortcutSignal, code);
+    void OnMapDirty() => EmitSignal(MapDirtySignal);
     void OnUnhandledScene(string name) => GD.PushError($"原版场景未映射: {name}");
 }

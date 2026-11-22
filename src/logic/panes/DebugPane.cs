@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using CML.Logic.Port;
 
 namespace CML.Logic.Panes;
 
@@ -70,9 +71,11 @@ public sealed class DebugPane : IPanel
                 Log($"速度 = {GameHost.Speed}");
                 break;
             case "event":
-                state.number_event = int.Parse(p[1]);
-                UiEvents.RequestScene("Event");
-                Log($"触发事件 {state.number_event}");
+                Event(state, p);
+                break;
+            case "events":
+            case "list_events":
+                Events(p);
                 break;
             case "money":
             case "party":
@@ -113,16 +116,30 @@ public sealed class DebugPane : IPanel
             case "list_wars":
                 ListWars(state);
                 break;
-            case "list_events":
-                ListEvents(state);
-                break;
+            case "terr":
             case "part":
-                var country = state.allcountries[int.Parse(p[1])];
-                country.parts[int.Parse(p[2])] = p.Length < 4 || p[3] != "off";
-                Log($"国家 {p[1]} parts[{p[2]}] = {country.parts[int.Parse(p[2])]}");
+                Territory(state, p);
                 break;
             case "parts":
                 Parts(state, int.Parse(p[1]));
+                break;
+            case "ideo":
+                Ideology(state, p);
+                break;
+            case "ideos":
+                Ideologies();
+                break;
+            case "doctr":
+                Doctrine(state, p);
+                break;
+            case "doctrs":
+                Doctrines(state);
+                break;
+            case "kill":
+                Kill(state, p);
+                break;
+            case "pol":
+                Politicians(state, p);
                 break;
             case "save":
                 Port.SaveService.Save(state, Port.SavePaths.Slot(int.Parse(p[1])));
@@ -193,24 +210,86 @@ public sealed class DebugPane : IPanel
         Log($"data[{slot}] = {state.data[slot]}（{state.data[slot] / 10f:0.0}）");
     }
 
-    static void ListWars(GameState state)
+    // ================= 强制触发事件 =================
+
+    // event 编号: 原版政策/按钮链在 number_event 里写的那个数(Event{N} 类名同号).
+    // 不带选项 = 照原版切进事件场景; 带选项 = 在此直接跑原版结算, 再跑原版结果页收尾.
+    static void Event(GameState state, string[] p)
     {
-        var going = new List<string>();
-        for (var i = 0; i < state.ingamewars.Length; i++)
+        var number = int.Parse(p[1]);
+        state.number_event = number;
+        if (p.Length == 2)
         {
-            if (state.ingamewars[i].is_going) going.Add(i + ":" + state.ingamewars[i].name_war);
+            UiEvents.RequestScene("Event");
+            Log($"触发事件 {number}");
+            return;
         }
-        Log(going.Count == 0 ? "没有进行中的战争" : string.Join("; ", going));
+        Settle(number, int.Parse(p[2]));
     }
 
-    static void ListEvents(GameState state)
+    static void Settle(int number, int choice)
     {
-        var count = 0;
+        PanelRouter.TryGet("事件", out var panel);
+        var events = (EventPane)panel;
+        events.Snapshot();
+        events.Act("选择", new List<object> { (long)choice });
+        Log($"事件 {number} 选项 {choice} 结算: {Short(events.Result)}");
+        events.Act("关闭", new List<object>());
+    }
+
+    // 事件文本只存在于 Event{N}.TextOfEvents 方法体里, 没有静态表; 检索只能实例化跑一次.
+    // 编号不连续(2000 槽里只存在一部分类), 所以先用类型名建一张编号表.
+    // 只收普通事件(EventsSecond 继承链): Event343 这类结局类没有 TextOfEvents 实现, 不在此列.
+    static readonly HashSet<int> EventNumbers = CollectEventNumbers();
+
+    static HashSet<int> CollectEventNumbers()
+    {
+        var set = new HashSet<int>();
         foreach (var type in typeof(Event1).Assembly.GetTypes())
         {
-            if (Regex.IsMatch(type.Name, "^Event[0-9]+$")) count++;
+            if (!typeof(EventsForDLC.EventsSecond).IsAssignableFrom(type)) continue;
+            var match = Regex.Match(type.Name, "^Event([0-9]+)$");
+            if (match.Success) set.Add(int.Parse(match.Groups[1].Value));
         }
-        Log($"事件类 {count} 个 | 当前 number_event = {state.number_event}");
+        return set;
+    }
+
+    static void Events(string[] p)
+    {
+        var start = p.Length > 1 ? int.Parse(p[1]) : 0;
+        var keyword = p.Length > 2 ? p[2] : "";
+        var end = start + 30;
+        var hit = 0;
+        for (var number = start; number < end; number++)
+        {
+            if (!EventNumbers.Contains(number)) continue;
+            var text = EventPane.TextOf(number);
+            if (keyword.Length > 0 && !text.Contains(keyword)) continue;
+            Log($"[{number}] {Short(text)}");
+            hit++;
+        }
+        Log($"事件 {start}..{end - 1} 命中 {hit} 条（events 起始号 关键字 继续翻）");
+    }
+
+    // ================= 领土块 =================
+
+    // 领土块 = 原版 Country.parts[]: 一块 = 地图上一块领土贴图.
+    // 改完标脏, 地图按新归属重算着色与显隐.
+    static void Territory(GameState state, string[] p)
+    {
+        var country = int.Parse(p[1]);
+        var parts = state.allcountries[country].parts;
+        if (p.Length == 2)
+        {
+            var on = new List<string>();
+            for (var i = 0; i < parts.Length; i++) if (parts[i]) on.Add(i.ToString());
+            Log($"{country} {state.allcountries[country].name} 领土块({parts.Length}): {(on.Count == 0 ? "无" : string.Join(",", on))}");
+            return;
+        }
+        var part = int.Parse(p[2]);
+        parts[part] = p[3] == "on" || p[3] == "1";
+        MapPane.Touch();
+        Log($"{country} parts[{part}] = {parts[part]}（地图已按新归属刷新）");
     }
 
     static void Parts(GameState state, int country)
@@ -221,19 +300,209 @@ public sealed class DebugPane : IPanel
         Log($"国家 {country} parts: {string.Join(",", on)}");
     }
 
+    // ================= 国家意识形态 =================
+
+    // 国体 = Country.Gosstroy(0威权/1社会主义/2改良主义/3自由主义, 见原版 PoliticalSystems 与 other_text 表);
+    // 意识形态 = Country.SubGosstroy(0..19, 原版 CountryScript.ChangeSubIcons 的 other_text 下标规则).
+    static void Ideology(GameState state, string[] p)
+    {
+        var country = state.allcountries[int.Parse(p[1])];
+        if (p.Length == 2)
+        {
+            Log($"{p[1]} {country.name} | 国体 {country.Gosstroy}={IdeologyText(country.Gosstroy)} | 意识形态 {country.SubGosstroy}={SubIdeologyText(country.SubGosstroy)} | 亲中 {country.proprc} 亲苏 {country.prosov} 亲美 {country.Vyshi}");
+            return;
+        }
+        country.SetSystem(int.Parse(p[2]));
+        if (p.Length > 3) country.SubGosstroy = int.Parse(p[3]);
+        MapPane.Touch();
+        Log($"{p[1]} 国体 {country.Gosstroy}={IdeologyText(country.Gosstroy)} 意识形态 {country.SubGosstroy}={SubIdeologyText(country.SubGosstroy)}");
+    }
+
+    static string IdeologyText(int gosstroy) => Clean(GameHost.Global.other_text[gosstroy]);
+
+    static string SubIdeologyText(int sub)
+        => Clean(GameHost.Global.other_text[sub < 10 ? sub + 13 : sub + 82]);
+
+    static void Ideologies()
+    {
+        var text = GameHost.Global.other_text;
+        var gosstroy = new List<string>();
+        for (var i = 0; i < 4; i++) gosstroy.Add($"{i}={Clean(text[i])}");
+        var sub = new List<string>();
+        for (var i = 0; i < 20; i++) sub.Add($"{i}={Clean(text[i < 10 ? i + 13 : i + 82])}");
+        Log("国体 Gosstroy: " + string.Join(" | ", gosstroy));
+        Log("意识形态 SubGosstroy: " + string.Join(" | ", sub));
+        Log("-> ideo 国家 [国体] [意识形态] 设置; 不给参数就是查看");
+    }
+
+    // ================= 政体政策 =================
+
+    // 7 个政策槽 = 原版 Doctrine_script 的 this_number(= GameState.data 下标),
+    // 每个槽的可选值 = 原版 Doctrine_script.Show(...) 里写死的那几个 doctr[] 下标.
+    static readonly (int Slot, int From, int To)[] DoctrineSlots =
+    {
+        (15, 6, 9),    // 政体
+        (16, 10, 15),  // 经济
+        (17, 16, 19),  // 言论
+        (18, 20, 23),  // 国家结构
+        (50, 24, 29),  // 宗教
+        (51, 30, 33),  // 军事
+        (52, 34, 37),  // 战略
+    };
+
+    static string DoctrineText(GameState state, int value) => Clean(state.doctr[value].Replace("|", ""));
+
+    static void Doctrine(GameState state, string[] p)
+    {
+        if (p.Length == 1)
+        {
+            var lines = new List<string>();
+            foreach (var slot in DoctrineSlots)
+                lines.Add($"[{slot.Slot}]={state.data[slot.Slot]} {DoctrineText(state, state.data[slot.Slot])}");
+            Log("当前政策: " + string.Join(" | ", lines));
+            return;
+        }
+        var index = int.Parse(p[1]);
+        state.data[index] = int.Parse(p[2]);
+        Log($"data[{index}] = {state.data[index]}（{DoctrineText(state, state.data[index])}）");
+    }
+
+    static void Doctrines(GameState state)
+    {
+        foreach (var slot in DoctrineSlots)
+        {
+            var options = new List<string>();
+            for (var value = slot.From; value <= slot.To; value++)
+                options.Add($"{value} {DoctrineText(state, value)}");
+            Log($"[{slot.Slot}] {string.Join(" / ", options)}");
+        }
+        Log("-> doctr 槽位 值 直接改写(跳过预算与前置条件)");
+    }
+
+    // ================= 政治人物 =================
+
+    // 原始库 KillPerson: 清职位(politics_dolshnost)/派系领袖/卡片排名, 再 BalancePolitic 重排.
+    static void Kill(GameState state, string[] p)
+    {
+        var who = int.Parse(p[1]);
+        state.KillPerson(who);
+        Log($"已杀死人物 {who}（{PoliticianName(state, who)}）: 职位/派系领袖/排名已按原版 KillPerson 清理");
+    }
+
+    static void Politicians(GameState state, string[] p)
+    {
+        if (p.Length == 1 || p[1] == "list")
+        {
+            for (var i = 0; i < state.politics.Length; i++)
+            {
+                var pol = state.politics[i];
+                Log($"[{i}] {PoliticianName(state, i)} 派系={PoliticTexts.Trait(pol.traits[0])} 权力={pol.power} 忠诚={pol.loyality} 年龄={pol.age} 职位={PostText(state, i)}");
+            }
+            return;
+        }
+        if (p[1] == "names1" || p[1] == "names2")
+        {
+            Names(state, p);
+            return;
+        }
+        var who = int.Parse(p[1]);
+        if (p.Length == 2)
+        {
+            DumpPolitician(state, who);
+            return;
+        }
+        SetPolitician(state, who, p);
+    }
+
+    static void DumpPolitician(GameState state, int who)
+    {
+        var pol = state.politics[who];
+        Log($"[{who}] {PoliticianName(state, who)}");
+        Log($"  派系 traits[0]={pol.traits[0]}={PoliticTexts.Trait(pol.traits[0])} traits[1]={pol.traits[1]}={PoliticTexts.Trait(pol.traits[1])} traits[2]={pol.traits[2]}={PoliticTexts.Trait(pol.traits[2])}");
+        Log($"  权力={pol.power} 忠诚={pol.loyality} 年龄={pol.age} 意向职位={pol.wantedDolzh} 在朝={pol.in_power} 职位={PostText(state, who)}");
+        Log($"  name_1={pol.name_1} name_2={pol.name_2} autosupport={pol.autosupport} autohound={pol.autohound}");
+        Log($"  loyality_to_other[0..17]={string.Join(",", pol.loyality_to_other)}");
+        Log("-> pol 人物 字段 值 | 字段: loyality power age name1 name2 trait0 trait1 trait2 wanted in_power dolzh 位置 l2o 目标 值 autosupport autohound");
+    }
+
+    static void SetPolitician(GameState state, int who, string[] p)
+    {
+        var pol = state.politics[who];
+        switch (p[2])
+        {
+            case "loyality": pol.loyality = int.Parse(p[3]); break;
+            case "power": pol.power = int.Parse(p[3]); break;
+            case "age": pol.age = (byte)int.Parse(p[3]); break;
+            case "name1": pol.name_1 = int.Parse(p[3]); break;
+            case "name2": pol.name_2 = int.Parse(p[3]); break;
+            case "trait0": pol.traits[0] = (byte)int.Parse(p[3]); break;
+            case "trait1": pol.traits[1] = (byte)int.Parse(p[3]); break;
+            case "trait2": pol.traits[2] = (byte)int.Parse(p[3]); break;
+            case "wanted": pol.wantedDolzh = int.Parse(p[3]); break;
+            case "in_power": pol.in_power = (byte)int.Parse(p[3]); break;
+            case "dolzh": state.politics_dolshnost[int.Parse(p[3])] = (byte)who; break;
+            case "l2o": pol.loyality_to_other[int.Parse(p[3])] = int.Parse(p[4]); break;
+            case "autosupport": pol.autosupport = int.Parse(p[3]); break;
+            case "autohound": pol.autohound = int.Parse(p[3]); break;
+            default: throw new ArgumentOutOfRangeException(nameof(p), p[2], "没有该人物字段");
+        }
+        Log($"[{who}] {PoliticianName(state, who)} {p[2]} = {p[3]}");
+    }
+
+    static void Names(GameState state, string[] p)
+    {
+        var table = p[1] == "names1" ? state.names1 : state.names2;
+        var start = p.Length > 2 ? int.Parse(p[2]) : 0;
+        var end = Math.Min(start + 40, table.Length);
+        var line = new List<string>();
+        for (var i = start; i < end; i++) line.Add($"{i}={Clean(table[i])}");
+        Log($"{(p[1] == "names1" ? "名字表1" : "名字表2")} {start}..{end - 1}/{table.Length}: " + string.Join(" | ", line));
+    }
+
+    static string PoliticianName(GameState state, int index)
+        => Clean(state.names1[state.politics[index].name_1]) + " " + Clean(state.names2[state.politics[index].name_2]);
+
+    static string PostText(GameState state, int index)
+    {
+        for (var i = 0; i < state.politics_dolshnost.Length; i++)
+            if (state.politics_dolshnost[i] == index) return PoliticTexts.Posts[i];
+        return "无";
+    }
+
+    static string Clean(string text) => text.Replace(" ", "").Replace("\n", " ");
+
+    static string Short(string text) => text.Length <= 120 ? text : text[..120] + "…";
+
+    // ================= 诊断 =================
+
+    static void ListWars(GameState state)
+    {
+        var going = new List<string>();
+        for (var i = 0; i < state.ingamewars.Length; i++)
+        {
+            if (state.ingamewars[i].is_going) going.Add(i + ":" + state.ingamewars[i].name_war);
+        }
+        Log(going.Count == 0 ? "没有进行中的战争" : string.Join("; ", going));
+    }
+
     static void Help()
     {
-        Log("help / clear / close");
-        Log("date d m y | speed 0-4 | event n | list_events");
-        Log("money/party/people/thought/living/prestige/agents/army/influence ±值");
-        Log("rel 0|1 值 | mod n 0|1 | diff 0-4 | ironman 0|1");
-        Log("war n | list_wars | part 国家 下标 on|off | parts 国家 | map");
-        Log("save 槽位 | load 槽位 | cheat 0-12");
-        Log("gold(金手指开关) | pop(人口+1亿) | key 动作号(快捷键同款)");
-        Log("faction(主导派系排查: data[15]/席位/联盟合计)");
-        Log("achreset(重置全部成就解锁状态)");
-        Log("audio(音乐目录/权限诊断)");
-        Log("mods(生效修正文案) | wars(进行中的战争)");
+        Log("help / clear");
+        Log("date d m y | speed 0-4 | money/party/people/thought/living/prestige/agents/army/influence ±值");
+        Log("rel 0|1 值 | mod n 0|1 | diff 0-4 | ironman 0|1 | war n | list_wars | wars");
+        Log("terr 国家 [part on|off]     领土块: 不给参数查看着该国各块状态");
+        Log("ideo 国家 [国体] [意识形态]  不给参数查看; ideos 列出可选值");
+        Log("event n                    强制触发事件(切事件场景)");
+        Log("event n 选项               触发并立即按原版结算该选项");
+        Log("events [起始号] [关键字]   检索事件正文(每次 30 个)");
+        Log("kill 人物                  杀死政治人物");
+        Log("pol list | pol 人物 | pol 人物 字段 值 | pol names1|names2 [起始]");
+        Log("doctr                      查看当前政体政策");
+        Log("doctr 槽位 值              直接改写(15政体 16经济 17言论 18结构 50宗教 51军事 52战略)");
+        Log("doctrs                     列出每个槽位的可选值");
+        Log("part 国家 下标 on|off | parts 国家 | map | highlight 国家 | faction");
+        Log("save 槽位 | load 槽位 | cheat 0-12 | gold | pop | key 动作号");
+        Log("mods | achreset | audio");
     }
 
     // 修正(buff)诊断: 读档前后各跑一次, 对比 active 与文本长度就能看出是数据丢了还是文案模板丢了.
@@ -247,7 +516,7 @@ public sealed class DebugPane : IPanel
             数++;
             var 名 = i < global.old_modify_texts.Length ? global.old_modify_texts[i].Replace(" ", "") : "?";
             var 描述 = i < global.old_modify_desc.Length ? global.old_modify_desc[i] : "?";
-            Log($"[{i}] {名} | desc={描述[..System.Math.Min(30, 描述.Length)]}");
+            Log($"[{i}] {名} | desc={描述[..Math.Min(30, 描述.Length)]}");
         }
         Log($"生效 {数} 个 | 文本表 old_modify_text={global.old_modify_texts.Length} old_modify_desc={global.old_modify_desc.Length}");
     }
@@ -276,7 +545,7 @@ public sealed class DebugPane : IPanel
         Log($"内置 res://assets/audio/music: {(内置 != null ? "有" : "无")}");
         内置?.Dispose();
         var 名们 = new[] { "专辑", "音乐", "Albums", "Music" };
-        var 候选 = new System.Collections.Generic.List<string>();
+        var 候选 = new List<string>();
         foreach (var 名 in 名们) 候选.Add(Godot.OS.GetUserDataDir() + "/" + 名);
         foreach (var 系统 in new[] { Godot.OS.SystemDir.Downloads, Godot.OS.SystemDir.Music, Godot.OS.SystemDir.Documents })
         {

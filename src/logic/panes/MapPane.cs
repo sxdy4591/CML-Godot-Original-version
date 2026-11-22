@@ -116,6 +116,13 @@ public sealed class MapPane : IPanel
     // 但日期/地图模式没变, 缓存不失效就会一直用旧颜色 —— 动作后由调用方清掉.
     public static void InvalidateColors() => _cachedKey = -1;
 
+    // 领土块/意识形态被控制台改动: 颜色与 index_map 都可能变, 清缓存并让地图重取一次快照.
+    public static void Touch()
+    {
+        InvalidateColors();
+        UiEvents.RequestMapDirty();
+    }
+
     static List<object> InteractiveList()
     {
         var list = new List<object>(Interactive.Count);

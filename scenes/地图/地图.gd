@@ -38,6 +38,8 @@ func _ready() -> void:
 	# 可互动高亮: 逻辑层每帧推进 12 国扫描, 有变化才推 map_highlight;
 	# 不能只靠 request("地图") —— 那份快照只在进场景/切地图模式时请求, 扫不全.
 	UiBridge.connect("map_highlight", _收到高亮)
+	# 控制台改领土块/意识形态后, 逻辑层标脏 → 重新取一次快照(着色与显隐)
+	UiBridge.connect("map_dirty", func() -> void: UiBridge.request(面板))
 	UiBridge.act(面板, "激活", [true])
 	UiBridge.request(面板)
 

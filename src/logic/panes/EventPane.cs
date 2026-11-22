@@ -23,6 +23,37 @@ public sealed class EventPane : IPanel
     // 同编号事件若复用旧脚本, 文本与结果都会写进上一档的对象.
     GameState _state;
 
+    // 控制台 event n 选项 直接结算后取结果文本
+    public string Result => _result;
+
+    // 控制台 events 检索: 事件正文只存在于 Event{N}.TextOfEvents 里, 没有静态表可查,
+    // 只能按编号实例化跑一次(结果缓存, 同一局反复翻页不重复跑).
+    static readonly Dictionary<int, string> ProbeTexts = new();
+
+    public static string TextOf(int number)
+    {
+        if (ProbeTexts.TryGetValue(number, out var cached)) return cached;
+        var type = typeof(Event1).Assembly.GetType("Event" + number);
+        var stub = Stub.Take(type, "EventProbe" + number, Lifecycle.Scene);
+        AchievementCenter.Register(stub.Also<achievements>());
+        var script = stub.Activate().Typed<Component>();
+        // 与 EnsureScript 同一条规矩: 事件类的 GameState 缓存在 a, 不灌就整页空文本
+        var stateField = type.GetField("a",
+            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
+        if (stateField != null) stateField.SetValue(script, GameHost.State);
+        var args = new object[] { "", "" };
+        // 检索口径: 事件正文用 data[82](正在进行的战争编号) 取战争名, 控制台没有战场可报,
+        // 先给 0 让正文走"无战争"分支, 跑完原样还回去 —— 只影响这一句文本, 不动存档状态.
+        var state = GameHost.State;
+        var war = state.data[82];
+        state.data[82] = 0;
+        type.GetMethod("TextOfEvents").Invoke(script, args);
+        state.data[82] = war;
+        var text = (args[0] + " " + args[1]).Replace("\n", " ").Trim();
+        ProbeTexts[number] = text;
+        return text;
+    }
+
     public Dictionary<string, object> Snapshot()
     {
         var state = GameHost.State;
