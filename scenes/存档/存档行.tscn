@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://bvmejx887himt"]
+
+[ext_resource type="Script" uid="uid://bwsapp5u2chu0" path="res://scenes/存档/存档行.gd" id="1_tv7r0"]
+
+[node name="Button" type="Button" unique_id=1063636676]
+custom_minimum_size = Vector2(1700, 64)
+flat = true
+script = ExtResource("1_tv7r0")
+
+[node name="槽位名" type="Label" parent="." unique_id=1001846418]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 190.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "槽位 1"
+
+[node name="日期" type="Label" parent="." unique_id=1235026343]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 14.0
+offset_right = 430.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="领袖" type="Label" parent="." unique_id=641806655]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 14.0
+offset_right = 700.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="难度" type="Label" parent="." unique_id=1481662992]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 14.0
+offset_right = 900.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="时间" type="Label" parent="." unique_id=62781896]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 14.0
+offset_right = 1110.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+
+[node name="主按钮" type="Button" parent="." unique_id=832989499]
+layout_mode = 0
+offset_left = 1050.0
+offset_top = 12.0
+offset_right = 1160.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "读取"
+
+[node name="复制" type="Button" parent="." unique_id=234803144]
+layout_mode = 0
+offset_left = 1260.0
+offset_top = 12.0
+offset_right = 1340.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "复制"
+
+[node name="删除" type="Button" parent="." unique_id=1071763828]
+layout_mode = 0
+offset_left = 1350.0
+offset_top = 12.0
+offset_right = 1430.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "删除"
+
+[node name="恢复" type="Button" parent="." unique_id=1275227906]
+layout_mode = 0
+offset_left = 1440.0
+offset_top = 12.0
+offset_right = 1520.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "恢复"
+
+[node name="导出" type="Button" parent="." unique_id=315902371]
+layout_mode = 0
+offset_left = 1530.0
+offset_top = 12.0
+offset_right = 1690.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "导出"
+
+[node name="自动" type="CheckButton" parent="." unique_id=926541675]
+layout_mode = 0
+offset_left = 1170.0
+offset_top = 12.0
+offset_right = 1250.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "自动"

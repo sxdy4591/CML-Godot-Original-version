@@ -103,15 +103,14 @@ func _bind_rows() -> void:
 		# 行容器在场景里是 mouse_filter=IGNORE, 必须改 PASS 才能被长按命中
 		if idx == 1:
 			node.mouse_filter = Control.MOUSE_FILTER_PASS
-			node.tooltip_text = "自动存档：每到该周期的 1 号，把当前局面自动写入下方「自动存档位」选定的槽位。\n" \
+			node.tooltip_text = "自动存档：每到该周期的 1 号，把当前局面写入「保存/读档」界面用「自动」按钮指定的槽位。\n" \
 				+ "每月 = 每个月的 1 号；半年 = 6 月 1 号与 12 月 1 号。\n" \
 				+ "保存完成会在右上角弹出「自动存档完成」提示。"
 		elif idx == 2:
 			node.mouse_filter = Control.MOUSE_FILTER_PASS
-			node.tooltip_text = "自动存档位：自动存档与 F5 快捷保存都写入这个槽位（1 … 5）。\n" \
-				+ "默认 1 号；自动存档会覆盖该槽，建议专门留一个槽给它。\n" \
-				+ "也可以直接到「保存/读档」界面点每个槽右侧的「自动」按钮来选；\n" \
-				+ "再点一次当前带 ✓ 的那个槽 = 取消自动存档。"
+			node.tooltip_text = "快捷保存槽位：F5 快捷保存写入这个槽位（1 … 5）。\n" \
+				+ "自动存档的目标槽不在这里设——到「保存/读档」界面点任意一行右侧的「自动」按钮指定；\n" \
+				+ "再点同一条 = 关闭自动存档（槽位无限，自动存档可以占任意一个槽）。"
 
 func _on_row(row: int, dir: int) -> void:
 	match row:
@@ -233,6 +232,18 @@ func _bind_music() -> void:
 	_refresh_track_slots()
 	_refresh_album_slots()
 	_跳到播放中专辑所在页()
+	# 专辑包导入: 打开系统文件管理器选 zip, 解压到 user://专辑/ 后重扫
+	var 导入按钮 := find_child("导入专辑包", true, false) as BaseButton
+	var 导入对话框 := find_child("专辑包对话框", true, false) as FileDialog
+	导入按钮.pressed.connect(func() -> void: 导入对话框.popup_centered_ratio(0.7))
+	导入对话框.file_selected.connect(_专辑包已选中)
+
+func _专辑包已选中(路径: String) -> void:
+	var audio := get_node("/root/AudioSys")
+	var 结果: String = audio.导入专辑包(路径)
+	(find_child("导入结果", true, false) as Label).text = 结果
+	_refresh_track_slots()
+	_refresh_album_slots()
 
 ## 进入设置时翻到"正在播放的专辑"所在页(照搬改版 设置.gd _初始化专辑页码)
 func _跳到播放中专辑所在页() -> void:
@@ -337,6 +348,8 @@ func _bind_custom_page() -> void:
 	_bind_checkbox("InteractiveHighlightToggle", "interactive_highlight", true)
 	# 事件结束回到外交后停表(消费者在 EventPane.Close → GameHost.PauseTime)
 	_bind_checkbox("EventPauseToggle", "event_pause_after", true)
+	# 时间运行时点击国家自动停表(消费者在 外交.gd 的地图点选)
+	_bind_checkbox("PauseOnSelectToggle", "pause_on_country_select", true)
 	_bind_auto_types()
 	var console_toggle := find_child("DebugConsoleToggle", true, false) as CheckButton
 	console_toggle.set_pressed_no_signal(ui.get_bool("debug_console", true))
@@ -395,6 +408,14 @@ const AUTO_TYPES := [
 	[146, "阿拉伯：施压海湾合作委员会增产"],
 ]
 
+## 外交扩张三组开关: 贸易 / 经济联盟 / 军事联盟(含非洲联盟按钮), 各管一组 this_type.
+## 组号与类型归属在逻辑层 Automation.DiplomacyGroups; 这里只负责勾选与落盘/读盘.
+const 外交自动行 := [
+	["AutoTradeToggle", 0],
+	["AutoEconUnionToggle", 1],
+	["AutoUnionToggle", 2],
+]
+
 func _bind_auto_types() -> void:
 	var 已开 := {}
 	for s in ui.get_string("auto_types", "").split(",", false):
@@ -404,8 +425,27 @@ func _bind_auto_types() -> void:
 		var cb := find_child("AutoT%dToggle" % t, true, false) as CheckButton
 		cb.set_pressed_no_signal(已开.has(t))
 		cb.toggled.connect(func(_on: bool): _推自动类型())
+	_bind_diplomacy_auto()
 	# 周期型决议的自动化改为"决议页逐条勾选"(每条一份开关), 设置页不再有总开关
 	find_child("AutoDecisionRow", true, false).visible = false
+
+
+func _bind_diplomacy_auto() -> void:
+	var 已开 := {}
+	for s in ui.get_string("auto_diplo", "").split(",", false):
+		已开[int(s)] = true
+	for row in 外交自动行:
+		var cb := find_child(row[0], true, false) as CheckButton
+		cb.set_pressed_no_signal(已开.has(int(row[1])))
+		cb.toggled.connect(func(_on: bool): _推外交自动())
+
+
+func _推外交自动() -> void:
+	var keys := PackedStringArray()
+	for row in 外交自动行:
+		if (find_child(row[0], true, false) as CheckButton).button_pressed:
+			keys.append(str(row[1]))
+	ui.set_string("auto_diplo", ",".join(keys))
 
 
 ## 把全部勾的当前状态拼回 "7,8,20" 落盘; 逻辑层在进外交场景时读这一行
@@ -566,6 +606,8 @@ func _on_恢复默认_pressed() -> void:
 	ui.set_bool("interactive_highlight", true)
 	ui.set_string("auto_types", "")
 	ui.set_string("auto_decisions", "")
+	ui.set_string("auto_diplo", "")
+	ui.set_int("autosave_slot", 1)
 	ui.set_bool("event_pause_after", true)
 	ui.set_int("event_align", 0)
 	for row in CUSTOM_STEP_ROWS:

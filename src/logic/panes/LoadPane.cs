@@ -1,4 +1,4 @@
-// 读档界面: 槽位元信息与读取.
+// 读档界面: 槽位列表 + 读取/删除/复制/恢复备份/导入导出.
 using System.Collections.Generic;
 using CML.Logic.Port;
 
@@ -8,16 +8,15 @@ public sealed class LoadPane : IPanel
 {
     public string Name => "读档";
 
-    static string _importMessage = "";
+    static string _message = "";
 
     public Dictionary<string, object> Snapshot()
     {
-        var slots = new List<object>();
-        slots.Add(SavePane.SlotInfo(SavePaths.AutoSlot));
-        for (var i = 1; i <= 5; i++) slots.Add(SavePane.SlotInfo(i));
+        var (auto, slots) = SaveActions.列表();
         return new PanelSnapshot()
+            .Put("auto", auto)
             .Put("slots", slots)
-            .Put("import_message", _importMessage)
+            .Put("message", _message)
             .Build();
     }
 
@@ -26,18 +25,12 @@ public sealed class LoadPane : IPanel
         switch (action)
         {
             case "读取":
-                var slot = (int)(long)args[0];
-                GameHost.ReplaceState(SaveService.Load(SavePaths.Slot(slot)));
+                GameHost.ReplaceState(SaveService.Load(SavePaths.Slot((int)(long)args[0])));
                 UiEvents.RequestScene("Diplomacy");
                 break;
-            case "导入Unity":
-                var count = UnitySaveImporter.ImportAll();
-                _importMessage = count > 0
-                    ? $"已从 Unity 版导入 {count} 个存档"
-                    : "未找到 Unity 版存档(NewData/*.save)";
-                break;
             default:
-                throw new System.ArgumentOutOfRangeException(nameof(action), action, "读档面板没有该动作");
+                _message = SaveActions.Act(action, args);
+                break;
         }
     }
 }

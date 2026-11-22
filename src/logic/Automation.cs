@@ -62,6 +62,26 @@ public static class Automation
         128, 142, 143, 144, 1054, 145, 146,
     };
 
+    // 外交扩张三组开关(设置页自定义页各一个勾): 贸易 / 经济联盟 / 军事联盟(含非洲联盟按钮).
+    // type 依据 = CountryScript.OnMouseDown 里的 Show 调用:
+    //   发展贸易 = 9, 17, 24, 50, 52, 102
+    //   经济合作 = 10, 13, 18, 31, 36, 39, 40, 44, 53, 54, 68, 121
+    //   军事同盟 = 19(同一按钮在非洲国家条件满足时换成"加入非洲联盟", 属于同一类, 不另分开关)
+    // 对应 OnMouseDown(7419 起)分支都不切场景、不开战.
+    public const int DiplomacyTrade = 0;
+    public const int DiplomacyEcon = 1;
+    public const int DiplomacyUnion = 2;
+
+    static readonly int[][] DiplomacyGroups =
+    {
+        new[] { 9, 17, 24, 50, 52, 102 },
+        new[] { 10, 13, 18, 31, 36, 39, 40, 44, 53, 54, 68, 121 },
+        new[] { 19 },
+    };
+
+    // 三组开关的真值; 默认全关, 由设置页勾选后落盘(playerprefs auto_diplo)
+    static readonly bool[] DiplomacyOn = new bool[3];
+
     // 周期型决议(GlobalScript.CreateDecisions 的数组下标): Oncein/DoTimer(6 个月) 那 10 条,
     // 冷却归零后由 TimeScript 复位 completedDecisions; 都不含 StartEvent, 不会把玩家拽进事件场景。
     static readonly HashSet<int> AutoDecisions = new() { 24, 25, 26, 27, 28, 29, 30, 31, 32, 34 };
@@ -80,7 +100,40 @@ public static class Automation
     // 本轮已执行的条数, 供 UI 显示"自动化干了什么"
     public static int Launched { get; private set; }
 
-    public static bool IsAutoable(int type) => System.Array.IndexOf(Categories, type) >= 0;
+    public static bool IsAutoable(int type)
+        => System.Array.IndexOf(Categories, type) >= 0 || DiplomacyGroup(type) >= 0;
+
+    public static int DiplomacyGroup(int type)
+    {
+        for (var group = 0; group < DiplomacyGroups.Length; group++)
+            if (System.Array.IndexOf(DiplomacyGroups[group], type) >= 0) return group;
+        return -1;
+    }
+
+    public static bool IsDiplomacyEnabled(int group) => DiplomacyOn[group];
+
+    static bool AnyDiplomacy()
+    {
+        foreach (var on in DiplomacyOn) if (on) return true;
+        return false;
+    }
+
+    public static void ToggleDiplomacy(int group) => DiplomacyOn[group] = !DiplomacyOn[group];
+
+    public static string DiplomacyString()
+    {
+        var list = new List<string>();
+        for (var i = 0; i < DiplomacyOn.Length; i++)
+            if (DiplomacyOn[i]) list.Add(i.ToString());
+        return string.Join(",", list);
+    }
+
+    public static void SetDiplomacyString(string text)
+    {
+        for (var i = 0; i < DiplomacyOn.Length; i++) DiplomacyOn[i] = false;
+        foreach (var part in text.Split(',', System.StringSplitOptions.RemoveEmptyEntries))
+            DiplomacyOn[int.Parse(part)] = true;
+    }
 
     public static bool IsAutoableDecision(int index) => AutoDecisions.Contains(index);
 
@@ -129,7 +182,9 @@ public static class Automation
     {
         var state = GameHost.State;
         if (GameHost.Speed <= 0) return;
-        if (Enabled.Count == 0 && EnabledDecisions.Count == 0) return;
+        // 外交扩张三组(贸易/经济联盟/军事联盟)也走同一条扫描: 只开这三组时
+        // Enabled/EnabledDecisions 都是空的, 不能在这里提前 return, 否则开关形同虚设.
+        if (Enabled.Count == 0 && EnabledDecisions.Count == 0 && !AnyDiplomacy()) return;
 
         // 原版按钮门禁在月初 1 号的日结算里复位(TimeScript.cs:2227 三的倍数 / 2240 六的倍数),
         // 决议冷却也每月递减并复位 completedDecisions(2289 起)。用"月份变化"触发:
@@ -152,7 +207,7 @@ public static class Automation
         // 决议先跑: 冷却 6 个月, 窗口比互动按钮(每月/每三月)稀有, 先吃满资源门槛。
         RunDecisions();
         _cursor = 0;
-        _scanning = Enabled.Count > 0;
+        _scanning = Enabled.Count > 0 || AnyDiplomacy();
         if (!_scanning) LogRound();
     }
 
@@ -197,7 +252,13 @@ public static class Automation
             var info = (Dictionary<string, object>)buttons[slot];
             if (!(bool)info["active"]) continue;
             var type = (int)info["type"];
-            if (!Enabled.Contains(type)) continue;
+            // 外交扩张按钮按"组"开关(贸易/经济联盟/军事联盟), 其余按钮仍按类别逐条勾
+            var group = DiplomacyGroup(type);
+            if (group >= 0)
+            {
+                if (!DiplomacyOn[group]) continue;
+            }
+            else if (!Enabled.Contains(type)) continue;
             if (!AllConditionsMet((List<object>)info["conditions"])) continue;
             // 原版 OnMouseDown 会拿同一组 is_active/uslovie_bool 再验一次; 这里不重写它。
             Port.DiploHost.Activate(_set, slot);

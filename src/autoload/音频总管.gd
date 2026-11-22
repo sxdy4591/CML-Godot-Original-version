@@ -165,6 +165,74 @@ func _扫描专辑() -> void:
 	print("[AudioSys] 专辑列表: %s" % str(专辑名列表))
 
 
+## ============================== 专辑导入 ==============================
+## 专辑包 = 一个 zip: 里面直接放音频/封面/info.json, 或者只有一个顶层专辑目录.
+## 解压到 user://专辑/<专辑名>/ —— 这是 _候选外置专辑根目录 的首选根, 手机无需存储权限.
+const 导入专辑根 := "user://专辑"
+
+func 导入专辑包(源: String) -> String:
+	# 统一先落盘再解压: Android 的系统文件选择器给的是 content:// URI,
+	# ZIPReader 只认可以随机读的普通路径; 落盘也用 FileAccess, 两种来源都覆盖.
+	var 数据 := FileAccess.get_file_as_bytes(源)
+	if 数据.is_empty():
+		return "读取失败：%s" % 源
+	var 临时 := "user://专辑导入.zip"
+	var 临时文件 := FileAccess.open(临时, FileAccess.WRITE)
+	临时文件.store_buffer(数据)
+	临时文件.close()
+	var zip := ZIPReader.new()
+	if zip.open(临时) != OK:
+		DirAccess.remove_absolute(临时)
+		return "不是有效的 zip 压缩包"
+	var 条目 := zip.get_files()
+	var 顶层 := _单一顶层目录(条目)
+	var 名 := 顶层 if 顶层 != "" else 源.get_file().get_basename()
+	var 目标 := 导入专辑根.path_join(名)
+	DirAccess.make_dir_recursive_absolute(目标)
+	var 写入 := 0
+	for 文件 in 条目:
+		if 文件.ends_with("/"):
+			continue
+		var 相对 := 文件.trim_prefix(顶层 + "/") if 顶层 != "" else 文件
+		if 相对.is_absolute_path() or 相对.contains(".."):
+			continue
+		var 目的 := 目标.path_join(相对)
+		DirAccess.make_dir_recursive_absolute(目的.get_base_dir())
+		var f := FileAccess.open(目的, FileAccess.WRITE)
+		f.store_buffer(zip.read_file(文件))
+		f.close()
+		写入 += 1
+	zip.close()
+	DirAccess.remove_absolute(临时)
+	if 写入 == 0:
+		return "压缩包里没有可导入的文件"
+	重新扫描专辑(目标)
+	return "已导入专辑「%s」（%d 个文件）" % [名, 写入]
+
+## zip 里所有文件都在同一个顶层目录下时返回该目录名(专辑包常见结构), 否则返回 "".
+func _单一顶层目录(条目: PackedStringArray) -> String:
+	var 顶层 := ""
+	for 文件 in 条目:
+		if 文件.ends_with("/"):
+			continue
+		var 段 := 文件.split("/")
+		if 段.size() < 2:
+			return ""
+		if 顶层 == "":
+			顶层 = 段[0]
+		elif 顶层 != 段[0]:
+			return ""
+	return 顶层
+
+## 导入/外部改动后重扫专辑并切到指定目录(不指定就保持当前).
+func 重新扫描专辑(选中 := "") -> void:
+	_扫描专辑()
+	if 专辑目录列表.is_empty():
+		return
+	var 目标目录 := 选中 if 选中 != "" else 当前专辑目录
+	var 索引 := 专辑目录列表.find(目标目录)
+	选择专辑(maxi(索引, 0))
+
 ## 某个专辑根下的专辑目录(按文件夹名排序, 顺序稳定); 根目录本身直接放音频时当作一张专辑.
 func _根下专辑目录(根: String) -> Array[String]:
 	var 目录们: Array[String] = []

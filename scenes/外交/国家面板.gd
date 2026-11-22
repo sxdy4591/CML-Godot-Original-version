@@ -50,7 +50,8 @@ const 按钮不可用色 := Color(0.35, 0.35, 0.35)
 ]
 @onready var 按钮: Array[Button] = [$互动按钮, $互动按钮2, $互动按钮3, $互动按钮4]
 @onready var 自动勾: Array[Button] = [$自动1, $自动2, $自动3, $自动4]
-@onready var 条件: RichTextLabel = $执行当前互动按钮所需条件及检查
+@onready var 条件滚动: ScrollContainer = $条件滚动
+@onready var 条件: RichTextLabel = $条件滚动/执行当前互动按钮所需条件及检查
 
 var _图标文案: Array = []
 var _按钮条件: Array = []
@@ -59,6 +60,7 @@ var _悬停: int = -1
 var _默认条件: String = ""
 var _刷新计时: float = 0.0
 var _自动串: String = ""
+var _外交自动串: String = ""
 
 
 func _ready() -> void:
@@ -69,7 +71,7 @@ func _ready() -> void:
 		按钮[i].mouse_exited.connect(_离开按钮)
 		自动勾[i].toggled.connect(_切换自动.bind(i))
 	UiBridge.connect("panel_snapshot", _收到快照)
-	条件.visible = false
+	条件滚动.visible = false
 
 
 # 面板可见时自己按 0.2s 拉快照: 资源一变, 按钮立即变灰/禁用, 不用重开面板
@@ -120,6 +122,10 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 	if 类别 != _自动串:
 		_自动串 = 类别
 		UISettings.set_string("auto_types", 类别)
+	var 外交自动 := str(data["auto_diplo"])
+	if 外交自动 != _外交自动串:
+		_外交自动串 = 外交自动
+		UISettings.set_string("auto_diplo", 外交自动)
 	if 名称.text != str(data["name"]):
 		名称.text = data["name"]
 
@@ -278,10 +284,12 @@ func _更新条件() -> void:
 				lines.append(line)
 	var 应该显示 := not lines.is_empty()
 	var 内容 := "\n".join(lines)
-	if 条件.visible != 应该显示:
-		条件.visible = 应该显示
+	if 条件滚动.visible != 应该显示:
+		条件滚动.visible = 应该显示
 	if 条件.text != 内容:
 		条件.text = 内容
+		# 换一条按钮条件时回到顶部, 否则还停在上一段内容的滚动位置
+		条件滚动.scroll_vertical = 0
 
 
 # 勾/取消这个槽的自动执行; 排除清单由逻辑层持有, 快照带回后由本页抄进 playerprefs

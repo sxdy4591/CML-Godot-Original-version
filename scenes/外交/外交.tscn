@@ -290,16 +290,20 @@ flat = true
 icon_alignment = 1
 
 [node name="决议" type="TextureButton" parent="地图模式" unique_id=1309358908]
-offset_left = 1817.0002
-offset_top = 473.9999
-offset_right = 1948.7795
-offset_bottom = 597.0769
+anchors_preset = -1
+anchor_left = 0.94635427
+anchor_top = 0.43888882
+anchor_right = 0.9998896
+anchor_bottom = 0.52777773
+offset_right = 28.991455
+offset_bottom = 27.076965
 scale = Vector2(0.78, 0.78)
 texture_normal = ExtResource("2_ut6ls")
 stretch_mode = 0
 metadata/screen_id = "decision"
 metadata/scene_uid = "uid://b3dscn2yak71"
 metadata/is_extra = true
+metadata/_edit_use_anchors_ = true
 
 [node name="顶层按钮" type="CanvasLayer" parent="." unique_id=8416709]
 

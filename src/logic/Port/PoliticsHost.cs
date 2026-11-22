@@ -133,6 +133,16 @@ public static class PoliticsHost
     // 原版 Politic_Manager.ResetPolitics: 把 GameState.p_first/p_second/p_third/p_forth
     // (BalancePolitic 按 politics[].power 降序写的排名) 抄到 18 张卡的 this_number 并整页重绘.
     // 政治界面卡片顺序 = 这个顺序; 每次快照都重算, 动作/事件改权力后立即生效.
+    // 原版 Politic_Manager.Awake 只在新开局把 names1/names2 克隆进 manager 一次;
+    // 读档换掉 gameState 后必须重指 —— 否则左栏/职位栏仍用上一份名字表
+    // (导入 Unity 存档后换回 Godot 档时, 两版名字表索引不同, 就会显示错人).
+    public static void RefreshNames()
+    {
+        if (!_ready) return;
+        _manager.first_names = (string[])GameHost.State.names1.Clone();
+        _manager.second_names = (string[])GameHost.State.names2.Clone();
+    }
+
     public static int[] CardOrder()
     {
         Ensure();

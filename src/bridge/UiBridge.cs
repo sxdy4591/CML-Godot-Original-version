@@ -135,6 +135,8 @@ public partial class UiBridge : Node
     public void set_auto_types(string text) => Automation.SetTypesString(text);
     // 周期型决议的自动勾选: 逐条独立(下标清单 "24,25"), 没有总开关
     public void set_auto_decisions(string text) => Automation.SetDecisionTypesString(text);
+    // 外交扩张三组开关(贸易/经济联盟/军事联盟)的勾选状态; 真值在逻辑层, 设置页只读写 "0,2" 这类组号串.
+    public void set_auto_diplo(string text) => Automation.SetDiplomacyString(text);
 
     // 1986 抉择的入口是否出现: 原版 CascadScrupt 判定(1986 年后), 桥层只转发结果
     public bool retire_available() => RetirePane.Available();
@@ -146,6 +148,9 @@ public partial class UiBridge : Node
     // 原版真值在 GlobalScript.autosavej / savePlace, 进游玩场景时推回.
     public void set_save_options(int autosave, int saveplace)
         => GameHost.SetSaveOptions(autosave, saveplace);
+
+    // 自动存档目标槽(0=关闭): 存档界面的行按钮设定后由 GDScript 落盘, 进游玩场景时推回来
+    public void set_auto_slot(int slot) => GameHost.SetAutoSlot(slot);
 
     // 成就提示弹窗只需标题/描述: 桥层做一次查表转发, 不让视图去拉整页快照.
     public Godot.Collections.Array achievement_text(int number)

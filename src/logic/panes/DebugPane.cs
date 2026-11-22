@@ -141,6 +141,12 @@ public sealed class DebugPane : IPanel
             case "faction":
                 Faction(state);
                 break;
+            case "mods":
+                LogMods(state);
+                break;
+            case "wars":
+                LogWars(state);
+                break;
             case "audio":
                 AudioDiag();
                 break;
@@ -227,6 +233,37 @@ public sealed class DebugPane : IPanel
         Log("faction(主导派系排查: data[15]/席位/联盟合计)");
         Log("achreset(重置全部成就解锁状态)");
         Log("audio(音乐目录/权限诊断)");
+        Log("mods(生效修正文案) | wars(进行中的战争)");
+    }
+
+    // 修正(buff)诊断: 读档前后各跑一次, 对比 active 与文本长度就能看出是数据丢了还是文案模板丢了.
+    static void LogMods(GameState state)
+    {
+        var global = GameHost.Global;
+        var 数 = 0;
+        for (var i = 0; i < state.modifies.Length; i++)
+        {
+            if (!state.modifies[i].active) continue;
+            数++;
+            var 名 = i < global.old_modify_texts.Length ? global.old_modify_texts[i].Replace(" ", "") : "?";
+            var 描述 = i < global.old_modify_desc.Length ? global.old_modify_desc[i] : "?";
+            Log($"[{i}] {名} | desc={描述[..System.Math.Min(30, 描述.Length)]}");
+        }
+        Log($"生效 {数} 个 | 文本表 old_modify_text={global.old_modify_texts.Length} old_modify_desc={global.old_modify_desc.Length}");
+    }
+
+    // 战争诊断: 两条同名战争会在这里看到不同的索引与双方, 据此定位是哪条重复/多余.
+    static void LogWars(GameState state)
+    {
+        var 数 = 0;
+        for (var i = 0; i < state.ingamewars.Length; i++)
+        {
+            var w = state.ingamewars[i];
+            if (!w.is_going) continue;
+            数++;
+            Log($"[{i}] {w.name_war} : {w.side1} vs {w.side2}");
+        }
+        Log($"进行中 {数} 场战争");
     }
 
     // 音乐诊断: 手机上没有 adb 时, 靠这条命令看权限与候选路径到底缺在哪.

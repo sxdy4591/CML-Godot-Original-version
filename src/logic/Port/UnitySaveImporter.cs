@@ -13,32 +13,14 @@ public static class UnitySaveImporter
 {
     const BindingFlags Flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 
-    // 原版 Savescript.WriteYugoSave 写到工作目录 NewData/{num}.save
-    public static string UnityPath(int slot) =>
-        Path.Combine(Directory.GetCurrentDirectory(), "NewData", slot + ".save");
-
-    // 返回成功导入的槽数; 没有文件/不是原版存档时直接抛.
-    public static int ImportAll()
-    {
-        var count = 0;
-        for (var slot = 1; slot <= 5; slot++)
-        {
-            if (!File.Exists(UnityPath(slot))) continue;
-            var tree = (NrbfClass)NrbfReader.Parse(UnityPath(slot));
-            if (tree.TypeName != nameof(GameState))
-                throw new InvalidDataException($"根对象是 {tree.TypeName}, 不是 GameState");
-            var state = (GameState)转换(typeof(GameState), tree);
-            SaveService.Save(state, SavePaths.Slot(slot));
-            count++;
-        }
-        return count;
-    }
-
     // 中立树 → 本工程类: 只按字段名对应, 类型不同时转换(NRBF 里的 int 字段可能对应 byte).
-    static object 转换(Type target, object node)
+    internal static object 转换(Type target, object node)
     {
         if (node == null) return target.IsValueType ? Activator.CreateInstance(target) : null;
-        if (target == typeof(string)) return node;
+        // Unity 存档里的文本表是 CRLF 文件 Split('\n') 的产物, 字符串末尾带 '\r';
+        // Unity 的 TextMesh 忽略 \r, Godot 的 Label 却把它当换行 —— 名字/事件文案会拆成两行.
+        // 导入时统一去掉 \r(只去回车, 保留 \n).
+        if (target == typeof(string)) return ((string)node).Replace("\r", "");
         if (target.IsEnum) return Enum.ToObject(target, node);
         // MS-NRBF 里 DateTime/TimeSpan 是 ticks(long) 的基元值, 不是对象.
         if (target == typeof(DateTime)) return new DateTime((long)node);

@@ -45,8 +45,10 @@ func _ready() -> void:
 	# 自动化勾选落在 playerprefs, 进游玩场景时推回逻辑层(bridge 只搬运, 不读配置)
 	UiBridge.set_auto_types(UISettings.get_string("auto_types", ""))
 	UiBridge.set_auto_decisions(UISettings.get_string("auto_decisions", ""))
+	UiBridge.set_auto_diplo(UISettings.get_string("auto_diplo", ""))
 	# 自动存档开关/槽位同样落盘在 playerprefs, 推回原版 GlobalScript 才真的会存
 	UiBridge.set_save_options(UISettings.get_int("autosave", 1), UISettings.get_int("saveplace", 1))
+	UiBridge.set_auto_slot(UISettings.get_int("autosave_slot", 1))
 
 	country_panel.connect("互动完成", _on_country_interact)
 
@@ -132,6 +134,9 @@ func _on_map_mode_pressed(mode: int) -> void:
 
 
 func _on_map_country_selected(index: int) -> void:
+	# 时间在走的时候点国家先停表: 玩家在地图上操作时日期不该继续推进
+	if _speed > 0 and UISettings.get_bool("pause_on_country_select", true):
+		UiBridge.act(面板, "设置速度", [0])
 	country_panel.call("show_country", index)
 
 

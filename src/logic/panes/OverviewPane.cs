@@ -42,34 +42,42 @@ public sealed class OverviewPane : IPanel
         return snapshot.Build();
     }
 
-    // 修正列表: 激活项在前, 其余按槽号补到 60 条(旧版概览上限).
-    // 名称/描述 = 原版 ModifyButtonScript.ChangeText(含动态数值与颜色);
-    // 图标名 = 原版 ChangeIcon 的资源名规则.
+    // 原版 Modify_iconsScript.CreateModifies(33-150) 的列表: 概览只显示这些编号的修正,
+    // 顺序就是原版 Add 的顺序. 原版用 conditionOn 在"已生效/未生效"两个视图间切换,
+    // 移植版同屏列出, 已生效在前. 不在白名单里的 modifies(焦点/事件直接写 active 的)
+    // 原版概览不显示 —— 之前按全量 modifies 装配, 会把这类条目也列出来, 且编号 > 60 的
+    // 条目在 ChangeText 里取 old_modify_texts[num] 会越界.
+    static readonly int[] 概览修正 =
+    {
+        15, 0, 2, 3, 6, 11, 8, 59, 50, 47, 48,
+        28, 29, 30, 31, 46,
+        1, 4, 5, 7, 9, 10, 12, 13,
+        16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+        33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44,
+        49, 51, 52, 53, 54, 55, 56, 57, 60,
+    };
+
+    // 原版 ModifyButtonScript.ChangeText(24-584): 名称/描述占位符由原版 string.Format 生成;
+    // 这里只把 okno1 里的 "名称|描述" 读出来, 不复制任何公式.
     static List<object> BuildModifiers(GameState state)
     {
-        var shown = new List<int>();
-        for (var i = 0; i < state.modifies.Length; i++)
+        var modifiers = new List<object>(概览修正.Length);
+        foreach (var pass in new[] { true, false })
         {
-            if (state.modifies[i].active) shown.Add(i);
-        }
-        for (var i = 0; i < state.modifies.Length && shown.Count < 60; i++)
-        {
-            if (!state.modifies[i].active) shown.Add(i);
-        }
-
-        var modifiers = new List<object>(shown.Count);
-        foreach (var i in shown)
-        {
-            var active = state.modifies[i].active;
-            var (name, desc) = ModifierText(i, active);
-            modifiers.Add(new Dictionary<string, object>
+            foreach (var i in 概览修正)
             {
-                ["id"] = i,
-                ["active"] = active ? 1 : 0,
-                ["icon"] = ModifierIcon(state, i, active),
-                ["name"] = name,
-                ["desc"] = desc,
-            });
+                var active = state.modifies[i].active;
+                if (active != pass) continue;
+                var (name, desc) = ModifierText(i, active);
+                modifiers.Add(new Dictionary<string, object>
+                {
+                    ["id"] = i,
+                    ["active"] = active ? 1 : 0,
+                    ["icon"] = ModifierIcon(state, i, active),
+                    ["name"] = name,
+                    ["desc"] = desc,
+                });
+            }
         }
         return modifiers;
     }

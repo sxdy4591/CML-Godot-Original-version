@@ -86,7 +86,9 @@ public static class SaveService
             case TBool: return r.ReadBoolean();
             case TInt: return r.ReadInt32();
             case TFloat: return r.ReadSingle();
-            case TString: return r.ReadString();
+            // 读档同样清 CRLF 残留: 旧版导入流程写进来的档里, 名字/文案字符串末尾带着 \r,
+            // Godot 的 Label 会把 \r 当换行(政治界面的名字全拆成两行). 只去回车, 保留 \n.
+            case TString: return r.ReadString().Replace("\r", "");
             case TByte: return r.ReadByte();
             case TDateTime: return new DateTime(r.ReadInt64());
             case TArray: return ReadArray(r, refs);

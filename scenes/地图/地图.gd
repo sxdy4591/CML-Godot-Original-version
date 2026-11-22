@@ -152,8 +152,9 @@ func _收到高亮(indices: Array) -> void:
 
 
 const 国家着色 := preload("res://scenes/地图/国家着色.gdshader")
-const 选中高亮 := Color(1.35, 1.28, 1.05, 1.0)
-const 悬停高亮 := Color(1.18, 1.14, 1.02, 1.0)
+# 选中/悬停同样只调亮度, 色相交给设置页的高亮乘色(否则蓝/灰国家一样会被染黄)
+const 选中高亮 := Color(1.35, 1.35, 1.35, 1.0)
+const 悬停高亮 := Color(1.18, 1.18, 1.18, 1.0)
 
 
 func _应用颜色() -> void:
@@ -276,7 +277,10 @@ func _应用战争() -> void:
 
 func _应用选中() -> void:
 	var 强度 := 0.45 + 0.55 * (0.5 + 0.5 * sin(_脉冲 / 1.2 * TAU))
-	var 金色 := Color(1.0 + 强度, 1.0 + 强度 * 0.75, 1.0 - 强度 * 0.55) * _高亮乘
+	# 可互动高亮的色相只由设置页「地图高亮乘色」决定, 这里只给中性亮度脉冲.
+	# 旧实现把色相硬编码成金色(R>1, G>1, B<1): 乘到蓝/灰国家上蓝通道被压低,
+	# 就变成"蓝国发绿、灰国闪金光"; 玩家把高亮设成白色也不会生效, 因为金色是乘法里写死的.
+	var 可互动色 := Color(1.0 + 强度 * 0.6, 1.0 + 强度 * 0.6, 1.0 + 强度 * 0.6) * _高亮乘
 	for d in _sprites:
 		if d["kind"] == "war" or not d["tinted"]:
 			continue
@@ -287,7 +291,7 @@ func _应用选中() -> void:
 		var 悬停 := _hover_country >= 0 and disp == _hover_country
 		# 高亮集合存的是"点开这国看到的面板"索引(disp): 别名块(18/111 等)要与目标国同亮
 		var 可互动 := _可互动开 and _高亮.has(disp)
-		sp.modulate = 选中高亮 * _高亮乘 if 选中 else (悬停高亮 * _高亮乘 if 悬停 else (金色 if 可互动 else Color.WHITE))
+		sp.modulate = 选中高亮 * _高亮乘 if 选中 else (悬停高亮 * _高亮乘 if 悬停 else (可互动色 if 可互动 else Color.WHITE))
 
 
 # 悬停高亮: 0.1s 采样一次鼠标所在国家(逐像素拾取较重, 不逐帧跑)

@@ -35,6 +35,8 @@ const 禁止按钮 := {"禁止极左派": 0, "禁止温和派": 2, "禁止改革
 @onready var 政治路线类型: Label = $政治路线类型
 @onready var 军队力量: Label = $军队力量
 @onready var 右栏条件显示: Label = $右栏条件显示
+@onready var 介绍滚动: ScrollContainer = $右栏政策介绍/介绍滚动
+@onready var 介绍文案: RichTextLabel = $右栏政策介绍/介绍滚动/右栏政策介绍文案
 @onready var 中共党内派系: Label = $中共党内派系
 @onready var 选举: Button = $选举
 @onready var 经济同盟: Button = $经济同盟
@@ -101,6 +103,7 @@ func _调整面板(控件: Control) -> void:
 func _展开介绍() -> void:
 	$右栏政策介绍.visible = true
 	$右栏政策介绍展开.visible = false
+	介绍滚动.scroll_vertical = 0
 
 
 func _收起介绍() -> void:
@@ -160,7 +163,7 @@ func _显示条件(cat: int, option_index: int) -> void:
 	# 条件栏只放执行条件; 政策介绍长文放右侧介绍面板(原版同一分工, 避免两处重复)
 	右栏条件显示.visible = not lines.is_empty()
 	右栏条件显示.text = "\n".join(lines)
-	$右栏政策介绍/右栏政策介绍文案.text = 悬浮提示.unity_to_bbcode(opis)
+	介绍文案.text = 悬浮提示.unity_to_bbcode(opis)
 
 
 func _清空条件() -> void:

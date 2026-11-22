@@ -15,6 +15,10 @@ public sealed class WarPane : IPanel
 
     public Dictionary<string, object> Snapshot()
     {
+        // 原版 War.DecleredWar() 每次调用都往 ingamewars 末尾追加(同引用), 焦点层跨读档
+        // 重跑会把同一场"欧加登战争"追加成多条 —— 打开战争界面前先按原版语义收拢,
+        // 保证列表里一场战争只出现一次.
+        GameHost.去重战争();
         var state = GameHost.State;
         var wars = new List<object>();
         for (var i = 0; i < state.ingamewars.Length; i++)

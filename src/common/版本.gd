@@ -5,12 +5,12 @@ extends RefCounted
 ## tools/check_version.py 校验. 纯静态工具, 不注册 autoload.
 
 
-## 当前版本, 形如 "0.7.2"
+## 当前版本, 形如 "0.7.2.1"
 static func 当前() -> String:
 	return str(ProjectSettings.get_setting("application/config/version", "0.0.0"))
 
 
-## 显示用, 形如 "v0.7.2"
+## 显示用, 形如 "v0.7.2.1"
 static func 文本() -> String:
 	return "v" + 当前()
 

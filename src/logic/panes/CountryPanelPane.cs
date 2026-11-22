@@ -10,6 +10,7 @@ public sealed class CountryPanelPane : IPanel
 
     int _index;
     readonly int[] _types = { -1, -1, -1, -1 };
+    readonly int[] _groups = { -1, -1, -1, -1 };
 
     public Dictionary<string, object> Snapshot()
     {
@@ -25,9 +26,11 @@ public sealed class CountryPanelPane : IPanel
         {
             var info = (Dictionary<string, object>)buttons[i];
             var type = (int)info["type"];
+            var group = Automation.DiplomacyGroup(type);
             _types[i] = type;
+            _groups[i] = group;
             info["autoable"] = Automation.IsAutoable(type) && (bool)info["active"];
-            info["auto"] = Automation.IsEnabled(type);
+            info["auto"] = group >= 0 ? Automation.IsDiplomacyEnabled(group) : Automation.IsEnabled(type);
         }
 
         return new PanelSnapshot()
@@ -38,6 +41,7 @@ public sealed class CountryPanelPane : IPanel
             .Put("icons", icons)
             .Put("buttons", buttons)
             .Put("auto_types", Automation.TypesString())
+            .Put("auto_diplo", Automation.DiplomacyString())
             .Build();
     }
 
@@ -57,7 +61,9 @@ public sealed class CountryPanelPane : IPanel
                 MapPane.InvalidateColors();
                 break;
             case "切换自动":
-                Automation.ToggleType(_types[(int)(long)args[0]]);
+                var 槽 = (int)(long)args[0];
+                if (_groups[槽] >= 0) Automation.ToggleDiplomacy(_groups[槽]);
+                else Automation.ToggleType(_types[槽]);
                 break;
             default:
                 throw new System.ArgumentOutOfRangeException(nameof(action), action, "国家面板没有该动作");

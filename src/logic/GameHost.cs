@@ -134,7 +134,12 @@ public static class GameHost
     public static void ReplaceState(GameState state)
     {
         Global.gameState = state;
-        Global.CreateDecisions();
+        // 原版 LoadInScript.OnMouseDown 就是读档入口: 重新载入文本表(new_texts/old_modify_*)、
+        // 按存档状态重算修正文案、重建决策对象. 文本表不在 GameState 里, 不做这一步
+        // 概览里的动态文案会退回基础文本(事件/时间脚本往 old_modify_desc 追加的内容全丢).
+        执行原版读档后处理();
+        // 政治界面的名字表是静态对象图里的克隆, 读档后必须重指(见 PoliticsHost.RefreshNames)
+        PoliticsHost.RefreshNames();
         typeof(TimeScript).GetField("global2", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
             .SetValue(Clock, state);
         ResetRoundState();
@@ -145,6 +150,36 @@ public static class GameHost
         Port.DiploHost.Ensure();
         Port.DiploHost.Ui.Map.EventWrite(state);
         成就不设限();
+        去重战争();
+    }
+
+    // ---------- 原版读档后处理 ----------
+    // 原版 LoadInScript.OnMouseDown 的完整流程是:
+    //   读槽位元信息 → 重载全部文本表 → LoadYugoSave(读 state) → CreateDecisions ×2 → 切外交
+    //   → 按 state 重算修正文案.
+    // 移植版存档是 SaveService 格式, 槽位文件不在 NewData 下, 所以让它走"文件不存在"分支:
+    // LoadYugoSave 不动刚读入的 state, 只执行文本表重载与文案重算(以及原版的两次 CreateDecisions).
+    // 切场景在这里抑制(由调用方统一发 scene_requested), 避免同一请求切两次.
+    const int 原版占位槽 = 1000000;
+    static Stub _loadScript;
+
+    static void 执行原版读档后处理()
+    {
+        _loadScript ??= Stub.Take<LoadInScript>("LoadScript", Lifecycle.Lazy).Set("number", 原版占位槽);
+        var 键 = "data14" + (原版占位槽 + 10);
+        UnityEngine.PlayerPrefs.SetInt(键, 0);
+        var 抑制 = SceneRouter.SuppressLoadScene;
+        SceneRouter.SuppressLoadScene = true;
+        try
+        {
+            _loadScript.Invoke("OnMouseDown");
+        }
+        finally
+        {
+            SceneRouter.SuppressLoadScene = 抑制;
+            SceneRouter.ConsumeCapturedScene();
+            UnityEngine.PlayerPrefs.DeleteKey(键);
+        }
     }
 
     // 移植版没有 Steam, 原版的 iron_and_blood 门控只为成就服务; 玩家要求成就不受难度/读档影响.
@@ -269,7 +304,27 @@ public static class GameHost
     // 原版 KGWars.Wars.O 是进程级静态单例, War.DecleredWar() 每次都往 ingamewars 末尾追加
     // (没有"已宣战"检查). 移植版是长驻进程: 焦点层在 active() 抛异常时会整层重跑,
     // 存档/读档边界也可能让同一层再执行, 结果同一场欧加登战争被追加两条(同引用).
-    // 这里每月按引用去重一次, 同一场战争只保留一条 is_going.
+    // 原版每月结算时按引用去重; 读档后立即去重一次, 把重复位置换成已结束的空位
+    // (不能把战争本身 is_going 置 false: 同引用会把唯一那条一起关掉, 战争凭空消失).
+    public static void 去重战争()
+    {
+        var state = Global.gameState;
+        var 已见 = new HashSet<warinwars>();
+        var 已见定义 = new HashSet<string>();
+        for (var i = 0; i < state.ingamewars.Length; i++)
+        {
+            var war = state.ingamewars[i];
+            if (!war.is_going) continue;
+            // 跨进程读档时 Wars.O 是新建对象, 与存档里那条不是同一引用, 所以再按
+            // 战争定义(名称+双方)收拢 —— 原版只有 Wars.O 一场欧加登战争, 同名同双方即同一场.
+            var 定义 = war.name_war + "\u0001" + war.side1 + "\u0001" + war.side2;
+            if (!已见.Add(war) || !已见定义.Add(定义))
+            {
+                state.ingamewars[i] = new warinwars { is_going = false };
+            }
+        }
+    }
+
     static int _warDedupMonth = -1;
 
     public static void TickWarDedup()
@@ -278,13 +333,7 @@ public static class GameHost
         var month = state.data[21] * 100 + state.data[20];
         if (month == _warDedupMonth) return;
         _warDedupMonth = month;
-        var seen = new HashSet<warinwars>();
-        for (var i = 0; i < state.ingamewars.Length; i++)
-        {
-            var war = state.ingamewars[i];
-            if (!war.is_going) continue;
-            if (!seen.Add(war)) war.is_going = false;
-        }
+        去重战争();
     }
 
     // ================= 自动存档 =================
@@ -298,6 +347,13 @@ public static class GameHost
     // 移植版自动存档全部走 SaveService(见 MaybeAutoSave).
     static int _autoSaveMode = 1;
 
+    // 自动存档目标槽(0=关闭): 槽位无限, 由玩家在存档界面的行按钮任意指定, 不再固定 0 号独立槽.
+    static int _autoSaveSlot = 1;
+
+    public static int AutoSaveSlot => _autoSaveSlot;
+
+    public static void SetAutoSlot(int slot) => _autoSaveSlot = slot;
+
     public static void SetSaveOptions(int mode, int place)
     {
         _autoSaveMode = mode;
@@ -308,12 +364,12 @@ public static class GameHost
     public static void MaybeAutoSave()
     {
         var s = Global.gameState;
-        if (Global.speed <= 0 || _autoSaveMode <= 0) return;
+        if (_autoSaveSlot <= 0 || Global.speed <= 0 || _autoSaveMode <= 0) return;
         if (s.data[19] != 1) return;
         if (_autoSaveMode == 2 && s.data[20] % 6 != 0) return;
         var key = s.data[21] * 10000 + s.data[20] * 100 + s.data[19];
         if (key == _autoSaveDay) return;
         _autoSaveDay = key;
-        Port.SaveService.Save(s, Port.SavePaths.Slot(Port.SavePaths.AutoSlot));
+        Port.SaveService.Save(s, Port.SavePaths.Slot(_autoSaveSlot));
     }
 }
