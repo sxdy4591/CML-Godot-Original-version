@@ -79,6 +79,9 @@ func _ready() -> void:
 		选择专辑(0)
 	print("[AudioSys] 音频总管就绪: %d 张专辑, 音乐音量 %d / 音效音量 %d"
 			% [专辑目录列表.size(), _音乐音量, _音效音量])
+	if OS.get_name() == "Android":
+		print("[AudioSys] Android 已授权限: %s" % str(OS.get_granted_permissions()))
+		_申请存储权限()
 	# 注: 按项目要求已删除全局左键/滚轮点击音效; play_button_click_sound() 保留供按钮显式调用
 
 # ============================== 专辑扫描 ==============================
@@ -115,6 +118,12 @@ func _候选外置专辑根目录() -> Array[String]:
 	#   · 下载 / 音乐 / 文档  : 数据线或文件管理器直接放进去(Android 11+ 受分区存储限制)
 	# 顺序: user:// 在公共目录之前 —— Android 11+ 即使申请了 READ_MEDIA_*,
 	# 直接枚举 /storage/emulated/0 下的目录仍可能被拒, 应用私有目录没有这个问题.
+	# [Android] 内部存储根: 玩家最常见的做法是把「专辑」直接拷到 手机存储/专辑,
+	# 而不是放进 Download 子目录(需要「所有文件访问权限」, 见 _申请存储权限).
+	if OS.get_name() == "Android":
+		for 根 in _安卓存储根():
+			for 名 in 外置专辑根目录名候选:
+				结果.append(根.path_join(名))
 	for 名 in 外置专辑根目录名候选:
 		结果.append(OS.get_user_data_dir().path_join(名))
 	for sys_dir in [OS.SYSTEM_DIR_DOWNLOADS, OS.SYSTEM_DIR_MUSIC, OS.SYSTEM_DIR_DOCUMENTS]:
@@ -668,3 +677,52 @@ func _exit_tree() -> void:
 		按钮按下.stop()
 	if 按钮悬停:
 		按钮悬停.stop()
+
+
+# ============================== Android 存储权限 ==============================
+
+## Android 11+ 的「所有文件访问权限」是特殊权限: 导出预设里声明(manage_external_storage)之后,
+## 仍要在系统设置里手动开启. 这里申请一次, 之后每 2 秒重扫专辑, 玩家在系统设置里授权后不必重启游戏.
+const 存储权限 := "android.permission.MANAGE_EXTERNAL_STORAGE"
+
+## 内部存储根候选(/storage/emulated/0 等), 去重保序.
+func _安卓存储根() -> Array[String]:
+	var 根们: Array[String] = []
+	for env in ["EXTERNAL_STORAGE", "SECONDARY_STORAGE", "EMULATED_STORAGE_TARGET"]:
+		var p := OS.get_environment(env)
+		if not p.is_empty() and not 根们.has(p):
+			根们.append(p)
+	var 下载 := OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
+	var 上级 := 下载.get_base_dir()
+	if not 上级.is_empty() and not 根们.has(上级):
+		根们.append(上级)
+	return 根们
+
+
+## 申请一次即可: 特殊权限走的是系统设置页, request_permission 可能在设置页里等玩家操作.
+func _申请存储权限() -> void:
+	if OS.get_granted_permissions().has(存储权限):
+		return
+	print("[AudioSys] 申请存储权限: %s" % 存储权限)
+	OS.request_permission(存储权限)
+	_复查专辑(0)
+
+
+## 玩家从设置页回来后权限才生效, 而且 get_granted_permissions() 对特殊权限不一定如实上报;
+## 所以不看权限位, 直接每隔 2 秒重扫一次专辑(最多 5 分钟), 扫到新专辑就切过去.
+var _复查次数 := 0
+const 复查上限 := 150
+
+func _复查专辑(_第几次: int) -> void:
+	var 计时 := get_tree().create_timer(2.0)
+	计时.timeout.connect(func() -> void:
+		_复查次数 += 1
+		var 原专辑 := 当前专辑目录
+		var 原数量 := 专辑目录列表.size()
+		_扫描专辑()
+		if 专辑目录列表.find(原专辑) < 0 and not 专辑目录列表.is_empty():
+			选择专辑(0)
+		elif 专辑目录列表.size() != 原数量:
+			print("[AudioSys] 复查发现专辑数量变化: %d → %d" % [原数量, 专辑目录列表.size()])
+		if _复查次数 < 复查上限:
+			_复查专辑(_复查次数))

@@ -196,6 +196,9 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 	政体类型.text = data["regime"]
 	政治路线类型.text = data["route"]
 	军队力量.text = data["army_power"]
+	# 原版术语是「军事实力」; 悬停说明数值含义, 否则界面上只有一个裸数字
+	军队力量.tooltip_text = "军事实力 %s" % data["army_power"]
+	($军队力量图标 as Control).tooltip_text = 军队力量.tooltip_text
 	中共党内派系.text = "%s（主导派系：%s）" % [data["title"], data["leading"]]
 	右栏条件显示.text = ""
 	选举.disabled = not bool(data["can_elect"])

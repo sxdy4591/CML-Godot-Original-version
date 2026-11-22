@@ -2458,7 +2458,7 @@ metadata/orig = "134.0"
 [node name="part_140.0" type="Sprite2D" parent="国家层" unique_id=1512025575]
 visible = false
 z_index = -160
-position = Vector2(693.2102, -36.2859)
+position = Vector2(693, -14)
 scale = Vector2(0.38766086, 0.38766098)
 texture = ExtResource("242_p_140_0")
 metadata/kind = "part"
@@ -2640,7 +2640,7 @@ metadata/orig = "013.1"
 [node name="part_149.0" type="Sprite2D" parent="国家层" unique_id=997257694]
 visible = false
 z_index = 600
-position = Vector2(785.1334, 0.861)
+position = Vector2(785.00006, 23)
 scale = Vector2(0.387661, 0.3876607)
 texture = ExtResource("272_p_149_0")
 metadata/kind = "part"

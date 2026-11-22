@@ -212,9 +212,7 @@ public sealed class ShortcutPane : IPanel
 	// 且距 int 上限(21 亿)有六个数量级的余量, 不会溢出.
 	const int PartyCap = 1000;        // data[1]  党内支持  BoundsOfVariables
 	const int PeopleCap = 1000;       // data[3]  人民支持
-	const int FreedomCap = 1000;      // data[4]  思想自由
 	const int LivingCap = 1500;       // data[5]  生活水平
-	const int PrestigeCap = 1100;     // data[6]  国际声望
 	const int IndustryCap = 1500;     // data[12] 工业
 	const int AgricultureCap = 1500;  // data[13] 农业
 	const int ServiceCap = 1500;      // data[68] 服务业
@@ -237,9 +235,7 @@ public sealed class ShortcutPane : IPanel
 		var state = GameHost.State;
 		state.data[1] = PartyCap;
 		state.data[3] = PeopleCap;
-		state.data[4] = FreedomCap;
 		state.data[5] = LivingCap;
-		state.data[6] = PrestigeCap;
 		state.data[12] = IndustryCap;
 		state.data[13] = AgricultureCap;
 		state.data[68] = ServiceCap;

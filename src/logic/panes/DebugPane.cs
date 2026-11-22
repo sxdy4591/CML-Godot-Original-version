@@ -141,6 +141,9 @@ public sealed class DebugPane : IPanel
             case "faction":
                 Faction(state);
                 break;
+            case "audio":
+                AudioDiag();
+                break;
             case "achreset":
                 AchievementCenter.ResetAll();
                 Log("成就解锁状态已重置(内存 + playerprefs)");
@@ -223,6 +226,33 @@ public sealed class DebugPane : IPanel
         Log("gold(金手指开关) | pop(人口+1亿) | key 动作号(快捷键同款)");
         Log("faction(主导派系排查: data[15]/席位/联盟合计)");
         Log("achreset(重置全部成就解锁状态)");
+        Log("audio(音乐目录/权限诊断)");
+    }
+
+    // 音乐诊断: 手机上没有 adb 时, 靠这条命令看权限与候选路径到底缺在哪.
+    static void AudioDiag()
+    {
+        Log($"平台 {Godot.OS.GetName()} | 已授权限 [{string.Join(",", Godot.OS.GetGrantedPermissions())}]");
+        Log($"EXTERNAL_STORAGE={Godot.OS.GetEnvironment("EXTERNAL_STORAGE")}");
+        Log($"user={Godot.OS.GetUserDataDir()}");
+        var 内置 = Godot.DirAccess.Open("res://assets/audio/music");
+        Log($"内置 res://assets/audio/music: {(内置 != null ? "有" : "无")}");
+        内置?.Dispose();
+        var 名们 = new[] { "专辑", "音乐", "Albums", "Music" };
+        var 候选 = new System.Collections.Generic.List<string>();
+        foreach (var 名 in 名们) 候选.Add(Godot.OS.GetUserDataDir() + "/" + 名);
+        foreach (var 系统 in new[] { Godot.OS.SystemDir.Downloads, Godot.OS.SystemDir.Music, Godot.OS.SystemDir.Documents })
+        {
+            var 根 = Godot.OS.GetSystemDir(系统);
+            if (string.IsNullOrEmpty(根)) continue;
+            foreach (var 名 in 名们) 候选.Add(根 + "/" + 名);
+        }
+        foreach (var 路径 in 候选)
+        {
+            var 目录 = Godot.DirAccess.Open(路径);
+            Log($"{(目录 != null ? "有" : "无")} {路径}");
+            目录?.Dispose();
+        }
     }
 
     // 主导派系排查: data[56] 由原版 Results_text.Pereraschyot 在事件结算时算,

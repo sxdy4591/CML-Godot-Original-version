@@ -36,6 +36,12 @@ public static class GameHost
 
     public static void StartNewGame(int number)
     {
+        // 设置页改难度只落 playerprefs [ui] difficulty; 开局数据读的是 gameState.diff,
+        // 它只在启动时由 GlobalScript.Init 从 PlayerPrefs("our_diff_in") 读过一次.
+        // 这里重同步, 否则改完难度开新档还是启动时的那个难度.
+        var 难度 = ReadDifficultySetting();
+        SetDifficulty(难度);
+        Global.gameState.diff = 难度;
         // 焦点树是静态字典, 重开局必须清空, 否则 CreateTree 会因同名 key 抛重复键异常
         KGFocus.FocusManager.all_trees.Clear();
         NewGameSetup.Reset(Global.gameState);
@@ -53,6 +59,13 @@ public static class GameHost
         EnsureCountryCapacity(Global.gameState);
         // GameStartScript 把 iron_and_blood 设成 diff>=2; 移植版不受难度限制, 开局后统一打开
         成就不设限();
+    }
+
+    static int ReadDifficultySetting()
+    {
+        var cfg = new Godot.ConfigFile();
+        cfg.Load("user://playerprefs.ini");
+        return (int)cfg.GetValue("ui", "difficulty", 2);
     }
 
     // 原版预设里国家 200 个、parts 至少 12 槽; 开局重建后要补回来, 地图与外交才不越界

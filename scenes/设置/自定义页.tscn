@@ -818,21 +818,53 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "开"
 
-[node name="GoldRow" type="HBoxContainer" parent="滚动/列表" unique_id=1262914393]
+[node name="AutoT145Row" type="HBoxContainer" parent="滚动/列表" unique_id=516801028]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="标题" type="Label" parent="滚动/列表/GoldRow" unique_id=384751132]
+[node name="标题" type="Label" parent="滚动/列表/AutoT145Row" unique_id=518327475]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·阿拉伯：施压海湾合作委员会减产"
+
+[node name="AutoT145Toggle" type="CheckButton" parent="滚动/列表/AutoT145Row" unique_id=964545484]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="AutoT146Row" type="HBoxContainer" parent="滚动/列表" unique_id=1791308884]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoT146Row" unique_id=2004408543]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动·阿拉伯：施压海湾合作委员会增产"
+
+[node name="AutoT146Toggle" type="CheckButton" parent="滚动/列表/AutoT146Row" unique_id=1315019890]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"
+
+[node name="GoldRow" type="HBoxContainer" parent="滚动/列表" unique_id=745480149]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/GoldRow" unique_id=1968346778]
 custom_minimum_size = Vector2(380, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "金手指模式"
 
-[node name="GoldToggle" type="CheckButton" parent="滚动/列表/GoldRow" unique_id=1487596602]
+[node name="GoldToggle" type="CheckButton" parent="滚动/列表/GoldRow" unique_id=618082717]
 custom_minimum_size = Vector2(64, 48)
 layout_mode = 2
 button_pressed = true
 
-[node name="底部占位" type="Control" parent="滚动/列表" unique_id=1774221278]
+[node name="底部占位" type="Control" parent="滚动/列表" unique_id=1617963914]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
