@@ -22,6 +22,29 @@ public static class DataSlots
     // 原值显示(不除 10)的槽
     public static bool Raw(int slot) => slot is 19 or 20 or 21 or 82 or 47 or 105 or 108;
 
+    // 缓存槽 → 真值字段. 这几个槽由 TimeScript.KumihaRepaint() 每天用真值覆盖:
+    //   data[7]  = influencePRC
+    //   data[28] = empires[0].relations
+    //   data[29] = empires[1].relations
+    // 所有原版判定读这三个槽, 但界面显示读的是真值字段 —— 只改缓存会写了个寂寞.
+    // 控制台写缓存槽时同步写真值(反之亦然), 返回 null 表示该槽不是缓存.
+    public static string? Mirror(int slot) => slot switch
+    {
+        7 => "influencePRC",
+        28 => "empires[0].relations",
+        29 => "empires[1].relations",
+        _ => null,
+    };
+
+    // 真值字段 → 对应缓存槽, 找不到返回 -1
+    public static int MirrorSlot(string path) => path switch
+    {
+        "influencePRC" => 7,
+        "empires[0].relations" => 28,
+        "empires[1].relations" => 29,
+        _ => -1,
+    };
+
     static string Fixed(int value)
     {
         var a = System.Math.Abs(value);
@@ -37,7 +60,7 @@ public static class DataSlots
         /* 004 */ "思想自由度",
         /* 005 */ "生活水平",
         /* 006 */ "国际声望",
-        /* 007 */ "全球影响力(缓存)",
+        /* 007 */ "全球影响力(每日缓存)",
         /* 008 */ "预算",
         /* 009 */ "特工网络",
         /* 010 */ "美国实力初值",
@@ -58,8 +81,8 @@ public static class DataSlots
         /* 025 */ "自由化压力",
         /* 026 */ "腐败度",
         /* 027 */ "",
-        /* 028 */ "美国关系(上期镜像)",
-        /* 029 */ "苏联关系(上期镜像)",
+        /* 028 */ "美国关系(每日缓存)",
+        /* 029 */ "苏联关系(每日缓存)",
         /* 030 */ "中苏党际联系",
         /* 031 */ "两极平衡刻度(500为中)",
         /* 032 */ "毛派(纳萨尔派)力量",

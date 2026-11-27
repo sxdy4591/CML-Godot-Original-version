@@ -103,6 +103,9 @@ public sealed class DebugPane : IPanel
             case "rel":
                 var empire = state.empires[int.Parse(p[1])];
                 empire.relations = int.Parse(p[2]);
+                // 关系值每天会被 KumihaRepaint 镜像进 data[28]/[29], 这里顺手写一份,
+                // 免得改完当下事件条件还读着旧镜像值
+                state.data[28 + int.Parse(p[1])] = empire.relations;
                 Log($"关系[{p[1]}] = {empire.relations}");
                 break;
             case "mod":
@@ -511,9 +514,11 @@ public sealed class DebugPane : IPanel
     // 槽位名见 Port.DataSlots(逐条取自原版源码读写点); 未知槽按 data[n] 显示.
     //   data            列出 0..19
     //   data 起始        从该槽起列出 20 个
-    //   data 槽          查看
+    //   data 槽          查看(缓存槽会一并打印真值字段)
     //   data 槽 值       直接改写(内部原值, 不乘 10)
     //   data 槽 +值/-值  增减
+    // 缓存槽 7/28/29 由 TimeScript.KumihaRepaint 每天用真值覆盖, 写它们等于白写:
+    // 这里写完同步写真值, 界面立刻跟着变(下次 KumihaRepaint 也不会把它盖回去).
     static void Data(GameState state, string[] p)
     {
         if (p.Length == 1)
@@ -525,11 +530,20 @@ public sealed class DebugPane : IPanel
         if (p.Length == 2)
         {
             Log($"[{slot}] {槽名(slot)} = {state.data[slot]}（显示 {Port.DataSlots.Text(slot, state.data[slot])}）");
+            var 真值 = Port.DataSlots.Mirror(slot);
+            if (真值 != null) Log($"  该槽是每日缓存, 真值 {真值} = {ReadField(state, 真值)}");
             return;
         }
         var 值 = p[2];
         if (值[0] == '+' || 值[0] == '-') state.data[slot] += int.Parse(值);
         else state.data[slot] = int.Parse(值);
+        var 镜像 = Port.DataSlots.Mirror(slot);
+        if (镜像 != null)
+        {
+            WriteField(state, 镜像, state.data[slot].ToString());
+            Log($"[{slot}] {槽名(slot)} = {state.data[slot]}（显示 {Port.DataSlots.Text(slot, state.data[slot])}）→ 已同步真值 {镜像} = {ReadField(state, 镜像)}");
+            return;
+        }
         Log($"[{slot}] {槽名(slot)} = {state.data[slot]}（显示 {Port.DataSlots.Text(slot, state.data[slot])}）");
     }
 
@@ -556,7 +570,11 @@ public sealed class DebugPane : IPanel
             return;
         }
         WriteField(state, p[1], p[2]);
-        Log($"{p[1]} = {ReadField(state, p[1])}");
+        // 写的是缓存槽对应的真值(影响力/美苏关系)时, 把缓存槽一起刷新,
+        // 免得概览/事件的 data 镜像在下一次 KumihaRepaint 前还是旧值
+        var slot = Port.DataSlots.MirrorSlot(p[1]);
+        if (slot >= 0) state.data[slot] = (int)ReadField(state, p[1]);
+        Log($"{p[1]} = {ReadField(state, p[1])}" + (slot >= 0 ? $"（同步缓存 data[{slot}]）" : ""));
     }
 
     static object ReadField(object root, string path)
@@ -653,6 +671,7 @@ public sealed class DebugPane : IPanel
         Log("save 槽位 | load 槽位 | cheat 0-12 | gold | pop | key 动作号");
         Log("data [起始]                 列出 data 全字段(每次 20 个, 0..199)");
         Log("data 槽 [值|+值|-值]        查看/改写 data 槽(共 200 槽, 名称见 data 列表)");
+        Log("                           缓存槽 7/28/29 写入会自动同步真值(influencePRC / 美苏关系)");
         Log("field 路径 [值]             任意状态字段: influencePRC / leader.power / empires[0].relations /");
         Log("                            politics[3].loyality / allcountries[1].Gosstroy / data[8] ...");
         Log("auto [条数]                 最近自动动作明细(干了什么、资源扣在哪)");

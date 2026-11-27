@@ -19,7 +19,30 @@ data 8 +100          增加
 field influencePRC 500         data 之外的任意状态字段
 field empires[0].relations 900
 field allcountries[1].Gosstroy 1
+rel 1 1000                     美国关系(0)/苏联关系(1), 同时同步 data[28]/[29]
 ```
+
+### 先看这一节：三个"看起来像真值"的缓存槽
+
+`data[7] / data[28] / data[29]` 不是独立状态，而是 `TimeScript.KumihaRepaint()` **每天**用真值覆盖的镜像：
+
+```csharp
+private void KumihaRepaint()
+{
+    global2.data[28] = global2.empires[0].relations;   // 美国关系
+    global2.data[29] = global2.empires[1].relations;   // 苏联关系
+    global2.data[7]  = global2.influencePRC;           // 全球影响力
+}
+```
+
+原版的判定（事件条件、焦点 `QueryChina` 等）读这三个槽，但**界面显示读真值字段**。
+只改缓存 = 界面不动、第二天还被盖回去。控制台已经做了双向同步：
+
+- `data 29 1000` → 写完自动同步 `empires[1].relations = 1000`，顶栏立刻变
+- `field empires[1].relations 1000` → 自动同步 `data[29]`
+- `data 29` 查看时会额外打印"该槽是每日缓存，真值 = …"
+
+其余槽（8 预算、9 特工、22 军力、12/13/68 产业、26 腐败…）都是真值，改完即生效。
 
 ---
 
@@ -33,7 +56,7 @@ field allcountries[1].Gosstroy 1
 | 4 | 思想自由度 | `TopStatePane`；`BoundsOfVariables` 钳制 0..1000 |
 | 5 | 生活水平 | `TopStatePane`；钳制 0..1500 |
 | 6 | 国际声望 | `TopStatePane`；钳制 −50..1100 |
-| 7 | 全球影响力（缓存） | `TimeScript.KumihaRepaint` 每天写入；**真值是 `influencePRC`** |
+| 7 | 全球影响力（每日缓存） | `TimeScript.KumihaRepaint()` 每天写 `data[7] = influencePRC`；**真值是 `influencePRC`** |
 | 8 | 预算 | `TopStatePane`；外交按钮判定 `data[8] + data[36]` |
 | 9 | 特工网络 | `TopStatePane`；外交按钮费用 |
 | 10 | 美国实力初值 | `GameStartScript`：`empires[0].power = data[10]` |
@@ -53,8 +76,8 @@ field allcountries[1].Gosstroy 1
 | 24 | 进口规模（相对 1975 年） | 经济界面 `% от 1975: num - data[24]` |
 | 25 | 自由化压力 | 概览文案「自由化思潮（每两周）」 |
 | 26 | 腐败度 | `Repaint_corrupt`；`BoundsOfVariables` 下限 0 |
-| 28 | 美国关系（上期镜像） | `TimeScript.BoundsOfVariables` 前 `data[28] = empires[0].relations` |
-| 29 | 苏联关系（上期镜像） | 同上，`empires[1].relations` |
+| 28 | 美国关系（每日缓存） | `TimeScript.KumihaRepaint()` 每天写 `data[28] = empires[0].relations`；**真值是 `empires[0].relations`** |
+| 29 | 苏联关系（每日缓存） | 同上：`data[29] = empires[1].relations`；**真值是 `empires[1].relations`** |
 | 30 | 中苏党际联系 | `GameStartScript`：`SOV_PRC_PartiesConnection = data[30]` |
 | 31 | 两极平衡刻度（500 为中点） | 概览文案「两极大国关系: (500 − data[31])/100」 |
 | 32 | 毛派（纳萨尔派）力量 | 外交文案「支持东部游击武装｜毛主义者力量: data[32]/10」 |
