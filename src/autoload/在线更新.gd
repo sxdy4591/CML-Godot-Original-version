@@ -3,6 +3,8 @@ extends Node
 ## 系统界面(主菜单/关于)专用, 不依赖原版内核, 不碰 UiBridge.
 
 signal 更新检查完成(有新版本: bool, 远端版本: String, 下载页: String, 说明: String)
+## 连不上站点(离线/超时): 主菜单据此把"正在检查更新…"换成可重试的提示
+signal 更新检查失败
 signal 在线内容就绪(内容: Dictionary)
 
 ## GitHub Pages 站点根: 仓库 Settings -> Pages 选 main 分支 /site 目录后,
@@ -13,7 +15,7 @@ const 站点 := "https://sxdy4591.github.io/CML-Godot-Original-version/"
 var 内容: Dictionary = {}
 
 func 检查更新() -> void:
-	请求文本(站点 + "version.json", _解析版本清单)
+	请求文本(站点 + "version.json", _解析版本清单, func() -> void: 更新检查失败.emit())
 
 func 拉取内容() -> void:
 	请求文本(站点 + "content.json", _解析内容)
@@ -63,13 +65,13 @@ func _缓存路径(url: String) -> String:
 		后缀 = "img"
 	return "%s/%s.%s" % [图片缓存目录, url.md5_text(), 后缀]
 
-func 请求文本(url: String, 回调: Callable) -> void:
+func 请求文本(url: String, 回调: Callable, 失败 := Callable()) -> void:
 	请求字节(url, func(数据: PackedByteArray) -> void:
 		if not 回调.is_valid():
 			return
-		回调.call(数据.get_string_from_utf8()))
+		回调.call(数据.get_string_from_utf8()), false, 失败)
 
-func 请求字节(url: String, 回调: Callable, 报错 := true) -> void:
+func 请求字节(url: String, 回调: Callable, 报错 := true, 失败 := Callable()) -> void:
 	var 请求 := HTTPRequest.new()
 	请求.timeout = 10.0
 	add_child(请求)
@@ -79,6 +81,8 @@ func 请求字节(url: String, 回调: Callable, 报错 := true) -> void:
 			if 结果 != HTTPRequest.RESULT_SUCCESS or 码 != 200:
 				if 报错:
 					push_error("[在线更新] %s 失败: result=%d code=%d" % [url, 结果, 码])
+				if 失败.is_valid():
+					失败.call()
 				return
 			# 调用方节点可能已在请求期间被释放(例如成就界面随主菜单切场景), 此时丢弃结果
 			if not 回调.is_valid():

@@ -932,3 +932,19 @@ custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "开"
+
+[node name="AutoReportRow" type="HBoxContainer" parent="滚动/列表" unique_id=663198420]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="标题" type="Label" parent="滚动/列表/AutoReportRow" unique_id=1494176465]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "自动动作提示（每轮自动执行后在屏幕底部列出做了什么、扣了哪些资源）"
+
+[node name="AutoReportToggle" type="CheckButton" parent="滚动/列表/AutoReportRow" unique_id=609157857]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "开"

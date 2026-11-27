@@ -197,6 +197,15 @@ public sealed class DebugPane : IPanel
                 ShortcutPane.Run(int.Parse(p[1]));
                 Log($"快捷键动作 {p[1]} 已执行");
                 break;
+            case "data":
+                Data(state, p);
+                break;
+            case "field":
+                Field(state, p);
+                break;
+            case "auto":
+                Auto(p);
+                break;
             default:
                 Log($"未知命令: {p[0]}（输入 help）");
                 break;
@@ -496,6 +505,131 @@ public sealed class DebugPane : IPanel
         Log(going.Count == 0 ? "没有进行中的战争" : string.Join("; ", going));
     }
 
+    // ================= data 全字段 =================
+    // data 是 200 槽(0..199)的整数数组, 游戏内几乎全部数值都住在这里:
+    // 预算/特工/军力/人口/工业/农业/服务业/腐败/财政分配/日期/战争编号/政策槽...
+    // 槽位名见 Port.DataSlots(逐条取自原版源码读写点); 未知槽按 data[n] 显示.
+    //   data            列出 0..19
+    //   data 起始        从该槽起列出 20 个
+    //   data 槽          查看
+    //   data 槽 值       直接改写(内部原值, 不乘 10)
+    //   data 槽 +值/-值  增减
+    static void Data(GameState state, string[] p)
+    {
+        if (p.Length == 1)
+        {
+            ListData(state, 0);
+            return;
+        }
+        var slot = int.Parse(p[1]);
+        if (p.Length == 2)
+        {
+            Log($"[{slot}] {槽名(slot)} = {state.data[slot]}（显示 {Port.DataSlots.Text(slot, state.data[slot])}）");
+            return;
+        }
+        var 值 = p[2];
+        if (值[0] == '+' || 值[0] == '-') state.data[slot] += int.Parse(值);
+        else state.data[slot] = int.Parse(值);
+        Log($"[{slot}] {槽名(slot)} = {state.data[slot]}（显示 {Port.DataSlots.Text(slot, state.data[slot])}）");
+    }
+
+    static void ListData(GameState state, int start)
+    {
+        var end = Math.Min(start + 20, state.data.Length);
+        for (var i = start; i < end; i++)
+            Log($"[{i}] {槽名(i)} = {state.data[i]}（{Port.DataSlots.Text(i, state.data[i])}）");
+        Log($"data {start}..{end - 1}/{state.data.Length}；继续输入 data {end}");
+    }
+
+    static string 槽名(int slot) => Port.DataSlots.Known(slot) ? Port.DataSlots.Name(slot) : $"data[{slot}]";
+
+    // ================= 任意字段 =================
+    // data 之外的字段(engines: influencePRC / SOV_PRC_PartiesConnection / leader.power /
+    // empires[0].relations / allcountries[1].Gosstroy / politics[3].loyality ...).
+    // 路径用 '.' 分段, 支持 Name[i] 下标; 只写 int/bool/byte/float/string 四种标量.
+    static void Field(GameState state, string[] p)
+    {
+        if (p.Length == 2)
+        {
+            var 值 = ReadField(state, p[1]);
+            Log($"{p[1]} = {值}");
+            return;
+        }
+        WriteField(state, p[1], p[2]);
+        Log($"{p[1]} = {ReadField(state, p[1])}");
+    }
+
+    static object ReadField(object root, string path)
+    {
+        var current = root;
+        foreach (var part in path.Split('.'))
+        {
+            var (name, index) = ParsePart(part);
+            var type = current.GetType();
+            var field = type.GetField(name, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
+            current = index >= 0 ? ((Array)field.GetValue(current)).GetValue(index) : field.GetValue(current);
+        }
+        return current;
+    }
+
+    static void WriteField(object root, string path, string raw)
+    {
+        var parts = path.Split('.');
+        var current = root;
+        for (var i = 0; i < parts.Length - 1; i++)
+        {
+            var (name, index) = ParsePart(parts[i]);
+            var field = current.GetType().GetField(name, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
+            current = index >= 0 ? ((Array)field.GetValue(current)).GetValue(index) : field.GetValue(current);
+        }
+        var (leaf, leafIndex) = ParsePart(parts[^1]);
+        var leafField = current.GetType().GetField(leaf, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
+        object 目标;
+        Type 类型;
+        if (leafIndex >= 0)
+        {
+            var array = (Array)leafField.GetValue(current);
+            目标 = array;
+            类型 = array.GetType().GetElementType();
+            array.SetValue(解析值(raw, 类型), leafIndex);
+            return;
+        }
+        类型 = leafField.FieldType;
+        leafField.SetValue(current, 解析值(raw, 类型));
+    }
+
+    static (string Name, int Index) ParsePart(string part)
+    {
+        var open = part.IndexOf('[');
+        if (open < 0) return (part, -1);
+        return (part[..open], int.Parse(part[(open + 1)..^1]));
+    }
+
+    static object 解析值(string raw, Type type)
+    {
+        if (type == typeof(int)) return int.Parse(raw);
+        if (type == typeof(bool)) return raw == "1" || raw == "true" || raw == "on";
+        if (type == typeof(byte)) return (byte)int.Parse(raw);
+        if (type == typeof(float)) return float.Parse(raw);
+        if (type == typeof(string)) return raw;
+        throw new ArgumentOutOfRangeException(nameof(type), type, "field 只支持 int/bool/byte/float/string");
+    }
+
+    // ================= 自动化日志 =================
+    // 逻辑层 Automation 每轮结束把"汇总 + 逐条明细"写进 Recent; 这里列最近 20 条.
+    static void Auto(string[] p)
+    {
+        var count = p.Length > 1 ? int.Parse(p[1]) : 20;
+        if (Automation.Recent.Count == 0)
+        {
+            Log("本轮还没有自动动作(检查国家面板的自动勾是否打开)");
+            return;
+        }
+        var from = Math.Max(0, Automation.Recent.Count - count);
+        for (var i = from; i < Automation.Recent.Count; i++) Log(Automation.Recent[i]);
+        Log($"最近 {Automation.Recent.Count - from} 条 / 共 {Automation.Recent.Count} 条");
+    }
+
     static void Help()
     {
         Log("help / clear");
@@ -517,6 +651,11 @@ public sealed class DebugPane : IPanel
         Log("fac leader 派系 人物号      改派系领袖 faction_leader");
         Log("part 国家 下标 on|off | parts 国家 | map | highlight 国家 | faction");
         Log("save 槽位 | load 槽位 | cheat 0-12 | gold | pop | key 动作号");
+        Log("data [起始]                 列出 data 全字段(每次 20 个, 0..199)");
+        Log("data 槽 [值|+值|-值]        查看/改写 data 槽(共 200 槽, 名称见 data 列表)");
+        Log("field 路径 [值]             任意状态字段: influencePRC / leader.power / empires[0].relations /");
+        Log("                            politics[3].loyality / allcountries[1].Gosstroy / data[8] ...");
+        Log("auto [条数]                 最近自动动作明细(干了什么、资源扣在哪)");
         Log("mods | achreset | audio");
     }
 

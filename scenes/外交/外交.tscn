@@ -14,9 +14,21 @@
 [ext_resource type="PackedScene" uid="uid://da15250ca4be3" path="res://scenes/外交/预警图标.tscn" id="12_alert"]
 [ext_resource type="PackedScene" uid="uid://r6qwt218ctg5" path="res://scenes/通用/1986抉择.tscn" id="14_reborn"]
 [ext_resource type="Script" uid="uid://dui7yvr672tv6" path="res://scenes/外交/地图摄像机.gd" id="15_kwgjq"]
+[ext_resource type="Script" uid="uid://dyj85kuqqbsd3" path="res://scenes/外交/自动提示.gd" id="23_autotip"]
 [ext_resource type="PackedScene" uid="uid://ce3cbk18lse3v" path="res://scenes/通用/TopState.tscn" id="90_bar"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xi88r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_autotip"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.05, 0.05, 0.05, 0.72)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="外交" type="Control" unique_id=345181900]
 layout_mode = 3
@@ -160,7 +172,6 @@ metadata/_edit_use_anchors_ = true
 [node name="预警图标" parent="." unique_id=205346205 instance=ExtResource("12_alert")]
 
 [node name="国家列表层" parent="." unique_id=617726405 instance=ExtResource("11_flags")]
-layer = 1
 
 [node name="地图模式" type="CanvasLayer" parent="." unique_id=326525378]
 
@@ -317,5 +328,39 @@ text = "ESC"
 
 [node name="1986抉择" parent="." unique_id=938821122 instance=ExtResource("14_reborn")]
 visible = false
+
+[node name="自动提示" type="CanvasLayer" parent="." unique_id=103147602]
+layer = 60
+script = ExtResource("23_autotip")
+
+[node name="面板" type="PanelContainer" parent="自动提示" unique_id=875240948]
+visible = false
+anchors_preset = -1
+anchor_left = 0.18
+anchor_top = 0.93
+anchor_right = 0.82
+anchor_bottom = 0.93
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_autotip")
+
+[node name="布局" type="VBoxContainer" parent="自动提示/面板" unique_id=406834674]
+layout_mode = 2
+
+[node name="标题" type="Label" parent="自动提示/面板/布局" unique_id=1417139440]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "自动动作"
+
+[node name="内容" type="RichTextLabel" parent="自动提示/面板/布局" unique_id=1625149114]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="隐藏计时" type="Timer" parent="自动提示" unique_id=666141759]
+wait_time = 14.0
+one_shot = true
 
 [connection signal="country_selected" from="国家列表层" to="." method="_on_map_country_selected"]

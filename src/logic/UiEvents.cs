@@ -15,6 +15,8 @@ public static class UiEvents
     public static event Action<int> EventShortcutRequested;
     // 领土块/国家意识形态被改动: 地图着色与显隐要按新数据重取一次快照
     public static event Action MapDirty;
+    // 自动化一轮结束: "[1979年3月 自动执行 3 项 · 预算-15.0 特工-15.0 军力-15.0]"
+    public static event Action<string> AutoReported;
 
     public static void RequestScene(string unitySceneName)
     {
@@ -33,4 +35,5 @@ public static class UiEvents
 
     public static void RequestMapDirty() => MapDirty?.Invoke();
 
+    public static void ReportAuto(string text) => AutoReported?.Invoke(text);
 }

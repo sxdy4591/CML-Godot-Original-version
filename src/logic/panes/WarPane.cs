@@ -25,7 +25,6 @@ public sealed class WarPane : IPanel
         {
             var w = state.ingamewars[i];
             if (!w.is_going) continue;
-            LocalizeKnownWar(w);
             var can = new List<object>(8);
             foreach (var button in Ensure(i))
             {
@@ -35,9 +34,9 @@ public sealed class WarPane : IPanel
             wars.Add(new Dictionary<string, object>
             {
                 ["index"] = i,
-                ["name"] = Newlines(w.name_war),
-                ["left"] = Newlines(w.side1),
-                ["right"] = Newlines(w.side2),
+                ["name"] = Newlines(Localized(w.name_war)),
+                ["left"] = Newlines(Localized(w.side1)),
+                ["right"] = Newlines(Localized(w.side2)),
                 ["left_value"] = (w.infl1 / 10).ToString(),
                 ["right_value"] = (w.infl2 / 10).ToString(),
                 ["usa_side"] = w.usa_place,
@@ -114,11 +113,14 @@ public sealed class WarPane : IPanel
         return (value < 0 ? "-" : "") + a / 10 + "." + a % 10;
     }
 
-    // 作者 DLC 未做中文本地化的遗留(数据表有权威译名)
-    static void LocalizeKnownWar(warinwars w)
+    // 作者 DLC 未做中文本地化的遗留(数据表有权威译名).
+    // 只在输出时映射, 不改 state —— 战争去重按 name_war/side1/side2 判断同一场,
+    // 就地改写会让存档里那条变成中文、新宣战那条仍是俄语, 去重认不出, 面板出现两场欧加登战争.
+    static string Localized(string text) => text switch
     {
-        if (w.name_war == "Война за Огаден") w.name_war = " 欧加登战争";
-        if (w.side1 == "Сомали") w.side1 = " 索马里";
-        if (w.side2 == "Эфиопия") w.side2 = " 埃塞俄比亚";
-    }
+        "Война за Огаден" => " 欧加登战争",
+        "Сомали" => " 索马里",
+        "Эфиопия" => " 埃塞俄比亚",
+        _ => text,
+    };
 }

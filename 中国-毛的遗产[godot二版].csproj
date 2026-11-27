@@ -25,8 +25,8 @@
     <DisableUnsupportedError Condition=" '$(GodotTargetPlatform)' == 'android' ">true</DisableUnsupportedError>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>中国毛的遗产godot二版</RootNamespace>
-    <Version>0.7.2.0</Version>
-    <InformationalVersion>0.7.2</InformationalVersion>
+    <Version>0.7.3.0</Version>
+    <InformationalVersion>0.7.3</InformationalVersion>
     <!-- Godot 4.7 的 ScriptSignalsGenerator 生成代码使用集合表达式(C# 12), 低于 12 无法编译.
          反编译代码本身只需 `文件作用域命名空间`(C# 10), 12 是超集; 新版 Roslyn 的 ref 安全
          误报(CS8374)统一在 NoWarn 里静音. -->

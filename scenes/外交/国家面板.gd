@@ -61,6 +61,9 @@ var _默认条件: String = ""
 var _刷新计时: float = 0.0
 var _自动串: String = ""
 var _外交自动串: String = ""
+## 触摸设备没有悬停: 手指一挪(去拖条件区的滚动条)就等于鼠标移出按钮,
+## 若照桌面在 mouse_exited 里复位, 条件区连同滚动条会当场消失 —— 越拖越没。
+var _触摸: bool = DisplayServer.is_touchscreen_available()
 
 
 func _ready() -> void:
@@ -87,6 +90,8 @@ func _process(delta: float) -> void:
 
 func show_country(index: int) -> void:
 	visible = true
+	_悬停 = -1
+	_默认条件 = ""
 	_清空槽位()
 	UiBridge.act(面板, "查看", [index])
 	UiBridge.request(面板)
@@ -109,6 +114,9 @@ func 关闭() -> void:
 
 
 func _互动(index: int) -> void:
+	# 点下的槽就是玩家正在看的那条: 手机上不一定有"悬停", 这里补一次填充
+	_悬停 = index
+	_更新条件()
 	UiBridge.act(面板, "互动", [index])
 	UiBridge.request(面板)
 	互动完成.emit()
@@ -263,6 +271,8 @@ func _悬停按钮(index: int) -> void:
 
 
 func _离开按钮() -> void:
+	if _触摸:
+		return
 	_悬停 = -1
 	_更新条件()
 

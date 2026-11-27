@@ -15,8 +15,11 @@ const 版本工具 := preload("res://src/common/版本.gd")
 func _ready() -> void:
 	版本信息.text = _版本文案("")
 	检测更新.pressed.connect(_检查更新)
-	版本信息.meta_clicked.connect(func(链接: String) -> void: OS.shell_open(链接))
+	版本信息.meta_clicked.connect(_点链接)
 	在线.更新检查完成.connect(_更新结果)
+	在线.更新检查失败.connect(_更新失败)
+	# 进入主菜单就自动检测一次(手动按钮保留, 用于离线后重试)
+	_检查更新()
 
 
 func _检查更新() -> void:
@@ -24,12 +27,26 @@ func _检查更新() -> void:
 	在线.检查更新()
 
 
-func _更新结果(有新版本: bool, 远端: String, 下载页: String, _说明: String) -> void:
+func _更新失败() -> void:
+	版本信息.text = _版本文案("[url=retry][color=#8A6D3B]检查更新失败（离线/超时）· 点此重试[/color][/url]")
+
+
+func _更新结果(有新版本: bool, 远端: String, _下载页: String, _说明: String) -> void:
 	if 有新版本:
-		var 链接: String = 下载页 if not 下载页.is_empty() else str(在线.站点)
-		版本信息.text = _版本文案("[url=%s][color=#C0392B]发现新版本 %s · 点击前往下载[/color][/url]" % [链接, 远端])
+		# 醒目: 白字红底大字, 点一下直接进关于页看 QQ 群二维码(不再跳 GitHub 下载页)
+		版本信息.text = _版本文案(
+			"[url=about][bgcolor=#B03A2E][color=#FFFFFF][font_size=30]发现新版本 %s[/font_size]\n" % 远端
+			+ "[font_size=24]获取新版本请加入 QQ 群（点这里看群二维码）[/font_size][/color][/bgcolor][/url]")
 	else:
-		版本信息.text = _版本文案("[color=#2E7D32]已是最新版本[/color]")
+		版本信息.text = _版本文案("[color=#2E7D32]已是最新版本 %s[/color]" % 版本工具.文本())
+
+
+## 版本区里可点的东西: 新版本提示 -> 关于页(QQ 群二维码); 失败提示 -> 重试
+func _点链接(链接: String) -> void:
+	if 链接 == "about":
+		全局管理.show_about.emit()
+	elif 链接 == "retry":
+		_检查更新()
 
 
 func _版本文案(状态: String) -> String:

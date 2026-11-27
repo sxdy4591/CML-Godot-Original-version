@@ -140,6 +140,8 @@ public static class SaveLibrary
         if (tree == null || tree.TypeName != nameof(GameState))
             throw new InvalidDataException($"{源} 不是 Unity 版 GameState 存档");
         var state = (GameState)UnitySaveImporter.转换(typeof(GameState), tree);
+        // 顺手补齐旧口径的数组, 导入后的槽位文件就是当前口径, 之后每次读档都不用再赌
+        GameStateFactory.EnsureCapacity(state);
         if (File.Exists(SavePaths.Slot(slot))) File.Copy(SavePaths.Slot(slot), 备份路径(slot), true);
         SaveService.Save(state, SavePaths.Slot(slot));
         缓存.Remove(slot);

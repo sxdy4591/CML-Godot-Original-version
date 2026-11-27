@@ -46,6 +46,16 @@ const 禁止按钮 := {"禁止极左派": 0, "禁止温和派": 2, "禁止改革
 
 var _快照: Dictionary = {}
 var _当前政策: int = -1
+## 当前显示着的那个选项(类目 + 槽号): 快照回刷后据此重填条件, 否则手机点一下按钮
+## 快照一回来条件就被清空 —— 就是玩家说的"一按就没了"。
+var _显示类别: int = -1
+var _显示槽: int = -1
+## 触摸设备没有"悬停"这回事: 手指一挪就等同于鼠标移出按钮, 若照桌面那样
+## 在 mouse_exited 里清空, 手机上条件/介绍会"点一下就没"。
+var _触摸: bool = DisplayServer.is_touchscreen_available()
+## 介绍滚动在 tscn 里是 550 高, 窄画布上会被屏幕底边切掉, 只剩底下一条;
+## 记住原始高度, 按屏幕内可见高度收窄(视觉不变, 改变的是"能滚多少")。
+var _介绍视口原高: float = 0.0
 
 
 func _ready() -> void:
@@ -80,6 +90,7 @@ func _ready() -> void:
 	UiBridge.connect("panel_snapshot", _收到快照)
 	UiBridge.request(面板)
 	_适配政策面板()
+	_适配介绍视口.call_deferred()
 
 
 
@@ -103,7 +114,18 @@ func _调整面板(控件: Control) -> void:
 func _展开介绍() -> void:
 	$右栏政策介绍.visible = true
 	$右栏政策介绍展开.visible = false
+	_适配介绍视口()
 	介绍滚动.scroll_vertical = 0
+
+
+## 窄画布上右栏介绍面板会被屏幕底边切掉, 而滚动视口仍按 tscn 的 550 高算:
+## 可见区远小于视口, 内容不够 550 就一格都滚不动, 够也滚不全。
+## 这里把视口收到屏幕内可见的高度 —— 不改任何布局坐标, 面板位置/背景不动,
+## 玩家看到的范围不变, 变的只是滚动的可用行程。
+func _适配介绍视口() -> void:
+	if _介绍视口原高 == 0.0:
+		_介绍视口原高 = 介绍滚动.size.y
+	介绍滚动.size.y = minf(_介绍视口原高, get_viewport_rect().size.y - 介绍滚动.global_position.y)
 
 
 func _收起介绍() -> void:
@@ -126,6 +148,7 @@ func _切换政策(index: int) -> void:
 	var 定义: Dictionary = 政策定义[index]
 	var 已展开: bool = get_node(定义["panel"]).visible
 	_隐藏政策面板()
+	_清空条件(true)
 	if 已展开:
 		return
 	var 控件 := get_node(定义["panel"]) as Control
@@ -135,6 +158,8 @@ func _切换政策(index: int) -> void:
 
 
 func _政策(cat: int, option_index: int) -> void:
+	# 点下去的这条就是玩家正在看的那条: 手机上不一定有"悬停", 这里补一次填充
+	_显示条件(cat, option_index)
 	var 定义: Dictionary = _定义(cat)
 	var options: Array = _快照["policy_options"][定义["key"]]
 	UiBridge.act(面板, "政策", [cat, options[option_index]["id"]])
@@ -149,6 +174,8 @@ func _定义(cat: int) -> Dictionary:
 
 
 func _显示条件(cat: int, option_index: int) -> void:
+	_显示类别 = cat
+	_显示槽 = option_index
 	var 定义: Dictionary = _定义(cat)
 	var options: Array = _快照["policy_options"][定义["key"]]
 	if option_index >= options.size():
@@ -163,10 +190,18 @@ func _显示条件(cat: int, option_index: int) -> void:
 	# 条件栏只放执行条件; 政策介绍长文放右侧介绍面板(原版同一分工, 避免两处重复)
 	右栏条件显示.visible = not lines.is_empty()
 	右栏条件显示.text = "\n".join(lines)
-	介绍文案.text = 悬浮提示.unity_to_bbcode(opis)
+	var 新文案 := 悬浮提示.unity_to_bbcode(opis)
+	if 介绍文案.text != 新文案:
+		介绍文案.text = 新文案
+		# 换成另一条政策时回到顶部; 同一条在快照回刷时不动, 免得读到一半被弹回去
+		介绍滚动.scroll_vertical = 0
 
 
-func _清空条件() -> void:
+## 强制 = 换政策/换选项时自己清, 不受触摸设备"保留"规则影响
+func _清空条件(强制: bool = false) -> void:
+	if _触摸 and not 强制:
+		return
+	_显示槽 = -1
 	右栏条件显示.visible = false
 	右栏条件显示.text = ""
 
@@ -203,7 +238,6 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 	军队力量.tooltip_text = "军事实力 %s" % data["army_power"]
 	($军队力量图标 as Control).tooltip_text = 军队力量.tooltip_text
 	中共党内派系.text = "%s（主导派系：%s）" % [data["title"], data["leading"]]
-	右栏条件显示.text = ""
 	选举.disabled = not bool(data["can_elect"])
 	经济同盟.disabled = not bool(data["can_econ"])
 	军事同盟.disabled = not bool(data["can_mil"])
@@ -243,3 +277,6 @@ func _收到快照(panel: String, data: Dictionary) -> void:
 			# 原版条件不满足的选项仍可点/悬停(点击由原版 OnMouseDown 内部拦截)
 			button.disabled = false
 			按钮特效.set_base_modulate(button, Color.WHITE if bool(options[i]["enabled"]) else Color(0.55, 0.55, 0.55))
+	# 快照回刷后把正在显示的那条选项重填一遍: 手机上点完按钮, 条件与介绍要留在原处
+	if _显示槽 >= 0:
+		_显示条件(_显示类别, _显示槽)

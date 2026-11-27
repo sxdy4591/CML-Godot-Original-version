@@ -61,11 +61,6 @@ func _ready() -> void:
 	_bind_rows()
 	_bind_shortcuts()
 	_bind_custom_page()
-	# 手机版没有实体键盘: 键位重绑无意义, 把「快捷键」页与基础页的重绑行藏起来.
-	if OS.has_feature("mobile"):
-		find_child("快捷键页按钮", true, false).visible = false
-		for row in SHORTCUT_ROWS:
-			find_child(row[0], true, false).visible = false
 	_bind_music()
 	var back := find_child("返回", true, false) as BaseButton
 	if back and not back.pressed.is_connected(_on_返回_pressed):
@@ -388,6 +383,9 @@ func _bind_custom_page() -> void:
 	_bind_checkbox("EventPauseToggle", "event_pause_after", true)
 	# 时间运行时点击国家自动停表(消费者在 外交.gd 的地图点选)
 	_bind_checkbox("PauseOnSelectToggle", "pause_on_country_select", true)
+	# 自动动作提示: 每轮自动执行后在外交场景底部列出做了什么/扣了哪些资源
+	# (消费者在 自动提示.gd; 关掉只影响屏幕提示, 控制台 auto 仍能看到明细)
+	_bind_checkbox("AutoReportToggle", "auto_report", true)
 	_bind_auto_types()
 	var console_toggle := find_child("DebugConsoleToggle", true, false) as CheckButton
 	console_toggle.set_pressed_no_signal(ui.get_bool("debug_console", true))
@@ -648,6 +646,7 @@ func _on_恢复默认_pressed() -> void:
 	ui.set_string("auto_diplo", "")
 	ui.set_int("autosave_slot", 1)
 	ui.set_bool("event_pause_after", true)
+	ui.set_bool("auto_report", true)
 	ui.set_int("event_align", 0)
 	for row in CUSTOM_STEP_ROWS:
 		if row[1] in 音量行:

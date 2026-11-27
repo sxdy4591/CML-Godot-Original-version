@@ -53,14 +53,22 @@ public static class Automation
     //       (每三月一次, 门禁是该国 sovinfl/usainfl 归零后重新可做)
     //   1054 尼日利亚: 援助革命派 / 援助扬塔特斯尼(一年二次, 门禁是 allcountries[60].based)
     //   145/146 阿拉伯: 对海湾合作委员会施压要求减产/增产石油(门禁是世界油价与亲中成员数)
+    //   25/45/67 拉阿拉伯国家进阿革共(OAR): 原版 Show 文案都是"谈判该国加入 OAR",
+    //       执行分支只写 allcountries[].oar = true 与 influencePRC += 10, 不切场景不消耗资源
+    //   1022 支持阿湾人阵: 原版按 allcountries[24].prcpower 分两支, <100 是"支持"(扣预算/特工/军力
+    //       各 5, 阿湾人阵力量 +10), >=100 是"推动革命"(LoadScene Event) —— 自动只跑前一支
     // 刻意收不进来(执行会 LoadScene 或直接开战):
     //   1 支持毛派组织(置 war_active), 2 武力占领港澳, 3/14/35/46/49/55/58/70/94/95/109/114/115/116/138
-    //   与 1000..1063 里的切场景档(含 1022 阿湾人阵、1063 缅甸), 15/30/122/123 直接开战。
+    //   与 1000..1063 里其余切场景档(含 1063 缅甸), 15/30/122/123 直接开战。
     static readonly int[] Categories =
     {
         7, 8, 20, 21, 28, 34, 56, 71, 1009, 1024, 1043, 1044, 1057, 1061,
-        128, 142, 143, 144, 1054, 145, 146,
+        128, 142, 143, 144, 1054, 145, 146, 25, 45, 67, 1022,
     };
+
+    // 会切场景的 type 里"安全的那个分支"的判据(全部照搬原版 Show 的分支条件):
+    // 1022 只有 prcpower < 100 时原版走"支持"分支, >=100 走 LoadScene("Event") 的推动革命分支.
+    static bool 分支不切场景(int type) => type != 1022 || GameHost.State.allcountries[24].prcpower < 100;
 
     // 外交扩张三组开关(设置页自定义页各一个勾): 贸易 / 经济联盟 / 军事联盟(含非洲联盟按钮).
     // type 依据 = CountryScript.OnMouseDown 里的 Show 调用:
@@ -99,6 +107,110 @@ public static class Automation
 
     // 本轮已执行的条数, 供 UI 显示"自动化干了什么"
     public static int Launched { get; private set; }
+
+    // ================= 自动动作提示 =================
+    // 玩家反馈: 自动化在背后按按钮, 不知道它干了什么、扣的资源在哪.
+    // 每次执行前快照 data/影响力/关系与目标国相关字段, 执行后按差值生成一条明细:
+    //   "1979年3月 也门 · 支持阿湾人阵 · 预算-5.0 特工-5.0 军力-5.0 · 阿湾人阵力量+1.0"
+    // 本轮汇总(执行条数 + 资源合计)在回合结束时经 UiEvents 报给视图; 明细保留最近 60 条供控制台 auto 查看.
+    public static readonly List<string> Recent = new();
+    static readonly List<string> RoundItem = new();
+    static readonly Dictionary<int, int> RoundSpent = new();
+    static int _roundInfluence;
+    static int _roundRelation0;
+    static int _roundRelation1;
+    public static string RoundSummary { get; private set; } = "";
+
+    struct 快照
+    {
+        public int[] Data;
+        public int Influence;
+        public int Relation0;
+        public int Relation1;
+        public int CountryPower;
+        public int CountryStab;
+    }
+
+    static 快照 Take(int index)
+    {
+        var state = GameHost.State;
+        return new 快照
+        {
+            Data = (int[])state.data.Clone(),
+            Influence = state.influencePRC,
+            Relation0 = state.empires[0].relations,
+            Relation1 = state.empires[1].relations,
+            CountryPower = state.allcountries[index].prcpower,
+            CountryStab = state.allcountries[index].stab,
+        };
+    }
+
+    // 执行后的差值: 资源按槽位名 + 增减量列出, 再带上目标国的亲中力量/稳定度
+    static string Diff(int index, in 快照 before)
+    {
+        var state = GameHost.State;
+        var parts = new List<string>();
+        for (var slot = 0; slot < state.data.Length; slot++)
+        {
+            var delta = state.data[slot] - before.Data[slot];
+            if (delta == 0) continue;
+            parts.Add(Delta(槽名(slot), delta, Port.DataSlots.Raw(slot)));
+            RoundSpent[slot] = RoundSpent.TryGetValue(slot, out var sum) ? sum + delta : delta;
+        }
+        if (state.influencePRC != before.Influence)
+        {
+            var delta = state.influencePRC - before.Influence;
+            parts.Add(Delta("影响力", delta, false));
+            _roundInfluence += delta;
+        }
+        if (state.empires[0].relations != before.Relation0)
+        {
+            var delta = state.empires[0].relations - before.Relation0;
+            parts.Add(Delta("美国关系", delta, false));
+            _roundRelation0 += delta;
+        }
+        if (state.empires[1].relations != before.Relation1)
+        {
+            var delta = state.empires[1].relations - before.Relation1;
+            parts.Add(Delta("苏联关系", delta, false));
+            _roundRelation1 += delta;
+        }
+        var country = state.allcountries[index];
+        if (country.prcpower != before.CountryPower)
+            parts.Add(Delta("亲中力量", country.prcpower - before.CountryPower, false));
+        if (country.stab != before.CountryStab)
+            parts.Add(Delta("稳定度", country.stab - before.CountryStab, false));
+        return parts.Count == 0 ? "无资源变化" : string.Join(" ", parts);
+    }
+
+    static string 槽名(int slot) => Port.DataSlots.Known(slot) ? Port.DataSlots.Name(slot) : $"data[{slot}]";
+
+    static string Delta(string name, int delta, bool raw)
+    {
+        var sign = delta > 0 ? "+" : "";
+        if (raw) return name + sign + delta;
+        var a = System.Math.Abs(delta);
+        return name + (delta < 0 ? "-" : "+") + a / 10 + "." + a % 10;
+    }
+
+    static string 国家名(int index) => GameHost.State.allcountries[index].name.Replace(" ", "");
+
+    // 原版按钮描述里的 "|" 是"标题|说明"的分隔, 明细只要标题
+    static string 动作名(string opis)
+    {
+        var bar = opis.IndexOf('|');
+        var text = (bar >= 0 ? opis[..bar] : opis).Replace(" ", "");
+        return text.Length <= 24 ? text : text[..24] + "…";
+    }
+
+    static void 记录(int index, string opis, string diff)
+    {
+        var state = GameHost.State;
+        var line = $"{state.data[21]}年{state.data[20]}月 {国家名(index)} · {动作名(opis)} · {diff}";
+        RoundItem.Add(line);
+        Recent.Add(line);
+        if (Recent.Count > 60) Recent.RemoveAt(0);
+    }
 
     public static bool IsAutoable(int type)
         => System.Array.IndexOf(Categories, type) >= 0 || DiplomacyGroup(type) >= 0;
@@ -176,6 +288,13 @@ public static class Automation
         _scanning = false;
         _cursor = 0;
         Launched = 0;
+        RoundSummary = "";
+        Recent.Clear();
+        RoundItem.Clear();
+        RoundSpent.Clear();
+        _roundInfluence = 0;
+        _roundRelation0 = 0;
+        _roundRelation1 = 0;
     }
 
     public static void Tick()
@@ -204,6 +323,11 @@ public static class Automation
     static void StartRound()
     {
         Launched = 0;
+        RoundItem.Clear();
+        RoundSpent.Clear();
+        _roundInfluence = 0;
+        _roundRelation0 = 0;
+        _roundRelation1 = 0;
         // 决议先跑: 冷却 6 个月, 窗口比互动按钮(每月/每三月)稀有, 先吃满资源门槛。
         RunDecisions();
         _cursor = 0;
@@ -233,11 +357,28 @@ public static class Automation
         LogRound();
     }
 
-    // 一轮一条: 让玩家(和排查)确认本月到底跑没跑、按掉了几项
+    // 一轮一条: 让玩家(和排查)确认本月到底跑没跑、按掉了几项、资源花在哪.
+    // 视图侧(外交场景的自动提示)靠 UiEvents.AutoReported 拿到同一段文字.
     static void LogRound()
     {
         var state = GameHost.State;
-        Godot.GD.Print($"[Automation] {state.data[21]}年{state.data[20]}月 自动执行 {Launched} 项");
+        var 头 = $"{state.data[21]}年{state.data[20]}月 自动执行 {Launched} 项";
+        var 合计 = new List<string>();
+        foreach (var pair in RoundSpent)
+            合计.Add(Delta(槽名(pair.Key), pair.Value, Port.DataSlots.Raw(pair.Key)));
+        if (_roundInfluence != 0) 合计.Add(Delta("影响力", _roundInfluence, false));
+        if (_roundRelation0 != 0) 合计.Add(Delta("美国关系", _roundRelation0, false));
+        if (_roundRelation1 != 0) 合计.Add(Delta("苏联关系", _roundRelation1, false));
+        RoundSummary = Launched == 0 ? $"{头} · 本月无可自动执行项"
+            : 头 + (合计.Count == 0 ? "" : " · " + string.Join(" ", 合计));
+        Godot.GD.Print($"[Automation] {RoundSummary}");
+        foreach (var line in RoundItem) Godot.GD.Print($"[Automation]   {line}");
+        // 一条都没执行就不弹提示(否则每月都要在屏幕上闪一次"无可自动执行项")
+        if (Launched == 0) return;
+        // 视图一次拿到"汇总 + 明细", 不再回头查逻辑层状态
+        var 全文 = new List<string> { RoundSummary };
+        全文.AddRange(RoundItem);
+        UiEvents.ReportAuto(string.Join("\n", 全文));
     }
 
     static void ScanCountry(int index)
@@ -260,9 +401,12 @@ public static class Automation
             }
             else if (!Enabled.Contains(type)) continue;
             if (!AllConditionsMet((List<object>)info["conditions"])) continue;
+            if (!分支不切场景(type)) continue;
             // 原版 OnMouseDown 会拿同一组 is_active/uslovie_bool 再验一次; 这里不重写它。
+            var before = Take(index);
             Port.DiploHost.Activate(_set, slot);
             Launched++;
+            记录(index, (string)info["opis"], Diff(index, in before));
         }
     }
 
@@ -288,9 +432,15 @@ public static class Automation
             var decision = state.decisions[i];
             if (!global.dlc[decision.version]) continue;
             if (!decision.condition()) continue;
+            // 决议没有国家目标, 用本方(索引 1)做差值锚点, 明细写决议标题
+            var before = Take(1);
             decision.active();
             state.completedDecisions[i] = true;
             Launched++;
+            var line = $"{state.data[21]}年{state.data[20]}月 决议 · {decision.name.Replace(" ", "")} · {Diff(1, in before)}";
+            RoundItem.Add(line);
+            Recent.Add(line);
+            if (Recent.Count > 60) Recent.RemoveAt(0);
         }
     }
 }
